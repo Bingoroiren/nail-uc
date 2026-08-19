@@ -86,7 +86,7 @@ async def scrape_company_details(context, href):
             js = api_data["json"]
             emails = find_values_by_keys(js, ["email", "mail"])
             phones = find_values_by_keys(js, ["phone", "tel"])
-            names_en = find_values_by_keys(js, ["latin", "english", "eng"])
+            names_en = find_values_by_keys(js, ["latin", "english", "eng", "i18n"])
             
             if emails:
                 email = ", ".join(emails)
