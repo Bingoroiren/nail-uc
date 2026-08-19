@@ -1,0 +1,1779 @@
+{
+    "completed": [
+        [
+            "Bankstown",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Cabramatta",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Canley Heights",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Canley Vale",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Fairfield",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Marrickville",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Darra",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Inala",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Kilkenny",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Mansfield Park",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Woodville",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Braybrook",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Footscray",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Keysborough",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Noble Park",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Richmond",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Springvale",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "St Albans",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Sunshine",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Girrawheen",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Mirrabooka",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Acton",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Amaroo",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Banks",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Beard",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Belconnen",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Bonython",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Causeway",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Chapman",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Charnwood",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Chifley",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Crace",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Fadden",
+            "ACT",
+            "barber shop"
+        ],
+        [
+            "Abbotsbury",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Abbotsford",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Adamstown",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Albion Park",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Alexandria",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Alfords Point",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Alison",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Allambie Heights",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Allawah",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Annangrove",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Arcadia",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Arcadia Vale",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Argenton",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Arncliffe",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Arndell Park",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Artarmon",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Ashbury",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Ashcroft",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Asquith",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Auburn",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Audley",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Austinmer",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Austral",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Avalon Beach",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Avoca Beach",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Avondale",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Balcolyn",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Balgownie",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Balmain",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Banksmeadow",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Bar Point",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Barrack Heights",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Bateau Bay",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Baulkham Hills",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Beaumont Hills",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Beecroft",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Bellevue Hill",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Belmont",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Belrose",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Bennetts Green",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Berkeley",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Berowra",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Birmingham Gardens",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Blacksmiths",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Blackwall",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Blenheim Road",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Blue Haven",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Bucketty",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Bundeena",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Callaghan",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Canoelands",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Canton Beach",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Caringbah",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Carramar",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Church Point",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Coalcliff",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Coasters Retreat",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Collaroy",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Coniston",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Constitution Hill",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Cooranbong",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Cordeaux",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Cottage Point",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Denistone",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Dural",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Elanora Heights",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Eleebana",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Engadine",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Fern Bay",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Fountaindale",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Glenfield",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Gordon",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Holmesville",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Holsworthy",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Homebush",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Kings Langley",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Kooragang",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Kurnell",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Manly",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Mosman",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "North Parramatta",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Port Kembla",
+            "NSW",
+            "barber shop"
+        ],
+        [
+            "Acacia Ridge",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Advancetown",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Albany Creek",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Albion",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Alderley",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Alexandra Headland",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Alexandra Hills",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Amamoor",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Annerley",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Anstead",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Arana Hills",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Aroona",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Arundel",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Aspley",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Auchenflower",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Austinville",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Australia Fair",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Bald Hills",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Bald Knob",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Banyo",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Belli Park",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Belmont",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Benowa",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Berrinba",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Bilinga",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Black Mountain",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Bli Bli",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Boreen Point",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Boronia Heights",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Bridges",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Broadbeach",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Brookfield",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Buderim",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Bulwer",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Burbank",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Burleigh Dc",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Camp Hill",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Carbrook",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Castaways Beach",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Chambers Flat",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Chandler",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Chevallum",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Clontarf",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Como",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Coolabine",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Coolum Beach",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Coomera",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Cooran",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Corinda",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Crestmead",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Daisy Hill",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Diamond Valley",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Doolandella",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Eight Mile Plains",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Elanora",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Gilberton",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Guanaba",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Helensvale",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Hemmant",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Jamboree Heights",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Landsborough",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Loganholme",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Lota",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Mansfield",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Marcoola",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Mount Cotton",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Munruben",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Newport",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Noosaville",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Reedy Creek",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Rothwell",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Tallebudgera",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "The Gap",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Thornlands",
+            "QLD",
+            "barber shop"
+        ],
+        [
+            "Aberfoyle Park",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Adelaide",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Albert Park",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Aldgate",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Aldinga",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Andrews Farm",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Ascot Park",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Ashbourne",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Ashton",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Athelstone",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Auldana",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Banksia Park",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Belair",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Bibaringa",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Biggs Flat",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Birkenhead",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Blair Athol",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Blewitt Springs",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Bolivar",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Brahma Lodge",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Brighton",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Brooklyn Park",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Buckland Park",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Christie Downs",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Cleland",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Dingabledinga",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Edinburgh",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Felixstow",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Forest Range",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Glen Osmond",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Hallett Cove",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Ingle Farm",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Inglewood",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Maslin Beach",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "North Haven",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Sellicks Beach",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Upper Sturt",
+            "SA",
+            "barber shop"
+        ],
+        [
+            "Austins Ferry",
+            "TAS",
+            "barber shop"
+        ],
+        [
+            "Battery Point",
+            "TAS",
+            "barber shop"
+        ],
+        [
+            "Collinsvale",
+            "TAS",
+            "barber shop"
+        ],
+        [
+            "Derwent Park",
+            "TAS",
+            "barber shop"
+        ],
+        [
+            "Geilston Bay",
+            "TAS",
+            "barber shop"
+        ],
+        [
+            "Grasstree Hill",
+            "TAS",
+            "barber shop"
+        ],
+        [
+            "Abbotsford",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Aberfeldie",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Airport West",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Albanvale",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Albert Park",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Albion",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Altona",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Armadale",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Arthurs Creek",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Ashburton",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Aspendale",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Avalon",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Balwyn",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Bangholme",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Banyule",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Bareena",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Batman",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Bayswater",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Beaumaris",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Beenak",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Belgrave",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Bell Park",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Belmont",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Bend Of Islands",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Bentleigh",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Blackburn",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Brandon Park",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Brighton",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Bundoora",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Campbellfield",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Carrum",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Carrum Downs",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Caulfield Junction",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Chirnside Park",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Clarinda",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Cocoroc",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Corio",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Craigieburn",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Croydon",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Diamond Creek",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Doncaster",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Donvale",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Doveton",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Eltham",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Epping",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Ferntree Gully",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Frankston North",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Gilberton",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Greenvale",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Heathwood",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Hoppers Crossing",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Keilor",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Knoxfield",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Mambourin",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Melbourne Airport",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Newport",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "North Warrandyte",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Oaklands Junction",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Plenty",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Reservoir",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Rowville",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Sandown Village",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "South Yarra",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Williams Landing",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Wonga Park",
+            "VIC",
+            "barber shop"
+        ],
+        [
+            "Alexander Heights",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Alfred Cove",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Alkimos",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Anketell",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Armadale",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Ascot",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Ashby",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Ashendon",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Atwell",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Aveley",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Avon Valley National Park",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Bailup",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Balcatta",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Baldivis",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Beaconsfield",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Beckenham",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Beechboro",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Beldon",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Bibra Lake",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Bickley",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Breton Bay",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Broadway Nedlands",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Burns Beach",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Butler",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Byford",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Canning Vale",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Caraban",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Carabooda",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Carlisle",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Caversham",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Churchlands",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Coogee",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Coolbinia",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Cottesloe",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Darlington",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Duncraig",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Forrestfield",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Gidgegannup",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Golden Bay",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Gosnells",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "High Wycombe",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Hope Valley",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Hopeland",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Jarrahdale",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Karakin",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Keysbrook",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Lakelands",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Leda",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Mahogany Creek",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Mundijong",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Oakford",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Port Kennedy",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Rottnest Island",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Seabird",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Trigg",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Two Rocks",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Whiteman",
+            "WA",
+            "barber shop"
+        ],
+        [
+            "Yanchep",
+            "WA",
+            "barber shop"
+        ]
+    ]
+}

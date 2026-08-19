@@ -1,0 +1,2354 @@
+{
+  "completed": [
+    [
+      "Riga",
+      "Rīga",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Riga",
+      "Rīga",
+      "Konservu fabrika"
+    ],
+    [
+      "Riga",
+      "Rīga",
+      "Zivju ferma"
+    ],
+    [
+      "Riga",
+      "Rīga",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Riga",
+      "Rīga",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Konservu fabrika"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Zivju ferma"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Konservu fabrika"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Zivju ferma"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Konservu fabrika"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Zivju ferma"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Konservu fabrika"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Zivju ferma"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Konservu fabrika"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Zivju ferma"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Konservu fabrika"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Zivju ferma"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Konservu fabrika"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Zivju ferma"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Konservu fabrika"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Zivju ferma"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Konservu fabrika"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Zivju ferma"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Konservu fabrika"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Zivju ferma"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Konservu fabrika"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Zivju ferma"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Konservu fabrika"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Zivju ferma"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Konservu fabrika"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Zivju ferma"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Konservu fabrika"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Zivju ferma"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Konservu fabrika"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Zivju ferma"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Konservu fabrika"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Zivju ferma"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Konservu fabrika"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Zivju ferma"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Konservu fabrika"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Zivju ferma"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Konservu fabrika"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Zivju ferma"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Zivju ferma"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Konservu fabrika"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Zivju ferma"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Konservu fabrika"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Zivju ferma"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Konservu fabrika"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Zivju ferma"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Konservu fabrika"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Zivju ferma"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Konservu fabrika"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Zivju ferma"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Konservu fabrika"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Zivju ferma"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Konservu fabrika"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Zivju ferma"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Zivju ferma"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Konservu fabrika"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Zivju ferma"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Zivju ferma"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Konservu fabrika"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Zivju ferma"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Konservu fabrika"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Zivju ferma"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Konservu fabrika"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Zivju ferma"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Konservu fabrika"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Zivju ferma"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Konservu fabrika"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Zivju ferma"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Konservu fabrika"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Zivju ferma"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Konservu fabrika"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Zivju ferma"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Konservu fabrika"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Zivju ferma"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Konservu fabrika"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Zivju ferma"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Konservu fabrika"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Zivju ferma"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Konservu fabrika"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Zivju ferma"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Konservu fabrika"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Zivju ferma"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Konservu fabrika"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Zivju ferma"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Zivju ferma"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Konservu fabrika"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Zivju ferma"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Konservu fabrika"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Zivju ferma"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Konservu fabrika"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Zivju ferma"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Konservu fabrika"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Zivju ferma"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Zivju ferma"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Konservu fabrika"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Zivju ferma"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Konservu fabrika"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Zivju ferma"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Konservu fabrika"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Zivju ferma"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Konservu fabrika"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Zivju ferma"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Konservu fabrika"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Zivju ferma"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Konservu fabrika"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Zivju ferma"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Konservu fabrika"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Zivju ferma"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Konservu fabrika"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Zivju ferma"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Konservu fabrika"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Zivju ferma"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Konservu fabrika"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Zivju ferma"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Konservu fabrika"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Zivju ferma"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Konservu fabrika"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Zivju ferma"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Konservu fabrika"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Zivju ferma"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Zivju ferma"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Konservu fabrika"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Zivju ferma"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Konservu fabrika"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Zivju ferma"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Konservu fabrika"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Zivju ferma"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Konservu fabrika"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Zivju ferma"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Konservu fabrika"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Zivju ferma"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Konservu fabrika"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Zivju ferma"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Konservu fabrika"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Zivju ferma"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Konservu fabrika"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Zivju ferma"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Konservu fabrika"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Zivju ferma"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Zivju ferma"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Konservu fabrika"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Zivju ferma"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Konservu fabrika"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Zivju ferma"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Konservu fabrika"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Zivju ferma"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Konservu fabrika"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Zivju ferma"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Konservu fabrika"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Zivju ferma"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Konservu fabrika"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Zivju ferma"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Zivju ferma"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Konservu fabrika"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Zivju ferma"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Konservu fabrika"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Zivju ferma"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Konservu fabrika"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Zivju ferma"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Konservu fabrika"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Zivju ferma"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Konservu fabrika"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Zivju ferma"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Konservu fabrika"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Zivju ferma"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Konservu fabrika"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Zivju ferma"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Konservu fabrika"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Zivju ferma"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Konservu fabrika"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Zivju ferma"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Konservu fabrika"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Zivju ferma"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Konservu fabrika"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Zivju ferma"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Konservu fabrika"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Zivju ferma"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Jūras velšu vairumtirgotājs"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Zivju apstrādes uzņēmums"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Konservu fabrika"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Zivju ferma"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Akvakultūras ferma"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Jūras velšu vairumtirgotājs"
+    ]
+  ]
+}
