@@ -86,22 +86,24 @@ async def scrape_company_details(context, href):
             js = api_data["json"]
             emails = find_values_by_keys(js, ["email", "mail"])
             phones = find_values_by_keys(js, ["phone", "tel"])
-            names_en = find_values_by_keys(js, ["namelatin", "name_latin", "distinctivetitlelatin", "tradename_latin"])
+            names_en = find_values_by_keys(js, ["latin", "english", "eng"])
             
             if emails:
                 email = ", ".join(emails)
             if phones:
                 phone = ", ".join(phones)
             if names_en:
-                name_en = names_en[0] # Lấy tên Latin đầu tiên
+                # Tìm tên có chữ Latin dài nhất hoặc chứa ký tự tiếng Anh làm tên tiếng Anh
+                names_en.sort(key=len, reverse=True)
+                name_en = names_en[0]
                 
             if email or phone or name_en:
                 # Đã lấy được dữ liệu sạch, kiểm tra xem có thiếu tên tiếng Anh không
                 if not name_en:
                     try:
                         sibling = detail_page.locator('xpath=//*[text()="Επωνυμία με λατινικούς χαρακτήρες" or contains(text(), "λατινικούς")]/following-sibling::*[1]')
-                        if await sibling.count() > 0:
-                            name_en = (await sibling.first.inner_text()).strip()
+                        await sibling.wait_for(state="attached", timeout=3000)
+                        name_en = (await sibling.first.inner_text()).strip()
                     except Exception:
                         pass
                 await detail_page.close()
@@ -111,8 +113,8 @@ async def scrape_company_details(context, href):
         # Lấy tên Latin từ DOM trước
         try:
             sibling = detail_page.locator('xpath=//*[text()="Επωνυμία με λατινικούς χαρακτήρες" or contains(text(), "λατινικούς")]/following-sibling::*[1]')
-            if await sibling.count() > 0:
-                name_en = (await sibling.first.inner_text()).strip()
+            await sibling.wait_for(state="attached", timeout=3000)
+            name_en = (await sibling.first.inner_text()).strip()
         except Exception:
             pass
 
