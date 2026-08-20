@@ -1,7 +1,7 @@
 """
-format_construction_greece_emails.py
+format_manufacturing_greece_emails.py
 =====================================
-Formats the Greece construction data (from either CSV or XLSX) into the standard cold-mail template.
+Formats the Greece manufacturing data (from either CSV or XLSX) into the standard cold-mail template.
 
 Output columns:
   No. | Công ty | Chức danh | Người liên hệ | SĐT | Liên Hệ | Email |
@@ -26,11 +26,11 @@ if sys.platform.startswith('win'):
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Determine input file path
-INPUT_FILE = os.path.join(SCRIPT_DIR, "Xây dựng Hy lạp - Raw.csv")
+INPUT_FILE = os.path.join(SCRIPT_DIR, "Sản xuất Hy lạp - Raw.csv")
 if not os.path.exists(INPUT_FILE):
-    INPUT_FILE = os.path.join(SCRIPT_DIR, "gemi_construction_companies.csv")
+    INPUT_FILE = os.path.join(SCRIPT_DIR, "gemi_manufacturing_companies.csv")
 if not os.path.exists(INPUT_FILE):
-    INPUT_FILE = os.path.join(SCRIPT_DIR, "Xây dựng Hy lạp.xlsx")
+    INPUT_FILE = os.path.join(SCRIPT_DIR, "Sản xuất Hy lạp.xlsx")
 
 if len(sys.argv) > 1:
     INPUT_FILE = sys.argv[1]
@@ -38,9 +38,9 @@ if len(sys.argv) > 1:
 # Set backup and formatted output file names
 ext = os.path.splitext(INPUT_FILE)[1]
 BACKUP_FILE = INPUT_FILE.replace(ext, f"_backup{ext}")
-FORMATTED_CSV = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted.csv")
-FORMATTED_XLSX = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted.xlsx")
-FORMATTED_V2_XLSX = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted_v2.xlsx")
+FORMATTED_CSV = os.path.join(os.path.dirname(INPUT_FILE), "Sản xuất Hy lạp_formatted.csv")
+FORMATTED_XLSX = os.path.join(os.path.dirname(INPUT_FILE), "Sản xuất Hy lạp_formatted.xlsx")
+FORMATTED_V2_XLSX = os.path.join(os.path.dirname(INPUT_FILE), "Sản xuất Hy lạp_formatted_v2.xlsx")
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 
@@ -50,7 +50,7 @@ GENERIC_DOMAINS = {
 
 BUSINESS_PREFIXES = {
     'info', 'hello', 'contact', 'office', 'admin', 'sales', 
-    'enquiries', 'manager', 'service', 'gemi', 'build', 'builder', 'construction'
+    'enquiries', 'manager', 'service', 'gemi', 'factory', 'manufacture', 'production'
 }
 
 BAD_KEYWORDS = {
@@ -303,7 +303,7 @@ def main():
             "Lần Follow-up": 0,
             "Ngày Follow-up gần nhất": "",
             "Mailbox đã dùng": "",
-            "Category": "Xây dựng Hy Lạp"
+            "Category": "Sản xuất Hy Lạp"
         }
         output_rows.append(out_row)
         

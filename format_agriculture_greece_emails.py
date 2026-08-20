@@ -22,12 +22,15 @@ if sys.platform.startswith('win'):
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
     sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
 
+# Determine script directory dynamically to support running on different computers
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Determine input file path
-INPUT_FILE = r"d:\glc\nail uc\Nông lâm thủy sản Hy lạp - Raw.csv"
+INPUT_FILE = os.path.join(SCRIPT_DIR, "Nông lâm thủy sản Hy lạp - Raw.csv")
 if not os.path.exists(INPUT_FILE):
-    INPUT_FILE = r"d:\glc\nail uc\gemi_agriculture_companies.csv"
+    INPUT_FILE = os.path.join(SCRIPT_DIR, "gemi_agriculture_companies.csv")
 if not os.path.exists(INPUT_FILE):
-    INPUT_FILE = r"d:\glc\nail uc\Nông lâm thủy sản Hy lạp.xlsx"
+    INPUT_FILE = os.path.join(SCRIPT_DIR, "Nông lâm thủy sản Hy lạp.xlsx")
 
 if len(sys.argv) > 1:
     INPUT_FILE = sys.argv[1]
