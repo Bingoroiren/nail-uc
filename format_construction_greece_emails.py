@@ -62,17 +62,23 @@ GENERIC_DOMAINS = {
 
 BUSINESS_PREFIXES = {
     'info', 'hello', 'contact', 'office', 'admin', 'sales', 
-    'enquiries', 'manager', 'service', 'gemi', 'build', 'builder', 'construction'
+    'enquiries', 'manager', 'service', 'build', 'builder', 'construction'
 }
 
 BAD_KEYWORDS = {
     'wix', 'support', 'no-reply', 'noreply', 'test', 'example', 'domain'
 }
 
-CHAMBER_KEYWORDS = {
+# Domains and keywords belonging to chambers or GEMI registry. These are completely discarded.
+DISCARD_KEYWORDS = {
     'cci', 'chamber', 'epimel', 'epime', 'eea.gr', 'gov.gr', 'evep', 
     'eves', 'eveh', 'ebed', 'icci', 'bep.gr', 'dramanet', 'arcadianet', 
-    'eber.gr', 'epimevro', 'ebef', 'otenet.gr', 'otenet'
+    'eber.gr', 'epimevro', 'ebef', 'gemi'
+}
+
+# Old Greek ISP domains or low-quality domains that are penalized but NOT discarded.
+PENALTY_KEYWORDS = {
+    'otenet.gr', 'otenet'
 }
 
 def clean_and_score_email(email_str):
@@ -88,10 +94,14 @@ def clean_and_score_email(email_str):
     if not emails:
         return ""
         
-    best_email = emails[0]
+    best_email = ""
     best_score = -9999
     
     for email in emails:
+        # Discard chamber or GEMI registry emails completely
+        if any(k in email for k in DISCARD_KEYWORDS):
+            continue
+            
         score = 0
         try:
             local_part, domain = email.split('@', 1)
@@ -107,8 +117,8 @@ def clean_and_score_email(email_str):
         if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
-        # Severe penalty for Chamber of Commerce or generic registry emails
-        if any(k in email for k in CHAMBER_KEYWORDS):
+        # Penalize old ISP or generic chamber-adjacent domains
+        if any(k in email for k in PENALTY_KEYWORDS):
             score -= 50
             
         score -= len(email) * 0.01
@@ -118,6 +128,7 @@ def clean_and_score_email(email_str):
             best_email = email
             
     return best_email
+
 
 def normalize_name(name):
     if not name:
