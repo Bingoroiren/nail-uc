@@ -25,22 +25,34 @@ if sys.platform.startswith('win'):
 # Determine script directory dynamically to support running on different computers
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Determine input file path
-INPUT_FILE = os.path.join(SCRIPT_DIR, "Xây dựng Hy lạp - Raw.csv")
-if not os.path.exists(INPUT_FILE):
-    INPUT_FILE = os.path.join(SCRIPT_DIR, "gemi_construction_companies.csv")
-if not os.path.exists(INPUT_FILE):
-    INPUT_FILE = os.path.join(SCRIPT_DIR, "Xây dựng Hy lạp.xlsx")
+# Candidates for input file path (in order of priority)
+CANDIDATES = [
+    os.path.join(SCRIPT_DIR, "Xây dựng Hy lạp - Raw.csv"),
+    os.path.join(SCRIPT_DIR, "gemi_construction_companies.csv"),
+    os.path.join(SCRIPT_DIR, "Xây dựng Hy lạp.xlsx")
+]
+
+INPUT_FILE = None
+for candidate in CANDIDATES:
+    if os.path.exists(candidate):
+        INPUT_FILE = candidate
+        break
 
 if len(sys.argv) > 1:
     INPUT_FILE = sys.argv[1]
 
 # Set backup and formatted output file names
-ext = os.path.splitext(INPUT_FILE)[1]
-BACKUP_FILE = INPUT_FILE.replace(ext, f"_backup{ext}")
-FORMATTED_CSV = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted.csv")
-FORMATTED_XLSX = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted.xlsx")
-FORMATTED_V2_XLSX = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted_v2.xlsx")
+if INPUT_FILE:
+    ext = os.path.splitext(INPUT_FILE)[1]
+    BACKUP_FILE = INPUT_FILE.replace(ext, f"_backup{ext}")
+    FORMATTED_CSV = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted.csv")
+    FORMATTED_XLSX = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted.xlsx")
+    FORMATTED_V2_XLSX = os.path.join(os.path.dirname(INPUT_FILE), "Xây dựng Hy lạp_formatted_v2.xlsx")
+else:
+    BACKUP_FILE = None
+    FORMATTED_CSV = None
+    FORMATTED_XLSX = None
+    FORMATTED_V2_XLSX = None
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 
@@ -185,8 +197,13 @@ def load_data(file_path):
     return rows
 
 def main():
-    if not os.path.exists(INPUT_FILE):
-        print(f"Error: Input file {INPUT_FILE} does not exist.")
+    if not INPUT_FILE or not os.path.exists(INPUT_FILE):
+        print("="*70)
+        print("[ERROR] Khong tim thay file du lieu dau vao de dinh dang!")
+        print("Bạn cần thực hiện một trong hai cách sau:")
+        print("1. Chạy file cào trước (scrape_gemi_construction.py) để tạo file raw tự động.")
+        print("2. Đặt file dữ liệu thô (Xay dung Hy lap - Raw.csv hoặc Xay dung Hy lap.xlsx) vào thư mục này.")
+        print("="*70)
         return
         
     print(f"[*] Backing up original file to {BACKUP_FILE}...")
