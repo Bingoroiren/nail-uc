@@ -1,16 +1,16 @@
 @echo off
-title Taiwan WDA Employer Database Scraper Launcher
+title Taiwan Factory Google Maps & Email Scraper Launcher
 cd /d "%~dp0"
 
 echo ======================================================
-echo         AUTOMATIC PYTHON SETUP AND SCRAPER RUN (WDA)
+echo         AUTOMATIC PYTHON SETUP AND SCRAPER RUN (TAIWAN FACTORIES)
 echo ======================================================
 
 :: Check if Python is installed
 python --version >nul 2>&1
 if errorlevel 1 goto NoPython
 
-:: Activate Virtual Environment if it exists
+:: Create Virtual Environment if it doesn't exist
 if exist .venv goto ActivateVenv
 echo [*] Creating virtual environment (.venv)...
 python -m venv .venv
@@ -34,23 +34,39 @@ playwright install chromium
 if errorlevel 1 goto PlaywrightFailed
 
 echo.
+echo [SUCCESS] Environment is fully configured!
 echo ======================================================
-echo Launching Taiwan WDA Employer Database Scraper...
+echo STEP 1: Launching Taiwan Factory Google Maps Scraper...
 echo ======================================================
-python scrape_wda_employers.py
+python -u src/scraper_tw_factories.py
 if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo Scoring and Sorting Leads (Quota Hunter Rating)...
+echo STEP 2: Preprocessing Scraped Taiwan Businesses...
 echo ======================================================
-python filter_wda_hot_leads.py
+python crawlmail/preprocess_csv_tw_factories.py
+if errorlevel 1 goto RunFailed
+
+echo.
+echo ======================================================
+echo STEP 3: Launching Email Scraper for Taiwan Factories...
+echo ======================================================
+python crawlmail/email_scraper.py taiwan_factories.csv taiwan_factories_with_emails.csv
+if errorlevel 1 goto RunFailed
+
+echo.
+echo ======================================================
+echo STEP 4: Formatting and Translating Results...
+echo ======================================================
+python format_tw_factories_emails.py
 if errorlevel 1 goto RunFailed
 
 goto End
 
 :NoPython
 echo [ERROR] Python is not installed or not in your PATH.
+echo Please install Python 3.8+ and check "Add Python to PATH" during installation.
 pause
 exit /b
 
@@ -77,6 +93,6 @@ exit /b
 :End
 echo.
 echo ======================================================
-echo       TAIWAN WDA SCRAPING SESSION TERMINATED
+echo       TAIWAN FACTORIES SCRAPING SESSION TERMINATED
 echo ======================================================
 pause
