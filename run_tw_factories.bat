@@ -1,5 +1,5 @@
 @echo off
-title Taiwan Factory Google Maps & Email Scraper Launcher
+title Taiwan Factory Google Maps ^& Email Scraper Launcher
 cd /d "%~dp0"
 
 echo ======================================================
