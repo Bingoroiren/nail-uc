@@ -1,9 +1,9 @@
 @echo off
-title Taiwan WDA Employer Database Scraper Launcher
+title Greece Labor Broker Google Maps & Email Scraper Launcher
 cd /d "%~dp0"
 
 echo ======================================================
-echo         AUTOMATIC PYTHON SETUP AND SCRAPER RUN (WDA)
+echo         AUTOMATIC PYTHON SETUP AND SCRAPER RUN (BROKER GR)
 echo ======================================================
 
 :: Check if Python is installed
@@ -33,25 +33,33 @@ echo [*] Checking/installing Playwright browser driver (Chromium)...
 playwright install chromium
 if errorlevel 1 goto PlaywrightFailed
 
+:RunScraper
 echo.
 echo ======================================================
-echo Launching Taiwan WDA Employer Database Scraper...
+echo STEP 1: Launching Greece Labor Broker Google Maps Scraper...
 echo ======================================================
-python scrape_wda_employers.py
+python -u src/scraper_broker_gr.py %*
 if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo Scoring and Sorting Leads (Quota Hunter Rating)...
+echo STEP 2: Preprocessing Scraped Greece Labor Brokers...
 echo ======================================================
-python filter_wda_hot_leads.py
+python crawlmail/preprocess_csv_broker_gr.py
 if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo Formatting Results to standard template...
+echo STEP 3: Launching Email Scraper for Greece Labor Brokers...
 echo ======================================================
-python format_wda_emails.py
+python crawlmail/email_scraper.py broker_greece.csv broker_greece_with_emails.csv
+if errorlevel 1 goto RunFailed
+
+echo.
+echo ======================================================
+echo STEP 4: Formatting and Translating Results...
+echo ======================================================
+python format_broker_gr_emails.py
 if errorlevel 1 goto RunFailed
 
 goto End
@@ -84,6 +92,6 @@ exit /b
 :End
 echo.
 echo ======================================================
-echo       TAIWAN WDA SCRAPING SESSION TERMINATED
+echo       GREECE LABOR BROKER SCRAPING SESSION TERMINATED
 echo ======================================================
 pause
