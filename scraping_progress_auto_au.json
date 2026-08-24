@@ -1,0 +1,7109 @@
+{
+  "completed": [
+    [
+      "bankstown",
+      "nsw",
+      "auto repair shop"
+    ],
+    [
+      "Bankstown",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Bankstown",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bankstown",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bankstown",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Cabramatta",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Cabramatta",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Cabramatta",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Cabramatta",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Canley Heights",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Canley Heights",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Canley Heights",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Canley Heights",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Canley Vale",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Canley Vale",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Canley Vale",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Canley Vale",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Fairfield",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Fairfield",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Fairfield",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Fairfield",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Marrickville",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Marrickville",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Marrickville",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Marrickville",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Darra",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Darra",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Darra",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Darra",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Inala",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Inala",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Inala",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Inala",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Kilkenny",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Kilkenny",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Kilkenny",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Kilkenny",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Mansfield Park",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Mansfield Park",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Mansfield Park",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Mansfield Park",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Woodville",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Woodville",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Woodville",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Woodville",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Braybrook",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Braybrook",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Braybrook",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Braybrook",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Footscray",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Footscray",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Footscray",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Footscray",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Keysborough",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Keysborough",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Keysborough",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Keysborough",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Noble Park",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Noble Park",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Noble Park",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Noble Park",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Richmond",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Richmond",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Richmond",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Richmond",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Springvale",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Springvale",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Springvale",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Springvale",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "St Albans",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "St Albans",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "St Albans",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "St Albans",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Sunshine",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Sunshine",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Sunshine",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Sunshine",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Girrawheen",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Girrawheen",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Girrawheen",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Girrawheen",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Mirrabooka",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Mirrabooka",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Mirrabooka",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Mirrabooka",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Acton",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Acton",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Acton",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Acton",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Amaroo",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Amaroo",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Amaroo",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Amaroo",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Banks",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Banks",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Banks",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Banks",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Beard",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Beard",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beard",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beard",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Belconnen",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Belconnen",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Belconnen",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Belconnen",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Bonython",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Bonython",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bonython",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bonython",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Causeway",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Causeway",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Causeway",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Causeway",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Chapman",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Chapman",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Chapman",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Chapman",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Charnwood",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Charnwood",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Charnwood",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Charnwood",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Chifley",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Chifley",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Chifley",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Chifley",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Crace",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Crace",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Crace",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Crace",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Fadden",
+      "ACT",
+      "Auto repair shop"
+    ],
+    [
+      "Fadden",
+      "ACT",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Fadden",
+      "ACT",
+      "Automobile manufacturer"
+    ],
+    [
+      "Fadden",
+      "ACT",
+      "Car manufacturer"
+    ],
+    [
+      "Abbotsbury",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Abbotsbury",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Abbotsbury",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Abbotsbury",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Abbotsford",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Abbotsford",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Abbotsford",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Abbotsford",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Adamstown",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Adamstown",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Adamstown",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Adamstown",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Albion Park",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Albion Park",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Albion Park",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Albion Park",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Alexandria",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Alexandria",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alexandria",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alexandria",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Alfords Point",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Alfords Point",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alfords Point",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alfords Point",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Alison",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Alison",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alison",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alison",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Allambie Heights",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Allambie Heights",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Allambie Heights",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Allambie Heights",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Allawah",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Allawah",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Allawah",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Allawah",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Annangrove",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Annangrove",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Annangrove",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Annangrove",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Arcadia",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Arcadia",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Arcadia",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Arcadia",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Arcadia Vale",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Arcadia Vale",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Arcadia Vale",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Arcadia Vale",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Argenton",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Argenton",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Argenton",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Argenton",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Arncliffe",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Arncliffe",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Arncliffe",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Arncliffe",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Arndell Park",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Arndell Park",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Arndell Park",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Arndell Park",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Artarmon",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Artarmon",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Artarmon",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Artarmon",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Ashbury",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Ashbury",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ashbury",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ashbury",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Ashcroft",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Ashcroft",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ashcroft",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ashcroft",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Asquith",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Asquith",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Asquith",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Asquith",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Auburn",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Auburn",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Auburn",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Auburn",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Audley",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Audley",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Audley",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Audley",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Austinmer",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Austinmer",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Austinmer",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Austinmer",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Austral",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Austral",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Austral",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Austral",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Avalon Beach",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Avalon Beach",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Avalon Beach",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Avalon Beach",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Avoca Beach",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Avoca Beach",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Avoca Beach",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Avoca Beach",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Avondale",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Avondale",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Avondale",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Avondale",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Balcolyn",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Balcolyn",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Balcolyn",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Balcolyn",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Balgownie",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Balgownie",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Balgownie",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Balgownie",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Balmain",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Balmain",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Balmain",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Balmain",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Banksmeadow",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Banksmeadow",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Banksmeadow",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Banksmeadow",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Bar Point",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Bar Point",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bar Point",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bar Point",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Barrack Heights",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Barrack Heights",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Barrack Heights",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Barrack Heights",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Bateau Bay",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Bateau Bay",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bateau Bay",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bateau Bay",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Baulkham Hills",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Baulkham Hills",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Baulkham Hills",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Baulkham Hills",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Beaumont Hills",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Beaumont Hills",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beaumont Hills",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beaumont Hills",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Beecroft",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Beecroft",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beecroft",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beecroft",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Bellevue Hill",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Bellevue Hill",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bellevue Hill",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bellevue Hill",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Belmont",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Belmont",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Belmont",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Belmont",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Belrose",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Belrose",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Belrose",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Belrose",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Bennetts Green",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Bennetts Green",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bennetts Green",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bennetts Green",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Berkeley",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Berkeley",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Berkeley",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Berkeley",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Berowra",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Berowra",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Berowra",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Berowra",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Birmingham Gardens",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Birmingham Gardens",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Birmingham Gardens",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Birmingham Gardens",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Blacksmiths",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Blacksmiths",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Blacksmiths",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Blacksmiths",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Blackwall",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Blackwall",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Blackwall",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Blackwall",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Blenheim Road",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Blenheim Road",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Blenheim Road",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Blenheim Road",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Blue Haven",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Blue Haven",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Blue Haven",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Blue Haven",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Bucketty",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Bucketty",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bucketty",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bucketty",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Bundeena",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Bundeena",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bundeena",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bundeena",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Callaghan",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Callaghan",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Callaghan",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Callaghan",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Canoelands",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Canoelands",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Canoelands",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Canoelands",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Canton Beach",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Canton Beach",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Canton Beach",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Canton Beach",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Caringbah",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Caringbah",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Caringbah",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Caringbah",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Carramar",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Carramar",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Carramar",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Carramar",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Church Point",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Church Point",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Church Point",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Church Point",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Coalcliff",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Coalcliff",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Coalcliff",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Coalcliff",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Coasters Retreat",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Coasters Retreat",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Coasters Retreat",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Coasters Retreat",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Collaroy",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Collaroy",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Collaroy",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Collaroy",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Coniston",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Coniston",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Coniston",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Coniston",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Constitution Hill",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Constitution Hill",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Constitution Hill",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Constitution Hill",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Cooranbong",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Cooranbong",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Cooranbong",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Cooranbong",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Cordeaux",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Cordeaux",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Cordeaux",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Cordeaux",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Cottage Point",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Cottage Point",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Cottage Point",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Cottage Point",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Denistone",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Denistone",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Denistone",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Denistone",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Dural",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Dural",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Dural",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Dural",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Elanora Heights",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Elanora Heights",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Elanora Heights",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Elanora Heights",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Eleebana",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Eleebana",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Eleebana",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Eleebana",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Engadine",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Engadine",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Engadine",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Engadine",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Fern Bay",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Fern Bay",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Fern Bay",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Fern Bay",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Fountaindale",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Fountaindale",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Fountaindale",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Fountaindale",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Glenfield",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Glenfield",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Glenfield",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Glenfield",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Gordon",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Gordon",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Gordon",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Gordon",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Holmesville",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Holmesville",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Holmesville",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Holmesville",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Holsworthy",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Holsworthy",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Holsworthy",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Holsworthy",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Homebush",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Homebush",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Homebush",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Homebush",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Kings Langley",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Kings Langley",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Kings Langley",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Kings Langley",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Kooragang",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Kooragang",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Kooragang",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Kooragang",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Kurnell",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Kurnell",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Kurnell",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Kurnell",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Manly",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Manly",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Manly",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Manly",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Mosman",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Mosman",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Mosman",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Mosman",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "North Parramatta",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "North Parramatta",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "North Parramatta",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "North Parramatta",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Port Kembla",
+      "NSW",
+      "Auto repair shop"
+    ],
+    [
+      "Port Kembla",
+      "NSW",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Port Kembla",
+      "NSW",
+      "Automobile manufacturer"
+    ],
+    [
+      "Port Kembla",
+      "NSW",
+      "Car manufacturer"
+    ],
+    [
+      "Acacia Ridge",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Acacia Ridge",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Acacia Ridge",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Acacia Ridge",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Advancetown",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Advancetown",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Advancetown",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Advancetown",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Albany Creek",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Albany Creek",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Albany Creek",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Albany Creek",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Albion",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Albion",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Albion",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Albion",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Alderley",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Alderley",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alderley",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alderley",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Alexandra Headland",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Alexandra Headland",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alexandra Headland",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alexandra Headland",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Alexandra Hills",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Alexandra Hills",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alexandra Hills",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alexandra Hills",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Amamoor",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Amamoor",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Amamoor",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Amamoor",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Annerley",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Annerley",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Annerley",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Annerley",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Anstead",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Anstead",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Anstead",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Anstead",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Arana Hills",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Arana Hills",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Arana Hills",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Arana Hills",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Aroona",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Aroona",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Aroona",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Aroona",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Arundel",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Arundel",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Arundel",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Arundel",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Aspley",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Aspley",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Aspley",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Aspley",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Auchenflower",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Auchenflower",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Auchenflower",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Auchenflower",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Austinville",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Austinville",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Austinville",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Austinville",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Australia Fair",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Australia Fair",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Australia Fair",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Australia Fair",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Bald Hills",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Bald Hills",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bald Hills",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bald Hills",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Bald Knob",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Bald Knob",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bald Knob",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bald Knob",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Banyo",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Banyo",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Banyo",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Banyo",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Belli Park",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Belli Park",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Belli Park",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Belli Park",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Belmont",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Belmont",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Belmont",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Belmont",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Benowa",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Benowa",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Benowa",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Benowa",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Berrinba",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Berrinba",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Berrinba",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Berrinba",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Bilinga",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Bilinga",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bilinga",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bilinga",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Black Mountain",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Black Mountain",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Black Mountain",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Black Mountain",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Bli Bli",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Bli Bli",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bli Bli",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bli Bli",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Boreen Point",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Boreen Point",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Boreen Point",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Boreen Point",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Boronia Heights",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Boronia Heights",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Boronia Heights",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Boronia Heights",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Bridges",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Bridges",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bridges",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bridges",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Broadbeach",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Broadbeach",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Broadbeach",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Broadbeach",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Brookfield",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Brookfield",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Brookfield",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Brookfield",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Buderim",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Buderim",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Buderim",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Buderim",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Bulwer",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Bulwer",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bulwer",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bulwer",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Burbank",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Burbank",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Burbank",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Burbank",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Burleigh Dc",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Burleigh Dc",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Burleigh Dc",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Burleigh Dc",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Camp Hill",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Camp Hill",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Camp Hill",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Camp Hill",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Carbrook",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Carbrook",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Carbrook",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Carbrook",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Castaways Beach",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Castaways Beach",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Castaways Beach",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Castaways Beach",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Chambers Flat",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Chambers Flat",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Chambers Flat",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Chambers Flat",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Chandler",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Chandler",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Chandler",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Chandler",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Chevallum",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Chevallum",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Chevallum",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Chevallum",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Clontarf",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Clontarf",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Clontarf",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Clontarf",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Como",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Como",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Como",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Como",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Coolabine",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Coolabine",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Coolabine",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Coolabine",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Coolum Beach",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Coolum Beach",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Coolum Beach",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Coolum Beach",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Coomera",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Coomera",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Coomera",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Coomera",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Cooran",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Cooran",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Cooran",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Cooran",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Corinda",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Corinda",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Corinda",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Corinda",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Crestmead",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Crestmead",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Crestmead",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Crestmead",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Daisy Hill",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Daisy Hill",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Daisy Hill",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Daisy Hill",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Diamond Valley",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Diamond Valley",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Diamond Valley",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Diamond Valley",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Doolandella",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Doolandella",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Doolandella",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Doolandella",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Eight Mile Plains",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Eight Mile Plains",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Eight Mile Plains",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Eight Mile Plains",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Elanora",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Elanora",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Elanora",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Elanora",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Gilberton",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Gilberton",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Gilberton",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Gilberton",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Guanaba",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Guanaba",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Guanaba",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Guanaba",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Helensvale",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Helensvale",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Helensvale",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Helensvale",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Hemmant",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Hemmant",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Hemmant",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Hemmant",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Jamboree Heights",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Jamboree Heights",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Jamboree Heights",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Jamboree Heights",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Landsborough",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Landsborough",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Landsborough",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Landsborough",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Loganholme",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Loganholme",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Loganholme",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Loganholme",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Lota",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Lota",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Lota",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Lota",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Mansfield",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Mansfield",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Mansfield",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Mansfield",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Marcoola",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Marcoola",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Marcoola",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Marcoola",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Mount Cotton",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Mount Cotton",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Mount Cotton",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Mount Cotton",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Munruben",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Munruben",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Munruben",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Munruben",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Newport",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Newport",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Newport",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Newport",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Noosaville",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Noosaville",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Noosaville",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Noosaville",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Reedy Creek",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Reedy Creek",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Reedy Creek",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Reedy Creek",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Rothwell",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Rothwell",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Rothwell",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Rothwell",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Tallebudgera",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Tallebudgera",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Tallebudgera",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Tallebudgera",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "The Gap",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "The Gap",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "The Gap",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "The Gap",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Thornlands",
+      "QLD",
+      "Auto repair shop"
+    ],
+    [
+      "Thornlands",
+      "QLD",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Thornlands",
+      "QLD",
+      "Automobile manufacturer"
+    ],
+    [
+      "Thornlands",
+      "QLD",
+      "Car manufacturer"
+    ],
+    [
+      "Aberfoyle Park",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Aberfoyle Park",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Aberfoyle Park",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Aberfoyle Park",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Adelaide",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Adelaide",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Adelaide",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Adelaide",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Albert Park",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Albert Park",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Albert Park",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Albert Park",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Aldgate",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Aldgate",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Aldgate",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Aldgate",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Aldinga",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Aldinga",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Aldinga",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Aldinga",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Andrews Farm",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Andrews Farm",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Andrews Farm",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Andrews Farm",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Ascot Park",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Ascot Park",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ascot Park",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ascot Park",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Ashbourne",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Ashbourne",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ashbourne",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ashbourne",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Ashton",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Ashton",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ashton",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ashton",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Athelstone",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Athelstone",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Athelstone",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Athelstone",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Auldana",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Auldana",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Auldana",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Auldana",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Banksia Park",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Banksia Park",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Banksia Park",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Banksia Park",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Belair",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Belair",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Belair",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Belair",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Bibaringa",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Bibaringa",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bibaringa",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bibaringa",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Biggs Flat",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Biggs Flat",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Biggs Flat",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Biggs Flat",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Birkenhead",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Birkenhead",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Birkenhead",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Birkenhead",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Blair Athol",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Blair Athol",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Blair Athol",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Blair Athol",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Blewitt Springs",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Blewitt Springs",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Blewitt Springs",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Blewitt Springs",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Bolivar",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Bolivar",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bolivar",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bolivar",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Brahma Lodge",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Brahma Lodge",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Brahma Lodge",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Brahma Lodge",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Brighton",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Brighton",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Brighton",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Brighton",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Brooklyn Park",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Brooklyn Park",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Brooklyn Park",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Brooklyn Park",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Buckland Park",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Buckland Park",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Buckland Park",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Buckland Park",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Christie Downs",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Christie Downs",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Christie Downs",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Christie Downs",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Cleland",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Cleland",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Cleland",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Cleland",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Dingabledinga",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Dingabledinga",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Dingabledinga",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Dingabledinga",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Edinburgh",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Edinburgh",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Edinburgh",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Edinburgh",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Felixstow",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Felixstow",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Felixstow",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Felixstow",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Forest Range",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Forest Range",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Forest Range",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Forest Range",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Glen Osmond",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Glen Osmond",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Glen Osmond",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Glen Osmond",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Hallett Cove",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Hallett Cove",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Hallett Cove",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Hallett Cove",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Ingle Farm",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Ingle Farm",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ingle Farm",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ingle Farm",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Inglewood",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Inglewood",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Inglewood",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Inglewood",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Maslin Beach",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Maslin Beach",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Maslin Beach",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Maslin Beach",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "North Haven",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "North Haven",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "North Haven",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "North Haven",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Sellicks Beach",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Sellicks Beach",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Sellicks Beach",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Sellicks Beach",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Upper Sturt",
+      "SA",
+      "Auto repair shop"
+    ],
+    [
+      "Upper Sturt",
+      "SA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Upper Sturt",
+      "SA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Upper Sturt",
+      "SA",
+      "Car manufacturer"
+    ],
+    [
+      "Austins Ferry",
+      "TAS",
+      "Auto repair shop"
+    ],
+    [
+      "Austins Ferry",
+      "TAS",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Austins Ferry",
+      "TAS",
+      "Automobile manufacturer"
+    ],
+    [
+      "Austins Ferry",
+      "TAS",
+      "Car manufacturer"
+    ],
+    [
+      "Battery Point",
+      "TAS",
+      "Auto repair shop"
+    ],
+    [
+      "Battery Point",
+      "TAS",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Battery Point",
+      "TAS",
+      "Automobile manufacturer"
+    ],
+    [
+      "Battery Point",
+      "TAS",
+      "Car manufacturer"
+    ],
+    [
+      "Collinsvale",
+      "TAS",
+      "Auto repair shop"
+    ],
+    [
+      "Collinsvale",
+      "TAS",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Collinsvale",
+      "TAS",
+      "Automobile manufacturer"
+    ],
+    [
+      "Collinsvale",
+      "TAS",
+      "Car manufacturer"
+    ],
+    [
+      "Derwent Park",
+      "TAS",
+      "Auto repair shop"
+    ],
+    [
+      "Derwent Park",
+      "TAS",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Derwent Park",
+      "TAS",
+      "Automobile manufacturer"
+    ],
+    [
+      "Derwent Park",
+      "TAS",
+      "Car manufacturer"
+    ],
+    [
+      "Geilston Bay",
+      "TAS",
+      "Auto repair shop"
+    ],
+    [
+      "Geilston Bay",
+      "TAS",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Geilston Bay",
+      "TAS",
+      "Automobile manufacturer"
+    ],
+    [
+      "Geilston Bay",
+      "TAS",
+      "Car manufacturer"
+    ],
+    [
+      "Grasstree Hill",
+      "TAS",
+      "Auto repair shop"
+    ],
+    [
+      "Grasstree Hill",
+      "TAS",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Grasstree Hill",
+      "TAS",
+      "Automobile manufacturer"
+    ],
+    [
+      "Grasstree Hill",
+      "TAS",
+      "Car manufacturer"
+    ],
+    [
+      "Abbotsford",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Abbotsford",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Abbotsford",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Abbotsford",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Aberfeldie",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Aberfeldie",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Aberfeldie",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Aberfeldie",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Airport West",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Airport West",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Airport West",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Airport West",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Albanvale",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Albanvale",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Albanvale",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Albanvale",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Albert Park",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Albert Park",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Albert Park",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Albert Park",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Albion",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Albion",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Albion",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Albion",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Altona",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Altona",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Altona",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Altona",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Armadale",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Armadale",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Armadale",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Armadale",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Arthurs Creek",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Arthurs Creek",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Arthurs Creek",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Arthurs Creek",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Ashburton",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Ashburton",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ashburton",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ashburton",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Aspendale",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Aspendale",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Aspendale",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Aspendale",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Avalon",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Avalon",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Avalon",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Avalon",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Balwyn",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Balwyn",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Balwyn",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Balwyn",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Bangholme",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Bangholme",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bangholme",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bangholme",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Banyule",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Banyule",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Banyule",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Banyule",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Bareena",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Bareena",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bareena",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bareena",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Batman",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Batman",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Batman",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Batman",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Bayswater",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Bayswater",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bayswater",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bayswater",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Beaumaris",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Beaumaris",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beaumaris",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beaumaris",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Beenak",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Beenak",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beenak",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beenak",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Belgrave",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Belgrave",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Belgrave",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Belgrave",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Bell Park",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Bell Park",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bell Park",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bell Park",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Belmont",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Belmont",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Belmont",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Belmont",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Bend Of Islands",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Bend Of Islands",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bend Of Islands",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bend Of Islands",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Bentleigh",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Bentleigh",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bentleigh",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bentleigh",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Blackburn",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Blackburn",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Blackburn",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Blackburn",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Brandon Park",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Brandon Park",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Brandon Park",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Brandon Park",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Brighton",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Brighton",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Brighton",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Brighton",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Bundoora",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Bundoora",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bundoora",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bundoora",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Campbellfield",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Campbellfield",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Campbellfield",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Campbellfield",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Carrum",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Carrum",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Carrum",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Carrum",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Carrum Downs",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Carrum Downs",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Carrum Downs",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Carrum Downs",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Caulfield Junction",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Caulfield Junction",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Caulfield Junction",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Caulfield Junction",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Chirnside Park",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Chirnside Park",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Chirnside Park",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Chirnside Park",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Clarinda",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Clarinda",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Clarinda",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Clarinda",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Cocoroc",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Cocoroc",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Cocoroc",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Cocoroc",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Corio",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Corio",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Corio",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Corio",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Craigieburn",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Craigieburn",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Craigieburn",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Craigieburn",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Croydon",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Croydon",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Croydon",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Croydon",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Diamond Creek",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Diamond Creek",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Diamond Creek",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Diamond Creek",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Doncaster",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Doncaster",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Doncaster",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Doncaster",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Donvale",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Donvale",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Donvale",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Donvale",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Doveton",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Doveton",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Doveton",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Doveton",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Eltham",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Eltham",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Eltham",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Eltham",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Epping",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Epping",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Epping",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Epping",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Ferntree Gully",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Ferntree Gully",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ferntree Gully",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ferntree Gully",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Frankston North",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Frankston North",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Frankston North",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Frankston North",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Gilberton",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Gilberton",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Gilberton",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Gilberton",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Greenvale",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Greenvale",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Greenvale",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Greenvale",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Heathwood",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Heathwood",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Heathwood",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Heathwood",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Hoppers Crossing",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Hoppers Crossing",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Hoppers Crossing",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Hoppers Crossing",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Keilor",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Keilor",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Keilor",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Keilor",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Knoxfield",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Knoxfield",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Knoxfield",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Knoxfield",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Mambourin",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Mambourin",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Mambourin",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Mambourin",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Melbourne Airport",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Melbourne Airport",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Melbourne Airport",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Melbourne Airport",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Newport",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Newport",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Newport",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Newport",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "North Warrandyte",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "North Warrandyte",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "North Warrandyte",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "North Warrandyte",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Oaklands Junction",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Oaklands Junction",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Oaklands Junction",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Oaklands Junction",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Plenty",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Plenty",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Plenty",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Plenty",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Reservoir",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Reservoir",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Reservoir",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Reservoir",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Rowville",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Rowville",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Rowville",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Rowville",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Sandown Village",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Sandown Village",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Sandown Village",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Sandown Village",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "South Yarra",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "South Yarra",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "South Yarra",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "South Yarra",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Williams Landing",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Williams Landing",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Williams Landing",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Williams Landing",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Wonga Park",
+      "VIC",
+      "Auto repair shop"
+    ],
+    [
+      "Wonga Park",
+      "VIC",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Wonga Park",
+      "VIC",
+      "Automobile manufacturer"
+    ],
+    [
+      "Wonga Park",
+      "VIC",
+      "Car manufacturer"
+    ],
+    [
+      "Alexander Heights",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Alexander Heights",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alexander Heights",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alexander Heights",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Alfred Cove",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Alfred Cove",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alfred Cove",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alfred Cove",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Alkimos",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Alkimos",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Alkimos",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Alkimos",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Anketell",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Anketell",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Anketell",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Anketell",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Armadale",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Armadale",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Armadale",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Armadale",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Ascot",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Ascot",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ascot",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ascot",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Ashby",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Ashby",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ashby",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ashby",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Ashendon",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Ashendon",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Ashendon",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Ashendon",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Atwell",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Atwell",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Atwell",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Atwell",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Aveley",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Aveley",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Aveley",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Aveley",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Avon Valley National Park",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Avon Valley National Park",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Avon Valley National Park",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Avon Valley National Park",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Bailup",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Bailup",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bailup",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bailup",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Balcatta",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Balcatta",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Balcatta",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Balcatta",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Baldivis",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Baldivis",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Baldivis",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Baldivis",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Beaconsfield",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Beaconsfield",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beaconsfield",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beaconsfield",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Beckenham",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Beckenham",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beckenham",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beckenham",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Beechboro",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Beechboro",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beechboro",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beechboro",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Beldon",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Beldon",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Beldon",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Beldon",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Bibra Lake",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Bibra Lake",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bibra Lake",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bibra Lake",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Bickley",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Bickley",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Bickley",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Bickley",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Breton Bay",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Breton Bay",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Breton Bay",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Breton Bay",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Broadway Nedlands",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Broadway Nedlands",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Broadway Nedlands",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Broadway Nedlands",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Burns Beach",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Burns Beach",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Burns Beach",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Burns Beach",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Butler",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Butler",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Butler",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Butler",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Byford",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Byford",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Byford",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Byford",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Canning Vale",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Canning Vale",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Canning Vale",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Canning Vale",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Caraban",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Caraban",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Caraban",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Caraban",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Carabooda",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Carabooda",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Carabooda",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Carabooda",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Carlisle",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Carlisle",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Carlisle",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Carlisle",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Caversham",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Caversham",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Caversham",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Caversham",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Churchlands",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Churchlands",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Churchlands",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Churchlands",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Coogee",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Coogee",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Coogee",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Coogee",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Coolbinia",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Coolbinia",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Coolbinia",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Coolbinia",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Cottesloe",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Cottesloe",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Cottesloe",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Cottesloe",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Darlington",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Darlington",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Darlington",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Darlington",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Duncraig",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Duncraig",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Duncraig",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Duncraig",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Forrestfield",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Forrestfield",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Forrestfield",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Forrestfield",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Gidgegannup",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Gidgegannup",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Gidgegannup",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Gidgegannup",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Golden Bay",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Golden Bay",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Golden Bay",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Golden Bay",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Gosnells",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Gosnells",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Gosnells",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Gosnells",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "High Wycombe",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "High Wycombe",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "High Wycombe",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "High Wycombe",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Hope Valley",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Hope Valley",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Hope Valley",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Hope Valley",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Hopeland",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Hopeland",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Hopeland",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Hopeland",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Jarrahdale",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Jarrahdale",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Jarrahdale",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Jarrahdale",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Karakin",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Karakin",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Karakin",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Karakin",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Keysbrook",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Keysbrook",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Keysbrook",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Keysbrook",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Lakelands",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Lakelands",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Lakelands",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Lakelands",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Leda",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Leda",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Leda",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Leda",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Mahogany Creek",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Mahogany Creek",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Mahogany Creek",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Mahogany Creek",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Mundijong",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Mundijong",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Mundijong",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Mundijong",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Oakford",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Oakford",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Oakford",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Oakford",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Port Kennedy",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Port Kennedy",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Port Kennedy",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Port Kennedy",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Rottnest Island",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Rottnest Island",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Rottnest Island",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Rottnest Island",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Seabird",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Seabird",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Seabird",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Seabird",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Trigg",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Trigg",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Trigg",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Trigg",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Two Rocks",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Two Rocks",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Two Rocks",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Two Rocks",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Whiteman",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Whiteman",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Whiteman",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Whiteman",
+      "WA",
+      "Car manufacturer"
+    ],
+    [
+      "Yanchep",
+      "WA",
+      "Auto repair shop"
+    ],
+    [
+      "Yanchep",
+      "WA",
+      "Car repair and maintenance service"
+    ],
+    [
+      "Yanchep",
+      "WA",
+      "Automobile manufacturer"
+    ],
+    [
+      "Yanchep",
+      "WA",
+      "Car manufacturer"
+    ]
+  ]
+}

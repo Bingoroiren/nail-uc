@@ -129,7 +129,13 @@ async def crawl_regular_site(page, url):
     try:
         print(f"[*] Navigating to Website: {url}")
         await page.goto(url, timeout=25000, wait_until="commit")
-        await page.wait_for_timeout(3000)
+        await page.wait_for_timeout(2000)
+        # Scroll to bottom to trigger lazy loading of footers
+        try:
+            await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            await page.wait_for_timeout(1000)
+        except Exception:
+            pass
     except Exception as e:
         print(f"[-] Website load failed ({url}): {e}")
         return [], [], []
@@ -212,7 +218,12 @@ async def crawl_regular_site(page, url):
             try:
                 print(f"[*] Navigating to Subpage: {sub_url}")
                 await page.goto(sub_url, timeout=15000, wait_until="commit")
-                await page.wait_for_timeout(2000)
+                await page.wait_for_timeout(1000)
+                try:
+                    await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                    await page.wait_for_timeout(1000)
+                except Exception:
+                    pass
                 await extract_links_and_emails(page)
             except Exception:
                 pass
@@ -392,19 +403,24 @@ async def main():
         try:
             with open(OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
-                for row in reader:
-                    url = row.get('URL')
-                    if url:
-                        email = row.get('Email', '').strip()
-                        emails_by_url[url] = email
-                        
-                        website = row.get('Website', '').strip()
-                        if RETRY_EMPTY and website and not email:
-                            # Do not mark as processed if we are retrying empty emails and website exists
-                            pass
-                        else:
-                            processed_urls.add(url)
-            print(f"[*] Resuming: Loaded {len(processed_urls)} already processed records.")
+                if reader.fieldnames and 'Công ty' in reader.fieldnames:
+                    print("[WARNING] Output CSV appears to be already formatted. Starting fresh by overwriting it.")
+                    file_exists = False
+                else:
+                    for row in reader:
+                        url = row.get('URL')
+                        if url:
+                            email = row.get('Email', '').strip()
+                            emails_by_url[url] = email
+                            
+                            website = row.get('Website', '').strip()
+                            if RETRY_EMPTY and website and not email:
+                                # Do not mark as processed if we are retrying empty emails and website exists
+                                pass
+                            else:
+                                processed_urls.add(url)
+            if file_exists:
+                print(f"[*] Resuming: Loaded {len(processed_urls)} already processed records.")
         except Exception as e:
             print(f"[-] Could not read existing output file, starting fresh: {e}")
             file_exists = False

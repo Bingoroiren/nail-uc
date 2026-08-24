@@ -265,7 +265,7 @@ def main():
     
     # Step 4: Reformat to standard cold mail template columns
     fieldnames = [
-        "No.", "Công ty", "Tên Latin", "Chức danh", "Người liên hệ", "SĐT", "Liên Hệ", 
+        "No.", "Công ty", "Chức danh", "Người liên hệ", "SĐT", "Liên Hệ", 
         "Email", "Liên Hệ mail", "Địa chỉ", "Lương", "Ngày đăng", "Hạn tuyển", 
         "Check gửi", "Last Subject", "Last Body HTML", "Trạng thái Reply", 
         "Lần Follow-up", "Ngày Follow-up gần nhất", "Mailbox đã dùng", "Category"
@@ -291,7 +291,6 @@ def main():
         out_row = {
             "No.": i,
             "Công ty": raw_company_name,
-            "Tên Latin": transliterate_greek_to_latin(raw_company_name),
             "Chức danh": "",
             "Người liên hệ": "",
             "SĐT": phone,
