@@ -73,7 +73,11 @@ BAD_KEYWORDS = {
 DISCARD_KEYWORDS = {
     'cci', 'chamber', 'epimel', 'epime', 'eea.gr', 'gov.gr', 'evep', 
     'eves', 'eveh', 'ebed', 'icci', 'bep.gr', 'dramanet', 'arcadianet', 
-    'eber.gr', 'epimevro', 'ebef', 'gemi'
+    'eber.gr', 'epimevro', 'ebef', 'gemi', 'cycladescc.gr', 'larcci.gr',
+    'epihal.gr', 'champier.gr', 'e-thesprotias.gr', 'fthiotidoscc.gr',
+    'korinthiacc.gr', 'acci.gr', 'cci-magnesia.gr', 'eepir', 'ebear',
+    'e-a.gr', 'zantecci', 'corfucci.gr', 'ebeh.gr', 'epimfok', 'epimlas',
+    'etheas'
 }
 
 # Old Greek ISP domains or low-quality domains that are penalized but NOT discarded.
@@ -232,6 +236,9 @@ def main():
     grouped_rows = {}
     for r in rows:
         comp_name = r['Tên công ty'] if r['Tên công ty'] else r['Tên tiếng Anh']
+        comp_name_str = str(comp_name).lower()
+        if 'etheas' in comp_name_str or 'εθεας' in comp_name_str or 'εθεασ' in comp_name_str or 'ε.θ.ε.α.σ' in comp_name_str:
+            continue
         norm_name = normalize_name(comp_name)
         if not norm_name:
             continue
@@ -366,17 +373,8 @@ def main():
             out_sheet.append(row_data)
         out_wb.save(target_xlsx)
         
-    # Try to copy/overwrite the original INPUT_FILE
-    print(f"[*] Attempting to update original {INPUT_FILE}...")
-    try:
-        if INPUT_FILE.lower().endswith('.csv'):
-            shutil.copy2(FORMATTED_CSV, INPUT_FILE)
-        else:
-            shutil.copy2(target_xlsx, INPUT_FILE)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print("\n[WARNING] Permission denied! The original file is locked.")
-        print(f"[i] The formatted copy is available at: {FORMATTED_CSV}")
+    # Do not overwrite the raw INPUT_FILE to preserve raw headers
+    pass
 
 if __name__ == "__main__":
     main()

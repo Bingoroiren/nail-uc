@@ -9,7 +9,7 @@ Output columns match all other formatted files in the project:
   Check gui | Last Subject | Last Body HTML | Trang thai Reply |
   Lan Follow-up | Ngay Follow-up gan nhat | Mailbox da dung | Category
 
-Data designed to be merged/appended into masoc_members_formatted.csv.
+Standalone woodworking list, formatted for cold mail.
 """
 import csv
 import os
@@ -17,7 +17,7 @@ import shutil
 import re
 import sys
 
-INPUT_CSV = r"d:\glc\nail uc\wood_latvia_with_emails.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wood_latvia_with_emails.csv")
 if len(sys.argv) > 1:
     INPUT_CSV = sys.argv[1]
 
@@ -250,12 +250,8 @@ def main():
             writer.writeheader()
             writer.writerows(output_rows)
 
-    print(f"[*] Updating original {INPUT_CSV}...")
-    try:
-        shutil.copy2(target, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print(f"\n[WARNING] Permission denied updating {INPUT_CSV}. File is open in Excel.")
+    # Do not overwrite the raw INPUT_CSV so it preserves the original headers for scraper resumes
+    pass
 
     print(f"\n--- Summary ---")
     print(f"Total output rows: {len(output_rows)}")

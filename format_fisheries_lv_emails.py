@@ -4,7 +4,7 @@ import shutil
 import re
 import sys
 
-INPUT_CSV = r"d:\glc\nail uc\fisheries_latvia_with_emails.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fisheries_latvia_with_emails.csv")
 if len(sys.argv) > 1:
     INPUT_CSV = sys.argv[1]
 

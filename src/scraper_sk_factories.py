@@ -328,7 +328,7 @@ async def extract_details(page, url, search_query, loc_info):
                     
     permanently_closed = "No"
     try:
-        closed_loc = page.locator('span:has-text("Permanently closed"), span:has-text("Trvalo zatvorené"), span:has-text("Zatvorené")')
+        closed_loc = page.locator('span:has-text("Permanently closed"), span:has-text("Trvalo zatvorené")')
         if await closed_loc.count() > 0:
             permanently_closed = "Yes"
     except Exception:

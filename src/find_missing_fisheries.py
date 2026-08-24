@@ -17,7 +17,7 @@ if sys.platform.startswith('win'):
     import codecs
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
 
-xlsx_path = r"d:\glc\nail uc\8.sekcija - Zvejas produktu apstrādes uzņēmumi.xlsx"
+xlsx_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "8.sekcija - Zvejas produktu apstrādes uzņēmumi.xlsx")
 csv_path = config_fisheries_lv.OUTPUT_CSV
 
 def clean_display_name(name):

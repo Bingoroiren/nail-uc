@@ -2,6 +2,7 @@
 title Latvia Woodworking Google Maps + Email Scraper Pipeline
 chcp 65001 > nul
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ============================================================
 echo   LATVIA WOODWORKING / CARPENTRY SCRAPER PIPELINE
@@ -78,8 +79,6 @@ echo    wood_latvia.csv                     - Raw Google Maps data
 echo    wood_latvia_with_emails.csv         - With emails scraped
 echo    wood_latvia_with_emails_formatted.csv - Final formatted output
 echo.
-echo  To merge into MASOC list, append the formatted CSV rows
-echo  into masoc_members_formatted.csv manually in Excel.
 echo ============================================================
 goto End
 

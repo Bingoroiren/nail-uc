@@ -7,9 +7,15 @@ from playwright.async_api import async_playwright
 from playwright_stealth import stealth_async
 import sys
 
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except Exception:
+    pass
+
 # File paths (default or from CLI args)
-INPUT_CSV = r"d:\glc\nail uc\nail_salons_australia.csv"
-OUTPUT_CSV = r"d:\glc\nail uc\nail_salons_with_emails.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "nail_salons_australia.csv")
+OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "nail_salons_with_emails.csv")
 
 # Parse retry-empty option
 RETRY_EMPTY = "--retry-empty" in sys.argv
@@ -56,6 +62,25 @@ def extract_emails_from_text(text):
             if not any(email.endswith(ext) for ext in INVALID_EXTENSIONS):
                 emails.add(email)
     return list(emails)
+
+def decode_cloudflare_email(hex_str):
+    try:
+        hex_data = bytes.fromhex(hex_str)
+        key = hex_data[0]
+        return ''.join(chr(b ^ key) for b in hex_data[1:])
+    except Exception:
+        return ""
+
+def extract_cloudflare_emails(html):
+    if not html:
+        return []
+    emails = []
+    for cfemail in re.findall(r'data-cfemail="([0-9a-fA-F]+)"', html):
+        decoded = decode_cloudflare_email(cfemail)
+        if decoded and '@' in decoded:
+            emails.append(decoded.strip().lower())
+    return emails
+
 
 def clean_fb_link(href):
     if not href:
@@ -116,6 +141,13 @@ async def crawl_facebook(page, url):
     except Exception:
         pass
 
+    # Search Cloudflare emails
+    try:
+        html = await page.content()
+        emails.extend(extract_cloudflare_emails(html))
+    except Exception:
+        pass
+
     return list(set(emails))
 
 async def crawl_instagram(page, url):
@@ -143,6 +175,13 @@ async def crawl_instagram(page, url):
         emails.extend(extract_emails_from_text(body_text))
     except Exception:
         pass
+
+    try:
+        html = await page.content()
+        emails.extend(extract_cloudflare_emails(html))
+    except Exception:
+        pass
+
     return list(set(emails))
 
 async def safe_scroll_to_bottom(page):
@@ -156,10 +195,14 @@ async def safe_scroll_to_bottom(page):
 async def crawl_regular_site(page, url):
     try:
         print(f"[*] Navigating to Website: {url}")
-        await page.goto(url, timeout=25000, wait_until="commit")
+        await page.goto(url, timeout=25000, wait_until="domcontentloaded")
         await page.wait_for_timeout(2000)
-        # Scroll to bottom to trigger lazy loading of footers
         await safe_scroll_to_bottom(page)
+        try:
+            title = await page.title()
+            print(f"[*] Page loaded. Title: {title}")
+        except Exception:
+            pass
     except Exception as e:
         print(f"[-] Website load failed ({url}): {e}")
         return [], [], []
@@ -185,7 +228,19 @@ async def crawl_regular_site(page, url):
         # 2. Search body text (visible content)
         try:
             body_text = await current_page.locator("body").inner_text()
-            emails.extend(extract_emails_from_text(body_text))
+            found = extract_emails_from_text(body_text)
+            if found:
+                emails.extend(found)
+                print(f"[+] Found in body_text on {current_page.url}: {found}")
+            else:
+                print(f"[-] No emails in body_text on {current_page.url}. Body text length: {len(body_text)}")
+        except Exception as e:
+            print(f"[-] Body text extraction error on {current_page.url}: {e}")
+
+        # Search Cloudflare obfuscated emails
+        try:
+            html = await current_page.content()
+            emails.extend(extract_cloudflare_emails(html))
         except Exception:
             pass
 
@@ -216,6 +271,12 @@ async def crawl_regular_site(page, url):
     # Search subpages if no emails found yet
     emails = list(set(emails))
     if not emails:
+        # Fallback wait for slow SPA/React rendering under concurrent CPU load
+        await page.wait_for_timeout(2000)
+        await extract_links_and_emails(page)
+        emails = list(set(emails))
+        
+    if not emails:
         candidate_links = []
         try:
             links = await page.locator('a[href]').all()
@@ -230,9 +291,9 @@ async def crawl_regular_site(page, url):
                     if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
                         full_url_clean = full_url.split('#')[0]
                         priority = 0
-                        if any(k in text_lower or k in href_lower for k in ['contact', 'about', 'support', 'reach', 'info', 'location', 'salon', 'find', 'store', 'team', 'enquir', 'inquiry']):
+                        if any(k in text_lower or k in href_lower for k in ['contact', 'about', 'support', 'reach', 'info', 'location', 'salon', 'find', 'store', 'kontak', 'nas', 'mums', 'sobre', 'επικοινων', 'epikoinon', '聯絡', '關於', '关于', '联系', 'contat', 'impressum', 'team', 'enquir', 'inquiry']):
                             priority = 2
-                        elif any(k in text_lower or k in href_lower for k in ['services', 'book', 'us', 'help', 'footer', 'sitemap']):
+                        elif any(k in text_lower or k in href_lower for k in ['services', 'book', 'us', 'pakalpojumi', 'sluzby', 'servicos', 'υπηρεσιες', '服務', '服务', 'help', 'footer', 'sitemap']):
                             priority = 1
                         
                         candidate_links.append((priority, full_url_clean))
@@ -256,7 +317,7 @@ async def crawl_regular_site(page, url):
         for sub_url in unique_sub_urls[:6]:
             try:
                 print(f"[*] Navigating to Subpage: {sub_url}")
-                await page.goto(sub_url, timeout=15000, wait_until="commit")
+                await page.goto(sub_url, timeout=15000, wait_until="domcontentloaded")
                 await page.wait_for_timeout(1000)
                 await safe_scroll_to_bottom(page)
                 await extract_links_and_emails(page)
@@ -326,8 +387,8 @@ async def process_row(row, browser, semaphore, writer, output_file, processed_ur
                 )
             
             page = await context.new_page()
-            if not (is_fb or is_ig):
-                await stealth_async(page)
+            # if not (is_fb or is_ig):
+            #     await stealth_async(page)
             
             # 2. Scrape
             fb_fallback_links = []

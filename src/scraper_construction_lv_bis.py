@@ -13,8 +13,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 BASE_URL = "https://bis.gov.lv"
 LIST_URL_TEMPLATE = "https://bis.gov.lv/bisp/lv/construction_companies/list?page={page}&search[statuses][]=A"
 PROGRESS_FILE = "scraping_progress_construction_lv_bis.json"
-OUTPUT_CSV = r"d:\glc\nail uc\construction_latvia_with_emails.csv"
-TEST_OUTPUT_CSV = r"d:\glc\nail uc\construction_latvia_test_with_emails.csv"
+OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "construction_latvia_with_emails.csv")
+TEST_OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "construction_latvia_test_with_emails.csv")
 
 # Force UTF-8 stdout encoding for safe console print of Baltic characters
 if hasattr(sys.stdout, 'reconfigure'):

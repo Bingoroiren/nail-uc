@@ -3,10 +3,10 @@ import os
 import shutil
 import re
 
-INPUT_CSV = r"d:\glc\nail uc\wda_hot_leads.csv"
-BACKUP_CSV = r"d:\glc\nail uc\wda_hot_leads_backup.csv"
-FORMATTED_CSV = r"d:\glc\nail uc\wda_employers_formatted.csv"
-FORMATTED_V2_CSV = r"d:\glc\nail uc\wda_employers_formatted_v2.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wda_hot_leads.csv")
+BACKUP_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wda_hot_leads_backup.csv")
+FORMATTED_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wda_employers_formatted.csv")
+FORMATTED_V2_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wda_employers_formatted_v2.csv")
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 
@@ -103,7 +103,7 @@ def main():
     # If wda_hot_leads.csv doesn't exist, try wda_employers.csv
     input_file = INPUT_CSV
     if not os.path.exists(input_file):
-        input_file = r"d:\glc\nail uc\wda_employers.csv"
+        input_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wda_employers.csv")
         
     if not os.path.exists(input_file):
         print(f"Error: Neither {INPUT_CSV} nor wda_employers.csv exist.")

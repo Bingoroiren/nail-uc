@@ -7,6 +7,7 @@ echo ============================================================
 echo.
 
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo [1/2] Scraping MASOC member database...
 python crawlmail\scrape_masoc.py

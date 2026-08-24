@@ -3,10 +3,10 @@ import os
 import shutil
 import re
 
-INPUT_CSV = r"d:\glc\nail uc\taiwan_construction_with_emails.csv"
-BACKUP_CSV = r"d:\glc\nail uc\taiwan_construction_with_emails_backup.csv"
-FORMATTED_CSV = r"d:\glc\nail uc\taiwan_construction_with_emails_formatted.csv"
-FORMATTED_V2_CSV = r"d:\glc\nail uc\taiwan_construction_with_emails_formatted_v2.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "taiwan_construction_with_emails.csv")
+BACKUP_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "taiwan_construction_with_emails_backup.csv")
+FORMATTED_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "taiwan_construction_with_emails_formatted.csv")
+FORMATTED_V2_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "taiwan_construction_with_emails_formatted_v2.csv")
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 

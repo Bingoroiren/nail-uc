@@ -111,8 +111,13 @@ def main():
         writer = csv.DictWriter(f, fieldnames=output_fields)
         writer.writeheader()
         for r in scored_rows:
-            # Clean up dict keys to match output_fields
-            row_data = {k: r.get(k, "") for k in output_fields}
+            # Clean up dict keys to match output_fields and add single quote to phone numbers
+            row_data = {}
+            for k in output_fields:
+                val = r.get(k, "")
+                if k in ["SĐT chủ", "SĐT môi giới"] and val and val != "不顯示" and not str(val).startswith("'"):
+                    val = f"'{val}"
+                row_data[k] = val
             writer.writerow(row_data)
             
     # Write to Excel with formatting
@@ -138,7 +143,12 @@ def main():
     cold_fill = PatternFill(start_color="E2EFDA", end_color="E2EFDA", fill_type="solid") # light green
     
     for r_idx, r in enumerate(scored_rows, 2):
-        row_data = [r.get(k, "") for k in output_fields]
+        row_data = []
+        for k in output_fields:
+            val = r.get(k, "")
+            if k in ["SĐT chủ", "SĐT môi giới"] and val and val != "不顯示" and not str(val).startswith("'"):
+                val = f"'{val}"
+            row_data.append(val)
         sheet.append(row_data)
         
         # Color rating cell

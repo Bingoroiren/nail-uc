@@ -2,8 +2,8 @@ import csv
 import os
 import shutil
 
-INPUT_CSV = r"d:\glc\nail uc\slovakia_recruitment.csv"
-BACKUP_CSV = r"d:\glc\nail uc\slovakia_recruitment_backup.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "slovakia_recruitment.csv")
+BACKUP_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "slovakia_recruitment_backup.csv")
 
 def normalize_website(url):
     if not url:

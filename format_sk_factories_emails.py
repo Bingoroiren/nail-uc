@@ -3,10 +3,10 @@ import os
 import shutil
 import re
 
-INPUT_CSV = r"d:\glc\nail uc\slovakia_factories_with_emails.csv"
-BACKUP_CSV = r"d:\glc\nail uc\slovakia_factories_with_emails_backup.csv"
-FORMATTED_CSV = r"d:\glc\nail uc\slovakia_factories_with_emails_formatted.csv"
-FORMATTED_V2_CSV = r"d:\glc\nail uc\slovakia_factories_with_emails_formatted_v2.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slovakia_factories_with_emails.csv")
+BACKUP_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slovakia_factories_with_emails_backup.csv")
+FORMATTED_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slovakia_factories_with_emails_formatted.csv")
+FORMATTED_V2_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slovakia_factories_with_emails_formatted_v2.csv")
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 
@@ -279,14 +279,13 @@ def main():
             writer.writeheader()
             writer.writerows(output_rows)
         
-    print(f"[*] Attempting to update original {INPUT_CSV}...")
-    try:
-        shutil.copy2(target_write_file, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print("\n[WARNING] Permission denied! The original file is locked by Excel.")
-        print(f"[!] Please close Excel and run: python format_sk_factories_emails.py")
-        print(f"[i] The formatted copy is available at: {target_write_file}")
+    # Do NOT overwrite the original input file with formatted output
+    # to preserve raw email data for future retry-empty runs
+    print(f"\n--- Summary ---")
+    print(f"Total output rows: {len(output_rows)}")
+    print(f"With email:        {len(with_email)}")
+    print(f"Without email:     {len(without_email)}")
+    print(f"Formatted file:    {target_write_file}")
 
 if __name__ == "__main__":
     main()

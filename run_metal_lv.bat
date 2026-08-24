@@ -1,7 +1,8 @@
-﻿@echo off
+@echo off
 title Latvia Metalworking Google Maps + Email Scraper Pipeline
 chcp 65001 > nul
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ============================================================
 echo   LATVIA METALWORKING / METAL FABRICATION SCRAPER PIPELINE
@@ -77,8 +78,8 @@ echo    metal_latvia.csv                     - Raw Google Maps data
 echo    metal_latvia_with_emails.csv         - With emails scraped
 echo    metal_latvia_with_emails_formatted.csv - Final formatted output
 echo.
-echo  To merge into MASOC list, append the formatted CSV rows
-echo  into masoc_members_formatted.csv manually in Excel.
+echo  Note: Metal entries have been AUTOMATICALLY merged
+echo        into masoc_members_formatted.csv.
 echo ============================================================
 goto End
 

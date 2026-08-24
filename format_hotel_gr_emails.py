@@ -63,7 +63,10 @@ BAD_KEYWORDS = {
 DISCARD_KEYWORDS = {
     'cci', 'chamber', 'epimel', 'epime', 'eea.gr', 'gov.gr', 'evep', 
     'eves', 'eveh', 'ebed', 'icci', 'bep.gr', 'dramanet', 'arcadianet', 
-    'eber.gr', 'epimevro', 'ebef', 'gemi'
+    'eber.gr', 'epimevro', 'ebef', 'gemi', 'cycladescc.gr', 'larcci.gr',
+    'epihal.gr', 'champier.gr', 'e-thesprotias.gr', 'fthiotidoscc.gr',
+    'korinthiacc.gr', 'acci.gr', 'cci-magnesia.gr', 'eepir', 'ebear',
+    'e-a.gr', 'zantecci', 'corfucci.gr', 'ebeh.gr', 'epimfok', 'epimlas'
 }
 
 # Old Greek ISP domains or low-quality domains that are penalized but NOT discarded.
@@ -341,13 +344,21 @@ def main():
     # Write XLSX
     target_xlsx = FORMATTED_XLSX
     print(f"[*] Writing to XLSX: {target_xlsx}...")
+    
+    # Helper to clean strings from XML illegal characters that cause openpyxl to fail
+    illegal_xml_re = re.compile(r"[\000-\008]|[\013-\014]|[\016-\037]")
+    def clean_cell_value(val):
+        if isinstance(val, str):
+            return illegal_xml_re.sub("", val)
+        return val
+
     try:
         out_wb = openpyxl.Workbook()
         out_sheet = out_wb.active
         out_sheet.title = "Raw"
         out_sheet.append(fieldnames)
         for o_row in output_rows:
-            row_data = [o_row[k] for k in fieldnames]
+            row_data = [clean_cell_value(o_row[k]) for k in fieldnames]
             out_sheet.append(row_data)
         out_wb.save(target_xlsx)
     except PermissionError:
@@ -358,16 +369,12 @@ def main():
         out_sheet.title = "Raw"
         out_sheet.append(fieldnames)
         for o_row in output_rows:
-            row_data = [o_row[k] for k in fieldnames]
+            row_data = [clean_cell_value(o_row[k]) for k in fieldnames]
             out_sheet.append(row_data)
         out_wb.save(target_xlsx)
         
-    print(f"[*] Updating original {INPUT_CSV}...")
-    try:
-        shutil.copy2(target_write_file, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print(f"\n[WARNING] Permission denied updating {INPUT_CSV}. File is open in Excel.")
+    # Do not overwrite the raw INPUT_CSV to preserve raw headers for email scraper resumes
+    pass
 
 if __name__ == "__main__":
     main()

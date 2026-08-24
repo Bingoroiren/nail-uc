@@ -1,10 +1,10 @@
-﻿import csv
+import csv
 import os
 import shutil
 import re
 import sys
 
-INPUT_CSV = r"d:\glc\nail uc\masoc_members.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "masoc_members.csv")
 if len(sys.argv) > 1:
     INPUT_CSV = sys.argv[1]
 
@@ -244,12 +244,8 @@ def main():
             writer.writeheader()
             writer.writerows(output_rows)
 
-    print(f"[*] Updating original {INPUT_CSV}...")
-    try:
-        shutil.copy2(target_write_file, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print(f"\n[WARNING] Permission denied updating {INPUT_CSV}. File is open in Excel.")
+    # Do not overwrite the raw INPUT_CSV to preserve raw headers
+    pass
 
 
 if __name__ == "__main__":
