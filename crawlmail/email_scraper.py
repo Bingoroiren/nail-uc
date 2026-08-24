@@ -27,6 +27,20 @@ elif len(sys.argv) == 2:
 EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b')
 INVALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.pdf', '.css', '.js', '.ico', '.woff', '.woff2', '.mp4', '.mp3')
 
+# Obfuscated email patterns (e.g. info [at] domain [dot] com)
+OBFUSCATED_PATTERNS = [
+    re.compile(r'([A-Za-z0-9._%+-]+)\s*\[at\]\s*([A-Za-z0-9.-]+)\s*\[dot\]\s*([A-Za-z]{2,7})', re.IGNORECASE),
+    re.compile(r'([A-Za-z0-9._%+-]+)\s*\(at\)\s*([A-Za-z0-9.-]+)\s*\(dot\)\s*([A-Za-z]{2,7})', re.IGNORECASE),
+    re.compile(r'([A-Za-z0-9._%+-]+)\s+AT\s+([A-Za-z0-9.-]+)\s+DOT\s+([A-Za-z]{2,7})'),
+]
+
+# Common contact page paths to guess if no emails found
+CONTACT_PAGE_GUESSES = [
+    '/contact', '/contact-us', '/contact-us/', '/contact/',
+    '/about', '/about-us', '/about-us/', '/about/',
+    '/get-in-touch', '/get-in-touch/',
+]
+
 def extract_emails_from_text(text):
     if not text:
         return []
@@ -35,6 +49,12 @@ def extract_emails_from_text(text):
         email = match.strip().lower()
         if not any(email.endswith(ext) for ext in INVALID_EXTENSIONS):
             emails.add(email)
+    # Also check for obfuscated emails
+    for pattern in OBFUSCATED_PATTERNS:
+        for m in pattern.finditer(text):
+            email = f"{m.group(1)}@{m.group(2)}.{m.group(3)}".lower()
+            if not any(email.endswith(ext) for ext in INVALID_EXTENSIONS):
+                emails.add(email)
     return list(emails)
 
 def clean_fb_link(href):
@@ -125,17 +145,21 @@ async def crawl_instagram(page, url):
         pass
     return list(set(emails))
 
+async def safe_scroll_to_bottom(page):
+    """Safely scroll to the bottom of the page to trigger lazy-loaded content."""
+    try:
+        await page.evaluate("if (document.body) window.scrollTo(0, document.body.scrollHeight)")
+        await page.wait_for_timeout(1000)
+    except Exception:
+        pass
+
 async def crawl_regular_site(page, url):
     try:
         print(f"[*] Navigating to Website: {url}")
         await page.goto(url, timeout=25000, wait_until="commit")
         await page.wait_for_timeout(2000)
         # Scroll to bottom to trigger lazy loading of footers
-        try:
-            await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-            await page.wait_for_timeout(1000)
-        except Exception:
-            pass
+        await safe_scroll_to_bottom(page)
     except Exception as e:
         print(f"[-] Website load failed ({url}): {e}")
         return [], [], []
@@ -158,14 +182,22 @@ async def crawl_regular_site(page, url):
         except Exception:
             pass
 
-        # 2. Search body text
+        # 2. Search body text (visible content)
         try:
             body_text = await current_page.locator("body").inner_text()
             emails.extend(extract_emails_from_text(body_text))
         except Exception:
             pass
 
-        # 3. Harvest social media links (FB/IG)
+        # 3. Search raw HTML source (hidden elements, comments, data attributes, JSON-LD)
+        try:
+            html_source = await current_page.content()
+            html_emails = extract_emails_from_text(html_source)
+            emails.extend(html_emails)
+        except Exception:
+            pass
+
+        # 4. Harvest social media links (FB/IG)
         try:
             links = await current_page.locator('a[href]').all()
             for link in links:
@@ -198,14 +230,21 @@ async def crawl_regular_site(page, url):
                     if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
                         full_url_clean = full_url.split('#')[0]
                         priority = 0
-                        if any(k in text_lower or k in href_lower for k in ['contact', 'about', 'support', 'reach', 'info', 'location', 'salon', 'find', 'store']):
+                        if any(k in text_lower or k in href_lower for k in ['contact', 'about', 'support', 'reach', 'info', 'location', 'salon', 'find', 'store', 'team', 'enquir', 'inquiry']):
                             priority = 2
-                        elif any(k in text_lower or k in href_lower for k in ['services', 'book', 'us']):
+                        elif any(k in text_lower or k in href_lower for k in ['services', 'book', 'us', 'help', 'footer', 'sitemap']):
                             priority = 1
                         
                         candidate_links.append((priority, full_url_clean))
         except Exception:
             pass
+
+        # Also guess common contact page URLs that might not be linked
+        parsed_base = urllib.parse.urlparse(url)
+        base_origin = f"{parsed_base.scheme}://{parsed_base.netloc}"
+        for guess_path in CONTACT_PAGE_GUESSES:
+            guess_url = base_origin + guess_path
+            candidate_links.append((3, guess_url))  # Highest priority for direct guesses
 
         candidate_links.sort(key=lambda x: x[0], reverse=True)
         unique_sub_urls = []
@@ -213,18 +252,17 @@ async def crawl_regular_site(page, url):
             if sub_url not in unique_sub_urls and sub_url != url:
                 unique_sub_urls.append(sub_url)
 
-        # Scrape up to 4 subpages
-        for sub_url in unique_sub_urls[:4]:
+        # Scrape up to 6 subpages (increased from 4)
+        for sub_url in unique_sub_urls[:6]:
             try:
                 print(f"[*] Navigating to Subpage: {sub_url}")
                 await page.goto(sub_url, timeout=15000, wait_until="commit")
                 await page.wait_for_timeout(1000)
-                try:
-                    await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                    await page.wait_for_timeout(1000)
-                except Exception:
-                    pass
+                await safe_scroll_to_bottom(page)
                 await extract_links_and_emails(page)
+                # Stop early if emails found
+                if list(set(emails)):
+                    break
             except Exception:
                 pass
 
