@@ -10,7 +10,7 @@ from playwright.async_api import async_playwright
 
 # Import local modules
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import config_hotel_ie
+import config_farm_ie
 import locations_ie
 
 # Set console output encoding to UTF-8
@@ -30,9 +30,9 @@ def extract_place_id(url):
 def get_scraped_urls():
     """Loads already scraped business URLs (Place IDs) from the CSV file to avoid duplicates."""
     scraped_urls = set()
-    if os.path.exists(config_hotel_ie.OUTPUT_CSV):
+    if os.path.exists(config_farm_ie.OUTPUT_CSV):
         try:
-            with open(config_hotel_ie.OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
+            with open(config_farm_ie.OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     if 'URL' in row and row['URL']:
@@ -59,7 +59,6 @@ def is_ireland_address(address):
     if any(city in addr_lower for city in ie_counties_cities):
         return True
         
-    # Eircode format (e.g. D02 X285 or T12 A382)
     if re.search(r'\b[a-z0-9]{3}\s?[a-z0-9]{4}\b', addr_lower):
         return True
         
@@ -67,9 +66,9 @@ def is_ireland_address(address):
 
 def append_to_csv(row_dict):
     """Appends a single scraped record to the output CSV file."""
-    file_exists = os.path.isfile(config_hotel_ie.OUTPUT_CSV)
+    file_exists = os.path.isfile(config_farm_ie.OUTPUT_CSV)
     try:
-        with open(config_hotel_ie.OUTPUT_CSV, mode='a', encoding='utf-8-sig', newline='') as f:
+        with open(config_farm_ie.OUTPUT_CSV, mode='a', encoding='utf-8-sig', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=row_dict.keys())
             if not file_exists:
                 writer.writeheader()
@@ -77,7 +76,7 @@ def append_to_csv(row_dict):
     except Exception as e:
         print(f"[-] Failed to write row to CSV: {e}")
 
-PROGRESS_FILE = config_hotel_ie.PROGRESS_FILE
+PROGRESS_FILE = config_farm_ie.PROGRESS_FILE
 
 def load_completed_scans():
     if os.path.exists(PROGRESS_FILE):
@@ -88,17 +87,17 @@ def load_completed_scans():
         except Exception as e:
             print(f"[-] Error loading progress file: {e}")
             
-    if os.path.exists(config_hotel_ie.OUTPUT_CSV):
+    if os.path.exists(config_farm_ie.OUTPUT_CSV):
         try:
             print("[*] Progress file not found. Initializing from existing CSV data...")
             completed_list = []
-            with open(config_hotel_ie.OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
+            with open(config_farm_ie.OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     loc_name = row.get('Location_Name')
                     state = row.get('State')
                     if loc_name and state:
-                        pair = (loc_name.strip().lower(), state.strip().lower(), config_hotel_ie.KEYWORDS[0].lower())
+                        pair = (loc_name.strip().lower(), state.strip().lower(), config_farm_ie.KEYWORDS[0].lower())
                         if pair not in completed_list:
                             completed_list.append(pair)
             save_completed_scans(set(completed_list))
@@ -120,7 +119,6 @@ async def handle_cookie_consent(page):
     try:
         consent_button = await page.query_selector('form[action*="consent"] button, button[aria-label*="Accept all"], button[aria-label*="Chấp nhận tất cả"]')
         if consent_button:
-            print("[*] Dismissing Cookie Consent Modal...")
             await consent_button.click()
             await page.wait_for_timeout(1000)
     except Exception:
@@ -158,7 +156,7 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
         return 0
 
     page = await context.new_page()
-    page.set_default_timeout(config_hotel_ie.TIMEOUT)
+    page.set_default_timeout(config_farm_ie.TIMEOUT)
     
     query = f"{keyword} in {location['name']}, {location['state']}, Ireland"
     encoded_query = urllib.parse.quote(query)
@@ -173,10 +171,9 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
         await handle_cookie_consent(page)
         
         try:
-            await page.wait_for_selector(config_hotel_ie.SELECTORS["results_container"], timeout=8000)
+            await page.wait_for_selector(config_farm_ie.SELECTORS["results_container"], timeout=8000)
         except Exception:
-            # Check if direct listing panel loaded
-            if await page.query_selector(config_hotel_ie.SELECTORS["business_name"]):
+            if await page.query_selector(config_farm_ie.SELECTORS["business_name"]):
                 pass
             else:
                 print(f"[-] No results container found for {query}.")
@@ -186,10 +183,10 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
                 return 0
 
         # Scroll to load all feed listings
-        await scroll_feed(page, config_hotel_ie.SELECTORS["results_container"])
+        await scroll_feed(page, config_farm_ie.SELECTORS["results_container"])
         
         # Collect listing links
-        links = await page.query_selector_all(config_hotel_ie.SELECTORS["listing_link"])
+        links = await page.query_selector_all(config_farm_ie.SELECTORS["listing_link"])
         listing_urls = []
         for link in links:
             href = await link.get_attribute("href")
@@ -207,10 +204,10 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
                 
             try:
                 await page.goto(listing_url, wait_until="domcontentloaded")
-                await page.wait_for_selector(config_hotel_ie.SELECTORS["business_name"], timeout=5000)
+                await page.wait_for_selector(config_farm_ie.SELECTORS["business_name"], timeout=5000)
                 
                 # Extract Name
-                name_elem = await page.query_selector(config_hotel_ie.SELECTORS["business_name"])
+                name_elem = await page.query_selector(config_farm_ie.SELECTORS["business_name"])
                 name = await name_elem.inner_text() if name_elem else ""
                 
                 # Permanently Closed check
@@ -221,7 +218,7 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
                 
                 # Extract Category
                 category = ""
-                cat_elems = await page.query_selector_all(config_hotel_ie.SELECTORS["category"])
+                cat_elems = await page.query_selector_all(config_farm_ie.SELECTORS["category"])
                 for cat_elem in cat_elems:
                     text = await cat_elem.inner_text()
                     text_clean = text.strip().replace("·", "").replace("•", "").strip()
@@ -231,7 +228,7 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
                         
                 # Extract Address
                 address = ""
-                addr_elem = await page.query_selector(config_hotel_ie.SELECTORS["phone"] + ' ~ div, button[data-item-id^="address"]')
+                addr_elem = await page.query_selector(config_farm_ie.SELECTORS["phone"] + ' ~ div, button[data-item-id^="address"]')
                 if addr_elem:
                     address = await addr_elem.inner_text()
                     
@@ -243,13 +240,13 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
 
                 # Extract Website
                 website = ""
-                web_elem = await page.query_selector(config_hotel_ie.SELECTORS["website"])
+                web_elem = await page.query_selector(config_farm_ie.SELECTORS["website"])
                 if web_elem:
                     website = await web_elem.get_attribute("href") or ""
                     
                 # Extract Phone
                 phone = ""
-                phone_elem = await page.query_selector(config_hotel_ie.SELECTORS["phone"])
+                phone_elem = await page.query_selector(config_farm_ie.SELECTORS["phone"])
                 if phone_elem:
                     phone_aria = await phone_elem.get_attribute("aria-label") or ""
                     phone_text = await phone_elem.inner_text() or ""
@@ -257,12 +254,12 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
 
                 # Extract Rating & Reviews
                 rating = ""
-                rating_elem = await page.query_selector(config_hotel_ie.SELECTORS["rating"])
+                rating_elem = await page.query_selector(config_farm_ie.SELECTORS["rating"])
                 if rating_elem:
                     rating = await rating_elem.inner_text()
                     
                 reviews_count = ""
-                rev_elem = await page.query_selector(config_hotel_ie.SELECTORS["reviews_count"])
+                rev_elem = await page.query_selector(config_farm_ie.SELECTORS["reviews_count"])
                 if rev_elem:
                     rev_aria = await rev_elem.get_attribute("aria-label") or ""
                     rev_match = re.search(r'([\d,]+)', rev_aria)
@@ -292,7 +289,7 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
                 print(f"    [-] Error extracting listing {listing_url}: {e}")
                 scraped_urls.add(place_id)
                 
-            await asyncio.sleep(random.uniform(config_hotel_ie.MIN_DELAY, config_hotel_ie.MAX_DELAY))
+            await asyncio.sleep(random.uniform(config_farm_ie.MIN_DELAY, config_farm_ie.MAX_DELAY))
 
         completed_scans.add(loc_key)
         save_completed_scans(completed_scans)
@@ -306,11 +303,11 @@ async def scrape_location_keyword(context, location, keyword, scraped_urls, comp
 
 async def main():
     print("==================================================================")
-    print("      IRELAND HOTELS & ACCOMMODATIONS GOOGLE MAPS SCRAPER       ")
+    print("      IRELAND FARMS & AGRICULTURE GOOGLE MAPS SCRAPER             ")
     print("==================================================================")
     
     locations = locations_ie.get_locations()
-    keywords = config_hotel_ie.KEYWORDS
+    keywords = config_farm_ie.KEYWORDS
     
     scraped_urls = get_scraped_urls()
     completed_scans = load_completed_scans()
@@ -321,7 +318,7 @@ async def main():
     print(f"[*] Loaded {len(completed_scans)} completed (location, keyword) scans.")
     
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=config_hotel_ie.HEADLESS, slow_mo=config_hotel_ie.SLOW_MO)
+        browser = await p.chromium.launch(headless=config_farm_ie.HEADLESS, slow_mo=config_farm_ie.SLOW_MO)
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             viewport={"width": 1280, "height": 800}

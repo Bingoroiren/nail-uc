@@ -9,6 +9,7 @@ import urllib.parse
 from playwright.async_api import async_playwright
 
 # Import local modules
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import config_broker_ie
 import locations_ie
 
