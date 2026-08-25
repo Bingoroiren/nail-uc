@@ -59,7 +59,6 @@ def is_ireland_address(address):
     if any(city in addr_lower for city in ie_counties_cities):
         return True
         
-    # Eircode format (e.g. D02 X285 or T12 A382)
     if re.search(r'\b[a-z0-9]{3}\s?[a-z0-9]{4}\b', addr_lower):
         return True
         
@@ -101,224 +100,438 @@ def load_completed_scans():
                         pair = (loc_name.strip().lower(), state.strip().lower(), config_hotel_ie.KEYWORDS[0].lower())
                         if pair not in completed_list:
                             completed_list.append(pair)
-            save_completed_scans(set(completed_list))
+            
+            with open(PROGRESS_FILE, 'w', encoding='utf-8') as f:
+                json.dump({"completed": completed_list}, f, indent=2, ensure_ascii=False)
             return set(completed_list)
         except Exception as e:
-            print(f"[-] Error initializing progress file from CSV: {e}")
+            print(f"[-] Error parsing CSV for progress: {e}")
             
     return set()
 
-def save_completed_scans(completed_set):
-    try:
-        data = {"completed": list(completed_set)}
-        with open(PROGRESS_FILE, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-    except Exception as e:
-        print(f"[-] Error saving progress file: {e}")
+def save_completed_scan(loc_name, state, keyword):
+    completed = []
+    if os.path.exists(PROGRESS_FILE):
+        try:
+            with open(PROGRESS_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                completed = data.get("completed", [])
+        except Exception:
+            completed = []
+            
+    item = [loc_name, state, keyword]
+    if item not in completed:
+        completed.append(item)
+        try:
+            with open(PROGRESS_FILE, 'w', encoding='utf-8') as f:
+                json.dump({"completed": completed}, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"[-] Error saving progress: {e}")
 
-async def handle_cookie_consent(page):
+async def handle_captcha(page):
+    """Detects if Google CAPTCHA / bot detection page is shown and exits safely."""
+    is_captcha = False
     try:
-        consent_button = await page.query_selector('form[action*="consent"] button, button[aria-label*="Accept all"], button[aria-label*="Chấp nhận tất cả"]')
-        if consent_button:
-            print("[*] Dismissing Cookie Consent Modal...")
-            await consent_button.click()
+        title = await page.title()
+        if "sorry" in title.lower() or "recaptcha" in title.lower() or "captcha" in title.lower():
+            is_captcha = True
+        elif await page.locator('iframe[src*="recaptcha"]').count() > 0 or await page.locator('div#recaptcha').count() > 0:
+            is_captcha = True
+    except Exception:
+        pass
+        
+    if is_captcha:
+        print("\n" + "="*60)
+        print("[!] IP BLOCK / CAPTCHA DETECTED! Google is blocking automated access.")
+        print("[!] Stopping the scraper immediately to protect your IP address...")
+        print("="*60 + "\n")
+        sys.stdout.write('\a')
+        sys.stdout.flush()
+        sys.exit(1)
+
+async def bypass_consent_screen(page):
+    """Automatically clicks Google Maps Consent/Cookie banners if they appear."""
+    try:
+        consent_buttons = page.locator('button:has-text("Accept all"), button:has-text("Agree"), button:has-text("I agree"), button:has-text("Accept"), button:has-text("Συμφωνώ"), button:has-text("Αποδοχή")')
+        if await consent_buttons.count() > 0:
+            print("[*] Google Consent / Cookie banner detected. Bypassing...")
+            await consent_buttons.first.click()
+            await page.wait_for_load_state("networkidle")
             await page.wait_for_timeout(1000)
     except Exception:
         pass
 
-async def scroll_feed(page, results_selector):
-    feed = await page.query_selector(results_selector)
-    if not feed:
-        return 0
-        
-    prev_height = 0
-    same_count = 0
-    
-    for _ in range(25):
-        await page.evaluate('(element) => element.scrollTop = element.scrollHeight', feed)
-        await page.wait_for_timeout(random.randint(600, 1000))
-        
-        end_text = await page.content()
-        if "You've reached the end of the list" in end_text or "Đã tới cuối danh sách" in end_text:
-            break
-            
-        curr_height = await page.evaluate('(element) => element.scrollHeight', feed)
-        if curr_height == prev_height:
-            same_count += 1
-            if same_count >= 3:
-                break
-        else:
-            same_count = 0
-            prev_height = curr_height
-
-async def scrape_location_keyword(context, location, keyword, scraped_urls, completed_scans):
-    loc_key = (location["name"].strip().lower(), location["state"].strip().lower(), keyword.strip().lower())
-    if loc_key in completed_scans:
-        print(f"[*] Skipping {location['name']} ({location['state']}) for '{keyword}' - already completed.")
-        return 0
-
-    page = await context.new_page()
-    page.set_default_timeout(config_hotel_ie.TIMEOUT)
-    
-    query = f"{keyword} in {location['name']}, {location['state']}, Ireland"
-    encoded_query = urllib.parse.quote(query)
-    url = f"https://www.google.com/maps/search/{encoded_query}/@{location['lat']},{location['lng']},{location['zoom']}z?hl=en"
-    
-    print(f"\n[+] Searching: '{query}' ({location['name']}, {location['state']}) [Zoom: {location['zoom']}]")
-    
-    scraped_in_this_session = 0
+async def scroll_feed(page, max_scrolls=25):
+    """Scrolls down the left results container to load all matching businesses."""
+    feed_selector = config_hotel_ie.SELECTORS["results_container"]
     
     try:
-        await page.goto(url, wait_until="domcontentloaded")
-        await handle_cookie_consent(page)
+        await page.wait_for_selector(feed_selector, timeout=8000)
+    except Exception:
+        return
         
-        try:
-            await page.wait_for_selector(config_hotel_ie.SELECTORS["results_container"], timeout=8000)
-        except Exception:
-            # Check if direct listing panel loaded
-            if await page.query_selector(config_hotel_ie.SELECTORS["business_name"]):
-                pass
+    feed = page.locator(feed_selector)
+    if await feed.count() == 0:
+        return
+        
+    print("[*] Scrolling the results panel to load listings...")
+    
+    scrolls = 0
+    last_height = await page.evaluate('(el) => el.scrollHeight', await feed.element_handle())
+    
+    while scrolls < max_scrolls:
+        await page.evaluate('(el) => el.scrollTop = el.scrollHeight', await feed.element_handle())
+        await page.wait_for_timeout(random.randint(600, 1000))
+        
+        inner_text = await feed.inner_text()
+        if "reached the end of the list" in inner_text.lower() or "đã tới cuối danh sách" in inner_text.lower():
+            print("[*] Reached the end of the results list.")
+            break
+            
+        new_height = await page.evaluate('(el) => el.scrollHeight', await feed.element_handle())
+        if new_height == last_height:
+            await page.wait_for_timeout(500)
+            await page.evaluate('(el) => el.scrollTop = el.scrollHeight', await feed.element_handle())
+            new_height = await page.evaluate('(el) => el.scrollHeight', await feed.element_handle())
+            if new_height == last_height:
+                break
+                
+        last_height = new_height
+        scrolls += 1
+
+def extract_coords_from_url(url):
+    if not url:
+        return None
+    match = re.search(r'!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)', url)
+    if match:
+        return float(match.group(1)), float(match.group(2))
+    match = re.search(r'@(-?\d+\.\d+),(-?\d+\.\d+)', url)
+    if match:
+        return float(match.group(1)), float(match.group(2))
+    return None
+
+def parse_ireland_address(address):
+    """Extracts suburb, state, and postcode from an Irish address."""
+    if not address:
+        return None, None, None
+    addr = re.sub(r',\s*Ireland\s*$', '', address, flags=re.IGNORECASE).strip()
+    
+    postcode_match = re.search(r'\b[a-z0-9]{3}\s?[a-z0-9]{4}\b', addr.lower())
+    if postcode_match:
+        postcode = postcode_match.group(0).upper()
+        remaining = addr[:postcode_match.start()].strip().rstrip(',')
+        parts = [p.strip() for p in remaining.split(',')]
+        suburb = parts[-1] if parts else ""
+        return suburb, "IE", postcode
+        
+    parts = [p.strip() for p in addr.split(',')]
+    if len(parts) >= 2:
+        return parts[-2], "IE", ""
+    elif len(parts) == 1:
+        return parts[0], "IE", ""
+    return None, None, None
+
+async def extract_details(page, url, search_query, loc_info):
+    """Extracts business details from the detail panel on the page."""
+    sel = config_hotel_ie.SELECTORS
+    
+    name = ""
+    name_loc = page.locator(sel["business_name"])
+    if await name_loc.count() > 0:
+        name = await name_loc.first.inner_text()
+        name = name.strip()
+        
+    if not name:
+        return None
+        
+    website = ""
+    web_loc = page.locator(sel["website"])
+    if await web_loc.count() > 0:
+        website = await web_loc.first.get_attribute("href")
+        if website:
+            website = website.strip()
+            
+    phone = ""
+    phone_loc = page.locator(sel["phone"])
+    if await phone_loc.count() > 0:
+        phone_attr = await phone_loc.first.get_attribute("data-item-id")
+        if phone_attr:
+            phone = phone_attr.replace("phone:tel:", "").strip()
+            
+    address = ""
+    addr_loc = page.locator(sel["address"])
+    if await addr_loc.count() > 0:
+        addr_label = await addr_loc.first.get_attribute("aria-label")
+        if addr_label:
+            address = addr_label.replace("Address:", "").replace("Địa chỉ:", "").strip()
+        else:
+            address = await addr_loc.first.inner_text()
+            address = address.strip()
+            
+    if not is_ireland_address(address):
+        print(f"    [-] Skipping: Address '{address}' is not in Ireland.")
+        return None
+        
+    actual_lat, actual_lng = loc_info["lat"], loc_info["lng"]
+    coords = extract_coords_from_url(url)
+    if coords:
+        actual_lat, actual_lng = coords
+        
+    actual_suburb, actual_state, postcode = parse_ireland_address(address)
+    if not actual_state:
+        actual_suburb = loc_info["name"]
+        actual_state = "IE"
+        
+    rating = ""
+    reviews_count = ""
+    rating_loc = page.locator('div.F7nice')
+    if await rating_loc.count() > 0:
+        span_rating = rating_loc.first.locator('span[aria-hidden="true"]')
+        if await span_rating.count() > 0:
+            rating = await span_rating.first.inner_text()
+            rating = rating.strip()
+            
+        span_reviews = rating_loc.first.locator('span[aria-label*="classificação"], span[aria-label*="avaliação"], span[aria-label*="review"]')
+        if await span_reviews.count() > 0:
+            reviews_text = await span_reviews.first.get_attribute("aria-label")
+            if reviews_text:
+                match = re.search(r'\d+', reviews_text.replace(" ", "").replace(",", ""))
+                if match:
+                    reviews_count = match.group()
             else:
-                print(f"[-] No results container found for {query}.")
-                completed_scans.add(loc_key)
-                save_completed_scans(completed_scans)
-                await page.close()
-                return 0
-
-        # Scroll to load all feed listings
-        await scroll_feed(page, config_hotel_ie.SELECTORS["results_container"])
-        
-        # Collect listing links
-        links = await page.query_selector_all(config_hotel_ie.SELECTORS["listing_link"])
-        listing_urls = []
-        for link in links:
-            href = await link.get_attribute("href")
-            if href:
-                place_id = extract_place_id(href)
-                if place_id and place_id not in scraped_urls:
-                    listing_urls.append(href)
+                reviews_text = await span_reviews.first.inner_text()
+                match = re.search(r'\d+', reviews_text.replace(" ", "").replace(",", ""))
+                if match:
+                    reviews_count = match.group()
                     
-        print(f"[+] Found {len(listing_urls)} new listings to extract in {location['name']}.")
+    permanently_closed = "No"
+    try:
+        closed_loc = page.locator('span:has-text("Permanently closed"), span:has-text("Fechado permanentemente"), span:has-text("Đóng cửa vĩnh viễn")')
+        if await closed_loc.count() > 0:
+            permanently_closed = "Yes"
+    except Exception:
+        pass
 
-        for i, listing_url in enumerate(listing_urls, 1):
-            place_id = extract_place_id(listing_url)
-            if place_id in scraped_urls:
-                continue
-                
-            try:
-                await page.goto(listing_url, wait_until="domcontentloaded")
-                await page.wait_for_selector(config_hotel_ie.SELECTORS["business_name"], timeout=5000)
-                
-                # Extract Name
-                name_elem = await page.query_selector(config_hotel_ie.SELECTORS["business_name"])
-                name = await name_elem.inner_text() if name_elem else ""
-                
-                # Permanently Closed check
-                perm_closed = "No"
-                closed_elem = await page.query_selector('span.pk475, span:has-text("Permanently closed"), span:has-text("Đóng cửa vĩnh viễn")')
-                if closed_elem:
-                    perm_closed = "Yes"
-                
-                # Extract Category
-                category = ""
-                cat_elems = await page.query_selector_all(config_hotel_ie.SELECTORS["category"])
-                for cat_elem in cat_elems:
-                    text = await cat_elem.inner_text()
-                    text_clean = text.strip().replace("·", "").replace("•", "").strip()
-                    if text_clean and not text_clean.startswith("$$") and not text_clean.startswith("€") and not re.search(r'\d', text_clean):
-                        category = text_clean
+    # Extract Category Tag with a wait loop to prevent race conditions
+    category = ""
+    try:
+        category_loc = page.locator(sel["category"])
+        for _ in range(15):
+            count = await category_loc.count()
+            if count > 0:
+                for i in range(count):
+                    txt = await category_loc.nth(i).inner_text()
+                    txt_clean = txt.strip().replace("·", "").strip()
+                    if txt_clean and txt_clean not in ["", "·"]:
+                        category = txt_clean
                         break
-                        
-                # Extract Address
-                address = ""
-                addr_elem = await page.query_selector(config_hotel_ie.SELECTORS["phone"] + ' ~ div, button[data-item-id^="address"]')
-                if addr_elem:
-                    address = await addr_elem.inner_text()
-                    
-                # Verify address is in Ireland
-                if address and not is_ireland_address(address):
-                    print(f"    [-] Skipping non-Ireland address: {name} ({address})")
-                    scraped_urls.add(place_id)
-                    continue
+                if category:
+                    break
+            await page.wait_for_timeout(200)
+    except Exception:
+        pass
 
-                # Extract Website
-                website = ""
-                web_elem = await page.query_selector(config_hotel_ie.SELECTORS["website"])
-                if web_elem:
-                    website = await web_elem.get_attribute("href") or ""
-                    
-                # Extract Phone
-                phone = ""
-                phone_elem = await page.query_selector(config_hotel_ie.SELECTORS["phone"])
-                if phone_elem:
-                    phone_aria = await phone_elem.get_attribute("aria-label") or ""
-                    phone_text = await phone_elem.inner_text() or ""
-                    phone = phone_aria.replace("Phone:", "").replace("Điện thoại:", "").strip() if phone_aria else phone_text.strip()
+    # Strict filter: category must match one of the allowed Ireland hotel tags
+    if category:
+        cat_lower = category.lower().strip()
+        if not any(tag in cat_lower for tag in config_hotel_ie.ALLOWED_CATEGORIES):
+            print(f"    [-] Skipping: Category '{category}' is not in allowed Ireland hotel tags.")
+            return None
 
-                # Extract Rating & Reviews
-                rating = ""
-                rating_elem = await page.query_selector(config_hotel_ie.SELECTORS["rating"])
-                if rating_elem:
-                    rating = await rating_elem.inner_text()
-                    
-                reviews_count = ""
-                rev_elem = await page.query_selector(config_hotel_ie.SELECTORS["reviews_count"])
-                if rev_elem:
-                    rev_aria = await rev_elem.get_attribute("aria-label") or ""
-                    rev_match = re.search(r'([\d,]+)', rev_aria)
-                    if rev_match:
-                        reviews_count = rev_match.group(1).replace(",", "")
-                        
-                data_row = {
-                    "Name": name,
-                    "Category": category,
-                    "Address": address,
-                    "Phone": f"'{phone}" if phone else "",
-                    "Website": website,
-                    "Rating": rating,
-                    "Reviews_Count": reviews_count,
-                    "State": location["state"],
-                    "Location_Name": location["name"],
-                    "URL": listing_url,
-                    "Permanently_Closed": perm_closed
-                }
+    record = {
+        "Name": name,
+        "Website": website,
+        "Phone": phone,
+        "Address": address,
+        "Rating": rating,
+        "Reviews_Count": reviews_count,
+        "State": actual_state,
+        "Location_Name": actual_suburb,
+        "Latitude": actual_lat,
+        "Longitude": actual_lng,
+        "Search_Query": search_query,
+        "URL": url,
+        "Permanently_Closed": permanently_closed,
+        "Category": category,
+    }
+    return record
 
-                append_to_csv(data_row)
-                scraped_urls.add(place_id)
-                scraped_in_this_session += 1
-                print(f"    [{i}/{len(listing_urls)}] Scraped: {name} | Category: {category} | Web: {'Yes' if website else 'No'}")
-                
-            except Exception as e:
-                print(f"    [-] Error extracting listing {listing_url}: {e}")
-                scraped_urls.add(place_id)
-                
-            await asyncio.sleep(random.uniform(config_hotel_ie.MIN_DELAY, config_hotel_ie.MAX_DELAY))
+async def process_search(page, keyword, loc_info, scraped_urls):
+    """Executes search for a specific keyword at a specific coordinate location."""
+    search_query = f"{keyword} in {loc_info['name']}, Ireland"
+    print(f"\n[+] Searching: '{search_query}'")
+    
+    query_encoded = urllib.parse.quote_plus(keyword)
+    zoom = loc_info.get("zoom", 11)
+    search_url = f"https://www.google.com/maps/search/{query_encoded}/@{loc_info['lat']},{loc_info['lng']},{zoom}z?hl=en"
+    
+    try:
+        await page.context.set_geolocation({"latitude": loc_info['lat'], "longitude": loc_info['lng']})
+    except Exception as geo_err:
+        print(f"[*] Warning: Could not set geolocation context: {geo_err}")
 
-        completed_scans.add(loc_key)
-        save_completed_scans(completed_scans)
-
-    except Exception as e:
-        print(f"[-] Error searching query '{query}': {e}")
-    finally:
-        await page.close()
+    max_retries = 3
+    for attempt in range(1, max_retries + 1):
+        try:
+            if attempt > 1:
+                print(f"[*] Navigating to search URL (Attempt {attempt}/{max_retries})...")
+            await page.goto(search_url, timeout=config_hotel_ie.TIMEOUT, wait_until="domcontentloaded")
+            await page.wait_for_timeout(2000)
+            break
+        except Exception as e:
+            if attempt == max_retries:
+                print(f"[-] Navigation failed to search URL after {max_retries} attempts: {e}")
+                return False
+            else:
+                print(f"[!] Timeout/error navigating, retrying in 5 seconds... ({e})")
+                await asyncio.sleep(5.0)
         
-    return scraped_in_this_session
+    await handle_captcha(page)
+    await bypass_consent_screen(page)
+    current_url = page.url
+    
+    if "/maps/place/" in current_url:
+        print("[*] Redirected directly to place details view.")
+        current_place_id = extract_place_id(current_url)
+        if current_place_id not in scraped_urls:
+            record = await extract_details(page, current_url, search_query, loc_info)
+            if record:
+                append_to_csv(record)
+                scraped_urls.add(current_place_id)
+                print(f"    -> SAVED: {record['Name']} | Tag: {record['Category']} | Phone: {record['Phone']} | Web: {record['Website']}")
+        return True
+
+    link_selector = config_hotel_ie.SELECTORS["listing_link"]
+    listings_count = await page.locator(link_selector).count()
+    
+    if listings_count > 0:
+        first_item = page.locator(link_selector).first
+        try:
+            expected_name = await first_item.get_attribute("aria-label")
+            await first_item.scroll_into_view_if_needed()
+            await first_item.click()
+            
+            for _ in range(15):
+                h1_locator = page.locator(config_hotel_ie.SELECTORS["business_name"])
+                if await h1_locator.count() > 0:
+                    current_name = await h1_locator.first.inner_text()
+                    current_name = current_name.strip()
+                    if expected_name and (expected_name.lower() in current_name.lower() or current_name.lower() in expected_name.lower()):
+                        break
+                await page.wait_for_timeout(200)
+                
+            addr_loc = page.locator(config_hotel_ie.SELECTORS["address"])
+            address = ""
+            if await addr_loc.count() > 0:
+                addr_label = await addr_loc.first.get_attribute("aria-label")
+                address = addr_label.replace("Address:", "").replace("Địa chỉ:", "").strip() if addr_label else await addr_loc.first.inner_text()
+                address = address.strip()
+                
+            if address and not is_ireland_address(address):
+                print(f"[-] First listing is outside Ireland ('{address}'). Skipping location.")
+                return True
+        except Exception as check_err:
+            print(f"[-] Error checking geofence on first listing: {check_err}")
+
+    await scroll_feed(page)
+    
+    listings_count = await page.locator(link_selector).count()
+    print(f"[*] Found {listings_count} listings in search results.")
+    
+    urls = []
+    for i in range(listings_count):
+        try:
+            href = await page.locator(link_selector).nth(i).get_attribute("href")
+            if href:
+                urls.append(href)
+        except Exception:
+            pass
+            
+    urls = list(dict.fromkeys(urls))
+    
+    count_saved = 0
+    for index, url in enumerate(urls):
+        if extract_place_id(url) in scraped_urls:
+            continue
+            
+        print(f"[{index + 1}/{len(urls)}] Extracting detail...")
+        
+        clicked = False
+        try:
+            item_locator = page.locator(f'a.hfpxzc[href="{url}"]')
+            if await item_locator.count() > 0:
+                expected_name = await item_locator.first.get_attribute("aria-label")
+                if expected_name:
+                    expected_name = expected_name.strip()
+                    
+                await item_locator.first.scroll_into_view_if_needed()
+                await item_locator.first.click()
+                
+                if expected_name:
+                    name_matched = False
+                    for _ in range(15):
+                        h1_locator = page.locator(config_hotel_ie.SELECTORS["business_name"])
+                        if await h1_locator.count() > 0:
+                            current_name = await h1_locator.first.inner_text()
+                            current_name = current_name.strip()
+                            if expected_name.lower() in current_name.lower() or current_name.lower() in expected_name.lower():
+                                name_matched = True
+                                break
+                        await page.wait_for_timeout(200)
+                    
+                    if name_matched:
+                        clicked = True
+                    else:
+                        print("      [-] Details card did not match. Skipping.")
+                else:
+                    await page.wait_for_timeout(2000)
+                    clicked = True
+                    
+                await handle_captcha(page)
+        except Exception:
+            pass
+            
+        if not clicked:
+            continue
+
+        try:
+            record = await extract_details(page, url, search_query, loc_info)
+            if record:
+                append_to_csv(record)
+                scraped_urls.add(extract_place_id(url))
+                count_saved += 1
+                print(f"    -> SAVED: {record['Name']} | Tag: {record['Category']} | Phone: {record['Phone']} | Web: {record['Website']}")
+            else:
+                print("    [-] Failed to parse details card or tag filtered out.")
+        except Exception as parse_err:
+            print(f"    [-] Exception during detail extraction: {parse_err}")
+                
+        await asyncio.sleep(random.uniform(config_hotel_ie.MIN_DELAY, config_hotel_ie.MAX_DELAY))
+
+    if count_saved > 0:
+        print(f"[+] Finished scan for query: Saved {count_saved} new entries.")
+    return True
 
 async def main():
-    print("==================================================================")
-    print("      IRELAND HOTELS & ACCOMMODATIONS GOOGLE MAPS SCRAPER       ")
-    print("==================================================================")
-    
-    locations = locations_ie.get_locations()
-    keywords = config_hotel_ie.KEYWORDS
+    print("="*60)
+    print("        IRELAND HOTEL & ACCOMMODATION GOOGLE MAPS SCRAPER")
+    print("="*60)
     
     scraped_urls = get_scraped_urls()
+    print(f"[+] Loaded {len(scraped_urls)} existing entries from CSV.")
+    
     completed_scans = load_completed_scans()
     
-    print(f"[*] Total location grid points: {len(locations)}")
-    print(f"[*] Total search keywords: {len(keywords)}")
-    print(f"[*] Loaded {len(scraped_urls)} existing business Place IDs from CSV.")
-    print(f"[*] Loaded {len(completed_scans)} completed (location, keyword) scans.")
+    locs = locations_ie.get_locations()
+    keywords = config_hotel_ie.KEYWORDS
+    
+    if len(sys.argv) > 1 and sys.argv[1] == "--test":
+        locs = locs[:3]
+        print(f"[TEST MODE] Running on first {len(locs)} locations only.")
+        
+    print(f"[+] Total target locations: {len(locs)}")
+    print(f"[+] Search keywords: {keywords}")
+    print(f"[+] Output CSV path: {config_hotel_ie.OUTPUT_CSV}\n")
     
     async with async_playwright() as p:
         browser = None
@@ -345,25 +558,49 @@ async def main():
         if not browser:
             print("[!] Could not launch any browser. Exiting.")
             return
-            
+        
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-            viewport={"width": 1280, "height": 800}
+            locale="en-US",
+            viewport={"width": 1280, "height": 800},
+            geolocation={"latitude": 53.3498, "longitude": -6.2603}, # Dublin coordinates
+            permissions=["geolocation"]
         )
         
-        total_scraped = 0
-        for kw in keywords:
-            print(f"\n==========================================")
-            print(f"  PROCESSING KEYWORD: '{kw}'")
-            print(f"==========================================")
-            for loc in locations:
-                count = await scrape_location_keyword(context, loc, kw, scraped_urls, completed_scans)
-                total_scraped += count
-                
-        await context.close()
-        await browser.close()
+        page = await context.new_page()
         
-    print(f"\n[SUCCESS] Scraping completed! Total new listings scraped: {total_scraped}")
+        total_scans = len(locs) * len(keywords)
+        scan_index = 0
+        
+        try:
+            for loc in locs:
+                for kw in keywords:
+                    scan_index += 1
+                    scan_key = (loc['name'].lower(), loc['state'].lower(), kw.lower())
+                    if scan_key in completed_scans:
+                        continue
+                        
+                    print(f"\n[Progress: {scan_index}/{total_scans}] Location: {loc['name']} | Keyword: '{kw}'")
+                    success = await process_search(page, kw, loc, scraped_urls)
+                    
+                    if success is not False:
+                        save_completed_scan(loc['name'], loc['state'], kw)
+                    
+                    await asyncio.sleep(random.uniform(2.0, 5.0))
+                    
+        except KeyboardInterrupt:
+            print("\n[-] Scraping manually interrupted by user.")
+            sys.exit(1)
+        except Exception as e:
+            print(f"\n[-] Unexpected runtime error: {e}")
+            sys.exit(1)
+        finally:
+            print("\n[*] Closing browser...")
+            await context.close()
+            await browser.close()
+            
+    print(f"\n[+] Scraping session complete! Total unique entries in CSV: {len(get_scraped_urls())}")
+    print(f"[+] Results saved to: {config_hotel_ie.OUTPUT_CSV}")
 
 if __name__ == "__main__":
     asyncio.run(main())
