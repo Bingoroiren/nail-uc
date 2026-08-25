@@ -14,7 +14,7 @@ import config_hotel_ie
 import locations_ie
 
 # Set console output encoding to UTF-8
-if sys.platform.startswith('win'):
+if sys.platform.startswith('win') and hasattr(sys.stdout, 'buffer'):
     import codecs
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
     sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
