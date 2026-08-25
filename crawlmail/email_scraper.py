@@ -285,8 +285,8 @@ def save_progress(rows, path, fieldnames):
         print(f"[-] Error saving progress to {path}: {e}")
 
 async def process_row(row, browser, semaphore, writer, output_file, processed_urls):
-    url = row.get('URL', '')
-    website = row.get('Website', '').strip()
+    url = row.get('URL') or row.get('Liên Hệ') or ''
+    website = (row.get('Website') or row.get('Liên Hệ') or '').strip()
     
     if url in processed_urls:
         return
@@ -296,7 +296,8 @@ async def process_row(row, browser, semaphore, writer, output_file, processed_ur
         if writer:
             writer.writerow(row)
             output_file.flush()
-        processed_urls.add(url)
+        if url:
+            processed_urls.add(url)
         return
 
     async with semaphore:
@@ -441,17 +442,18 @@ async def main():
         try:
             with open(OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
-                if reader.fieldnames and 'Công ty' in reader.fieldnames:
+                is_formatted = reader.fieldnames and 'Công ty' in reader.fieldnames
+                if is_formatted and not (INPUT_CSV == OUTPUT_CSV and RETRY_EMPTY):
                     print("[WARNING] Output CSV appears to be already formatted. Starting fresh by overwriting it.")
                     file_exists = False
                 else:
                     for row in reader:
-                        url = row.get('URL')
+                        url = row.get('URL') or row.get('Liên Hệ')
                         if url:
                             email = row.get('Email', '').strip()
                             emails_by_url[url] = email
                             
-                            website = row.get('Website', '').strip()
+                            website = (row.get('Website') or row.get('Liên Hệ') or "").strip()
                             if RETRY_EMPTY and website and not email:
                                 # Do not mark as processed if we are retrying empty emails and website exists
                                 pass
@@ -465,12 +467,12 @@ async def main():
 
     # Sync already found emails to all_rows
     for row in all_rows:
-        url = row.get('URL')
+        url = row.get('URL') or row.get('Liên Hệ')
         if url in processed_urls:
             row['Email'] = emails_by_url.get(url, '')
 
     # 3. Filter rows that actually need processing (i.e. not already processed)
-    rows_to_process = [row for row in all_rows if row.get('URL') not in processed_urls]
+    rows_to_process = [row for row in all_rows if (row.get('URL') or row.get('Liên Hệ')) not in processed_urls]
     print(f"[*] Total rows to process: {len(rows_to_process)}")
 
     if not rows_to_process:
@@ -483,10 +485,12 @@ async def main():
         # Retry empty mode: we update the all_rows dataset in memory and save the whole list to file
         website_rows = []
         for row in rows_to_process:
-            website = row.get('Website', '').strip()
+            url = row.get('URL') or row.get('Liên Hệ')
+            website = (row.get('Website') or row.get('Liên Hệ') or "").strip()
             if not website:
                 row['Email'] = ''
-                processed_urls.add(row['URL'])
+                if url:
+                    processed_urls.add(url)
             else:
                 website_rows.append(row)
 
@@ -522,12 +526,14 @@ async def main():
             # Separate rows with no website (process instantly to save resources)
             website_rows = []
             for row in rows_to_process:
-                website = row.get('Website', '').strip()
+                url = row.get('URL') or row.get('Liên Hệ')
+                website = (row.get('Website') or row.get('Liên Hệ') or "").strip()
                 if not website:
                     row['Email'] = ''
                     writer.writerow(row)
                     outfile.flush()
-                    processed_urls.add(row['URL'])
+                    if url:
+                        processed_urls.add(url)
                 else:
                     website_rows.append(row)
 
