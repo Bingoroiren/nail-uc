@@ -5,14 +5,41 @@ import re
 import sys
 import openpyxl
 
-INPUT_CSV = r"d:\glc\nail uc\construction_ireland_with_emails.csv"
+# Set console output encoding to UTF-8
+if sys.platform.startswith('win') and hasattr(sys.stdout, 'buffer'):
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+CANDIDATES = [
+    os.path.join(SCRIPT_DIR, "construction_ireland_with_emails.csv"),
+    os.path.join(SCRIPT_DIR, "construction_ireland.csv")
+]
+
+INPUT_CSV = None
+for candidate in CANDIDATES:
+    if os.path.exists(candidate):
+        INPUT_CSV = candidate
+        break
+
 if len(sys.argv) > 1:
     INPUT_CSV = sys.argv[1]
 
-BACKUP_CSV = INPUT_CSV.replace(".csv", "_backup.csv")
-FORMATTED_CSV = INPUT_CSV.replace(".csv", "_formatted.csv")
-FORMATTED_XLSX = INPUT_CSV.replace(".csv", "_formatted.xlsx")
-FORMATTED_V2_CSV = INPUT_CSV.replace(".csv", "_formatted_v2.csv")
+if INPUT_CSV:
+    ext = os.path.splitext(INPUT_CSV)[1]
+    BACKUP_CSV = INPUT_CSV.replace(ext, f"_backup{ext}")
+    FORMATTED_CSV = INPUT_CSV.replace(ext, f"_formatted{ext}")
+    FORMATTED_XLSX = INPUT_CSV.replace(ext, f"_formatted.xlsx")
+    FORMATTED_V2_CSV = INPUT_CSV.replace(ext, f"_formatted_v2{ext}")
+    FORMATTED_V2_XLSX = INPUT_CSV.replace(ext, f"_formatted_v2.xlsx")
+else:
+    BACKUP_CSV = None
+    FORMATTED_CSV = None
+    FORMATTED_XLSX = None
+    FORMATTED_V2_CSV = None
+    FORMATTED_V2_XLSX = None
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 
@@ -27,6 +54,10 @@ BUSINESS_PREFIXES = {
 
 BAD_KEYWORDS = {
     'wix', 'support', 'no-reply', 'noreply', 'test', 'example', 'domain', 'sentry'
+}
+
+DISCARD_KEYWORDS = {
+    'gov.ie', 'citb.ie', 'gemi'
 }
 
 # Category translations from English to Vietnamese for Construction
@@ -89,6 +120,9 @@ def clean_and_score_email(email_str):
         if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
+        if any(discard in email for discard in DISCARD_KEYWORDS):
+            score -= 50
+            
         score -= len(email) * 0.01
         
         if score > best_score:
@@ -114,8 +148,8 @@ def normalize_phone(phone_str):
     return phone_clean
 
 def main():
-    if not os.path.exists(INPUT_CSV):
-        print(f"Error: Input file {INPUT_CSV} does not exist.")
+    if not INPUT_CSV or not os.path.exists(INPUT_CSV):
+        print(f"Error: No valid input CSV found.")
         return
         
     print(f"[*] Backing up original CSV to {BACKUP_CSV}...")
@@ -127,7 +161,7 @@ def main():
         for r in reader:
             rows.append(r)
             
-    print(f"[+] Loaded {len(rows)} rows.")
+    print(f"[+] Loaded {len(rows)} rows from {INPUT_CSV}.")
     
     # Filter out permanently closed businesses safely
     active_rows = []

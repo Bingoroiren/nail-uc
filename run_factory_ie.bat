@@ -1,5 +1,5 @@
 @echo off
-title Ireland Electronics & Semiconductor Factory Scraper Launcher
+title Ireland Electronics and Semiconductor Factory Scraper Launcher
 cd /d "%~dp0"
 
 echo ======================================================
@@ -35,14 +35,14 @@ if errorlevel 1 goto PlaywrightFailed
 
 echo.
 echo ======================================================
-echo STEP 1: Launching Ireland Factory & Semiconductor Maps Scraper...
+echo STEP 1: Launching Ireland Factory and Semiconductor Maps Scraper...
 echo ======================================================
 python -u src/scraper_factory_ie.py %*
 if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo STEP 2: Preprocessing & Strict Category Filtering...
+echo STEP 2: Preprocessing and Strict Category Filtering...
 echo ======================================================
 python crawlmail/preprocess_csv_factory_ie.py
 if errorlevel 1 goto RunFailed
@@ -56,7 +56,7 @@ if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo STEP 4: Formatting, Scoring & Translating Tags...
+echo STEP 4: Formatting, Scoring and Translating Tags...
 echo ======================================================
 python format_factory_ie_emails.py
 if errorlevel 1 goto RunFailed

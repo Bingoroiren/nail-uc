@@ -5,14 +5,43 @@ import re
 import sys
 import openpyxl
 
-INPUT_CSV = r"d:\glc\nail uc\hotel_ireland_with_emails.csv"
+# Set console output encoding to UTF-8
+if sys.platform.startswith('win') and hasattr(sys.stdout, 'buffer'):
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+
+# Determine script directory dynamically to support running on different computers
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Candidates for input file path (in order of priority)
+CANDIDATES = [
+    os.path.join(SCRIPT_DIR, "hotel_ireland_with_emails.csv"),
+    os.path.join(SCRIPT_DIR, "hotel_ireland.csv")
+]
+
+INPUT_CSV = None
+for candidate in CANDIDATES:
+    if os.path.exists(candidate):
+        INPUT_CSV = candidate
+        break
+
 if len(sys.argv) > 1:
     INPUT_CSV = sys.argv[1]
 
-BACKUP_CSV = INPUT_CSV.replace(".csv", "_backup.csv")
-FORMATTED_CSV = INPUT_CSV.replace(".csv", "_formatted.csv")
-FORMATTED_XLSX = INPUT_CSV.replace(".csv", "_formatted.xlsx")
-FORMATTED_V2_CSV = INPUT_CSV.replace(".csv", "_formatted_v2.csv")
+if INPUT_CSV:
+    ext = os.path.splitext(INPUT_CSV)[1]
+    BACKUP_CSV = INPUT_CSV.replace(ext, f"_backup{ext}")
+    FORMATTED_CSV = INPUT_CSV.replace(ext, f"_formatted{ext}")
+    FORMATTED_XLSX = INPUT_CSV.replace(ext, f"_formatted.xlsx")
+    FORMATTED_V2_CSV = INPUT_CSV.replace(ext, f"_formatted_v2{ext}")
+    FORMATTED_V2_XLSX = INPUT_CSV.replace(ext, f"_formatted_v2.xlsx")
+else:
+    BACKUP_CSV = None
+    FORMATTED_CSV = None
+    FORMATTED_XLSX = None
+    FORMATTED_V2_CSV = None
+    FORMATTED_V2_XLSX = None
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 
@@ -21,15 +50,19 @@ GENERIC_DOMAINS = {
 }
 
 BUSINESS_PREFIXES = {
-    'info', 'reservations', 'reception', 'contact', 'general', 
-    'booking', 'admin', 'office', 'stay', 'hello', 'enquiries'
+    'info', 'reservations', 'reception', 'contact', 'office', 'admin', 
+    'hello', 'booking', 'sales', 'manager', 'service', 'enquiries'
 }
 
 BAD_KEYWORDS = {
     'wix', 'support', 'no-reply', 'noreply', 'test', 'example', 'domain', 'sentry'
 }
 
-# Category translations from English to Vietnamese
+DISCARD_KEYWORDS = {
+    'gov.ie', 'failteireland.ie', 'tourismireland.com', 'gemi'
+}
+
+# Category translations from English to Vietnamese for Ireland Hotels & Hospitality
 CATEGORY_TRANSLATIONS = {
     "5-star hotel": "Khách sạn 5 sao",
     "4-star hotel": "Khách sạn 4 sao",
@@ -43,19 +76,19 @@ CATEGORY_TRANSLATIONS = {
     "holiday home": "Nhà nghỉ dưỡng (Holiday Home)",
     "vacation rental": "Căn hộ / Biệt thự cho thuê (Vacation Rental)",
     "hotel": "Khách sạn",
-    "resort": "Khách sạn nghỉ dưỡng (Resort)",
+    "resort": "Khu nghỉ dưỡng (Resort)",
     "resort hotel": "Khách sạn nghỉ dưỡng (Resort)",
-    "bed & breakfast": "Phòng nghỉ & Ăn sáng (Bed & Breakfast)",
-    "b&b": "Phòng nghỉ & Ăn sáng (Bed & Breakfast)",
+    "bed & breakfast": "Nhà nghỉ B&B (Bed & Breakfast)",
+    "b&b": "Nhà nghỉ B&B",
     "extended stay hotel": "Khách sạn lưu trú dài hạn",
-    "serviced accommodation": "Căn hộ dịch vụ",
-    "lodging": "Cơ sở lưu trú",
-    "inn": "Quán trọ / Inn"
+    "serviced accommodation": "Căn hộ dịch vụ lưu trú",
+    "lodging": "Cơ sở lưu trú / Nhà nghỉ",
+    "inn": "Nhà nghỉ / Quán trọ"
 }
 
 def translate_category(raw_cat):
     if not raw_cat:
-        return "Dịch vụ Khách sạn Ireland"
+        return "Khách sạn Ireland"
     raw_lower = raw_cat.strip().lower()
     for key, vi_val in CATEGORY_TRANSLATIONS.items():
         if key in raw_lower:
@@ -94,6 +127,9 @@ def clean_and_score_email(email_str):
         if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
+        if any(discard in email for discard in DISCARD_KEYWORDS):
+            score -= 50
+            
         score -= len(email) * 0.01
         
         if score > best_score:
@@ -119,8 +155,8 @@ def normalize_phone(phone_str):
     return phone_clean
 
 def main():
-    if not os.path.exists(INPUT_CSV):
-        print(f"Error: Input file {INPUT_CSV} does not exist.")
+    if not INPUT_CSV or not os.path.exists(INPUT_CSV):
+        print(f"Error: No valid input CSV found.")
         return
         
     print(f"[*] Backing up original CSV to {BACKUP_CSV}...")
@@ -132,7 +168,7 @@ def main():
         for r in reader:
             rows.append(r)
             
-    print(f"[+] Loaded {len(rows)} rows.")
+    print(f"[+] Loaded {len(rows)} rows from {INPUT_CSV}.")
     
     # Filter out permanently closed businesses safely
     active_rows = []

@@ -318,9 +318,33 @@ async def main():
     print(f"[*] Loaded {len(completed_scans)} completed (location, keyword) scans.")
     
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=config_farm_ie.HEADLESS, slow_mo=config_farm_ie.SLOW_MO)
+        browser = None
+        for channel in ["chrome", "msedge", None]:
+            try:
+                chan_str = f"channel '{channel}'" if channel else "default Chromium"
+                print(f"[*] Attempting to launch browser with {chan_str}...")
+                launch_args = {
+                    "headless": config_farm_ie.HEADLESS,
+                    "slow_mo": config_farm_ie.SLOW_MO,
+                    "args": [
+                        "--disable-blink-features=AutomationControlled",
+                        "--lang=en-US,en"
+                    ]
+                }
+                if channel:
+                    launch_args["channel"] = channel
+                browser = await p.chromium.launch(**launch_args)
+                print(f"[+] Successfully launched browser using {chan_str}!")
+                break
+            except Exception as e:
+                print(f"[-] Failed to launch with channel '{channel}': {e}")
+                
+        if not browser:
+            print("[!] Could not launch any browser. Exiting.")
+            return
+            
         context = await browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
             viewport={"width": 1280, "height": 800}
         )
         

@@ -1,5 +1,5 @@
 @echo off
-title Ireland Hotel & Accommodation Google Maps & Email Scraper Launcher
+title Ireland Hotel and Accommodation Google Maps Scraper Launcher
 cd /d "%~dp0"
 
 echo ======================================================
@@ -42,7 +42,7 @@ if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo STEP 2: Preprocessing & Strict Category Filtering...
+echo STEP 2: Preprocessing and Strict Category Filtering...
 echo ======================================================
 python crawlmail/preprocess_csv_hotel_ie.py
 if errorlevel 1 goto RunFailed
@@ -56,7 +56,7 @@ if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo STEP 4: Formatting, Scoring & Translating Tags...
+echo STEP 4: Formatting, Scoring and Translating Tags...
 echo ======================================================
 python format_hotel_ie_emails.py
 if errorlevel 1 goto RunFailed

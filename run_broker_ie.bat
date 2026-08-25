@@ -1,5 +1,5 @@
 @echo off
-title Ireland Employment Agency & Recruitment Broker Scraper Launcher
+title Ireland Employment Agencies and Recruiters Scraper Launcher
 cd /d "%~dp0"
 
 echo ======================================================
@@ -35,14 +35,14 @@ if errorlevel 1 goto PlaywrightFailed
 
 echo.
 echo ======================================================
-echo STEP 1: Launching Ireland Broker & Recruiter Maps Scraper...
+echo STEP 1: Launching Ireland Broker and Recruiter Maps Scraper...
 echo ======================================================
 python -u src/scraper_broker_ie.py %*
 if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo STEP 2: Preprocessing & Strict Category Filtering...
+echo STEP 2: Preprocessing and Strict Category Filtering...
 echo ======================================================
 python crawlmail/preprocess_csv_broker_ie.py
 if errorlevel 1 goto RunFailed
@@ -56,7 +56,7 @@ if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo STEP 4: Formatting, Scoring & Translating Tags...
+echo STEP 4: Formatting, Scoring and Translating Tags...
 echo ======================================================
 python format_broker_ie_emails.py
 if errorlevel 1 goto RunFailed
@@ -91,6 +91,6 @@ exit /b
 :End
 echo.
 echo ======================================================
-echo     IRELAND BROKER SCRAPING SESSION TERMINATED
+echo      IRELAND BROKER SCRAPING SESSION TERMINATED
 echo ======================================================
 pause

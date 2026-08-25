@@ -1,5 +1,5 @@
 @echo off
-title Ireland Farms & Agriculture Scraper Launcher
+title Ireland Farms and Agriculture Scraper Launcher
 cd /d "%~dp0"
 
 echo ======================================================
@@ -35,14 +35,14 @@ if errorlevel 1 goto PlaywrightFailed
 
 echo.
 echo ======================================================
-echo STEP 1: Launching Ireland Farms & Agriculture Maps Scraper...
+echo STEP 1: Launching Ireland Farms and Agriculture Maps Scraper...
 echo ======================================================
 python -u src/scraper_farm_ie.py %*
 if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo STEP 2: Preprocessing & Strict Category Filtering...
+echo STEP 2: Preprocessing and Strict Category Filtering...
 echo ======================================================
 python crawlmail/preprocess_csv_farm_ie.py
 if errorlevel 1 goto RunFailed
@@ -56,7 +56,7 @@ if errorlevel 1 goto RunFailed
 
 echo.
 echo ======================================================
-echo STEP 4: Formatting, Scoring & Translating Tags...
+echo STEP 4: Formatting, Scoring and Translating Tags...
 echo ======================================================
 python format_farm_ie_emails.py
 if errorlevel 1 goto RunFailed
