@@ -1,7 +1,6 @@
 import os
 
-# Google Maps Search Keywords for Ireland Construction Contractors & Manufacturing Factories
-# (Excluding Corporate office from search keywords as directed)
+# Google Maps Search Keywords for Ireland Construction Contractors (Purely Construction)
 KEYWORDS = [
     "Carport and pergola builder",
     "Construction company",
@@ -13,15 +12,11 @@ KEYWORDS = [
     "Building restoration service",
     "Bricklayer",
     "Roofing contractor",
-    "Paving contractor",
-    "Manufacturer",
-    "Medical equipment manufacturer",
-    "Semi conductor supplier",
-    "Electronics manufacturer"
+    "Paving contractor"
 ]
 
 # Allowed Category Tags for strict filtering (lowercase)
-# (Includes Corporate office for filtering)
+# (Includes Corporate office, Manufacturer, etc. so valid construction firms with these secondary tags are preserved)
 ALLOWED_CATEGORIES = {
     "carport and pergola builder",
     "construction company",
@@ -34,17 +29,10 @@ ALLOWED_CATEGORIES = {
     "bricklayer",
     "roofing contractor",
     "paving contractor",
-    "manufacturer",
-    "medical equipment manufacturer",
-    "semi conductor supplier",
-    "semiconductor supplier",
-    "electronics manufacturer",
-    "corporate office",
     "building contractor",
     "civil engineering company",
-    "factory",
-    "industrial equipment supplier",
-    "electronics factory"
+    "corporate office",
+    "manufacturer"
 }
 
 # Output file settings

@@ -29,7 +29,7 @@ BAD_KEYWORDS = {
     'wix', 'support', 'no-reply', 'noreply', 'test', 'example', 'domain', 'sentry'
 }
 
-# Category translations from English to Vietnamese for Construction & Manufacturing
+# Category translations from English to Vietnamese for Construction
 CATEGORY_TRANSLATIONS = {
     "carport and pergola builder": "Thầu thi công nhà xe & Giàn hoa outdoor",
     "construction company": "Công ty xây dựng",
@@ -42,19 +42,15 @@ CATEGORY_TRANSLATIONS = {
     "bricklayer": "Thầu thợ xây / Thi công gạch đá",
     "roofing contractor": "Nhà thầu thi công mái nhà / Lợp mái",
     "paving contractor": "Nhà thầu lát đường / Lát sân vỉa hè",
-    "manufacturer": "Nhà sản xuất / Nhà máy sản xuất",
-    "medical equipment manufacturer": "Nhà sản xuất thiết bị y tế",
-    "semi conductor supplier": "Nhà cung cấp / Sản xuất bán dẫn",
-    "semiconductor supplier": "Nhà cung cấp / Sản xuất bán dẫn",
-    "electronics manufacturer": "Nhà sản xuất thiết bị điện tử",
-    "corporate office": "Văn phòng doanh nghiệp / Trụ sở chính",
     "building contractor": "Nhà thầu xây dựng công trình",
-    "civil engineering company": "Công ty kỹ thuật & Xây dựng dân dụng"
+    "civil engineering company": "Công ty kỹ thuật & Xây dựng dân dụng",
+    "corporate office": "Văn phòng doanh nghiệp / Trụ sở chính",
+    "manufacturer": "Nhà sản xuất / Nhà máy sản xuất"
 }
 
 def translate_category(raw_cat):
     if not raw_cat:
-        return "Xây dựng & Nhà máy sản xuất Ireland"
+        return "Xây dựng Ireland"
     raw_lower = raw_cat.strip().lower()
     for key, vi_val in CATEGORY_TRANSLATIONS.items():
         if key in raw_lower:

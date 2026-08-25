@@ -5,7 +5,7 @@ import shutil
 INPUT_CSV = r"d:\glc\nail uc\construction_ireland.csv"
 BACKUP_CSV = r"d:\glc\nail uc\construction_ireland_backup.csv"
 
-# Allowed Ireland Construction & Manufacturing Category Tags (Strict Filtering)
+# Allowed Ireland Construction Category Tags (Strict Filtering)
 ALLOWED_CATEGORIES = {
     "carport and pergola builder",
     "construction company",
@@ -18,17 +18,10 @@ ALLOWED_CATEGORIES = {
     "bricklayer",
     "roofing contractor",
     "paving contractor",
-    "manufacturer",
-    "medical equipment manufacturer",
-    "semi conductor supplier",
-    "semiconductor supplier",
-    "electronics manufacturer",
-    "corporate office",
     "building contractor",
     "civil engineering company",
-    "factory",
-    "industrial equipment supplier",
-    "electronics factory"
+    "corporate office",
+    "manufacturer"
 }
 
 def normalize_website(url):
