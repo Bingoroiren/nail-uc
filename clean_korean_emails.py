@@ -10,6 +10,63 @@ JUNK_DOMAINS = [
     "kjuso.kr", "ggilbo.com", "hankooki.com", "cnews.co.kr", "boannews.com"
 ]
 
+import re
+import urllib.parse
+
+SOCIAL_DOMAINS = {
+    'facebook.com', 'fb.com', 'fb.me',
+    'instagram.com', 'instagr.am',
+    'twitter.com', 'x.com',
+    'linkedin.com',
+    'youtube.com', 'youtu.be',
+    'tiktok.com',
+    'pinterest.com', 'pin.it',
+    'reddit.com',
+    'threads.net',
+    'tumblr.com',
+    'flickr.com',
+    'snapchat.com',
+    't.me', 'telegram.org', 'telegram.me',
+    'wa.me', 'whatsapp.com',
+    'line.me',
+    'viber.com',
+    'zalo.me',
+    'wechat.com',
+    'google.com', 'goo.gl',
+    'naver.com', 'daum.net', 'kakao.com',
+    'yelp.com', 'tripadvisor.com', 'wikipedia.org',
+    'wix.com', 'wixsite.com', 'squarespace.com', 'wordpress.com'
+}
+
+def guess_email_from_website(website_url):
+    if not website_url or not isinstance(website_url, str):
+        return ""
+    url = website_url.strip()
+    if not url:
+        return ""
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url
+    try:
+        parsed = urllib.parse.urlparse(url)
+        netloc = parsed.netloc.strip().lower()
+        if not netloc:
+            return ""
+        if ':' in netloc:
+            netloc = netloc.split(':')[0]
+        netloc = re.sub(r'^www\d*\.', '', netloc)
+        if not netloc or '.' not in netloc:
+            return ""
+        for social in SOCIAL_DOMAINS:
+            if netloc == social or netloc.endswith('.' + social):
+                return ""
+        if re.match(r'^[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$', netloc):
+            if netloc.endswith('.') or re.match(r'^\d+\.\d+\.\d+\.\d+$', netloc):
+                return ""
+            return f"info@{netloc}"
+        return ""
+    except Exception:
+        return ""
+
 def clean_emails(email_str):
     if not email_str:
         return ""
@@ -47,6 +104,12 @@ def main():
             cleaned_count += 1
             row["Website"] = ""  # Clear the website too since it was a junk website
         
+        if not cleaned:
+            website = row.get("Website", "")
+            guessed = guess_email_from_website(website)
+            if guessed:
+                cleaned = guessed
+
         row["Email"] = cleaned
         if cleaned:
             valid_emails_count += 1
