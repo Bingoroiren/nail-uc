@@ -1,5 +1,5 @@
 @echo off
-title Taiwan Construction Company Google Maps & Email Scraper Launcher
+title Taiwan Construction Company Google Maps and Email Scraper Launcher
 cd /d "%~dp0"
 
 echo ======================================================
@@ -35,6 +35,12 @@ if errorlevel 1 goto PlaywrightFailed
 
 echo.
 echo [SUCCESS] Environment is fully configured!
+
+if exist taiwan_construction.csv (
+    echo [*] Found existing taiwan_construction.csv. Skipping Google Maps Scraping and Preprocessing.
+    goto Step3
+)
+
 echo ======================================================
 echo STEP 1: Launching Taiwan Construction Google Maps Scraper...
 echo ======================================================
@@ -48,6 +54,7 @@ echo ======================================================
 python crawlmail/preprocess_csv_tw.py
 if errorlevel 1 goto RunFailed
 
+:Step3
 echo.
 echo ======================================================
 echo STEP 3: Launching Email Scraper for Taiwan Construction...
