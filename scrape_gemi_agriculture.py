@@ -259,10 +259,28 @@ async def main():
                     print("\n[+] Đã đến trang cuối cùng.")
                     break
                 else:
+                    # Capture the first company's href before navigation to detect reload
+                    first_href_before = companies_data[0][1] if companies_data else ""
+                    
                     print("\n[*] Đang chuyển sang trang tiếp theo...")
                     await next_button.click()
-                    # Đợi trang mới load xong danh sách mới
-                    await page.wait_for_timeout(3000)
+                    
+                    # Wait for rows/links content to change/reload
+                    success = False
+                    for _ in range(25): # Wait up to 10 seconds (25 * 400ms)
+                        await page.wait_for_timeout(400)
+                        company_links = page.locator('a[href^="/company/"], a[href*="/company/"]')
+                        links_count = await company_links.count()
+                        if links_count > 0:
+                            first_href_after = await company_links.first.get_attribute("href")
+                            if first_href_after != first_href_before:
+                                success = True
+                                break
+                                
+                    if not success:
+                        print("[*] Warning: Content did not change automatically. Waiting extra 3s...")
+                        await page.wait_for_timeout(3000)
+                        
                     page_num += 1
             else:
                 print("\n[-] Không tìm thấy nút chuyển trang tiếp theo. Dừng cào.")

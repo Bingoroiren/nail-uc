@@ -1,6 +1,7 @@
 @echo off
 title Repair Portugal Hotel Categories
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ======================================================
 echo   REPAIR PORTUGAL HOTEL CATEGORIES IN CSV

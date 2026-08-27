@@ -11,8 +11,8 @@ if sys.platform.startswith('win'):
     import codecs
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
 
-csv_path = r"d:\glc\nail uc\hotel_portugal.csv"
-backup_path = r"d:\glc\nail uc\hotel_portugal_before_repair.csv"
+csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "hotel_portugal.csv")
+backup_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "hotel_portugal_before_repair.csv")
 
 # Robust category selector
 CATEGORY_SELECTOR = 'span.mgr77e, button.DkEaCc, button.DkEaL, div.F7nice ~ span, div.F7nice ~ button'

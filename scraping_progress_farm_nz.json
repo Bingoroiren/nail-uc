@@ -1,0 +1,834 @@
+{
+    "completed": [
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Orchard"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Crop grower"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Agricultural production"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Organic farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Vineyard"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Greenhouse"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Plant nursery"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Tree farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Truck farmer"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Pick your own farm produce"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Dairy farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Cattle farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Livestock producer"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Pig farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Poultry farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Honey farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Horsestable studfarm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Christmas tree farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Orchid farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Orchid grower"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Aquaculture farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Fish farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Seafood farm"
+        ],
+        [
+            "Taipa Bay-Mangonui",
+            "NZ",
+            "Shrimp farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Orchard"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Crop grower"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Agricultural production"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Organic farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Vineyard"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Greenhouse"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Plant nursery"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Tree farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Truck farmer"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Pick your own farm produce"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Dairy farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Cattle farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Livestock producer"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Pig farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Poultry farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Honey farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Horsestable studfarm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Christmas tree farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Orchid farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Orchid grower"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Aquaculture farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Fish farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Seafood farm"
+        ],
+        [
+            "Awanui",
+            "NZ",
+            "Shrimp farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Orchard"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Crop grower"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Agricultural production"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Organic farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Vineyard"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Greenhouse"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Plant nursery"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Tree farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Truck farmer"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Pick your own farm produce"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Dairy farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Cattle farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Livestock producer"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Pig farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Poultry farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Honey farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Horsestable studfarm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Christmas tree farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Orchid farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Orchid grower"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Aquaculture farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Fish farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Seafood farm"
+        ],
+        [
+            "Kaeo",
+            "NZ",
+            "Shrimp farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Orchard"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Crop grower"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Agricultural production"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Organic farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Vineyard"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Greenhouse"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Plant nursery"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Tree farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Truck farmer"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Pick your own farm produce"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Dairy farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Cattle farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Livestock producer"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Pig farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Poultry farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Honey farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Horsestable studfarm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Christmas tree farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Orchid farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Orchid grower"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Aquaculture farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Fish farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Seafood farm"
+        ],
+        [
+            "Kerikeri",
+            "NZ",
+            "Shrimp farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Orchard"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Crop grower"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Agricultural production"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Organic farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Vineyard"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Greenhouse"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Plant nursery"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Tree farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Truck farmer"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Pick your own farm produce"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Dairy farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Cattle farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Livestock producer"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Pig farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Poultry farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Honey farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Horsestable studfarm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Christmas tree farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Orchid farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Orchid grower"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Aquaculture farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Fish farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Seafood farm"
+        ],
+        [
+            "Okaihau",
+            "NZ",
+            "Shrimp farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Orchard"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Crop grower"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Agricultural production"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Organic farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Vineyard"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Greenhouse"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Plant nursery"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Tree farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Truck farmer"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Pick your own farm produce"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Dairy farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Cattle farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Livestock producer"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Pig farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Poultry farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Honey farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Horsestable studfarm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Christmas tree farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Orchid farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Orchid grower"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Aquaculture farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Fish farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Seafood farm"
+        ],
+        [
+            "Rawene",
+            "NZ",
+            "Shrimp farm"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Farm"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Orchard"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Crop grower"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Agricultural production"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Organic farm"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Vineyard"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Greenhouse"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Plant nursery"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Tree farm"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Truck farmer"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Pick your own farm produce"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Dairy farm"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Cattle farm"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Livestock producer"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Pig farm"
+        ],
+        [
+            "Ngunguru",
+            "NZ",
+            "Poultry farm"
+        ]
+    ]
+}

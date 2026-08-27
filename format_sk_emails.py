@@ -3,10 +3,10 @@ import os
 import shutil
 import re
 
-INPUT_CSV = r"d:\glc\nail uc\slovakia_recruitment_with_emails.csv"
-BACKUP_CSV = r"d:\glc\nail uc\slovakia_recruitment_with_emails_backup.csv"
-FORMATTED_CSV = r"d:\glc\nail uc\slovakia_recruitment_with_emails_formatted.csv"
-FORMATTED_V2_CSV = r"d:\glc\nail uc\slovakia_recruitment_with_emails_formatted_v2.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slovakia_recruitment_with_emails.csv")
+BACKUP_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slovakia_recruitment_with_emails_backup.csv")
+FORMATTED_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slovakia_recruitment_with_emails_formatted.csv")
+FORMATTED_V2_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slovakia_recruitment_with_emails_formatted_v2.csv")
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 
@@ -24,6 +24,82 @@ BAD_KEYWORDS = {
 }
 
 # Translation dictionary from Slovak to Vietnamese
+import urllib.parse
+
+SOCIAL_DOMAINS = {
+    # Social networks & Media
+    'facebook.com', 'fb.com', 'fb.me',
+    'instagram.com', 'instagr.am',
+    'twitter.com', 'x.com',
+    'linkedin.com',
+    'youtube.com', 'youtu.be',
+    'tiktok.com',
+    'pinterest.com', 'pin.it',
+    'reddit.com',
+    'threads.net',
+    'tumblr.com',
+    'flickr.com',
+    'snapchat.com',
+    # Messaging
+    't.me', 'telegram.org', 'telegram.me',
+    'wa.me', 'whatsapp.com',
+    'line.me',
+    'viber.com',
+    'zalo.me',
+    'wechat.com',
+    # Search & Maps
+    'google.com', 'goo.gl', 'google.co.uk', 'google.ie', 'google.com.au',
+    'google.com.tw', 'google.gr', 'google.pt', 'google.sk', 'google.lv',
+    'google.co.nz', 'google.com.hk', 'google.de', 'google.fr',
+    'maps.app.goo.gl', 'waze.com', 'bing.com', 'yahoo.com', 'duckduckgo.com',
+    # Directories & Reviews & Platforms
+    'yelp.com', 'yelp.com.au', 'yelp.ie', 'yelp.co.uk',
+    'tripadvisor.com', 'tripadvisor.ie', 'tripadvisor.co.uk', 'tripadvisor.com.tw', 'tripadvisor.com.gr',
+    'yellowpages.com', 'yellowpages.com.au', 'whitepages.com', 'whitepages.com.au',
+    'foursquare.com', 'trustpilot.com', 'wikipedia.org', 'wikidata.org',
+    # Website builders default / generic hosting
+    'apple.com', 'apps.apple.com', 'play.google.com',
+    'wix.com', 'wixsite.com', 'wixpress.com', 'squarespace.com', 
+    'wordpress.com', 'weebly.com', 'site123.me', 'jimdosite.com', 
+    'godaddysites.com', 'myshopify.com', 'canva.site', 'linktr.ee', 'carrd.co'
+}
+
+def get_field(r, *keys):
+    for k in keys:
+        val = r.get(k, '')
+        if val is not None and str(val).strip():
+            return str(val).strip()
+    return ''
+
+def guess_email_from_website(website_url):
+    if not website_url or not isinstance(website_url, str):
+        return ""
+    url = website_url.strip()
+    if not url:
+        return ""
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url
+    try:
+        parsed = urllib.parse.urlparse(url)
+        netloc = parsed.netloc.strip().lower()
+        if not netloc:
+            return ""
+        if ':' in netloc:
+            netloc = netloc.split(':')[0]
+        netloc = re.sub(r'^www\d*\.', '', netloc)
+        if not netloc or '.' not in netloc:
+            return ""
+        for social in SOCIAL_DOMAINS:
+            if netloc == social or netloc.endswith('.' + social):
+                return ""
+        if re.match(r'^[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$', netloc):
+            if netloc.endswith('.') or re.match(r'^\d+\.\d+\.\d+\.\d+$', netloc):
+                return ""
+            return f"info@{netloc}"
+        return ""
+    except Exception:
+        return ""
+
 CATEGORY_TRANSLATIONS = {
     "Pracovná agentúra": "Đại lý lao động",
     "Personálne poradenstvo": "Tư vấn nhân sự",
@@ -35,10 +111,40 @@ def clean_and_score_email(email_str):
     if not email_str:
         return ""
     
+    discard_domains = {
+        'example.com', 'example.org', 'example.net', 'yourdomain.com', 
+        'vasemail.cz', 'webonic.hu', 'tvojweb.sk', 'mojweb.sk', 'domain.com', 'mydomain.com',
+        'email.com', 'mail.com', 'test.com', 'website.com', 'sentry.io', 'wixpress.com'
+    }
+    discard_substrings = {
+        'noreply', 'no-reply', 'example', 'yourdomain', 'sentry', 'placeholder', 
+        'invalid', 'null', 'undefined', 'tempmail'
+    }
+    discard_locals = {
+        'email', 'your.email', 'yourname', 'test', 'your', 'user', 'name', 'myname'
+    }
+
     emails = []
-    for part in re.split(r'[,\s]+', email_str):
+    for part in re.split(r'[,\s;]+', str(email_str)):
         clean_part = part.strip().lower()
         if '@' in clean_part:
+            try:
+                local_part, domain = clean_part.split('@', 1)
+            except ValueError:
+                continue
+            
+            if domain in discard_domains:
+                continue
+            if any(sub in clean_part for sub in discard_substrings):
+                continue
+            if local_part in discard_locals:
+                continue
+            try:
+                if any(discard in clean_part for discard in DISCARD_KEYWORDS):
+                    continue
+            except NameError:
+                pass
+                
             emails.append(clean_part)
             
     if not emails:
@@ -54,19 +160,21 @@ def clean_and_score_email(email_str):
         except ValueError:
             continue
             
-        # 1. Prefer non-generic domain
         if domain not in GENERIC_DOMAINS:
             score += 10
             
-        # 2. Prefer business prefixes
         if any(prefix in local_part for prefix in BUSINESS_PREFIXES):
             score += 5
             
-        # 3. Penalize bad keywords
         if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
-        # Tie breaker: favor shorter emails slightly to avoid weird long URLs
+        try:
+            if any(k in email for k in PENALTY_KEYWORDS):
+                score -= 50
+        except NameError:
+            pass
+            
         score -= len(email) * 0.01
         
         if score > best_score:
@@ -122,13 +230,16 @@ def main():
 
     # Step 1: Normalize emails and score them
     for r in rows:
-        original_email = r.get('Email', '')
+        original_email = get_field(r, 'Email', 'Category', 'Liên Hệ mail', 'email', 'Email liên hệ')
         r['Best_Email'] = clean_and_score_email(original_email)
+        if not r['Best_Email']:
+            website = r.get('Website') or r.get('Liên Hệ') or r.get('URL') or r.get('website') or ''
+            r['Best_Email'] = guess_email_from_website(website)
         
     # Step 2: Deduplicate by normalized name
     grouped_rows = {}
     for r in rows:
-        norm_name = normalize_name(r.get('Name', ''))
+        norm_name = normalize_name(get_field(r, 'Name', 'Công ty', 'name', 'Tên công ty', 'Tên tiếng Anh', 'Tên chủ sử dụng'))
         if not norm_name:
             continue
             
@@ -140,7 +251,7 @@ def main():
     for norm_name, r_list in grouped_rows.items():
         def sort_rep(r):
             has_email = 1 if r['Best_Email'] else 0
-            has_web = 1 if r.get('Website', '').strip() else 0
+            has_web = 1 if get_field(r, 'Website', 'Liên Hệ', 'URL', 'website', 'Web').strip() else 0
             try:
                 reviews = float(r.get('Reviews_Count') or 0)
             except ValueError:
@@ -170,7 +281,7 @@ def main():
             continue
             
         clean_email = email.strip().lower()
-        phone = r.get('Phone', '')
+        phone = get_field(r, 'Phone', 'SĐT', 'phone', 'Điện thoại', 'SĐT chủ')
         clean_phone = normalize_phone(phone)
         
         if clean_email in seen_emails:
@@ -189,7 +300,7 @@ def main():
         if email:
             continue
             
-        phone = r.get('Phone', '')
+        phone = get_field(r, 'Phone', 'SĐT', 'phone', 'Điện thoại', 'SĐT chủ')
         clean_phone = normalize_phone(phone)
         
         if clean_phone and clean_phone in seen_phones:
@@ -214,7 +325,7 @@ def main():
     
     output_rows = []
     for i, r in enumerate(final_sorted_rows, 1):
-        phone = r.get('Phone', '').strip()
+        phone = get_field(r, 'Phone', 'SĐT', 'phone', 'Điện thoại', 'SĐT chủ').strip()
         if phone:
             raw_digits = normalize_phone(phone)
             phone = f"'{raw_digits}"
@@ -222,19 +333,19 @@ def main():
             phone = ""
             
         # Translate category to Vietnamese
-        raw_category = r.get('Category', '').strip()
-        vi_category = CATEGORY_TRANSLATIONS.get(raw_category, r.get('Category', ''))
+        raw_category = get_field(r, 'Category', 'category', 'Ngành nghề').strip()
+        vi_category = CATEGORY_TRANSLATIONS.get(raw_category, get_field(r, 'Category', 'category', 'Ngành nghề'))
             
         out_row = {
             "No.": i,
-            "Công ty": r.get('Name', ''),
+            "Công ty": get_field(r, 'Name', 'Công ty', 'name', 'Tên công ty', 'Tên tiếng Anh', 'Tên chủ sử dụng'),
             "Chức danh": "",
             "Người liên hệ": "",
             "SĐT": phone,
-            "Liên Hệ": r.get('Website', ''),
+            "Liên Hệ": get_field(r, 'Website', 'Liên Hệ', 'URL', 'website', 'Web'),
             "Email": r['Best_Email'],
             "Liên Hệ mail": "",
-            "Địa chỉ": r.get('Address', ''),
+            "Địa chỉ": get_field(r, 'Address', 'Địa chỉ', 'address'),
             "Lương": "",
             "Ngày đăng": "",
             "Hạn tuyển": "",
@@ -264,14 +375,13 @@ def main():
             writer.writeheader()
             writer.writerows(output_rows)
         
-    print(f"[*] Attempting to update original {INPUT_CSV}...")
-    try:
-        shutil.copy2(target_write_file, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print("\n[WARNING] Permission denied! The original file is locked by Excel.")
-        print(f"[!] Please close Excel and run: python format_sk_emails.py")
-        print(f"[i] The formatted copy is available at: {target_write_file}")
+    # Do NOT overwrite the original input file with formatted output
+    # to preserve raw email data for future retry-empty runs
+    print(f"\n--- Summary ---")
+    print(f"Total output rows: {len(output_rows)}")
+    print(f"With email:        {len(with_email)}")
+    print(f"Without email:     {len(without_email)}")
+    print(f"Formatted file:    {target_write_file}")
 
 if __name__ == "__main__":
     main()

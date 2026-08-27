@@ -80,7 +80,11 @@ async def scrape_detail(context, detail_url):
     
     try:
         await detail_page.goto(detail_url, timeout=45000, wait_until="domcontentloaded")
-        await detail_page.wait_for_timeout(1000)
+        try:
+            await detail_page.wait_for_selector('.text-top-info span', timeout=5000)
+        except Exception:
+            pass
+        await detail_page.wait_for_timeout(1500)
         
         # Extract span text contents
         spans = await detail_page.locator('.text-top-info span').all_inner_texts()
@@ -128,6 +132,18 @@ async def export_to_xlsx():
     except Exception as e:
         print(f"[-] Failed to write Excel spreadsheet: {e}")
 
+async def get_rows_safe(page, selector="tbody.tbody tr", retries=5):
+    """Safely retrieves locator elements with retries if context is destroyed during navigation."""
+    for i in range(retries):
+        try:
+            return await page.locator(selector).all()
+        except Exception as e:
+            if "destroyed" in str(e).lower() or "navigation" in str(e).lower():
+                await page.wait_for_timeout(1000)
+                continue
+            raise e
+    return []
+
 async def main():
     print("="*70)
     print("        TAIWAN WDA EMPLOYER TRANSITION DATABASE SCRAPER")
@@ -141,12 +157,13 @@ async def main():
     
     async with async_playwright() as p:
         browser = None
-        for channel in ["chrome", "msedge", None]:
+        # Try default Chromium first as it is the most stable and isolated context
+        for channel in [None, "chrome", "msedge"]:
             try:
                 chan_str = f"channel '{channel}'" if channel else "default Chromium"
                 print(f"[*] Attempting to launch browser with {chan_str}...")
                 launch_args = {
-                    "headless": False,  # Running headful to ensure stability and bypass simple bot detections
+                    "headless": True,  # Set to True to avoid profile locks and GUI hanging
                     "slow_mo": 10,
                     "args": ["--disable-blink-features=AutomationControlled"]
                 }
@@ -171,23 +188,28 @@ async def main():
         
         print(f"[*] Navigating to WDA database list URL: {list_url}")
         try:
-            await page.goto(list_url, timeout=60000, wait_until="networkidle")
+            await page.goto(list_url, timeout=60000, wait_until="domcontentloaded")
+            await page.wait_for_timeout(3000)
         except Exception as nav_err:
             print(f"[-] Navigation failed: {nav_err}")
             await browser.close()
             return
             
-        # Select 50 entries per page to minimize page loads
-        print("[*] Setting page size to 50 records...")
+        # Clean up non-POST forms in DOM to prevent jQuery $("form").submit() collision
+        print("[*] Cleaning up forms in DOM...")
         try:
-            await page.select_option('select#size', '50')
-            await page.wait_for_timeout(3000)
-            await page.wait_for_load_state("networkidle")
-        except Exception as sz_err:
-            print(f"[*] Warning: Could not adjust page size dropdown: {sz_err}")
+            await page.evaluate("""() => {
+                document.querySelectorAll('form').forEach(f => {
+                    if (!f.method || f.method.toLowerCase() !== 'post') {
+                        f.remove();
+                    }
+                });
+            }""")
+        except Exception as clean_err:
+            print(f"[*] Warning: Could not clean DOM forms: {clean_err}")
 
         # Get total pages
-        total_pages = 12  # Default fallback if parsing fails
+        total_pages = 37  # Default fallback if parsing fails
         try:
             total_pages_text = await page.locator('label#totalPage').inner_text()
             total_pages = int(total_pages_text.strip())
@@ -204,28 +226,44 @@ async def main():
             try:
                 # Capture the name of the first business on the current page to detect loading
                 first_name_before = ""
-                rows_before = await page.locator('tbody.tbody tr').all()
+                rows_before = await get_rows_safe(page)
                 if rows_before:
                     first_name_before = await rows_before[0].locator('td').first.inner_text()
                 
-                await page.select_option('select#page', str(page_idx))
-                await page.wait_for_timeout(1500)
-                
-                # Wait for rows content to change/reload
-                for _ in range(15):
-                    rows_after = await page.locator('tbody.tbody tr').all()
-                    if rows_after:
-                        first_name_after = await rows_after[0].locator('td').first.inner_text()
-                        if first_name_after != first_name_before:
-                            break
-                    await page.wait_for_timeout(200)
-                await page.wait_for_load_state("networkidle")
+                # Only change page if page_idx > 0 (since page 0 is already active)
+                if page_idx > 0:
+                    # Clean up forms again to prevent any re-created non-POST forms from causing a submit collision
+                    try:
+                        await page.evaluate("""() => {
+                            document.querySelectorAll('form').forEach(f => {
+                                if (!f.method || f.method.toLowerCase() !== 'post') {
+                                    f.remove();
+                                }
+                            });
+                        }""")
+                    except Exception:
+                        pass
+                        
+                    await page.evaluate(f"changePage('{page_idx}')")
+                    await page.wait_for_timeout(3000)
+                    
+                    # Wait for rows content to change/reload
+                    for _ in range(15):
+                        rows_after = await get_rows_safe(page)
+                        if rows_after:
+                            first_name_after = await rows_after[0].locator('td').first.inner_text()
+                            if first_name_after != first_name_before:
+                                break
+                        await page.wait_for_timeout(200)
+                    await page.wait_for_load_state("domcontentloaded")
+                else:
+                    await page.wait_for_timeout(2000)
             except Exception as select_err:
                 print(f"[-] Error navigating to page index {page_idx}: {select_err}")
                 continue
                 
             # Extract row items
-            rows = await page.locator('tbody.tbody tr').all()
+            rows = await get_rows_safe(page)
             print(f"[+] Found {len(rows)} rows on current page.")
             
             for row_el in rows:

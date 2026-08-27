@@ -1,4 +1,5 @@
 @echo off
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 title Ireland Employment Agencies and Recruiters Scraper Launcher
 cd /d "%~dp0"
 

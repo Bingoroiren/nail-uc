@@ -1,6 +1,7 @@
 @echo off
 title Taiwan WDA Employer Database Scraper Launcher
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ======================================================
 echo         AUTOMATIC PYTHON SETUP AND SCRAPER RUN (WDA)
@@ -37,7 +38,7 @@ echo.
 echo ======================================================
 echo Launching Taiwan WDA Employer Database Scraper...
 echo ======================================================
-python scrape_wda_employers.py
+python -u scrape_wda_employers.py
 if errorlevel 1 goto RunFailed
 
 echo.

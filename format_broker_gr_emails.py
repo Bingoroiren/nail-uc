@@ -67,6 +67,75 @@ PENALTY_KEYWORDS = {
 }
 
 # Category translations from Greek to Vietnamese
+import urllib.parse
+
+SOCIAL_DOMAINS = {
+    # Social networks & Media
+    'facebook.com', 'fb.com', 'fb.me',
+    'instagram.com', 'instagr.am',
+    'twitter.com', 'x.com',
+    'linkedin.com',
+    'youtube.com', 'youtu.be',
+    'tiktok.com',
+    'pinterest.com', 'pin.it',
+    'reddit.com',
+    'threads.net',
+    'tumblr.com',
+    'flickr.com',
+    'snapchat.com',
+    # Messaging
+    't.me', 'telegram.org', 'telegram.me',
+    'wa.me', 'whatsapp.com',
+    'line.me',
+    'viber.com',
+    'zalo.me',
+    'wechat.com',
+    # Search & Maps
+    'google.com', 'goo.gl', 'google.co.uk', 'google.ie', 'google.com.au',
+    'google.com.tw', 'google.gr', 'google.pt', 'google.sk', 'google.lv',
+    'google.co.nz', 'google.com.hk', 'google.de', 'google.fr',
+    'maps.app.goo.gl', 'waze.com', 'bing.com', 'yahoo.com', 'duckduckgo.com',
+    # Directories & Reviews & Platforms
+    'yelp.com', 'yelp.com.au', 'yelp.ie', 'yelp.co.uk',
+    'tripadvisor.com', 'tripadvisor.ie', 'tripadvisor.co.uk', 'tripadvisor.com.tw', 'tripadvisor.com.gr',
+    'yellowpages.com', 'yellowpages.com.au', 'whitepages.com', 'whitepages.com.au',
+    'foursquare.com', 'trustpilot.com', 'wikipedia.org', 'wikidata.org',
+    # Website builders default / generic hosting
+    'apple.com', 'apps.apple.com', 'play.google.com',
+    'wix.com', 'wixsite.com', 'wixpress.com', 'squarespace.com', 
+    'wordpress.com', 'weebly.com', 'site123.me', 'jimdosite.com', 
+    'godaddysites.com', 'myshopify.com', 'canva.site', 'linktr.ee', 'carrd.co'
+}
+
+def guess_email_from_website(website_url):
+    if not website_url or not isinstance(website_url, str):
+        return ""
+    url = website_url.strip()
+    if not url:
+        return ""
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url
+    try:
+        parsed = urllib.parse.urlparse(url)
+        netloc = parsed.netloc.strip().lower()
+        if not netloc:
+            return ""
+        if ':' in netloc:
+            netloc = netloc.split(':')[0]
+        netloc = re.sub(r'^www\d*\.', '', netloc)
+        if not netloc or '.' not in netloc:
+            return ""
+        for social in SOCIAL_DOMAINS:
+            if netloc == social or netloc.endswith('.' + social):
+                return ""
+        if re.match(r'^[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$', netloc):
+            if netloc.endswith('.') or re.match(r'^\d+\.\d+\.\d+\.\d+$', netloc):
+                return ""
+            return f"info@{netloc}"
+        return ""
+    except Exception:
+        return ""
+
 CATEGORY_TRANSLATIONS = {
     "εταιρεία συμβουλευτικών υπηρεσιών ανθρώπινου δυναμικού": "Công ty tư vấn nhân sự Hy Lạp",
     "γραφείο εύρεσης προσωπικού": "Văn phòng tuyển dụng Hy Lạp",
@@ -77,55 +146,76 @@ def clean_and_score_email(email_str):
     if not email_str:
         return ""
     
+    discard_domains = {
+        'example.com', 'example.org', 'example.net', 'yourdomain.com', 
+        'vasemail.cz', 'webonic.hu', 'tvojweb.sk', 'mojweb.sk', 'domain.com', 'mydomain.com',
+        'email.com', 'mail.com', 'test.com', 'website.com', 'sentry.io', 'wixpress.com'
+    }
+    discard_substrings = {
+        'noreply', 'no-reply', 'example', 'yourdomain', 'sentry', 'placeholder', 
+        'invalid', 'null', 'undefined', 'tempmail'
+    }
+    discard_locals = {
+        'email', 'your.email', 'yourname', 'test', 'your', 'user', 'name', 'myname'
+    }
+
     emails = []
     for part in re.split(r'[,\s;]+', str(email_str)):
         clean_part = part.strip().lower()
         if '@' in clean_part:
+            try:
+                local_part, domain = clean_part.split('@', 1)
+            except ValueError:
+                continue
+            
+            if domain in discard_domains:
+                continue
+            if any(sub in clean_part for sub in discard_substrings):
+                continue
+            if local_part in discard_locals:
+                continue
+            try:
+                if any(discard in clean_part for discard in DISCARD_KEYWORDS):
+                    continue
+            except NameError:
+                pass
+                
             emails.append(clean_part)
             
     if not emails:
         return ""
         
     best_email = emails[0]
-    best_score = -99999
+    best_score = -9999
     
     for email in emails:
         score = 0
         try:
-            local_part, domain_part = email.split('@', 1)
+            local_part, domain = email.split('@', 1)
         except ValueError:
             continue
             
-        # Check for discard keywords
-        if any(keyword in domain_part for keyword in DISCARD_KEYWORDS):
-            continue
+        if domain not in GENERIC_DOMAINS:
+            score += 10
             
-        # Check for generic domains
-        if domain_part not in GENERIC_DOMAINS:
-            score += 10  # Prefer business/corporate domains
-            
-        # Check prefixes
         if any(prefix in local_part for prefix in BUSINESS_PREFIXES):
             score += 5
             
-        # Check penalty/bad keywords
-        if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain_part for bad in BAD_KEYWORDS):
+        if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
-        if any(penalty in domain_part for penalty in PENALTY_KEYWORDS):
-            score -= 5
+        try:
+            if any(k in email for k in PENALTY_KEYWORDS):
+                score -= 50
+        except NameError:
+            pass
             
-        # Minor penalty for email length to prefer shorter ones
         score -= len(email) * 0.01
         
         if score > best_score:
             best_score = score
             best_email = email
             
-    # If the score is extremely low (meaning it was discarded), return empty or fallback safely
-    if best_score < -100:
-        return ""
-        
     return best_email
 
 def normalize_name(name):
@@ -271,6 +361,9 @@ def main():
     for r in rows:
         original_email = get_field(r, 'Email', 'Category', 'Liên Hệ mail')
         r['Best_Email'] = clean_and_score_email(original_email)
+        if not r['Best_Email']:
+            website = get_field(r, 'Website', 'Liên Hệ', 'URL', 'website', 'Web')
+            r['Best_Email'] = guess_email_from_website(website)
         
     # Step 2: Deduplicate by normalized name
     grouped_rows = {}

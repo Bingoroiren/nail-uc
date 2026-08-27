@@ -1,6 +1,7 @@
 @echo off
 title Greece Hotel and Accommodation Google Maps and Email Scraper Launcher
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ======================================================
 echo         AUTOMATIC PYTHON SETUP AND SCRAPER RUN (HOTEL GR)

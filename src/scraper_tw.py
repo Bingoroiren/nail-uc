@@ -97,11 +97,20 @@ def load_completed_scans():
                 for row in reader:
                     loc_name = row.get('Location_Name')
                     state = row.get('State')
+                    kw_val = row.get('Search_Query', '')
+                    found_kw = ""
+                    if kw_val:
+                        for original_kw in config_tw.KEYWORDS:
+                            if original_kw.lower() in kw_val.lower():
+                                found_kw = original_kw
+                                break
+                    if not found_kw:
+                        found_kw = config_tw.KEYWORDS[0]
                     if loc_name and state:
-                        pair = (loc_name.strip().lower(), state.strip().lower(), config_tw.KEYWORDS[0].lower())
+                        pair = (loc_name.strip().lower(), state.strip().lower(), found_kw.lower())
                         if pair not in completed:
                             completed.add(pair)
-                            completed_list.append([loc_name.strip(), state.strip(), config_tw.KEYWORDS[0]])
+                            completed_list.append([loc_name.strip(), state.strip(), found_kw])
             # Write to progress.json
             with open(PROGRESS_FILE, 'w', encoding='utf-8') as f:
                 json.dump({"completed": completed_list}, f, indent=4, ensure_ascii=False)

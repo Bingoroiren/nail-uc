@@ -1,6 +1,7 @@
 @echo off
 title Greece Manufacturing Company Email Formatter Launcher
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ======================================================
 echo         AUTOMATIC PYTHON SETUP AND FORMATTER RUN

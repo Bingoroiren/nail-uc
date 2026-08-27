@@ -1,4 +1,4 @@
-﻿"""
+"""
 format_metal_lv_emails.py
 =========================
 Formats metal_latvia_with_emails.csv into the standard cold-mail template.
@@ -17,7 +17,7 @@ import shutil
 import re
 import sys
 
-INPUT_CSV = r"d:\glc\nail uc\metal_latvia_with_emails.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "metal_latvia_with_emails.csv")
 if len(sys.argv) > 1:
     INPUT_CSV = sys.argv[1]
 
@@ -26,6 +26,75 @@ FORMATTED_CSV   = INPUT_CSV.replace(".csv", "_formatted.csv")
 FORMATTED_V2_CSV = INPUT_CSV.replace(".csv", "_formatted_v2.csv")
 
 # ---- Category translations (Latvian -> Vietnamese) ----
+import urllib.parse
+
+SOCIAL_DOMAINS = {
+    # Social networks & Media
+    'facebook.com', 'fb.com', 'fb.me',
+    'instagram.com', 'instagr.am',
+    'twitter.com', 'x.com',
+    'linkedin.com',
+    'youtube.com', 'youtu.be',
+    'tiktok.com',
+    'pinterest.com', 'pin.it',
+    'reddit.com',
+    'threads.net',
+    'tumblr.com',
+    'flickr.com',
+    'snapchat.com',
+    # Messaging
+    't.me', 'telegram.org', 'telegram.me',
+    'wa.me', 'whatsapp.com',
+    'line.me',
+    'viber.com',
+    'zalo.me',
+    'wechat.com',
+    # Search & Maps
+    'google.com', 'goo.gl', 'google.co.uk', 'google.ie', 'google.com.au',
+    'google.com.tw', 'google.gr', 'google.pt', 'google.sk', 'google.lv',
+    'google.co.nz', 'google.com.hk', 'google.de', 'google.fr',
+    'maps.app.goo.gl', 'waze.com', 'bing.com', 'yahoo.com', 'duckduckgo.com',
+    # Directories & Reviews & Platforms
+    'yelp.com', 'yelp.com.au', 'yelp.ie', 'yelp.co.uk',
+    'tripadvisor.com', 'tripadvisor.ie', 'tripadvisor.co.uk', 'tripadvisor.com.tw', 'tripadvisor.com.gr',
+    'yellowpages.com', 'yellowpages.com.au', 'whitepages.com', 'whitepages.com.au',
+    'foursquare.com', 'trustpilot.com', 'wikipedia.org', 'wikidata.org',
+    # Website builders default / generic hosting
+    'apple.com', 'apps.apple.com', 'play.google.com',
+    'wix.com', 'wixsite.com', 'wixpress.com', 'squarespace.com', 
+    'wordpress.com', 'weebly.com', 'site123.me', 'jimdosite.com', 
+    'godaddysites.com', 'myshopify.com', 'canva.site', 'linktr.ee', 'carrd.co'
+}
+
+def guess_email_from_website(website_url):
+    if not website_url or not isinstance(website_url, str):
+        return ""
+    url = website_url.strip()
+    if not url:
+        return ""
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url
+    try:
+        parsed = urllib.parse.urlparse(url)
+        netloc = parsed.netloc.strip().lower()
+        if not netloc:
+            return ""
+        if ':' in netloc:
+            netloc = netloc.split(':')[0]
+        netloc = re.sub(r'^www\d*\.', '', netloc)
+        if not netloc or '.' not in netloc:
+            return ""
+        for social in SOCIAL_DOMAINS:
+            if netloc == social or netloc.endswith('.' + social):
+                return ""
+        if re.match(r'^[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$', netloc):
+            if netloc.endswith('.') or re.match(r'^\d+\.\d+\.\d+\.\d+$', netloc):
+                return ""
+            return f"info@{netloc}"
+        return ""
+    except Exception:
+        return ""
+
 CATEGORY_TRANSLATIONS = {
     "metāla darbnīca":               "Xưởng gia công kim loại",
     "metālapstrāde":                 "Gia công kim loại",
@@ -138,6 +207,9 @@ def main():
         r["Best_Email"] = clean_and_score_email(
             get_field(r, "Email", "Category", "Liên Hệ mail")
         )
+        if not r["Best_Email"]:
+            website = get_field(r, "Website", "Liên Hệ", "URL", "website")
+            r["Best_Email"] = guess_email_from_website(website)
 
     # Deduplicate by normalized name
     grouped = {}
@@ -200,33 +272,106 @@ def main():
         "Lần Follow-up", "Ngày Follow-up gần nhất", "Mailbox đã dùng", "Category"
     ]
 
-    output_rows = []
-    for i, r in enumerate(final_rows, 1):
-        phone = get_field(r, "Phone", "SĐT")
-        if phone:
-            digits = re.sub(r"[^0-9]", "", phone)
+    # Load existing MASOC members to append/merge
+    masoc_formatted_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "masoc_members_formatted.csv")
+    masoc_rows = []
+    seen_masoc_names = set()
+    seen_masoc_emails = set()
+    seen_masoc_phones = set()
+
+    if os.path.exists(masoc_formatted_path):
+        print(f"[*] Loading existing MASOC members from {masoc_formatted_path} for merging...")
+        try:
+            with open(masoc_formatted_path, mode="r", encoding="utf-8-sig") as f:
+                reader = csv.DictReader(f)
+                for r in reader:
+                    masoc_rows.append(dict(r))
+                    
+                    name = r.get("Công ty", "").strip()
+                    norm_n = normalize_name(name)
+                    if norm_n:
+                        seen_masoc_names.add(norm_n)
+                        
+                    email = r.get("Email", "").strip().lower()
+                    if email:
+                        seen_masoc_emails.add(email)
+                        
+                    phone = r.get("SĐT", "").replace("'", "").strip()
+                    norm_p = normalize_phone(phone)
+                    if norm_p:
+                        seen_masoc_phones.add(norm_p)
+            print(f"[+] Loaded {len(masoc_rows)} existing MASOC records.")
+        except Exception as e:
+            print(f"[-] Error loading MASOC file: {e}")
+
+    metal_only_formatted = []
+    merged_count = 0
+    updated_count = 0
+
+    # Build a lookup dictionary for masoc rows by normalized name
+    masoc_by_name = {}
+    for row in masoc_rows:
+        n_name = normalize_name(row.get("Công ty", ""))
+        if n_name:
+            masoc_by_name[n_name] = row
+
+    for r in final_rows:
+        name_val = get_field(r, "Name", "Công ty")
+        norm_name = normalize_name(name_val)
+        
+        email_val = r["Best_Email"].strip()
+        phone_val = get_field(r, "Phone", "SĐT")
+        
+        if phone_val:
+            digits = re.sub(r"[^0-9]", "", phone_val)
             if digits.startswith("371"):
                 digits = digits[3:]
-            phone = f"'{digits}"
+            phone_fmt = f"'{digits}"
+            norm_phone = digits
         else:
-            phone = ""
+            phone_fmt = ""
+            norm_phone = ""
 
         raw_cat = get_field(r, "Category", "category").lower().strip()
-        # Find best matching Vietnamese translation
         vi_cat = CATEGORY_DEFAULT
         for lv_key, vi_val in CATEGORY_TRANSLATIONS.items():
             if lv_key in raw_cat:
                 vi_cat = vi_val
                 break
 
-        output_rows.append({
-            "No.":                       i,
-            "Công ty":                   get_field(r, "Name", "Công ty"),
+        # If it already exists in MASOC, check if we can fill missing email/phone
+        if norm_name in masoc_by_name:
+            existing_row = masoc_by_name[norm_name]
+            updated = False
+            
+            # Fill missing email
+            if email_val and not existing_row.get("Email", "").strip():
+                existing_row["Email"] = email_val
+                updated = True
+                
+            # Fill missing phone
+            if phone_fmt and not existing_row.get("SĐT", "").strip():
+                existing_row["SĐT"] = phone_fmt
+                updated = True
+                
+            if updated:
+                updated_count += 1
+            continue
+
+        # Check duplicates against MASOC by email/phone
+        if email_val.lower() and email_val.lower() in seen_masoc_emails:
+            continue
+        if norm_phone and norm_phone in seen_masoc_phones:
+            continue
+
+        new_row = {
+            "No.":                       0,  # Will be re-indexed
+            "Công ty":                   name_val,
             "Chức danh":                 "",
             "Người liên hệ":             "",
-            "SĐT":                       phone,
+            "SĐT":                       phone_fmt,
             "Liên Hệ":                   get_field(r, "Website", "Liên Hệ"),
-            "Email":                     r["Best_Email"],
+            "Email":                     email_val,
             "Liên Hệ mail":              "",
             "Địa chỉ":                   get_field(r, "Address", "Địa chỉ"),
             "Lương":                     "",
@@ -240,36 +385,56 @@ def main():
             "Ngày Follow-up gần nhất":   "",
             "Mailbox đã dùng":           "",
             "Category":                  vi_cat,
-        })
+        }
+        
+        metal_only_formatted.append(new_row.copy())
+        masoc_rows.append(new_row.copy())
+        merged_count += 1
 
-    # Write formatted CSV
-    target = FORMATTED_CSV
+    # Re-index all lists
+    for idx, row in enumerate(metal_only_formatted, 1):
+        row["No."] = idx
+    for idx, row in enumerate(masoc_rows, 1):
+        row["No."] = idx
+
+    # Write standalone metal formatted CSV
     print(f"[*] Writing to {FORMATTED_CSV}...")
     try:
         with open(FORMATTED_CSV, mode="w", encoding="utf-8-sig", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
-            writer.writerows(output_rows)
+            writer.writerows(metal_only_formatted)
     except PermissionError:
-        target = FORMATTED_V2_CSV
         print(f"[!] {FORMATTED_CSV} is locked. Writing to {FORMATTED_V2_CSV} instead...")
         with open(FORMATTED_V2_CSV, mode="w", encoding="utf-8-sig", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
-            writer.writerows(output_rows)
+            writer.writerows(metal_only_formatted)
 
-    print(f"[*] Updating original {INPUT_CSV}...")
+    # Write merged MASOC CSV
+    print(f"[*] Writing to {masoc_formatted_path}...")
     try:
-        shutil.copy2(target, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
+        with open(masoc_formatted_path, mode="w", encoding="utf-8-sig", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(masoc_rows)
     except PermissionError:
-        print(f"\n[WARNING] Permission denied updating {INPUT_CSV}. File is open in Excel.")
+        masoc_v2 = masoc_formatted_path.replace(".csv", "_v2.csv")
+        print(f"[!] {masoc_formatted_path} is locked. Writing to {masoc_v2} instead...")
+        with open(masoc_v2, mode="w", encoding="utf-8-sig", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(masoc_rows)
+
+    # Do not overwrite the raw INPUT_CSV so it preserves the original headers for scraper resumes
+    pass
 
     print(f"\n--- Summary ---")
-    print(f"Total output rows: {len(output_rows)}")
-    print(f"With email:        {len(with_email)}")
-    print(f"Without email:     {len(without_email)}")
-    print(f"Formatted file:    {target}")
+    print(f"Total unique metal rows: {len(metal_only_formatted)}")
+    print(f"Updated in existing MASOC file: {updated_count} rows")
+    print(f"Merged new into MASOC file:  {merged_count} rows")
+    print(f"Total combined MASOC:    {len(masoc_rows)} rows")
+    print(f"MASOC output file:       {masoc_formatted_path}")
 
 
 if __name__ == "__main__":

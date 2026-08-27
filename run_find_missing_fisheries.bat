@@ -1,6 +1,7 @@
 @echo off
 title Find Missing Latvia Fish Factories on Google Maps
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ======================================================
 echo   FIND MISSING LATVIA FISH FACTORIES ON GOOGLE MAPS

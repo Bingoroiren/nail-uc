@@ -1,6 +1,7 @@
 @echo off
 title Australia Construction Company Google Maps & Email Scraper Launcher
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ======================================================
 echo         AUTOMATIC PYTHON SETUP AND SCRAPER RUN (CONSTRUCTION AU)

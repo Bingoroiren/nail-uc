@@ -63,7 +63,10 @@ BAD_KEYWORDS = {
 DISCARD_KEYWORDS = {
     'cci', 'chamber', 'epimel', 'epime', 'eea.gr', 'gov.gr', 'evep', 
     'eves', 'eveh', 'ebed', 'icci', 'bep.gr', 'dramanet', 'arcadianet', 
-    'eber.gr', 'epimevro', 'ebef', 'gemi'
+    'eber.gr', 'epimevro', 'ebef', 'gemi', 'cycladescc.gr', 'larcci.gr',
+    'epihal.gr', 'champier.gr', 'e-thesprotias.gr', 'fthiotidoscc.gr',
+    'korinthiacc.gr', 'acci.gr', 'cci-magnesia.gr', 'eepir', 'ebear',
+    'e-a.gr', 'zantecci', 'corfucci.gr', 'ebeh.gr', 'epimfok', 'epimlas'
 }
 
 # Old Greek ISP domains or low-quality domains that are penalized but NOT discarded.
@@ -72,6 +75,75 @@ PENALTY_KEYWORDS = {
 }
 
 # Category translations from Greek to Vietnamese
+import urllib.parse
+
+SOCIAL_DOMAINS = {
+    # Social networks & Media
+    'facebook.com', 'fb.com', 'fb.me',
+    'instagram.com', 'instagr.am',
+    'twitter.com', 'x.com',
+    'linkedin.com',
+    'youtube.com', 'youtu.be',
+    'tiktok.com',
+    'pinterest.com', 'pin.it',
+    'reddit.com',
+    'threads.net',
+    'tumblr.com',
+    'flickr.com',
+    'snapchat.com',
+    # Messaging
+    't.me', 'telegram.org', 'telegram.me',
+    'wa.me', 'whatsapp.com',
+    'line.me',
+    'viber.com',
+    'zalo.me',
+    'wechat.com',
+    # Search & Maps
+    'google.com', 'goo.gl', 'google.co.uk', 'google.ie', 'google.com.au',
+    'google.com.tw', 'google.gr', 'google.pt', 'google.sk', 'google.lv',
+    'google.co.nz', 'google.com.hk', 'google.de', 'google.fr',
+    'maps.app.goo.gl', 'waze.com', 'bing.com', 'yahoo.com', 'duckduckgo.com',
+    # Directories & Reviews & Platforms
+    'yelp.com', 'yelp.com.au', 'yelp.ie', 'yelp.co.uk',
+    'tripadvisor.com', 'tripadvisor.ie', 'tripadvisor.co.uk', 'tripadvisor.com.tw', 'tripadvisor.com.gr',
+    'yellowpages.com', 'yellowpages.com.au', 'whitepages.com', 'whitepages.com.au',
+    'foursquare.com', 'trustpilot.com', 'wikipedia.org', 'wikidata.org',
+    # Website builders default / generic hosting
+    'apple.com', 'apps.apple.com', 'play.google.com',
+    'wix.com', 'wixsite.com', 'wixpress.com', 'squarespace.com', 
+    'wordpress.com', 'weebly.com', 'site123.me', 'jimdosite.com', 
+    'godaddysites.com', 'myshopify.com', 'canva.site', 'linktr.ee', 'carrd.co'
+}
+
+def guess_email_from_website(website_url):
+    if not website_url or not isinstance(website_url, str):
+        return ""
+    url = website_url.strip()
+    if not url:
+        return ""
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url
+    try:
+        parsed = urllib.parse.urlparse(url)
+        netloc = parsed.netloc.strip().lower()
+        if not netloc:
+            return ""
+        if ':' in netloc:
+            netloc = netloc.split(':')[0]
+        netloc = re.sub(r'^www\d*\.', '', netloc)
+        if not netloc or '.' not in netloc:
+            return ""
+        for social in SOCIAL_DOMAINS:
+            if netloc == social or netloc.endswith('.' + social):
+                return ""
+        if re.match(r'^[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$', netloc):
+            if netloc.endswith('.') or re.match(r'^\d+\.\d+\.\d+\.\d+$', netloc):
+                return ""
+            return f"info@{netloc}"
+        return ""
+    except Exception:
+        return ""
+
 CATEGORY_TRANSLATIONS = {
     "ξενοδοχείο 5 αστέρων": "Khách sạn 5 sao",
     "κατ' οίκον φιλοξενία": "Homestay / Nhà nghỉ gia đình",
@@ -89,23 +161,49 @@ def clean_and_score_email(email_str):
     if not email_str:
         return ""
     
+    discard_domains = {
+        'example.com', 'example.org', 'example.net', 'yourdomain.com', 
+        'vasemail.cz', 'webonic.hu', 'tvojweb.sk', 'mojweb.sk', 'domain.com', 'mydomain.com',
+        'email.com', 'mail.com', 'test.com', 'website.com', 'sentry.io', 'wixpress.com'
+    }
+    discard_substrings = {
+        'noreply', 'no-reply', 'example', 'yourdomain', 'sentry', 'placeholder', 
+        'invalid', 'null', 'undefined', 'tempmail'
+    }
+    discard_locals = {
+        'email', 'your.email', 'yourname', 'test', 'your', 'user', 'name', 'myname'
+    }
+
     emails = []
     for part in re.split(r'[,\s;]+', str(email_str)):
         clean_part = part.strip().lower()
         if '@' in clean_part:
+            try:
+                local_part, domain = clean_part.split('@', 1)
+            except ValueError:
+                continue
+            
+            if domain in discard_domains:
+                continue
+            if any(sub in clean_part for sub in discard_substrings):
+                continue
+            if local_part in discard_locals:
+                continue
+            try:
+                if any(discard in clean_part for discard in DISCARD_KEYWORDS):
+                    continue
+            except NameError:
+                pass
+                
             emails.append(clean_part)
             
     if not emails:
         return ""
         
-    best_email = ""
+    best_email = emails[0]
     best_score = -9999
     
     for email in emails:
-        # Discard chamber or GEMI registry emails completely
-        if any(k in email for k in DISCARD_KEYWORDS):
-            continue
-            
         score = 0
         try:
             local_part, domain = email.split('@', 1)
@@ -121,9 +219,11 @@ def clean_and_score_email(email_str):
         if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
-        # Penalize old ISP or generic chamber-adjacent domains
-        if any(k in email for k in PENALTY_KEYWORDS):
-            score -= 50
+        try:
+            if any(k in email for k in PENALTY_KEYWORDS):
+                score -= 50
+        except NameError:
+            pass
             
         score -= len(email) * 0.01
         
@@ -194,6 +294,9 @@ def main():
     for r in rows:
         original_email = get_field(r, 'Email', 'Category', 'Liên Hệ mail')
         r['Best_Email'] = clean_and_score_email(original_email)
+        if not r['Best_Email']:
+            website = get_field(r, 'Website', 'Liên Hệ', 'URL', 'website', 'Web')
+            r['Best_Email'] = guess_email_from_website(website)
         
     # Step 2: Deduplicate by normalized name
     grouped_rows = {}
@@ -341,13 +444,21 @@ def main():
     # Write XLSX
     target_xlsx = FORMATTED_XLSX
     print(f"[*] Writing to XLSX: {target_xlsx}...")
+    
+    # Helper to clean strings from XML illegal characters that cause openpyxl to fail
+    illegal_xml_re = re.compile(r"[\000-\008]|[\013-\014]|[\016-\037]")
+    def clean_cell_value(val):
+        if isinstance(val, str):
+            return illegal_xml_re.sub("", val)
+        return val
+
     try:
         out_wb = openpyxl.Workbook()
         out_sheet = out_wb.active
         out_sheet.title = "Raw"
         out_sheet.append(fieldnames)
         for o_row in output_rows:
-            row_data = [o_row[k] for k in fieldnames]
+            row_data = [clean_cell_value(o_row[k]) for k in fieldnames]
             out_sheet.append(row_data)
         out_wb.save(target_xlsx)
     except PermissionError:
@@ -358,16 +469,12 @@ def main():
         out_sheet.title = "Raw"
         out_sheet.append(fieldnames)
         for o_row in output_rows:
-            row_data = [o_row[k] for k in fieldnames]
+            row_data = [clean_cell_value(o_row[k]) for k in fieldnames]
             out_sheet.append(row_data)
         out_wb.save(target_xlsx)
         
-    print(f"[*] Updating original {INPUT_CSV}...")
-    try:
-        shutil.copy2(target_write_file, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print(f"\n[WARNING] Permission denied updating {INPUT_CSV}. File is open in Excel.")
+    # Do not overwrite the raw INPUT_CSV to preserve raw headers for email scraper resumes
+    pass
 
 if __name__ == "__main__":
     main()

@@ -2,8 +2,9 @@ import csv
 import os
 import shutil
 
-INPUT_CSV = r"d:\glc\nail uc\hotel_ireland.csv"
-BACKUP_CSV = r"d:\glc\nail uc\hotel_ireland_backup.csv"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+INPUT_CSV = os.path.join(BASE_DIR, "hotel_ireland.csv")
+BACKUP_CSV = os.path.join(BASE_DIR, "hotel_ireland_backup.csv")
 
 # Allowed Ireland Hotel & Hospitality Category Tags (Strict Filtering)
 ALLOWED_CATEGORIES = {

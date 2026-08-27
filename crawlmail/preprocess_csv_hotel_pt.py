@@ -2,8 +2,8 @@ import csv
 import os
 import shutil
 
-INPUT_CSV = r"d:\glc\nail uc\hotel_portugal.csv"
-BACKUP_CSV = r"d:\glc\nail uc\hotel_portugal_backup.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "hotel_portugal.csv")
+BACKUP_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "hotel_portugal_backup.csv")
 
 ALLOWED_CATEGORIES = {
     "hospedaria",

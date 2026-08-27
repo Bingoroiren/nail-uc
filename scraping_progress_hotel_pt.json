@@ -1,0 +1,6259 @@
+{
+  "completed": [
+    [
+      "Porto",
+      "Porto",
+      "Hospedaria"
+    ],
+    [
+      "Porto",
+      "Porto",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Porto",
+      "Porto",
+      "Hotel"
+    ],
+    [
+      "Porto",
+      "Porto",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Porto",
+      "Porto",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Porto",
+      "Porto",
+      "Hotel Resort"
+    ],
+    [
+      "Porto",
+      "Porto",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Porto",
+      "Porto",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Porto",
+      "Porto",
+      "Albergue"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Lisbon",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Hospedaria"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Hotel"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Hotel Resort"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Aves",
+      "Braga",
+      "Albergue"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Sintra",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Cascais",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Loures",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Hospedaria"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Hotel"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Hotel Resort"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Braga",
+      "Braga",
+      "Albergue"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Oeiras",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Hospedaria"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Hotel"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Hotel Resort"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Coimbra",
+      "Coimbra",
+      "Albergue"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vila Franca de Xira",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Hospedaria"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Hotel"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Hotel Resort"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Famalicão",
+      "Braga",
+      "Albergue"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Hospedaria"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Hotel"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Hotel Resort"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Leiria",
+      "Leiria",
+      "Albergue"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Setúbal",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Hospedaria"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Hotel"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Hotel Resort"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Barcelos",
+      "Braga",
+      "Albergue"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Hospedaria"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Hotel"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Hotel Resort"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Funchal",
+      "Madeira",
+      "Albergue"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Hospedaria"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Hotel"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Hotel Resort"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Viseu",
+      "Viseu",
+      "Albergue"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Hospedaria"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Hotel"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Hotel Resort"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Viana do Castelo",
+      "Viana do Castelo",
+      "Albergue"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Hospedaria"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Hotel"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Hotel Resort"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Paredes",
+      "Porto",
+      "Albergue"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Hospedaria"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Hotel"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Hotel Resort"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vila do Conde",
+      "Porto",
+      "Albergue"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Torres Vedras",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Aveiro",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Mafra",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Loulé",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Hospedaria"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Hotel"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Hotel Resort"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Ponta Delgada",
+      "Azores",
+      "Albergue"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Moita",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Faro",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Santarém",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Hospedaria"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Hotel"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Hotel Resort"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Figueira da Foz",
+      "Coimbra",
+      "Albergue"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Portimão",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Hospedaria"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Hotel"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Hotel Resort"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Felgueiras",
+      "Porto",
+      "Albergue"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Hospedaria"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Hotel"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Hotel Resort"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Paços de Ferreira",
+      "Porto",
+      "Albergue"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Hospedaria"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Hotel"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Hotel Resort"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Castelo Branco",
+      "Castelo Branco",
+      "Albergue"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Hospedaria"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Hotel"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Hotel Resort"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Pombal",
+      "Leiria",
+      "Albergue"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Hospedaria"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Hotel"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Hotel Resort"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Alcobaça",
+      "Leiria",
+      "Albergue"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Évora",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Hospedaria"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Hotel"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Hotel Resort"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Marco de Canavezes",
+      "Porto",
+      "Albergue"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Sesimbra",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Hospedaria"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Hotel"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Hotel Resort"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Amarante",
+      "Porto",
+      "Albergue"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Hospedaria"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Hotel"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Hotel Resort"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vila Real",
+      "Vila Real",
+      "Albergue"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Hospedaria"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Hotel"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Hotel Resort"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Covilhã",
+      "Castelo Branco",
+      "Albergue"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Hospedaria"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Hotel"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Hotel Resort"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Caldas da Rainha",
+      "Leiria",
+      "Albergue"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Hospedaria"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Hotel"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Hotel Resort"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vila Verde",
+      "Braga",
+      "Albergue"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Ourém",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Albufeira",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Guarda",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Hospedaria"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Hotel"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Hotel Resort"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Chaves",
+      "Vila Real",
+      "Albergue"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Tomar",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Abrantes",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Hospedaria"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Hotel"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Hotel Resort"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Marinha Grande",
+      "Leiria",
+      "Albergue"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Silves",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Torres Novas",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Hospedaria"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Hotel"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Hotel Resort"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Beja",
+      "Beja",
+      "Albergue"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Hospedaria"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Hotel"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Hotel Resort"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Angra do Heroísmo",
+      "Azores",
+      "Albergue"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Hospedaria"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Hotel"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Hotel Resort"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Bragança",
+      "Bragança",
+      "Albergue"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Hospedaria"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Hotel"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Hotel Resort"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Esposende",
+      "Braga",
+      "Albergue"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Hospedaria"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Hotel"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Hotel Resort"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Ribeira Grande",
+      "Azores",
+      "Albergue"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Espinho",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Lagos",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Charneca",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Santiago do Cacém",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Hospedaria"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Hotel"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Hotel Resort"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Fundão",
+      "Castelo Branco",
+      "Albergue"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Benavente",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Hospedaria"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Hotel"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Hotel Resort"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Tondela",
+      "Viseu",
+      "Albergue"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Quinta do Anjo",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Anadia",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Estarreja",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Hospedaria"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Hotel"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Hotel Resort"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Lamego",
+      "Viseu",
+      "Albergue"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Hospedaria"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Hotel"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Hotel Resort"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Peniche",
+      "Leiria",
+      "Albergue"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Tavira",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Hospedaria"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Hotel"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Hotel Resort"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Odemira",
+      "Beja",
+      "Albergue"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Portalegre",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Cartaxo",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Hospedaria"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Hotel"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Hotel Resort"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Mirandela",
+      "Bragança",
+      "Albergue"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Oliveira do Bairro",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vale de Cambra",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Arouca",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Hospedaria"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Hotel"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Hotel Resort"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Póvoa de Lanhoso",
+      "Braga",
+      "Albergue"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Azambuja",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "São João da Madeira",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Rio Maior",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Hospedaria"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Hotel"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Hotel Resort"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Oliveira do Hospital",
+      "Coimbra",
+      "Albergue"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Elvas",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vila Real de Santo António",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Hospedaria"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Hotel"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Hotel Resort"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Ovar",
+      "Aveiro",
+      "Albergue"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Hospedaria"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Hotel"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Hotel Resort"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Lousã",
+      "Coimbra",
+      "Albergue"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Alcochete",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Montemor-o-Novo",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Hospedaria"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Hotel"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Hotel Resort"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Condeixa-a-Nova",
+      "Coimbra",
+      "Albergue"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Hospedaria"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Hotel"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Hotel Resort"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Cabeceiras de Basto",
+      "Braga",
+      "Albergue"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Hospedaria"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Hotel"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Hotel Resort"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Macedo de Cavaleiros",
+      "Bragança",
+      "Albergue"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Hospedaria"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Hotel"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Hotel Resort"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Serpa",
+      "Beja",
+      "Albergue"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Hospedaria"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Hotel"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Hotel Resort"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Moura",
+      "Beja",
+      "Albergue"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Grândola",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Cadaval",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Estremoz",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Sines",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Gouveia",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Hospedaria"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Hotel"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Hotel Resort"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Nelas",
+      "Viseu",
+      "Albergue"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Hospedaria"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Hotel"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Hotel Resort"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Alcácer do Sal",
+      "Setúbal",
+      "Albergue"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Sabugal",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Hospedaria"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Hotel"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Hotel Resort"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Ponte da Barca",
+      "Viana do Castelo",
+      "Albergue"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vendas Novas",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Hospedaria"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Hotel"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Hotel Resort"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Santa Comba Dão",
+      "Viseu",
+      "Albergue"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Reguengos de Monsaraz",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "São Brás de Alportel",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Hospedaria"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Hotel"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Hotel Resort"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Sobral de Monte Agraço",
+      "Lisboa",
+      "Albergue"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Trancoso",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Pinhel",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Hospedaria"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Hotel"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Hotel Resort"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Aljustrel",
+      "Beja",
+      "Albergue"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Ponte de Sôr",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Coruche",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Hospedaria"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Hotel"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Hotel Resort"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Mangualde",
+      "Viseu",
+      "Albergue"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Campo Maior",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vila Viçosa",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Hospedaria"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Hotel"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Hotel Resort"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Cantanhede",
+      "Coimbra",
+      "Albergue"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Hospedaria"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Hotel"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Hotel Resort"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Miranda do Douro",
+      "Bragança",
+      "Albergue"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Nisa",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Hospedaria"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Hotel"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Hotel Resort"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Almodôvar",
+      "Beja",
+      "Albergue"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Arraiolos",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vila Nova de Foz Côa",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Hospedaria"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Hotel"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Hotel Resort"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Castro Verde",
+      "Beja",
+      "Albergue"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Redondo",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Portel",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Seia",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Hospedaria"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Hotel"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Hotel Resort"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Monchique",
+      "Faro",
+      "Albergue"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Viana do Alentejo",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Hospedaria"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Hotel"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Hotel Resort"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Golegã",
+      "Santarém",
+      "Albergue"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Mêda",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Hospedaria"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Hotel"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Hotel Resort"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Vidigueira",
+      "Beja",
+      "Albergue"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Hospedaria"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Hotel"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Hotel Resort"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Mora",
+      "Évora",
+      "Albergue"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Hospedaria"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Hotel"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Hotel Resort"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Valpaços",
+      "Vila Real",
+      "Albergue"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Crato",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Hospedaria"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Hotel"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Hotel Resort"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Mogadouro",
+      "Bragança",
+      "Albergue"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Hospedaria"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Hotel"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Hotel Resort"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Manteigas",
+      "Guarda",
+      "Albergue"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Fronteira",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Castelo de Vide",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Monforte",
+      "Portalegre",
+      "Albergue"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Hospedaria"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Hotel"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Hotel Resort"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Belmonte",
+      "Castelo Branco",
+      "Albergue"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Hospedaria"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Hotel de 3 estrelas"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Hotel"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Hotel de 5 estrelas"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Hotel de 4 estrelas"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Hotel Resort"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Hospedagem domiciliar"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Hotel de 2 estrelas"
+    ],
+    [
+      "Arronches",
+      "Portalegre",
+      "Albergue"
+    ]
+  ]
+}

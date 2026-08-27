@@ -1,6 +1,7 @@
 @echo off
 title New Zealand Farm Google Maps & Email Scraper Launcher
 cd /d "%~dp0"
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 
 echo ======================================================
 echo         AUTOMATIC PYTHON SETUP AND SCRAPER RUN (FARM NZ)

@@ -2,8 +2,8 @@ import csv
 import os
 import shutil
 
-INPUT_CSV = r"d:\glc\nail uc\fisheries_latvia.csv"
-BACKUP_CSV = r"d:\glc\nail uc\fisheries_latvia_backup.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "fisheries_latvia.csv")
+BACKUP_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "fisheries_latvia_backup.csv")
 
 ALLOWED_CATEGORIES = {
     "zivju apstrādes uzņēmums",

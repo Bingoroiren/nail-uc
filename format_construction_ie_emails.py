@@ -61,6 +61,75 @@ DISCARD_KEYWORDS = {
 }
 
 # Category translations from English to Vietnamese for Construction
+import urllib.parse
+
+SOCIAL_DOMAINS = {
+    # Social networks & Media
+    'facebook.com', 'fb.com', 'fb.me',
+    'instagram.com', 'instagr.am',
+    'twitter.com', 'x.com',
+    'linkedin.com',
+    'youtube.com', 'youtu.be',
+    'tiktok.com',
+    'pinterest.com', 'pin.it',
+    'reddit.com',
+    'threads.net',
+    'tumblr.com',
+    'flickr.com',
+    'snapchat.com',
+    # Messaging
+    't.me', 'telegram.org', 'telegram.me',
+    'wa.me', 'whatsapp.com',
+    'line.me',
+    'viber.com',
+    'zalo.me',
+    'wechat.com',
+    # Search & Maps
+    'google.com', 'goo.gl', 'google.co.uk', 'google.ie', 'google.com.au',
+    'google.com.tw', 'google.gr', 'google.pt', 'google.sk', 'google.lv',
+    'google.co.nz', 'google.com.hk', 'google.de', 'google.fr',
+    'maps.app.goo.gl', 'waze.com', 'bing.com', 'yahoo.com', 'duckduckgo.com',
+    # Directories & Reviews & Platforms
+    'yelp.com', 'yelp.com.au', 'yelp.ie', 'yelp.co.uk',
+    'tripadvisor.com', 'tripadvisor.ie', 'tripadvisor.co.uk', 'tripadvisor.com.tw', 'tripadvisor.com.gr',
+    'yellowpages.com', 'yellowpages.com.au', 'whitepages.com', 'whitepages.com.au',
+    'foursquare.com', 'trustpilot.com', 'wikipedia.org', 'wikidata.org',
+    # Website builders default / generic hosting
+    'apple.com', 'apps.apple.com', 'play.google.com',
+    'wix.com', 'wixsite.com', 'wixpress.com', 'squarespace.com', 
+    'wordpress.com', 'weebly.com', 'site123.me', 'jimdosite.com', 
+    'godaddysites.com', 'myshopify.com', 'canva.site', 'linktr.ee', 'carrd.co'
+}
+
+def guess_email_from_website(website_url):
+    if not website_url or not isinstance(website_url, str):
+        return ""
+    url = website_url.strip()
+    if not url:
+        return ""
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url
+    try:
+        parsed = urllib.parse.urlparse(url)
+        netloc = parsed.netloc.strip().lower()
+        if not netloc:
+            return ""
+        if ':' in netloc:
+            netloc = netloc.split(':')[0]
+        netloc = re.sub(r'^www\d*\.', '', netloc)
+        if not netloc or '.' not in netloc:
+            return ""
+        for social in SOCIAL_DOMAINS:
+            if netloc == social or netloc.endswith('.' + social):
+                return ""
+        if re.match(r'^[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$', netloc):
+            if netloc.endswith('.') or re.match(r'^\d+\.\d+\.\d+\.\d+$', netloc):
+                return ""
+            return f"info@{netloc}"
+        return ""
+    except Exception:
+        return ""
+
 CATEGORY_TRANSLATIONS = {
     "carport and pergola builder": "Thầu thi công nhà xe & Giàn hoa outdoor",
     "construction company": "Công ty xây dựng",
@@ -92,10 +161,40 @@ def clean_and_score_email(email_str):
     if not email_str:
         return ""
     
+    discard_domains = {
+        'example.com', 'example.org', 'example.net', 'yourdomain.com', 
+        'vasemail.cz', 'webonic.hu', 'tvojweb.sk', 'mojweb.sk', 'domain.com', 'mydomain.com',
+        'email.com', 'mail.com', 'test.com', 'website.com', 'sentry.io', 'wixpress.com'
+    }
+    discard_substrings = {
+        'noreply', 'no-reply', 'example', 'yourdomain', 'sentry', 'placeholder', 
+        'invalid', 'null', 'undefined', 'tempmail'
+    }
+    discard_locals = {
+        'email', 'your.email', 'yourname', 'test', 'your', 'user', 'name', 'myname'
+    }
+
     emails = []
-    for part in re.split(r'[,\s]+', email_str):
+    for part in re.split(r'[,\s;]+', str(email_str)):
         clean_part = part.strip().lower()
         if '@' in clean_part:
+            try:
+                local_part, domain = clean_part.split('@', 1)
+            except ValueError:
+                continue
+            
+            if domain in discard_domains:
+                continue
+            if any(sub in clean_part for sub in discard_substrings):
+                continue
+            if local_part in discard_locals:
+                continue
+            try:
+                if any(discard in clean_part for discard in DISCARD_KEYWORDS):
+                    continue
+            except NameError:
+                pass
+                
             emails.append(clean_part)
             
     if not emails:
@@ -120,8 +219,11 @@ def clean_and_score_email(email_str):
         if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
-        if any(discard in email for discard in DISCARD_KEYWORDS):
-            score -= 50
+        try:
+            if any(k in email for k in PENALTY_KEYWORDS):
+                score -= 50
+        except NameError:
+            pass
             
         score -= len(email) * 0.01
         
@@ -130,7 +232,6 @@ def clean_and_score_email(email_str):
             best_email = email
             
     return best_email
-
 def normalize_name(name):
     if not name:
         return ""
@@ -146,6 +247,45 @@ def normalize_phone(phone_str):
     if phone_clean.startswith('353'):
         phone_clean = phone_clean[3:]
     return phone_clean
+
+def is_republic_of_ireland_address(address):
+    if not address:
+        return False
+    addr_lower = str(address).lower()
+    
+    # Standalone or explicit country block list (using word boundary check to avoid substring matches)
+    block_patterns = [
+        r'\bunited kingdom\b', r'\buk\b', r'\bu\.k\.\b', r'\bnorthern ireland\b', r'\bgreat britain\b', r'\bgb\b', r'\bg\.b\.\b',
+        r'\bengland\b', r'\bscotland\b', r'\bwales\b', r'\bnetherlands\b', r'\bnederland\b', r'\bholland\b',
+        r'\bden haag\b', r'\bgermany\b', r'\bfrance\b', r'\bbelgium\b', r'\bvietnam\b', r'\bviet nam\b', r'\bvn\b'
+    ]
+    
+    # Check for UK postcodes (like BT postcode for Northern Ireland)
+    import re
+    if re.search(r'\bbt\d{1,2}\b', addr_lower):
+        return False
+        
+    for pattern in block_patterns:
+        if re.search(pattern, addr_lower):
+            return False
+                
+    # Must look like an Irish address
+    counties = [
+        'carlow', 'cavan', 'clare', 'cork', 'donegal', 'dublin', 'galway', 
+        'kerry', 'kildare', 'kilkenny', 'laois', 'leitrim', 'limerick', 
+        'longford', 'louth', 'mayo', 'meath', 'monaghan', 'offaly', 
+        'roscommon', 'sligo', 'tipperary', 'waterford', 'westmeath', 
+        'wexford', 'wicklow', 'ireland', 'éire', 'eire', 'leinster',
+        'munster', 'connacht', 'ulster'
+    ]
+    
+    if any(county in addr_lower for county in counties):
+        return True
+        
+    if "co. " in addr_lower or "county " in addr_lower or "eircode" in addr_lower:
+        return True
+        
+    return False
 
 def main():
     if not INPUT_CSV or not os.path.exists(INPUT_CSV):
@@ -163,18 +303,27 @@ def main():
             
     print(f"[+] Loaded {len(rows)} rows from {INPUT_CSV}.")
     
-    # Filter out permanently closed businesses safely
+    # Filter out permanently closed businesses and businesses outside Republic of Ireland safely
     active_rows = []
     closed_count = 0
+    outside_ireland_count = 0
     for r in rows:
         perm_closed = r.get('Permanently_Closed') or ''
         if str(perm_closed).strip().lower() == 'yes':
             closed_count += 1
             continue
+            
+        address = r.get('Address') or r.get('Địa chỉ') or ''
+        if address and not is_republic_of_ireland_address(address):
+            outside_ireland_count += 1
+            continue
+            
         active_rows.append(r)
     rows = active_rows
     if closed_count > 0:
         print(f"[*] Filtered out {closed_count} permanently closed businesses.")
+    if outside_ireland_count > 0:
+        print(f"[*] Filtered out {outside_ireland_count} businesses outside Republic of Ireland.")
 
     def get_field(r, *keys):
         for k in keys:
@@ -187,6 +336,9 @@ def main():
     for r in rows:
         original_email = get_field(r, 'Email', 'Category', 'Liên Hệ mail')
         r['Best_Email'] = clean_and_score_email(original_email)
+        if not r['Best_Email']:
+            website = get_field(r, 'Website', 'Liên Hệ', 'URL', 'website', 'Web')
+            r['Best_Email'] = guess_email_from_website(website)
         
     # Step 2: Deduplicate by normalized name
     grouped_rows = {}
@@ -335,12 +487,13 @@ def main():
         ws.append([row_dict[col] for col in fieldnames])
     wb.save(FORMATTED_XLSX)
         
-    print(f"[*] Updating original {INPUT_CSV}...")
-    try:
-        shutil.copy2(target_write_file, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print(f"\n[WARNING] Permission denied updating {INPUT_CSV}. File is open in Excel.")
+    # Do NOT overwrite the original input file with formatted output
+    # to preserve raw email data for future retry-empty runs
+    print(f"\n--- Summary ---")
+    print(f"Total output rows: {len(output_rows)}")
+    print(f"With email:        {len(with_email)}")
+    print(f"Without email:     {len(without_email)}")
+    print(f"Formatted file:    {target_write_file}")
 
 if __name__ == "__main__":
     main()

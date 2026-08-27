@@ -4,7 +4,7 @@ import shutil
 import re
 import sys
 
-INPUT_CSV = r"d:\glc\nail uc\auto_australia_with_emails.csv"
+INPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "auto_australia_with_emails.csv")
 if len(sys.argv) > 1:
     INPUT_CSV = sys.argv[1]
 
@@ -28,6 +28,75 @@ BAD_KEYWORDS = {
 }
 
 # Category translations from English to Vietnamese
+import urllib.parse
+
+SOCIAL_DOMAINS = {
+    # Social networks & Media
+    'facebook.com', 'fb.com', 'fb.me',
+    'instagram.com', 'instagr.am',
+    'twitter.com', 'x.com',
+    'linkedin.com',
+    'youtube.com', 'youtu.be',
+    'tiktok.com',
+    'pinterest.com', 'pin.it',
+    'reddit.com',
+    'threads.net',
+    'tumblr.com',
+    'flickr.com',
+    'snapchat.com',
+    # Messaging
+    't.me', 'telegram.org', 'telegram.me',
+    'wa.me', 'whatsapp.com',
+    'line.me',
+    'viber.com',
+    'zalo.me',
+    'wechat.com',
+    # Search & Maps
+    'google.com', 'goo.gl', 'google.co.uk', 'google.ie', 'google.com.au',
+    'google.com.tw', 'google.gr', 'google.pt', 'google.sk', 'google.lv',
+    'google.co.nz', 'google.com.hk', 'google.de', 'google.fr',
+    'maps.app.goo.gl', 'waze.com', 'bing.com', 'yahoo.com', 'duckduckgo.com',
+    # Directories & Reviews & Platforms
+    'yelp.com', 'yelp.com.au', 'yelp.ie', 'yelp.co.uk',
+    'tripadvisor.com', 'tripadvisor.ie', 'tripadvisor.co.uk', 'tripadvisor.com.tw', 'tripadvisor.com.gr',
+    'yellowpages.com', 'yellowpages.com.au', 'whitepages.com', 'whitepages.com.au',
+    'foursquare.com', 'trustpilot.com', 'wikipedia.org', 'wikidata.org',
+    # Website builders default / generic hosting
+    'apple.com', 'apps.apple.com', 'play.google.com',
+    'wix.com', 'wixsite.com', 'wixpress.com', 'squarespace.com', 
+    'wordpress.com', 'weebly.com', 'site123.me', 'jimdosite.com', 
+    'godaddysites.com', 'myshopify.com', 'canva.site', 'linktr.ee', 'carrd.co'
+}
+
+def guess_email_from_website(website_url):
+    if not website_url or not isinstance(website_url, str):
+        return ""
+    url = website_url.strip()
+    if not url:
+        return ""
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url
+    try:
+        parsed = urllib.parse.urlparse(url)
+        netloc = parsed.netloc.strip().lower()
+        if not netloc:
+            return ""
+        if ':' in netloc:
+            netloc = netloc.split(':')[0]
+        netloc = re.sub(r'^www\d*\.', '', netloc)
+        if not netloc or '.' not in netloc:
+            return ""
+        for social in SOCIAL_DOMAINS:
+            if netloc == social or netloc.endswith('.' + social):
+                return ""
+        if re.match(r'^[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$', netloc):
+            if netloc.endswith('.') or re.match(r'^\d+\.\d+\.\d+\.\d+$', netloc):
+                return ""
+            return f"info@{netloc}"
+        return ""
+    except Exception:
+        return ""
+
 CATEGORY_TRANSLATIONS = {
     "auto repair shop": "Gara sửa chữa ô tô",
     "car repair and maintenance service": "Dịch vụ sửa chữa và bảo dưỡng ô tô",
@@ -40,10 +109,40 @@ def clean_and_score_email(email_str):
     if not email_str:
         return ""
     
+    discard_domains = {
+        'example.com', 'example.org', 'example.net', 'yourdomain.com', 
+        'vasemail.cz', 'webonic.hu', 'tvojweb.sk', 'mojweb.sk', 'domain.com', 'mydomain.com',
+        'email.com', 'mail.com', 'test.com', 'website.com', 'sentry.io', 'wixpress.com'
+    }
+    discard_substrings = {
+        'noreply', 'no-reply', 'example', 'yourdomain', 'sentry', 'placeholder', 
+        'invalid', 'null', 'undefined', 'tempmail'
+    }
+    discard_locals = {
+        'email', 'your.email', 'yourname', 'test', 'your', 'user', 'name', 'myname'
+    }
+
     emails = []
-    for part in re.split(r'[,\s]+', email_str):
+    for part in re.split(r'[,\s;]+', str(email_str)):
         clean_part = part.strip().lower()
         if '@' in clean_part:
+            try:
+                local_part, domain = clean_part.split('@', 1)
+            except ValueError:
+                continue
+            
+            if domain in discard_domains:
+                continue
+            if any(sub in clean_part for sub in discard_substrings):
+                continue
+            if local_part in discard_locals:
+                continue
+            try:
+                if any(discard in clean_part for discard in DISCARD_KEYWORDS):
+                    continue
+            except NameError:
+                pass
+                
             emails.append(clean_part)
             
     if not emails:
@@ -67,6 +166,12 @@ def clean_and_score_email(email_str):
             
         if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
+            
+        try:
+            if any(k in email for k in PENALTY_KEYWORDS):
+                score -= 50
+        except NameError:
+            pass
             
         score -= len(email) * 0.01
         
@@ -177,6 +282,9 @@ def main():
     for r in rows:
         original_email = get_field(r, 'Email', 'Category', 'Liên Hệ mail')
         r['Best_Email'] = clean_and_score_email(original_email)
+        if not r['Best_Email']:
+            website = get_field(r, 'Website', 'Liên Hệ', 'URL', 'website', 'Web')
+            r['Best_Email'] = guess_email_from_website(website)
         
     # Step 2: Deduplicate by normalized name
     grouped_rows = {}
