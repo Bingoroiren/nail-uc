@@ -23469,6 +23469,361 @@
       "Moneygall",
       "Offaly",
       "Holiday home"
+    ],
+    [
+      "Moneygall",
+      "Offaly",
+      "Vacation Rental"
+    ],
+    [
+      "Moneygall",
+      "Offaly",
+      "Hotel"
+    ],
+    [
+      "Moneygall",
+      "Offaly",
+      "Resort"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "5-star hotel"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "4-star hotel"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "3-star hotel"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "2-star hotel"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "Hostel"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "Homestay"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "Guest house"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "Holiday home"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "Vacation Rental"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "Hotel"
+    ],
+    [
+      "Campile",
+      "Wexford",
+      "Resort"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "5-star hotel"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "4-star hotel"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "3-star hotel"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "2-star hotel"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "Hostel"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "Homestay"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "Guest house"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "Holiday home"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "Vacation Rental"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "Hotel"
+    ],
+    [
+      "Castlegregory",
+      "Kerry",
+      "Resort"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "5-star hotel"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "4-star hotel"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "3-star hotel"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "2-star hotel"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "Hostel"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "Homestay"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "Guest house"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "Holiday home"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "Vacation Rental"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "Hotel"
+    ],
+    [
+      "Collinstown",
+      "Westmeath",
+      "Resort"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "5-star hotel"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "4-star hotel"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "3-star hotel"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "2-star hotel"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "Hostel"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "Homestay"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "Guest house"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "Holiday home"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "Vacation Rental"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "Hotel"
+    ],
+    [
+      "Ballylanders",
+      "Limerick",
+      "Resort"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "5-star hotel"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "4-star hotel"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "3-star hotel"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "2-star hotel"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "Hostel"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "Homestay"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "Guest house"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "Holiday home"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "Vacation Rental"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "Hotel"
+    ],
+    [
+      "Rathmolyon",
+      "Meath",
+      "Resort"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "5-star hotel"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "4-star hotel"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "3-star hotel"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "2-star hotel"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "Hostel"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "Homestay"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "Guest house"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "Holiday home"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "Vacation Rental"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "Hotel"
+    ],
+    [
+      "Kildangan",
+      "Kildare",
+      "Resort"
+    ],
+    [
+      "Ballinaclash",
+      "Wicklow",
+      "5-star hotel"
+    ],
+    [
+      "Ballinaclash",
+      "Wicklow",
+      "4-star hotel"
     ]
   ]
 }
