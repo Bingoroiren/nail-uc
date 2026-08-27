@@ -304,7 +304,9 @@ async def extract_details(page, url, search_query, loc_info):
     if await phone_loc.count() > 0:
         phone_attr = await phone_loc.first.get_attribute("data-item-id")
         if phone_attr:
-            phone = phone_attr.replace("phone:tel:", "").strip()
+            phone_val = phone_attr.replace("phone:tel:", "").strip()
+            if phone_val:
+                phone = f"'{phone_val}"
             
     # Extract Address
     address = ""

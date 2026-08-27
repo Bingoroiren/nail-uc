@@ -1,0 +1,2224 @@
+{
+    "completed": [
+        [
+            "Bratislava",
+            "Bratislava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Bratislava",
+            "Bratislava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Bratislava",
+            "Bratislava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Bratislava",
+            "Bratislava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Košice",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Košice",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Košice",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Košice",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Prešov",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Prešov",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Prešov",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Prešov",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Žilina",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Žilina",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Žilina",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Žilina",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Nitra",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Nitra",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Nitra",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Nitra",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Banská Bystrica",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Banská Bystrica",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Banská Bystrica",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Banská Bystrica",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Trnava",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Trnava",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Trnava",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Trnava",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Trenčín",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Trenčín",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Trenčín",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Trenčín",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Martin",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Martin",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Martin",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Martin",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Poprad",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Poprad",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Poprad",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Poprad",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Prievidza",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Prievidza",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Prievidza",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Prievidza",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Zvolen",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Zvolen",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Zvolen",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Zvolen",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Považská Bystrica",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Považská Bystrica",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Považská Bystrica",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Považská Bystrica",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Nové Zámky",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Nové Zámky",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Nové Zámky",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Nové Zámky",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Michalovce",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Michalovce",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Michalovce",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Michalovce",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Spišská Nová Ves",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Spišská Nová Ves",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Spišská Nová Ves",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Spišská Nová Ves",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Komárno",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Komárno",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Komárno",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Komárno",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Levice",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Levice",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Levice",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Levice",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Liptovský Mikuláš",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Liptovský Mikuláš",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Liptovský Mikuláš",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Liptovský Mikuláš",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Bardejov",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Bardejov",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Bardejov",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Bardejov",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Humenné",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Humenné",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Humenné",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Humenné",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Ružomberok",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Ružomberok",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Ružomberok",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Ružomberok",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Piešťany",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Piešťany",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Piešťany",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Piešťany",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Lučenec",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Lučenec",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Lučenec",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Lučenec",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Pezinok",
+            "Bratislava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Pezinok",
+            "Bratislava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Pezinok",
+            "Bratislava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Pezinok",
+            "Bratislava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Topoľčany",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Topoľčany",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Topoľčany",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Topoľčany",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Dunajská Streda",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Dunajská Streda",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Dunajská Streda",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Dunajská Streda",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Trebišov",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Trebišov",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Trebišov",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Trebišov",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Čadca",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Čadca",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Čadca",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Čadca",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Dubnica nad Váhom",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Dubnica nad Váhom",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Dubnica nad Váhom",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Dubnica nad Váhom",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Rimavská Sobota",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Rimavská Sobota",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Rimavská Sobota",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Rimavská Sobota",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Senec",
+            "Bratislava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Senec",
+            "Bratislava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Senec",
+            "Bratislava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Senec",
+            "Bratislava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Partizánske",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Partizánske",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Partizánske",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Partizánske",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Vranov nad Topľou",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Vranov nad Topľou",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Vranov nad Topľou",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Vranov nad Topľou",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Brezno",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Brezno",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Brezno",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Brezno",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Šaľa",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Šaľa",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Šaľa",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Šaľa",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Hlohovec",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Hlohovec",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Hlohovec",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Hlohovec",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Nové Mesto nad Váhom",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Nové Mesto nad Váhom",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Nové Mesto nad Váhom",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Nové Mesto nad Váhom",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Senica",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Senica",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Senica",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Senica",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Malacky",
+            "Bratislava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Malacky",
+            "Bratislava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Malacky",
+            "Bratislava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Malacky",
+            "Bratislava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Snina",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Snina",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Snina",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Snina",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Dolný Kubín",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Dolný Kubín",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Dolný Kubín",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Dolný Kubín",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Rožňava",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Rožňava",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Rožňava",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Rožňava",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Žiar nad Hronom",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Žiar nad Hronom",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Žiar nad Hronom",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Žiar nad Hronom",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Bánovce nad Bebravou",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Bánovce nad Bebravou",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Bánovce nad Bebravou",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Bánovce nad Bebravou",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Stará Ľubovňa",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Stará Ľubovňa",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Stará Ľubovňa",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Stará Ľubovňa",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Galanta",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Galanta",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Galanta",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Galanta",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Skalica",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Skalica",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Skalica",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Skalica",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Handlová",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Handlová",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Handlová",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Handlová",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Kežmarok",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Kežmarok",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Kežmarok",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Kežmarok",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Sered’",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Sered’",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Sered’",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Sered’",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Šamorín",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Šamorín",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Šamorín",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Šamorín",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Detva",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Detva",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Detva",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Detva",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Stupava",
+            "Bratislava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Stupava",
+            "Bratislava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Stupava",
+            "Bratislava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Stupava",
+            "Bratislava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Sabinov",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Sabinov",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Sabinov",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Sabinov",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Zlaté Moravce",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Zlaté Moravce",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Zlaté Moravce",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Zlaté Moravce",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Bytča",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Bytča",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Bytča",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Bytča",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Revúca",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Revúca",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Revúca",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Revúca",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Veľký Krtíš",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Veľký Krtíš",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Veľký Krtíš",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Veľký Krtíš",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Myjava",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Myjava",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Myjava",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Myjava",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Moldava nad Bodvou",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Moldava nad Bodvou",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Moldava nad Bodvou",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Moldava nad Bodvou",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Stropkov",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Stropkov",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Stropkov",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Stropkov",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Fiľakovo",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Fiľakovo",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Fiľakovo",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Fiľakovo",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Svidník",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Svidník",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Svidník",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Svidník",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Štúrovo",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Štúrovo",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Štúrovo",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Štúrovo",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Banská Štiavnica",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Banská Štiavnica",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Banská Štiavnica",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Banská Štiavnica",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Šurany",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Šurany",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Šurany",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Šurany",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Tvrdošín",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Tvrdošín",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Tvrdošín",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Tvrdošín",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Veľké Kapušany",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Veľké Kapušany",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Veľké Kapušany",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Veľké Kapušany",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Vráble",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Vráble",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Vráble",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Vráble",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Krompachy",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Krompachy",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Krompachy",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Krompachy",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Veľký Meder",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Veľký Meder",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Veľký Meder",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Veľký Meder",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Ivanka pri Dunaji",
+            "Bratislava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Ivanka pri Dunaji",
+            "Bratislava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Ivanka pri Dunaji",
+            "Bratislava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Ivanka pri Dunaji",
+            "Bratislava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Kráľovský Chlmec",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Kráľovský Chlmec",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Kráľovský Chlmec",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Kráľovský Chlmec",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Hurbanovo",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Hurbanovo",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Hurbanovo",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Hurbanovo",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Turzovka",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Turzovka",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Turzovka",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Turzovka",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Šahy",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Šahy",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Šahy",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Šahy",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Nová Baňa",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Nová Baňa",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Nová Baňa",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Nová Baňa",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Želiezovce",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Želiezovce",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Želiezovce",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Želiezovce",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Tornaľa",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Tornaľa",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Tornaľa",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Tornaľa",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Lipany",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Lipany",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Lipany",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Lipany",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Čaňa",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Čaňa",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Čaňa",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Čaňa",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Turčianske Teplice",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Turčianske Teplice",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Turčianske Teplice",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Turčianske Teplice",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Sobrance",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Sobrance",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Sobrance",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Sobrance",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Zákamenné",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Zákamenné",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Zákamenné",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Zákamenné",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Lendak",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Lendak",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Lendak",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Lendak",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Šaca",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Šaca",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Šaca",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Šaca",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Medzilaborce",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Medzilaborce",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Medzilaborce",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Medzilaborce",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Rajec",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Rajec",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Rajec",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Rajec",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Rabča",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Rabča",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Rabča",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Rabča",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Skalité",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Skalité",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Skalité",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Skalité",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Rudňany",
+            "Košice",
+            "Pracovná agentúra"
+        ],
+        [
+            "Rudňany",
+            "Košice",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Rudňany",
+            "Košice",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Rudňany",
+            "Košice",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Poltár",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Poltár",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Poltár",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Poltár",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Kremnica",
+            "Banská Bystrica",
+            "Pracovná agentúra"
+        ],
+        [
+            "Kremnica",
+            "Banská Bystrica",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Kremnica",
+            "Banská Bystrica",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Kremnica",
+            "Banská Bystrica",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Veľké Zálužie",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Veľké Zálužie",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Veľké Zálužie",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Veľké Zálužie",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Jelka",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Jelka",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Jelka",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Jelka",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Kúty",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Kúty",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Kúty",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Kúty",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Giraltovce",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Giraltovce",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Giraltovce",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Giraltovce",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Lednické Rovne",
+            "Trenčin",
+            "Pracovná agentúra"
+        ],
+        [
+            "Lednické Rovne",
+            "Trenčin",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Lednické Rovne",
+            "Trenčin",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Lednické Rovne",
+            "Trenčin",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Varín",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Varín",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Varín",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Varín",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Lomnička",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Lomnička",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Lomnička",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Lomnička",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Trstice",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Trstice",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Trstice",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Trstice",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Spišské Podhradie",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Spišské Podhradie",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Spišské Podhradie",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Spišské Podhradie",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Rohožník",
+            "Bratislava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Rohožník",
+            "Bratislava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Rohožník",
+            "Bratislava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Rohožník",
+            "Bratislava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Chminianske Jakubovany",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Chminianske Jakubovany",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Chminianske Jakubovany",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Chminianske Jakubovany",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Smolenice",
+            "Trnava",
+            "Pracovná agentúra"
+        ],
+        [
+            "Smolenice",
+            "Trnava",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Smolenice",
+            "Trnava",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Smolenice",
+            "Trnava",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Nesluša",
+            "Žilina",
+            "Pracovná agentúra"
+        ],
+        [
+            "Nesluša",
+            "Žilina",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Nesluša",
+            "Žilina",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Nesluša",
+            "Žilina",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Mojmírovce",
+            "Nitra",
+            "Pracovná agentúra"
+        ],
+        [
+            "Mojmírovce",
+            "Nitra",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Mojmírovce",
+            "Nitra",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Mojmírovce",
+            "Nitra",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Vyšné Raslavice",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Vyšné Raslavice",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Vyšné Raslavice",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Vyšné Raslavice",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Bystré",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Bystré",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Bystré",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Bystré",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ],
+        [
+            "Sečovská Polianka",
+            "Prešov",
+            "Pracovná agentúra"
+        ],
+        [
+            "Sečovská Polianka",
+            "Prešov",
+            "Personálne poradenstvo"
+        ],
+        [
+            "Sečovská Polianka",
+            "Prešov",
+            "Agentúra pre sprostredkovanie práce"
+        ],
+        [
+            "Sečovská Polianka",
+            "Prešov",
+            "Sprostredkovanie práce"
+        ]
+    ]
+}

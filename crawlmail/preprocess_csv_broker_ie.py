@@ -2,8 +2,9 @@ import csv
 import os
 import shutil
 
-INPUT_CSV = r"d:\glc\nail uc\broker_ireland.csv"
-BACKUP_CSV = r"d:\glc\nail uc\broker_ireland_backup.csv"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+INPUT_CSV = os.path.join(BASE_DIR, "broker_ireland.csv")
+BACKUP_CSV = os.path.join(BASE_DIR, "broker_ireland_backup.csv")
 
 # Allowed Ireland Broker & Recruitment Category Tags (Strict Filtering)
 ALLOWED_CATEGORIES = {

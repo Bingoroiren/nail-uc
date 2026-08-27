@@ -1,0 +1,864 @@
+{
+  "completed": [
+    [
+      "Dublin",
+      "Dublin",
+      "Manufacturer"
+    ],
+    [
+      "Dublin",
+      "Dublin",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Dublin",
+      "Dublin",
+      "Semi conductor supplier"
+    ],
+    [
+      "Dublin",
+      "Dublin",
+      "Electronics manufacturer"
+    ],
+    [
+      "Finglas",
+      "Dublin",
+      "Manufacturer"
+    ],
+    [
+      "Finglas",
+      "Dublin",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Finglas",
+      "Dublin",
+      "Semi conductor supplier"
+    ],
+    [
+      "Finglas",
+      "Dublin",
+      "Electronics manufacturer"
+    ],
+    [
+      "Cork",
+      "Cork",
+      "Manufacturer"
+    ],
+    [
+      "Cork",
+      "Cork",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Cork",
+      "Cork",
+      "Semi conductor supplier"
+    ],
+    [
+      "Cork",
+      "Cork",
+      "Electronics manufacturer"
+    ],
+    [
+      "Galway",
+      "Galway",
+      "Manufacturer"
+    ],
+    [
+      "Galway",
+      "Galway",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Galway",
+      "Galway",
+      "Semi conductor supplier"
+    ],
+    [
+      "Galway",
+      "Galway",
+      "Electronics manufacturer"
+    ],
+    [
+      "Limerick",
+      "Limerick",
+      "Manufacturer"
+    ],
+    [
+      "Limerick",
+      "Limerick",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Limerick",
+      "Limerick",
+      "Semi conductor supplier"
+    ],
+    [
+      "Limerick",
+      "Limerick",
+      "Electronics manufacturer"
+    ],
+    [
+      "Lucan",
+      "South Dublin",
+      "Manufacturer"
+    ],
+    [
+      "Lucan",
+      "South Dublin",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Lucan",
+      "South Dublin",
+      "Semi conductor supplier"
+    ],
+    [
+      "Lucan",
+      "South Dublin",
+      "Electronics manufacturer"
+    ],
+    [
+      "Waterford",
+      "Kilkenny",
+      "Manufacturer"
+    ],
+    [
+      "Waterford",
+      "Kilkenny",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Waterford",
+      "Kilkenny",
+      "Semi conductor supplier"
+    ],
+    [
+      "Waterford",
+      "Kilkenny",
+      "Electronics manufacturer"
+    ],
+    [
+      "Dún Dealgan",
+      "Louth",
+      "Manufacturer"
+    ],
+    [
+      "Dún Dealgan",
+      "Louth",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Dún Dealgan",
+      "Louth",
+      "Semi conductor supplier"
+    ],
+    [
+      "Dún Dealgan",
+      "Louth",
+      "Electronics manufacturer"
+    ],
+    [
+      "Drogheda",
+      "Louth",
+      "Manufacturer"
+    ],
+    [
+      "Drogheda",
+      "Louth",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Drogheda",
+      "Louth",
+      "Semi conductor supplier"
+    ],
+    [
+      "Drogheda",
+      "Louth",
+      "Electronics manufacturer"
+    ],
+    [
+      "Navan",
+      "Meath",
+      "Manufacturer"
+    ],
+    [
+      "Navan",
+      "Meath",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Navan",
+      "Meath",
+      "Semi conductor supplier"
+    ],
+    [
+      "Navan",
+      "Meath",
+      "Electronics manufacturer"
+    ],
+    [
+      "Ennis",
+      "Clare",
+      "Manufacturer"
+    ],
+    [
+      "Ennis",
+      "Clare",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Ennis",
+      "Clare",
+      "Semi conductor supplier"
+    ],
+    [
+      "Ennis",
+      "Clare",
+      "Electronics manufacturer"
+    ],
+    [
+      "Tralee",
+      "Kerry",
+      "Manufacturer"
+    ],
+    [
+      "Tralee",
+      "Kerry",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Tralee",
+      "Kerry",
+      "Semi conductor supplier"
+    ],
+    [
+      "Tralee",
+      "Kerry",
+      "Electronics manufacturer"
+    ],
+    [
+      "Droichead Nua",
+      "Kildare",
+      "Manufacturer"
+    ],
+    [
+      "Droichead Nua",
+      "Kildare",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Droichead Nua",
+      "Kildare",
+      "Semi conductor supplier"
+    ],
+    [
+      "Droichead Nua",
+      "Kildare",
+      "Electronics manufacturer"
+    ],
+    [
+      "Carlow",
+      "Carlow",
+      "Manufacturer"
+    ],
+    [
+      "Carlow",
+      "Carlow",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Carlow",
+      "Carlow",
+      "Semi conductor supplier"
+    ],
+    [
+      "Carlow",
+      "Carlow",
+      "Electronics manufacturer"
+    ],
+    [
+      "Port Laoise",
+      "Laois",
+      "Manufacturer"
+    ],
+    [
+      "Port Laoise",
+      "Laois",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Port Laoise",
+      "Laois",
+      "Semi conductor supplier"
+    ],
+    [
+      "Port Laoise",
+      "Laois",
+      "Electronics manufacturer"
+    ],
+    [
+      "Baile Átha Luain",
+      "Roscommon",
+      "Manufacturer"
+    ],
+    [
+      "Baile Átha Luain",
+      "Roscommon",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Baile Átha Luain",
+      "Roscommon",
+      "Semi conductor supplier"
+    ],
+    [
+      "Baile Átha Luain",
+      "Roscommon",
+      "Electronics manufacturer"
+    ],
+    [
+      "Kilkenny",
+      "Kilkenny",
+      "Manufacturer"
+    ],
+    [
+      "Kilkenny",
+      "Kilkenny",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Kilkenny",
+      "Kilkenny",
+      "Semi conductor supplier"
+    ],
+    [
+      "Kilkenny",
+      "Kilkenny",
+      "Electronics manufacturer"
+    ],
+    [
+      "Mullingar",
+      "Westmeath",
+      "Manufacturer"
+    ],
+    [
+      "Mullingar",
+      "Westmeath",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Mullingar",
+      "Westmeath",
+      "Semi conductor supplier"
+    ],
+    [
+      "Mullingar",
+      "Westmeath",
+      "Electronics manufacturer"
+    ],
+    [
+      "Wexford",
+      "Wexford",
+      "Manufacturer"
+    ],
+    [
+      "Wexford",
+      "Wexford",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Wexford",
+      "Wexford",
+      "Semi conductor supplier"
+    ],
+    [
+      "Wexford",
+      "Wexford",
+      "Electronics manufacturer"
+    ],
+    [
+      "Letterkenny",
+      "Donegal",
+      "Manufacturer"
+    ],
+    [
+      "Letterkenny",
+      "Donegal",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Letterkenny",
+      "Donegal",
+      "Semi conductor supplier"
+    ],
+    [
+      "Letterkenny",
+      "Donegal",
+      "Electronics manufacturer"
+    ],
+    [
+      "Sligo",
+      "Sligo",
+      "Manufacturer"
+    ],
+    [
+      "Sligo",
+      "Sligo",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Sligo",
+      "Sligo",
+      "Semi conductor supplier"
+    ],
+    [
+      "Sligo",
+      "Sligo",
+      "Electronics manufacturer"
+    ],
+    [
+      "Clonmel",
+      "Tipperary",
+      "Manufacturer"
+    ],
+    [
+      "Clonmel",
+      "Tipperary",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Clonmel",
+      "Tipperary",
+      "Semi conductor supplier"
+    ],
+    [
+      "Clonmel",
+      "Tipperary",
+      "Electronics manufacturer"
+    ],
+    [
+      "Tullamore",
+      "Offaly",
+      "Manufacturer"
+    ],
+    [
+      "Tullamore",
+      "Offaly",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Tullamore",
+      "Offaly",
+      "Semi conductor supplier"
+    ],
+    [
+      "Tullamore",
+      "Offaly",
+      "Electronics manufacturer"
+    ],
+    [
+      "Greystones",
+      "Wicklow",
+      "Manufacturer"
+    ],
+    [
+      "Greystones",
+      "Wicklow",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Greystones",
+      "Wicklow",
+      "Semi conductor supplier"
+    ],
+    [
+      "Greystones",
+      "Wicklow",
+      "Electronics manufacturer"
+    ],
+    [
+      "Killarney",
+      "Kerry",
+      "Manufacturer"
+    ],
+    [
+      "Killarney",
+      "Kerry",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Killarney",
+      "Kerry",
+      "Semi conductor supplier"
+    ],
+    [
+      "Killarney",
+      "Kerry",
+      "Electronics manufacturer"
+    ],
+    [
+      "Midleton",
+      "Cork",
+      "Manufacturer"
+    ],
+    [
+      "Midleton",
+      "Cork",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Midleton",
+      "Cork",
+      "Semi conductor supplier"
+    ],
+    [
+      "Midleton",
+      "Cork",
+      "Electronics manufacturer"
+    ],
+    [
+      "Arklow",
+      "Wicklow",
+      "Manufacturer"
+    ],
+    [
+      "Arklow",
+      "Wicklow",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Arklow",
+      "Wicklow",
+      "Semi conductor supplier"
+    ],
+    [
+      "Arklow",
+      "Wicklow",
+      "Electronics manufacturer"
+    ],
+    [
+      "Wicklow",
+      "Wicklow",
+      "Manufacturer"
+    ],
+    [
+      "Wicklow",
+      "Wicklow",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Wicklow",
+      "Wicklow",
+      "Semi conductor supplier"
+    ],
+    [
+      "Wicklow",
+      "Wicklow",
+      "Electronics manufacturer"
+    ],
+    [
+      "Enniscorthy",
+      "Wexford",
+      "Manufacturer"
+    ],
+    [
+      "Enniscorthy",
+      "Wexford",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Enniscorthy",
+      "Wexford",
+      "Semi conductor supplier"
+    ],
+    [
+      "Enniscorthy",
+      "Wexford",
+      "Electronics manufacturer"
+    ],
+    [
+      "Castlebar",
+      "Mayo",
+      "Manufacturer"
+    ],
+    [
+      "Castlebar",
+      "Mayo",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Castlebar",
+      "Mayo",
+      "Semi conductor supplier"
+    ],
+    [
+      "Castlebar",
+      "Mayo",
+      "Electronics manufacturer"
+    ],
+    [
+      "An Cabhán",
+      "Cavan",
+      "Manufacturer"
+    ],
+    [
+      "An Cabhán",
+      "Cavan",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "An Cabhán",
+      "Cavan",
+      "Semi conductor supplier"
+    ],
+    [
+      "An Cabhán",
+      "Cavan",
+      "Electronics manufacturer"
+    ],
+    [
+      "Gorey",
+      "Wexford",
+      "Manufacturer"
+    ],
+    [
+      "Gorey",
+      "Wexford",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Gorey",
+      "Wexford",
+      "Semi conductor supplier"
+    ],
+    [
+      "Gorey",
+      "Wexford",
+      "Electronics manufacturer"
+    ],
+    [
+      "Athy",
+      "Kildare",
+      "Manufacturer"
+    ],
+    [
+      "Athy",
+      "Kildare",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Athy",
+      "Kildare",
+      "Semi conductor supplier"
+    ],
+    [
+      "Athy",
+      "Kildare",
+      "Electronics manufacturer"
+    ],
+    [
+      "Longford",
+      "Longford",
+      "Manufacturer"
+    ],
+    [
+      "Longford",
+      "Longford",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Longford",
+      "Longford",
+      "Semi conductor supplier"
+    ],
+    [
+      "Longford",
+      "Longford",
+      "Electronics manufacturer"
+    ],
+    [
+      "Na Sceirí",
+      "Fingal",
+      "Manufacturer"
+    ],
+    [
+      "Na Sceirí",
+      "Fingal",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Na Sceirí",
+      "Fingal",
+      "Semi conductor supplier"
+    ],
+    [
+      "Na Sceirí",
+      "Fingal",
+      "Electronics manufacturer"
+    ],
+    [
+      "Killiney",
+      "Dún Laoghaire-Rathdown",
+      "Manufacturer"
+    ],
+    [
+      "Killiney",
+      "Dún Laoghaire-Rathdown",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Killiney",
+      "Dún Laoghaire-Rathdown",
+      "Semi conductor supplier"
+    ],
+    [
+      "Killiney",
+      "Dún Laoghaire-Rathdown",
+      "Electronics manufacturer"
+    ],
+    [
+      "Ráth Tó",
+      "Meath",
+      "Manufacturer"
+    ],
+    [
+      "Ráth Tó",
+      "Meath",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Ráth Tó",
+      "Meath",
+      "Semi conductor supplier"
+    ],
+    [
+      "Ráth Tó",
+      "Meath",
+      "Electronics manufacturer"
+    ],
+    [
+      "Nenagh",
+      "Tipperary",
+      "Manufacturer"
+    ],
+    [
+      "Nenagh",
+      "Tipperary",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Nenagh",
+      "Tipperary",
+      "Semi conductor supplier"
+    ],
+    [
+      "Nenagh",
+      "Tipperary",
+      "Electronics manufacturer"
+    ],
+    [
+      "Portarlington",
+      "Offaly",
+      "Manufacturer"
+    ],
+    [
+      "Portarlington",
+      "Offaly",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Portarlington",
+      "Offaly",
+      "Semi conductor supplier"
+    ],
+    [
+      "Portarlington",
+      "Offaly",
+      "Electronics manufacturer"
+    ],
+    [
+      "Shannon",
+      "Clare",
+      "Manufacturer"
+    ],
+    [
+      "Shannon",
+      "Clare",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Shannon",
+      "Clare",
+      "Semi conductor supplier"
+    ],
+    [
+      "Shannon",
+      "Clare",
+      "Electronics manufacturer"
+    ],
+    [
+      "New Ross",
+      "Wexford",
+      "Manufacturer"
+    ],
+    [
+      "New Ross",
+      "Wexford",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "New Ross",
+      "Wexford",
+      "Semi conductor supplier"
+    ],
+    [
+      "New Ross",
+      "Wexford",
+      "Electronics manufacturer"
+    ],
+    [
+      "Youghal",
+      "Cork",
+      "Manufacturer"
+    ],
+    [
+      "Youghal",
+      "Cork",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Youghal",
+      "Cork",
+      "Semi conductor supplier"
+    ],
+    [
+      "Youghal",
+      "Cork",
+      "Electronics manufacturer"
+    ],
+    [
+      "Tuam",
+      "Galway",
+      "Manufacturer"
+    ],
+    [
+      "Tuam",
+      "Galway",
+      "Medical equipment manufacturer"
+    ],
+    [
+      "Tuam",
+      "Galway",
+      "Semi conductor supplier"
+    ],
+    [
+      "Tuam",
+      "Galway",
+      "Electronics manufacturer"
+    ]
+  ]
+}

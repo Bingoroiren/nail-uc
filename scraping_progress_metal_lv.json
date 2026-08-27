@@ -1,0 +1,2354 @@
+{
+  "completed": [
+    [
+      "Riga",
+      "Rīga",
+      "Metāla darbnīca"
+    ],
+    [
+      "Riga",
+      "Rīga",
+      "Metālapstrāde"
+    ],
+    [
+      "Riga",
+      "Rīga",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Riga",
+      "Rīga",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Riga",
+      "Rīga",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Metāla darbnīca"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Metālapstrāde"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Liepāja",
+      "Liepāja",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Metāla darbnīca"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Metālapstrāde"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Daugavpils",
+      "Daugavpils",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Metālapstrāde"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Jelgava",
+      "Jelgava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Metāla darbnīca"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Metālapstrāde"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Jūrmala",
+      "Jūrmala",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Metālapstrāde"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ventspils",
+      "Ventspils",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Metāla darbnīca"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Metālapstrāde"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Rēzekne",
+      "Rēzekne",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Metāla darbnīca"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Metālapstrāde"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Valmiera",
+      "Valmiera",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Metālapstrāde"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ogre",
+      "Ogre",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Metāla darbnīca"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Metālapstrāde"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Jēkabpils",
+      "Jēkabpils",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Metāla darbnīca"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Metālapstrāde"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Salaspils",
+      "Salaspils",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Metāla darbnīca"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Metālapstrāde"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Tukums",
+      "Tukums",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Metāla darbnīca"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Metālapstrāde"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Cēsis",
+      "Cēsis",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Metāla darbnīca"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Metālapstrāde"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Sigulda",
+      "Sigulda",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Metāla darbnīca"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Metālapstrāde"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Kuldīga",
+      "Kuldīga",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Metāla darbnīca"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Metālapstrāde"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Bauska",
+      "Bauska",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Metāla darbnīca"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Metālapstrāde"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Saldus",
+      "Saldus",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Metāla darbnīca"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Metālapstrāde"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Olaine",
+      "Olaine",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Metālapstrāde"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Talsi",
+      "Talsi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Metāla darbnīca"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Metālapstrāde"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Dobele",
+      "Dobele",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ādaži",
+      "Ādaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Metālapstrāde"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ludza",
+      "Ludza",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Metālapstrāde"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Krāslava",
+      "Krāslava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Metāla darbnīca"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Metālapstrāde"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Līvāni",
+      "Līvāni",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Metālapstrāde"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Baloži",
+      "Ķekava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Metāla darbnīca"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Metālapstrāde"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Gulbene",
+      "Gulbene",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Metāla darbnīca"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Metālapstrāde"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Aizkraukle",
+      "Aizkraukle",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Metāla darbnīca"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Metālapstrāde"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Madona",
+      "Madona",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Limbaži",
+      "Limbaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Metāla darbnīca"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Metālapstrāde"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Alūksne",
+      "Alūksne",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ulbroka",
+      "Ropaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Metāla darbnīca"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Metālapstrāde"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Lielvārde",
+      "Ogre",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Metālapstrāde"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Preiļi",
+      "Preiļi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Metālapstrāde"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Balvi",
+      "Balvi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Metāla darbnīca"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Metālapstrāde"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Iecava",
+      "Bauska",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Metāla darbnīca"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Metālapstrāde"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Smiltene",
+      "Smiltene",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Metālapstrāde"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ķekava",
+      "Ķekava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Metāla darbnīca"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Metālapstrāde"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Valka",
+      "Valka",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Metāla darbnīca"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Metālapstrāde"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Piņķi",
+      "Mārupe",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Metāla darbnīca"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Metālapstrāde"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Aizpute",
+      "Dienvidkurzeme",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Metālapstrāde"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Baldone",
+      "Ķekava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Metāla darbnīca"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Metālapstrāde"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Grobiņa",
+      "Dienvidkurzeme",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Metāla darbnīca"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Metālapstrāde"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Jaunmārupe",
+      "Mārupe",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Metāla darbnīca"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Metālapstrāde"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Kandava",
+      "Tukums",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Vangaži",
+      "Ropaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Metāla darbnīca"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Metālapstrāde"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Saulkrasti",
+      "Saulkrasti",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Metāla darbnīca"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Metālapstrāde"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Pļaviņas",
+      "Aizkraukle",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Metāla darbnīca"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Metālapstrāde"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Viļāni",
+      "Rēzekne",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Metāla darbnīca"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Metālapstrāde"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Rūjiena",
+      "Valmiera",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Salacgrīva",
+      "Limbaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Metāla darbnīca"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Metālapstrāde"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Koknese",
+      "Aizkraukle",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Metāla darbnīca"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Metālapstrāde"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Skrīveri",
+      "Aizkraukle",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Metāla darbnīca"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Metālapstrāde"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Liepa",
+      "Cēsis",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Metāla darbnīca"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Metālapstrāde"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Inčukalns",
+      "Sigulda",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Metāla darbnīca"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Metālapstrāde"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Auce",
+      "Dobele",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Metāla darbnīca"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Metālapstrāde"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Malta",
+      "Rēzekne",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Metālapstrāde"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Roja",
+      "Talsi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Metālapstrāde"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ilūkste",
+      "Augšdaugava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Metāla darbnīca"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Metālapstrāde"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Vecumnieki",
+      "Bauska",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Metāla darbnīca"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Metālapstrāde"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Priekule",
+      "Dienvidkurzeme",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Metāla darbnīca"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Metālapstrāde"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Kārsava",
+      "Ludza",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Metālapstrāde"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Dagda",
+      "Krāslava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Metāla darbnīca"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Metālapstrāde"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Skrunda",
+      "Kuldīga",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ropaži",
+      "Ropaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Metālapstrāde"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ērgļi",
+      "Madona",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Metālapstrāde"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Kalnciems",
+      "Jelgava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Metāla darbnīca"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Metālapstrāde"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Varakļāni",
+      "Varakļāni",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Metālapstrāde"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Eleja",
+      "Jelgava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Metālapstrāde"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ogresgals",
+      "Ogre",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Metāla darbnīca"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Metālapstrāde"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Vaiņode",
+      "Dienvidkurzeme",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Metālapstrāde"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Stende",
+      "Talsi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Metālapstrāde"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Dundaga",
+      "Talsi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Metāla darbnīca"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Metālapstrāde"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Viesīte",
+      "Jēkabpils",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Garciems",
+      "Ādaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Metāla darbnīca"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Metālapstrāde"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Augšlīgatne",
+      "Cēsis",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Metāla darbnīca"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Metālapstrāde"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Engure",
+      "Tukums",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Metāla darbnīca"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Metālapstrāde"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Lubāna",
+      "Madona",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Metālapstrāde"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Sabile",
+      "Talsi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Metāla darbnīca"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Metālapstrāde"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Lapmežciems",
+      "Tukums",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Metālapstrāde"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Mērsrags",
+      "Talsi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Silakrogs",
+      "Ropaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Metāla darbnīca"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Metālapstrāde"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Zilupe",
+      "Ludza",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Metāla darbnīca"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Metālapstrāde"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Rauna",
+      "Smiltene",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Metāla darbnīca"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Metālapstrāde"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Cesvaine",
+      "Madona",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Metāla darbnīca"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Metālapstrāde"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Ragana",
+      "Sigulda",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Metāla darbnīca"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Metālapstrāde"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Bēne",
+      "Dobele",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Metālapstrāde"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Valdemārpils",
+      "Talsi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Metāla darbnīca"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Metālapstrāde"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Viļaka",
+      "Balvi",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Metāla darbnīca"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Metālapstrāde"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Seda",
+      "Valmiera",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Metālapstrāde"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Brankas",
+      "Jelgava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Metāla darbnīca"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Metālapstrāde"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Mazsalaca",
+      "Valmiera",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Metāla darbnīca"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Metālapstrāde"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Lociki",
+      "Augšdaugava",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Metāla darbnīca"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Metālapstrāde"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Aloja",
+      "Limbaži",
+      "Metāllūžņu sniedzējs"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Metāla darbnīca"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Metālapstrāde"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Metāla konstrukcijas"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Metāla izstrādājumu ražotājs"
+    ],
+    [
+      "Jumprava",
+      "Ogre",
+      "Metāllūžņu sniedzējs"
+    ]
+  ]
+}

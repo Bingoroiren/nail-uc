@@ -89,14 +89,25 @@ def load_completed_scans():
                 for row in reader:
                     loc_name = row.get('Location_Name')
                     state = row.get('State')
+                    search_query = row.get('Search_Query', '')
                     if loc_name and state:
-                        pair = (loc_name.strip().lower(), state.strip().lower(), config_auto_au.KEYWORDS[0].lower())
-                        if pair not in completed_list:
+                        found_kw = ""
+                        if search_query:
+                            for kw in config_auto_au.KEYWORDS:
+                                if kw.lower() in search_query.lower():
+                                    found_kw = kw
+                                    break
+                        if not found_kw:
+                            found_kw = config_auto_au.KEYWORDS[0]
+                            
+                        pair = [loc_name.strip(), state.strip(), found_kw]
+                        pair_lower = (loc_name.strip().lower(), state.strip().lower(), found_kw.lower())
+                        if pair_lower not in [(x[0].lower(), x[1].lower(), x[2].lower()) for x in completed_list]:
                             completed_list.append(pair)
             
             with open(PROGRESS_FILE, 'w', encoding='utf-8') as f:
                 json.dump({"completed": completed_list}, f, indent=2, ensure_ascii=False)
-            return set(completed_list)
+            return set((x[0].lower(), x[1].lower(), x[2].lower()) for x in completed_list)
         except Exception as e:
             print(f"[-] Error parsing CSV for progress: {e}")
             

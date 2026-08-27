@@ -77,55 +77,76 @@ def clean_and_score_email(email_str):
     if not email_str:
         return ""
     
+    discard_domains = {
+        'example.com', 'example.org', 'example.net', 'yourdomain.com', 
+        'vasemail.cz', 'webonic.hu', 'tvojweb.sk', 'mojweb.sk', 'domain.com', 'mydomain.com',
+        'email.com', 'mail.com', 'test.com', 'website.com', 'sentry.io', 'wixpress.com'
+    }
+    discard_substrings = {
+        'noreply', 'no-reply', 'example', 'yourdomain', 'sentry', 'placeholder', 
+        'invalid', 'null', 'undefined', 'tempmail'
+    }
+    discard_locals = {
+        'email', 'your.email', 'yourname', 'test', 'your', 'user', 'name', 'myname'
+    }
+
     emails = []
     for part in re.split(r'[,\s;]+', str(email_str)):
         clean_part = part.strip().lower()
         if '@' in clean_part:
+            try:
+                local_part, domain = clean_part.split('@', 1)
+            except ValueError:
+                continue
+            
+            if domain in discard_domains:
+                continue
+            if any(sub in clean_part for sub in discard_substrings):
+                continue
+            if local_part in discard_locals:
+                continue
+            try:
+                if any(discard in clean_part for discard in DISCARD_KEYWORDS):
+                    continue
+            except NameError:
+                pass
+                
             emails.append(clean_part)
             
     if not emails:
         return ""
         
     best_email = emails[0]
-    best_score = -99999
+    best_score = -9999
     
     for email in emails:
         score = 0
         try:
-            local_part, domain_part = email.split('@', 1)
+            local_part, domain = email.split('@', 1)
         except ValueError:
             continue
             
-        # Check for discard keywords
-        if any(keyword in domain_part for keyword in DISCARD_KEYWORDS):
-            continue
+        if domain not in GENERIC_DOMAINS:
+            score += 10
             
-        # Check for generic domains
-        if domain_part not in GENERIC_DOMAINS:
-            score += 10  # Prefer business/corporate domains
-            
-        # Check prefixes
         if any(prefix in local_part for prefix in BUSINESS_PREFIXES):
             score += 5
             
-        # Check penalty/bad keywords
-        if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain_part for bad in BAD_KEYWORDS):
+        if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
-        if any(penalty in domain_part for penalty in PENALTY_KEYWORDS):
-            score -= 5
+        try:
+            if any(k in email for k in PENALTY_KEYWORDS):
+                score -= 50
+        except NameError:
+            pass
             
-        # Minor penalty for email length to prefer shorter ones
         score -= len(email) * 0.01
         
         if score > best_score:
             best_score = score
             best_email = email
             
-    # If the score is extremely low (meaning it was discarded), return empty or fallback safely
-    if best_score < -100:
-        return ""
-        
     return best_email
 
 def normalize_name(name):

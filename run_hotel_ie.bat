@@ -1,4 +1,5 @@
 @echo off
+set "PATH=C:\Users\PC\python311\tools;%PATH%"
 title Ireland Hotel and Accommodation Google Maps Scraper Launcher
 cd /d "%~dp0"
 

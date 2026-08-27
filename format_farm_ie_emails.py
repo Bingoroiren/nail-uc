@@ -92,10 +92,40 @@ def clean_and_score_email(email_str):
     if not email_str:
         return ""
     
+    discard_domains = {
+        'example.com', 'example.org', 'example.net', 'yourdomain.com', 
+        'vasemail.cz', 'webonic.hu', 'tvojweb.sk', 'mojweb.sk', 'domain.com', 'mydomain.com',
+        'email.com', 'mail.com', 'test.com', 'website.com', 'sentry.io', 'wixpress.com'
+    }
+    discard_substrings = {
+        'noreply', 'no-reply', 'example', 'yourdomain', 'sentry', 'placeholder', 
+        'invalid', 'null', 'undefined', 'tempmail'
+    }
+    discard_locals = {
+        'email', 'your.email', 'yourname', 'test', 'your', 'user', 'name', 'myname'
+    }
+
     emails = []
-    for part in re.split(r'[,\s]+', email_str):
+    for part in re.split(r'[,\s;]+', str(email_str)):
         clean_part = part.strip().lower()
         if '@' in clean_part:
+            try:
+                local_part, domain = clean_part.split('@', 1)
+            except ValueError:
+                continue
+            
+            if domain in discard_domains:
+                continue
+            if any(sub in clean_part for sub in discard_substrings):
+                continue
+            if local_part in discard_locals:
+                continue
+            try:
+                if any(discard in clean_part for discard in DISCARD_KEYWORDS):
+                    continue
+            except NameError:
+                pass
+                
             emails.append(clean_part)
             
     if not emails:
@@ -120,8 +150,11 @@ def clean_and_score_email(email_str):
         if any(bad in local_part for bad in BAD_KEYWORDS) or any(bad in domain for bad in BAD_KEYWORDS):
             score -= 20
             
-        if any(discard in email for discard in DISCARD_KEYWORDS):
-            score -= 50
+        try:
+            if any(k in email for k in PENALTY_KEYWORDS):
+                score -= 50
+        except NameError:
+            pass
             
         score -= len(email) * 0.01
         
@@ -130,7 +163,6 @@ def clean_and_score_email(email_str):
             best_email = email
             
     return best_email
-
 def normalize_name(name):
     if not name:
         return ""
@@ -146,6 +178,52 @@ def normalize_phone(phone_str):
     if phone_clean.startswith('353'):
         phone_clean = phone_clean[3:]
     return phone_clean
+
+def is_republic_of_ireland_address(address):
+    if not address:
+        return False
+    addr_lower = str(address).lower()
+    
+    # Standalone or explicit country block list
+    block_keywords = {
+        'united kingdom', 'uk', 'northern ireland', 'great britain', 'gb',
+        'england', 'scotland', 'wales', 'netherlands', 'nederland', 'holland',
+        'den haag', 'germany', 'france', 'belgium', 'vietnam', 'viet nam', 'vn'
+    }
+    
+    # Check for UK postcodes (like BT postcode for Northern Ireland)
+    import re
+    if re.search(r'\bbt\d{1,2}\b', addr_lower):
+        return False
+        
+    for kw in block_keywords:
+        if kw == 'uk':
+            if re.search(r'\b(uk|u\.k\.)\b', addr_lower):
+                return False
+        elif kw == 'gb':
+            if re.search(r'\b(gb|g\.b\.)\b', addr_lower):
+                return False
+        else:
+            if kw in addr_lower:
+                return False
+                
+    # Must look like an Irish address
+    counties = [
+        'carlow', 'cavan', 'clare', 'cork', 'donegal', 'dublin', 'galway', 
+        'kerry', 'kildare', 'kilkenny', 'laois', 'leitrim', 'limerick', 
+        'longford', 'louth', 'mayo', 'meath', 'monaghan', 'offaly', 
+        'roscommon', 'sligo', 'tipperary', 'waterford', 'westmeath', 
+        'wexford', 'wicklow', 'ireland', 'éire', 'eire', 'leinster',
+        'munster', 'connacht', 'ulster'
+    ]
+    
+    if any(county in addr_lower for county in counties):
+        return True
+        
+    if "co. " in addr_lower or "county " in addr_lower or "eircode" in addr_lower:
+        return True
+        
+    return False
 
 def main():
     if not INPUT_CSV or not os.path.exists(INPUT_CSV):
@@ -163,18 +241,27 @@ def main():
             
     print(f"[+] Loaded {len(rows)} rows from {INPUT_CSV}.")
     
-    # Filter out permanently closed businesses safely
+    # Filter out permanently closed businesses and businesses outside Republic of Ireland safely
     active_rows = []
     closed_count = 0
+    outside_ireland_count = 0
     for r in rows:
         perm_closed = r.get('Permanently_Closed') or ''
         if str(perm_closed).strip().lower() == 'yes':
             closed_count += 1
             continue
+            
+        address = r.get('Address') or r.get('Địa chỉ') or ''
+        if address and not is_republic_of_ireland_address(address):
+            outside_ireland_count += 1
+            continue
+            
         active_rows.append(r)
     rows = active_rows
     if closed_count > 0:
         print(f"[*] Filtered out {closed_count} permanently closed businesses.")
+    if outside_ireland_count > 0:
+        print(f"[*] Filtered out {outside_ireland_count} businesses outside Republic of Ireland.")
 
     def get_field(r, *keys):
         for k in keys:
@@ -335,12 +422,13 @@ def main():
         ws.append([row_dict[col] for col in fieldnames])
     wb.save(FORMATTED_XLSX)
         
-    print(f"[*] Updating original {INPUT_CSV}...")
-    try:
-        shutil.copy2(target_write_file, INPUT_CSV)
-        print("[SUCCESS] Successfully updated original file!")
-    except PermissionError:
-        print(f"\n[WARNING] Permission denied updating {INPUT_CSV}. File is open in Excel.")
+        # Do NOT overwrite the original input file with formatted output
+    # to preserve raw email data for future retry-empty runs
+    print("\n--- Summary ---")
+    print(f"Total output rows: {len(output_rows)}")
+    print(f"With email:        {len(with_email)}")
+    print(f"Without email:     {len(without_email)}")
+    print(f"Formatted file:    {target_write_file}")
 
 if __name__ == "__main__":
     main()
