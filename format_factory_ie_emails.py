@@ -247,28 +247,21 @@ def is_republic_of_ireland_address(address):
         return False
     addr_lower = str(address).lower()
     
-    # Standalone or explicit country block list
-    block_keywords = {
-        'united kingdom', 'uk', 'northern ireland', 'great britain', 'gb',
-        'england', 'scotland', 'wales', 'netherlands', 'nederland', 'holland',
-        'den haag', 'germany', 'france', 'belgium', 'vietnam', 'viet nam', 'vn'
-    }
+    # Standalone or explicit country block list (using word boundary check to avoid substring matches)
+    block_patterns = [
+        r'\bunited kingdom\b', r'\buk\b', r'\bu\.k\.\b', r'\bnorthern ireland\b', r'\bgreat britain\b', r'\bgb\b', r'\bg\.b\.\b',
+        r'\bengland\b', r'\bscotland\b', r'\bwales\b', r'\bnetherlands\b', r'\bnederland\b', r'\bholland\b',
+        r'\bden haag\b', r'\bgermany\b', r'\bfrance\b', r'\bbelgium\b', r'\bvietnam\b', r'\bviet nam\b', r'\bvn\b'
+    ]
     
     # Check for UK postcodes (like BT postcode for Northern Ireland)
     import re
     if re.search(r'\bbt\d{1,2}\b', addr_lower):
         return False
         
-    for kw in block_keywords:
-        if kw == 'uk':
-            if re.search(r'\b(uk|u\.k\.)\b', addr_lower):
-                return False
-        elif kw == 'gb':
-            if re.search(r'\b(gb|g\.b\.)\b', addr_lower):
-                return False
-        else:
-            if kw in addr_lower:
-                return False
+    for pattern in block_patterns:
+        if re.search(pattern, addr_lower):
+            return False
                 
     # Must look like an Irish address
     counties = [
