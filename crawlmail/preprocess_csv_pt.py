@@ -3,8 +3,8 @@ import os
 import shutil
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "slovakia_recruitment.csv")
-BACKUP_CSV = os.path.join(ROOT_DIR, "data", "raw", "slovakia_recruitment_backup.csv")
+INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "broker_portugal.csv")
+BACKUP_CSV = os.path.join(ROOT_DIR, "data", "raw", "broker_portugal_backup.csv")
 
 def normalize_website(url):
     if not url:
@@ -64,17 +64,19 @@ def preprocess():
 
     # 3.5. Filter by allowed categories
     ALLOWED_CATEGORIES = {
-        "Pracovná agentúra",
-        "Personálne poradenstvo",
-        "Agentúra pre sprostredkovanie práce",
-        "Sprostredkovanie práce"
+        "Agência de empregos",
+        "Assessoria de recursos humanos",
+        "Centro de empregos",
+        "Recrutamento",
+        "Agência de empregos temporários"
     }
 
     filtered_rows = []
     filtered_out_count = 0
     for row in unique_rows:
         category = row.get("Category", "").strip()
-        if category and category not in ALLOWED_CATEGORIES:
+        # Case insensitive compare
+        if category and not any(tag.lower() == category.lower() for tag in ALLOWED_CATEGORIES):
             filtered_out_count += 1
             continue
         filtered_rows.append(row)
