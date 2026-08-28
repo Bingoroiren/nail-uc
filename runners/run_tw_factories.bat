@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 title Taiwan Factory Google Maps and Email Scraper Launcher
 cd /d "%~dp0.."
 set "PATH=C:\Users\PC\python311\tools;%PATH%"
@@ -60,10 +60,9 @@ echo.
 echo ======================================================
 echo STEP 3: Launching Email Scraper for Taiwan Factories...
 echo ======================================================
-python crawlmail/email_scraper.py data/raw/taiwan_factories.csv data/formatted/taiwan_factories_with_emails.csv
+python -u crawlmail/email_scraper.py data/raw/taiwan_factories.csv data/formatted/taiwan_factories_with_emails.csv
 if errorlevel 1 goto RunFailed
 
-echo.
 echo ======================================================
 echo STEP 4: Formatting and Translating Results...
 echo ======================================================

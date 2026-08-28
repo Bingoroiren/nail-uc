@@ -7,6 +7,13 @@ from playwright.async_api import async_playwright
 from playwright_stealth import stealth_async
 import sys
 
+# Set Windows Proactor Event Loop Policy for robust subprocess piping
+if sys.platform == 'win32':
+    try:
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    except Exception as e:
+        print(f"[WARNING] Could not set WindowsProactorEventLoopPolicy: {e}")
+
 try:
     sys.stdout.reconfigure(encoding='utf-8')
     sys.stderr.reconfigure(encoding='utf-8')
@@ -30,14 +37,15 @@ elif len(sys.argv) == 2:
     sys.exit(1)
 
 # Email Regex & Invalid list
-EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b')
+EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]{1,255}\.[A-Z|a-z]{2,7}\b')
 INVALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.pdf', '.css', '.js', '.ico', '.woff', '.woff2', '.mp4', '.mp3')
 
 # Obfuscated email patterns (e.g. info [at] domain [dot] com)
+# Use bounded quantifiers to prevent catastrophic backtracking on large HTML/JS strings
 OBFUSCATED_PATTERNS = [
-    re.compile(r'([A-Za-z0-9._%+-]+)\s*\[at\]\s*([A-Za-z0-9.-]+)\s*\[dot\]\s*([A-Za-z]{2,7})', re.IGNORECASE),
-    re.compile(r'([A-Za-z0-9._%+-]+)\s*\(at\)\s*([A-Za-z0-9.-]+)\s*\(dot\)\s*([A-Za-z]{2,7})', re.IGNORECASE),
-    re.compile(r'([A-Za-z0-9._%+-]+)\s+AT\s+([A-Za-z0-9.-]+)\s+DOT\s+([A-Za-z]{2,7})'),
+    re.compile(r'([A-Za-z0-9._%+-]{1,64})\s*\[at\]\s*([A-Za-z0-9.-]{1,255})\s*\[dot\]\s*([A-Za-z]{2,7})', re.IGNORECASE),
+    re.compile(r'([A-Za-z0-9._%+-]{1,64})\s*\(at\)\s*([A-Za-z0-9.-]{1,255})\s*\(dot\)\s*([A-Za-z]{2,7})', re.IGNORECASE),
+    re.compile(r'([A-Za-z0-9._%+-]{1,64})\s+AT\s+([A-Za-z0-9.-]{1,255})\s+DOT\s+([A-Za-z]{2,7})'),
 ]
 
 # Common contact page paths to guess if no emails found
@@ -237,17 +245,11 @@ async def crawl_regular_site(page, url):
         except Exception as e:
             print(f"[-] Body text extraction error on {current_page.url}: {e}")
 
-        # Search Cloudflare obfuscated emails
+        # Search Cloudflare obfuscated emails and raw HTML source using a single content fetch
         try:
             html = await current_page.content()
             emails.extend(extract_cloudflare_emails(html))
-        except Exception:
-            pass
-
-        # 3. Search raw HTML source (hidden elements, comments, data attributes, JSON-LD)
-        try:
-            html_source = await current_page.content()
-            html_emails = extract_emails_from_text(html_source)
+            html_emails = extract_emails_from_text(html)
             emails.extend(html_emails)
         except Exception:
             pass
@@ -345,7 +347,7 @@ def save_progress(rows, path, fieldnames):
     except Exception as e:
         print(f"[-] Error saving progress to {path}: {e}")
 
-async def process_row(row, browser, semaphore, writer, output_file, processed_urls):
+async def process_row(row, semaphore, writer, output_file, processed_urls):
     url = row.get('URL') or row.get('Liên Hệ') or ''
     website = (row.get('Website') or row.get('Liên Hệ') or '').strip()
     
@@ -355,8 +357,11 @@ async def process_row(row, browser, semaphore, writer, output_file, processed_ur
     if not website:
         row['Email'] = ''
         if writer:
-            writer.writerow(row)
-            output_file.flush()
+            try:
+                writer.writerow(row)
+                output_file.flush()
+            except Exception:
+                pass
         if url:
             processed_urls.add(url)
         return
@@ -365,142 +370,138 @@ async def process_row(row, browser, semaphore, writer, output_file, processed_ur
         is_fb = "facebook.com" in website.lower()
         is_ig = "instagram.com" in website.lower()
         
-        context = None
-        page = None
         emails = []
         
         try:
-            # 1. Setup Context based on website type
-            if is_fb:
-                context = await browser.new_context(
-                    user_agent="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
-                    viewport={"width": 1280, "height": 800}
-                )
-            elif is_ig:
-                context = await browser.new_context(
-                    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-                    viewport={"width": 1280, "height": 800}
-                )
-            else:
-                context = await browser.new_context(
-                    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-                    viewport={"width": 1280, "height": 800}
-                )
-            
-            page = await context.new_page()
-            page.set_default_timeout(30000)
-            page.set_default_navigation_timeout(30000)
-            
-            # 2. Define nested scrape logic to run with a global timeout
-            async def do_scrape():
-                nonlocal page, context
-                fb_fallback_links = []
-                ig_fallback_links = []
-                found_emails = []
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
                 
+                # 1. Setup Context based on website type
                 if is_fb:
-                    found_emails = await crawl_facebook(page, website)
+                    context = await browser.new_context(
+                        user_agent="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+                        viewport={"width": 1280, "height": 800}
+                    )
                 elif is_ig:
-                    found_emails = await crawl_instagram(page, website)
+                    context = await browser.new_context(
+                        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                        viewport={"width": 1280, "height": 800}
+                    )
                 else:
-                    target_url = website
-                    if not target_url.startswith(('http://', 'https://')):
-                        target_url = 'https://' + target_url
-                    found_emails, fb_fallback_links, ig_fallback_links = await crawl_regular_site(page, target_url)
+                    context = await browser.new_context(
+                        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                        viewport={"width": 1280, "height": 800}
+                    )
                 
-                # 3. Fallback social crawling if regular website had no emails but had social page links
-                if not is_fb and not is_ig and not found_emails and (fb_fallback_links or ig_fallback_links):
-                    print(f"[*] Fallback: No emails found on {website}. Scanning social pages...")
+                page = await context.new_page()
+                page.set_default_timeout(30000)
+                page.set_default_navigation_timeout(30000)
+                
+                # 2. Define nested scrape logic to run with a global timeout
+                async def do_scrape():
+                    nonlocal page, context
+                    fb_fallback_links = []
+                    ig_fallback_links = []
+                    found_emails = []
                     
-                    # Close regular website page/context
-                    if page: await page.close()
-                    if context: await context.close()
-                    page = None
-                    context = None
+                    if is_fb:
+                        found_emails = await crawl_facebook(page, website)
+                    elif is_ig:
+                        found_emails = await crawl_instagram(page, website)
+                    else:
+                        target_url = website
+                        if not target_url.startswith(('http://', 'https://')):
+                            target_url = 'https://' + target_url
+                        found_emails, fb_fallback_links, ig_fallback_links = await crawl_regular_site(page, target_url)
                     
-                    # Check Facebook fallback pages
-                    for fb_url in fb_fallback_links:
-                        try:
-                            context = await browser.new_context(
-                                user_agent="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
-                                viewport={"width": 1280, "height": 800}
-                            )
-                            page = await context.new_page()
-                            page.set_default_timeout(30000)
-                            page.set_default_navigation_timeout(30000)
-                            fb_emails = await crawl_facebook(page, fb_url)
-                            if fb_emails:
-                                found_emails.extend(fb_emails)
-                                print(f"[+] Fallback Facebook success: {fb_url} -> {fb_emails}")
-                                break
-                        except Exception as e:
-                            print(f"[-] Fallback Facebook failed ({fb_url}): {e}")
-                        finally:
-                            if page: await page.close()
-                            if context: await context.close()
-                            page = None
-                            context = None
-                    
-                    # Check Instagram fallback pages
-                    if not found_emails:
-                        for ig_url in ig_fallback_links:
+                    # 3. Fallback social crawling if regular website had no emails but had social page links
+                    if not is_fb and not is_ig and not found_emails and (fb_fallback_links or ig_fallback_links):
+                        print(f"[*] Fallback: No emails found on {website}. Scanning social pages...")
+                        
+                        # Close regular website page/context
+                        if page: await page.close()
+                        if context: await context.close()
+                        page = None
+                        context = None
+                        
+                        # Check Facebook fallback pages
+                        for fb_url in fb_fallback_links:
                             try:
                                 context = await browser.new_context(
-                                    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                                    user_agent="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
                                     viewport={"width": 1280, "height": 800}
                                 )
                                 page = await context.new_page()
                                 page.set_default_timeout(30000)
                                 page.set_default_navigation_timeout(30000)
-                                ig_emails = await crawl_instagram(page, ig_url)
-                                if ig_emails:
-                                    found_emails.extend(ig_emails)
-                                    print(f"[+] Fallback Instagram success: {ig_url} -> {ig_emails}")
+                                fb_emails = await crawl_facebook(page, fb_url)
+                                if fb_emails:
+                                    found_emails.extend(fb_emails)
+                                    print(f"[+] Fallback Facebook success: {fb_url} -> {fb_emails}")
                                     break
                             except Exception as e:
-                                print(f"[-] Fallback Instagram failed ({ig_url}): {e}")
+                                print(f"[-] Fallback Facebook failed ({fb_url}): {e}")
                             finally:
                                 if page: await page.close()
                                 if context: await context.close()
                                 page = None
                                 context = None
-                return found_emails
+                        
+                        # Check Instagram fallback pages
+                        if not found_emails:
+                            for ig_url in ig_fallback_links:
+                                try:
+                                    context = await browser.new_context(
+                                        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                                        viewport={"width": 1280, "height": 800}
+                                    )
+                                    page = await context.new_page()
+                                    page.set_default_timeout(30000)
+                                    page.set_default_navigation_timeout(30000)
+                                    ig_emails = await crawl_instagram(page, ig_url)
+                                    if ig_emails:
+                                        found_emails.extend(ig_emails)
+                                        print(f"[+] Fallback Instagram success: {ig_url} -> {ig_emails}")
+                                        break
+                                except Exception as e:
+                                    print(f"[-] Fallback Instagram failed ({ig_url}): {e}")
+                                finally:
+                                    if page: await page.close()
+                                    if context: await context.close()
+                                    page = None
+                                    context = None
+                    return found_emails
 
-            try:
-                emails = await asyncio.wait_for(do_scrape(), timeout=90.0)
-            except asyncio.TimeoutError:
-                print(f"[!] Timeout Error: Scanning {website} took longer than 90 seconds. Aborting task to prevent hang.")
-                emails = []
+                try:
+                    emails = await asyncio.wait_for(do_scrape(), timeout=90.0)
+                except asyncio.TimeoutError:
+                    print(f"[!] Timeout Error: Scanning {website} took longer than 90 seconds. Aborting task to prevent hang.")
+                    emails = []
 
-            # Clean and save row
-            emails = list(set(emails))
-            email_str = ", ".join(emails)
-            row['Email'] = email_str
-            print(f"[+] URL: {website} -> Emails: {email_str if email_str else 'None found'}")
-            
-            if writer:
-                writer.writerow(row)
-                output_file.flush()
-            processed_urls.add(url)
+                # Clean and save row
+                emails = list(set(emails))
+                email_str = ", ".join(emails)
+                row['Email'] = email_str
+                print(f"[+] URL: {website} -> Emails: {email_str if email_str else 'None found'}")
+                
+                if writer:
+                    try:
+                        writer.writerow(row)
+                        output_file.flush()
+                    except Exception as write_err:
+                        print(f"[-] Critical: Failed to write row to CSV: {write_err}")
+                processed_urls.add(url)
             
         except Exception as e:
             print(f"[-] Error processing {website}: {e}")
             row['Email'] = ''
             if writer:
-                writer.writerow(row)
-                output_file.flush()
+                try:
+                    writer.writerow(row)
+                    output_file.flush()
+                except Exception as write_err:
+                    print(f"[-] Critical: Failed to write error row to CSV: {write_err}")
             processed_urls.add(url)
-        finally:
-            if page:
-                try:
-                    await asyncio.wait_for(page.close(), timeout=5.0)
-                except Exception:
-                    pass
-            if context:
-                try:
-                    await asyncio.wait_for(context.close(), timeout=5.0)
-                except Exception:
-                    pass
 
 async def main():
     if not os.path.exists(INPUT_CSV):
@@ -581,22 +582,16 @@ async def main():
             chunk = website_rows[i:i+batch_size]
             print(f"\n[***] Starting website crawl batch {i//batch_size + 1} ({len(chunk)} websites)...")
 
-            async with async_playwright() as p:
-                browser = await p.chromium.launch(headless=True)
-                semaphore = asyncio.Semaphore(3) # Max 3 concurrent crawlers
+            semaphore = asyncio.Semaphore(3) # Max 3 concurrent crawlers
 
-                tasks = []
-                for row in chunk:
-                    task = process_row(row, browser, semaphore, None, None, processed_urls)
-                    tasks.append(task)
+            tasks = []
+            for row in chunk:
+                task = process_row(row, semaphore, None, None, processed_urls)
+                tasks.append(task)
 
-                await asyncio.gather(*tasks)
-                try:
-                    await asyncio.wait_for(browser.close(), timeout=10.0)
-                except Exception:
-                    pass
+            await asyncio.gather(*tasks)
 
-            print(f"[***] Completed batch {i//batch_size + 1}. Browser closed & resources released.")
+            print(f"[***] Completed batch {i//batch_size + 1}. Resources released.")
             save_progress(all_rows, OUTPUT_CSV, fieldnames)
             print(f"[*] Progress saved to {OUTPUT_CSV}")
     else:
@@ -628,22 +623,16 @@ async def main():
                 chunk = website_rows[i:i+batch_size]
                 print(f"\n[***] Starting website crawl batch {i//batch_size + 1} ({len(chunk)} websites)...")
 
-                async with async_playwright() as p:
-                    browser = await p.chromium.launch(headless=True)
-                    semaphore = asyncio.Semaphore(3) # Max 3 concurrent crawlers
+                semaphore = asyncio.Semaphore(3) # Max 3 concurrent crawlers
 
-                    tasks = []
-                    for row in chunk:
-                        task = process_row(row, browser, semaphore, writer, outfile, processed_urls)
-                        tasks.append(task)
+                tasks = []
+                for row in chunk:
+                    task = process_row(row, semaphore, writer, outfile, processed_urls)
+                    tasks.append(task)
 
-                    await asyncio.gather(*tasks)
-                    try:
-                        await asyncio.wait_for(browser.close(), timeout=10.0)
-                    except Exception:
-                        pass
+                await asyncio.gather(*tasks)
 
-                print(f"[***] Completed batch {i//batch_size + 1}. Browser closed & resources released.")
+                print(f"[***] Completed batch {i//batch_size + 1}. Resources released.")
 
     print(f"\n[+] Email scraping complete! Output saved to {OUTPUT_CSV}")
 
