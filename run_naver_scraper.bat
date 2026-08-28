@@ -41,6 +41,12 @@ echo ======================================================
 python src/scraper_naver.py
 if errorlevel 1 goto RunFailed
 
+echo ======================================================
+echo STEP 2: Scrape Emails and Format Korean Agencies Data...
+echo ======================================================
+python format_korean_emails.py
+if errorlevel 1 goto FormatFailed
+
 goto End
 
 :NoPython
@@ -66,6 +72,11 @@ exit /b
 
 :RunFailed
 echo [ERROR] Scraping pipeline failed during execution.
+pause
+exit /b
+
+:FormatFailed
+echo [ERROR] Email scraping or formatting step failed during execution.
 pause
 exit /b
 

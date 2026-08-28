@@ -16,6 +16,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Candidates for input file path (in order of priority)
 CANDIDATES = [
+    os.path.join(SCRIPT_DIR, "(chờ) khách sạn Hy Lạp - CleanData.csv"),
     os.path.join(SCRIPT_DIR, "hotel_greece_with_emails.csv"),
     os.path.join(SCRIPT_DIR, "hotel_greece.csv")
 ]
@@ -292,11 +293,12 @@ def main():
 
     # Step 1: Normalize emails and score them
     for r in rows:
-        original_email = get_field(r, 'Email', 'Category', 'Liên Hệ mail')
+        original_email = get_field(r, 'Email', 'Liên Hệ mail')
         r['Best_Email'] = clean_and_score_email(original_email)
-        if not r['Best_Email']:
-            website = get_field(r, 'Website', 'Liên Hệ', 'URL', 'website', 'Web')
-            r['Best_Email'] = guess_email_from_website(website)
+        # Email guessing is disabled per user request
+        # if not r['Best_Email']:
+        #     website = get_field(r, 'Website', 'Liên Hệ', 'URL', 'website', 'Web')
+        #     r['Best_Email'] = guess_email_from_website(website)
         
     # Step 2: Deduplicate by normalized name
     grouped_rows = {}
@@ -385,9 +387,12 @@ def main():
     
     output_rows = []
     for i, r in enumerate(final_sorted_rows, 1):
-        phone = get_field(r, 'Phone', 'SĐT')
+        phone = get_field(r, 'SĐT', 'Phone')
         if phone:
-            raw_digits = normalize_phone(phone)
+            if phone.startswith("'"):
+                raw_digits = phone[1:]
+            else:
+                raw_digits = normalize_phone(phone)
             phone = f"'{raw_digits}"
         else:
             phone = ""
@@ -398,29 +403,29 @@ def main():
         # Fallback to general category name if translation not found
         if not vi_category:
             vi_category = "Khách sạn Hy Lạp"
-        else:
+        elif not vi_category.strip().lower().endswith("hy lạp"):
             vi_category = f"{vi_category} Hy Lạp"
             
         out_row = {
             "No.": i,
-            "Công ty": get_field(r, 'Name', 'Công ty'),
-            "Chức danh": "",
-            "Người liên hệ": "",
+            "Công ty": get_field(r, 'Công ty', 'Name'),
+            "Chức danh": get_field(r, 'Chức danh'),
+            "Người liên hệ": get_field(r, 'Người liên hệ'),
             "SĐT": phone,
-            "Liên Hệ": get_field(r, 'Website', 'Liên Hệ'),
+            "Liên Hệ": get_field(r, 'Liên Hệ', 'Website'),
             "Email": r['Best_Email'],
-            "Liên Hệ mail": "",
-            "Địa chỉ": get_field(r, 'Address', 'Địa chỉ'),
-            "Lương": "",
-            "Ngày đăng": "",
-            "Hạn tuyển": "",
-            "Check gửi": "",
-            "Last Subject": "",
-            "Last Body HTML": "",
-            "Trạng thái Reply": "",
-            "Lần Follow-up": 0,
-            "Ngày Follow-up gần nhất": "",
-            "Mailbox đã dùng": "",
+            "Liên Hệ mail": get_field(r, 'Liên Hệ mail'),
+            "Địa chỉ": get_field(r, 'Địa chỉ', 'Address'),
+            "Lương": get_field(r, 'Lương'),
+            "Ngày đăng": get_field(r, 'Ngày đăng'),
+            "Hạn tuyển": get_field(r, 'Hạn tuyển'),
+            "Check gửi": get_field(r, 'Check gửi'),
+            "Last Subject": get_field(r, 'Last Subject'),
+            "Last Body HTML": get_field(r, 'Last Body HTML'),
+            "Trạng thái Reply": get_field(r, 'Trạng thái Reply'),
+            "Lần Follow-up": get_field(r, 'Lần Follow-up') or 0,
+            "Ngày Follow-up gần nhất": get_field(r, 'Ngày Follow-up gần nhất'),
+            "Mailbox đã dùng": get_field(r, 'Mailbox đã dùng'),
             "Category": vi_category
         }
         output_rows.append(out_row)
