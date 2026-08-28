@@ -10,7 +10,7 @@ KEYWORDS = [
 ]
 
 # Output settings
-OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "construction_latvia.csv")
+OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "construction_latvia.csv")
 
 # Playwright Browser Settings
 HEADLESS = False  # Set to True to run the browser hidden in the background

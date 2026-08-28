@@ -28,7 +28,7 @@ CATEGORY_TRANSLATIONS = {
 # Output settings
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_CSV = os.path.join(os.path.dirname(SCRIPT_DIR), "broker_greece.csv")
-PROGRESS_FILE = os.path.join(os.path.dirname(OUTPUT_CSV), "scraping_progress_broker_gr.json")
+PROGRESS_FILE = os.path.join(os.path.dirname(os.path.dirname(OUTPUT_CSV)), "progress", "scraping_progress_broker_gr.json")
 
 # Playwright Browser Settings
 HEADLESS = False  # Set to True to run browser hidden

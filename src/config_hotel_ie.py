@@ -40,8 +40,8 @@ ALLOWED_CATEGORIES = {
 }
 
 # Output file settings
-OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "hotel_ireland.csv")
-PROGRESS_FILE = os.path.join(os.path.dirname(OUTPUT_CSV), "scraping_progress_hotel_ie.json")
+OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "hotel_ireland.csv")
+PROGRESS_FILE = os.path.join(os.path.dirname(os.path.dirname(OUTPUT_CSV)), "progress", "scraping_progress_hotel_ie.json")
 
 # Playwright Browser Settings
 HEADLESS = False   # Set to True for headless running

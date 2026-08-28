@@ -4,8 +4,8 @@
 import os
 
 # Output File Paths
-OUTPUT_CSV = r"d:\glc\nail uc\korean_agencies.csv"
-OUTPUT_XLSX = r"d:\glc\nail uc\korean_agencies.xlsx"
+OUTPUT_CSV = r"d:\glc\nail uc\data\raw\korean_agencies.csv"
+OUTPUT_XLSX = r"d:\glc\nail uc\data\raw\korean_agencies.xlsx"
 
 # Search settings
 KEYWORDS = [

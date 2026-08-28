@@ -45,7 +45,7 @@ ALLOWED_CATEGORIES = [
 ]
 
 # Output settings
-OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "slovakia_factories.csv")
+OUTPUT_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "slovakia_factories.csv")
 
 # Playwright Browser Settings
 HEADLESS = False  # Set to True to run the browser hidden in the background

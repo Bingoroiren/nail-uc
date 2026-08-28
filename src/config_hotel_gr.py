@@ -31,7 +31,7 @@ ALLOWED_CATEGORIES = {
 # Output settings (uses dynamic relative paths)
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_CSV = os.path.join(os.path.dirname(SCRIPT_DIR), "hotel_greece.csv")
-PROGRESS_FILE = os.path.join(os.path.dirname(OUTPUT_CSV), "scraping_progress_hotel_gr.json")
+PROGRESS_FILE = os.path.join(os.path.dirname(os.path.dirname(OUTPUT_CSV)), "progress", "scraping_progress_hotel_gr.json")
 
 # Playwright Browser Settings
 HEADLESS = False  # Set to True to run the browser hidden in the background
