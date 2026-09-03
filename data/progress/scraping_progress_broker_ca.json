@@ -1,0 +1,1454 @@
+{
+  "completed": [
+    [
+      "Toronto",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Toronto",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Toronto",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Toronto",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Toronto",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Ottawa",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Ottawa",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Ottawa",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Ottawa",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Ottawa",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Mississauga",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Mississauga",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Mississauga",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Mississauga",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Mississauga",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Brampton",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Brampton",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Brampton",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Brampton",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Brampton",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Hamilton",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Hamilton",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Hamilton",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Hamilton",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Hamilton",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "London",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "London",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "London",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "London",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "London",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Markham",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Markham",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Markham",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Markham",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Markham",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Kitchener",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Kitchener",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Kitchener",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Kitchener",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Kitchener",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Windsor",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Windsor",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Windsor",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Windsor",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Windsor",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Oakville",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Oakville",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Oakville",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Oakville",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Oakville",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Barrie",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Barrie",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Barrie",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Barrie",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Barrie",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Vaughan",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Vaughan",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Vaughan",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Vaughan",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Vaughan",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Oshawa",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Oshawa",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Oshawa",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Oshawa",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Oshawa",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Kingston",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Kingston",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Kingston",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Kingston",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Kingston",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Sudbury",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Sudbury",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Sudbury",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Sudbury",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Sudbury",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Thunder Bay",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Thunder Bay",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Thunder Bay",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Thunder Bay",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Thunder Bay",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Guelph",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Guelph",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Guelph",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Guelph",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Guelph",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Cambridge",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "Cambridge",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "Cambridge",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "Cambridge",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "Cambridge",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "St. Catharines",
+      "Ontario",
+      "Employment agency"
+    ],
+    [
+      "St. Catharines",
+      "Ontario",
+      "Temp agency"
+    ],
+    [
+      "St. Catharines",
+      "Ontario",
+      "Human resource consulting"
+    ],
+    [
+      "St. Catharines",
+      "Ontario",
+      "Recruiter"
+    ],
+    [
+      "St. Catharines",
+      "Ontario",
+      "Employment consultant"
+    ],
+    [
+      "Vancouver",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Vancouver",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Vancouver",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Vancouver",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Vancouver",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Surrey",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Surrey",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Surrey",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Surrey",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Surrey",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Burnaby",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Burnaby",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Burnaby",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Burnaby",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Burnaby",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Richmond",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Richmond",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Richmond",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Richmond",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Richmond",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Kelowna",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Kelowna",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Kelowna",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Kelowna",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Kelowna",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Abbotsford",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Abbotsford",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Abbotsford",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Abbotsford",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Abbotsford",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Victoria",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Victoria",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Victoria",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Victoria",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Victoria",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Coquitlam",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Coquitlam",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Coquitlam",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Coquitlam",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Coquitlam",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Prince George",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Prince George",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Prince George",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Prince George",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Prince George",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Kamloops",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Kamloops",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Kamloops",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Kamloops",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Kamloops",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Langley",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Langley",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Langley",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Langley",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Langley",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Nanaimo",
+      "British Columbia",
+      "Employment agency"
+    ],
+    [
+      "Nanaimo",
+      "British Columbia",
+      "Temp agency"
+    ],
+    [
+      "Nanaimo",
+      "British Columbia",
+      "Human resource consulting"
+    ],
+    [
+      "Nanaimo",
+      "British Columbia",
+      "Recruiter"
+    ],
+    [
+      "Nanaimo",
+      "British Columbia",
+      "Employment consultant"
+    ],
+    [
+      "Montreal",
+      "Quebec",
+      "Employment agency"
+    ],
+    [
+      "Montreal",
+      "Quebec",
+      "Temp agency"
+    ],
+    [
+      "Montreal",
+      "Quebec",
+      "Human resource consulting"
+    ],
+    [
+      "Montreal",
+      "Quebec",
+      "Recruiter"
+    ],
+    [
+      "Montreal",
+      "Quebec",
+      "Employment consultant"
+    ],
+    [
+      "Quebec City",
+      "Quebec",
+      "Employment agency"
+    ],
+    [
+      "Quebec City",
+      "Quebec",
+      "Temp agency"
+    ],
+    [
+      "Quebec City",
+      "Quebec",
+      "Human resource consulting"
+    ],
+    [
+      "Quebec City",
+      "Quebec",
+      "Recruiter"
+    ],
+    [
+      "Quebec City",
+      "Quebec",
+      "Employment consultant"
+    ],
+    [
+      "Laval",
+      "Quebec",
+      "Employment agency"
+    ],
+    [
+      "Laval",
+      "Quebec",
+      "Temp agency"
+    ],
+    [
+      "Laval",
+      "Quebec",
+      "Human resource consulting"
+    ],
+    [
+      "Laval",
+      "Quebec",
+      "Recruiter"
+    ],
+    [
+      "Laval",
+      "Quebec",
+      "Employment consultant"
+    ],
+    [
+      "Longueuil",
+      "Quebec",
+      "Employment agency"
+    ],
+    [
+      "Longueuil",
+      "Quebec",
+      "Temp agency"
+    ],
+    [
+      "Longueuil",
+      "Quebec",
+      "Human resource consulting"
+    ],
+    [
+      "Longueuil",
+      "Quebec",
+      "Recruiter"
+    ],
+    [
+      "Longueuil",
+      "Quebec",
+      "Employment consultant"
+    ],
+    [
+      "Sherbrooke",
+      "Quebec",
+      "Employment agency"
+    ],
+    [
+      "Sherbrooke",
+      "Quebec",
+      "Temp agency"
+    ],
+    [
+      "Sherbrooke",
+      "Quebec",
+      "Human resource consulting"
+    ],
+    [
+      "Sherbrooke",
+      "Quebec",
+      "Recruiter"
+    ],
+    [
+      "Sherbrooke",
+      "Quebec",
+      "Employment consultant"
+    ],
+    [
+      "Saguenay",
+      "Quebec",
+      "Employment agency"
+    ],
+    [
+      "Saguenay",
+      "Quebec",
+      "Temp agency"
+    ],
+    [
+      "Saguenay",
+      "Quebec",
+      "Human resource consulting"
+    ],
+    [
+      "Saguenay",
+      "Quebec",
+      "Recruiter"
+    ],
+    [
+      "Saguenay",
+      "Quebec",
+      "Employment consultant"
+    ],
+    [
+      "Trois-Rivieres",
+      "Quebec",
+      "Employment agency"
+    ],
+    [
+      "Trois-Rivieres",
+      "Quebec",
+      "Temp agency"
+    ],
+    [
+      "Trois-Rivieres",
+      "Quebec",
+      "Human resource consulting"
+    ],
+    [
+      "Trois-Rivieres",
+      "Quebec",
+      "Recruiter"
+    ],
+    [
+      "Trois-Rivieres",
+      "Quebec",
+      "Employment consultant"
+    ],
+    [
+      "Gatineau",
+      "Quebec",
+      "Employment agency"
+    ],
+    [
+      "Gatineau",
+      "Quebec",
+      "Temp agency"
+    ],
+    [
+      "Gatineau",
+      "Quebec",
+      "Human resource consulting"
+    ],
+    [
+      "Gatineau",
+      "Quebec",
+      "Recruiter"
+    ],
+    [
+      "Gatineau",
+      "Quebec",
+      "Employment consultant"
+    ],
+    [
+      "Calgary",
+      "Alberta",
+      "Employment agency"
+    ],
+    [
+      "Calgary",
+      "Alberta",
+      "Temp agency"
+    ],
+    [
+      "Calgary",
+      "Alberta",
+      "Human resource consulting"
+    ],
+    [
+      "Calgary",
+      "Alberta",
+      "Recruiter"
+    ],
+    [
+      "Calgary",
+      "Alberta",
+      "Employment consultant"
+    ],
+    [
+      "Edmonton",
+      "Alberta",
+      "Employment agency"
+    ],
+    [
+      "Edmonton",
+      "Alberta",
+      "Temp agency"
+    ],
+    [
+      "Edmonton",
+      "Alberta",
+      "Human resource consulting"
+    ],
+    [
+      "Edmonton",
+      "Alberta",
+      "Recruiter"
+    ],
+    [
+      "Edmonton",
+      "Alberta",
+      "Employment consultant"
+    ],
+    [
+      "Red Deer",
+      "Alberta",
+      "Employment agency"
+    ],
+    [
+      "Red Deer",
+      "Alberta",
+      "Temp agency"
+    ],
+    [
+      "Red Deer",
+      "Alberta",
+      "Human resource consulting"
+    ],
+    [
+      "Red Deer",
+      "Alberta",
+      "Recruiter"
+    ],
+    [
+      "Red Deer",
+      "Alberta",
+      "Employment consultant"
+    ],
+    [
+      "Lethbridge",
+      "Alberta",
+      "Employment agency"
+    ],
+    [
+      "Lethbridge",
+      "Alberta",
+      "Temp agency"
+    ],
+    [
+      "Lethbridge",
+      "Alberta",
+      "Human resource consulting"
+    ],
+    [
+      "Lethbridge",
+      "Alberta",
+      "Recruiter"
+    ],
+    [
+      "Lethbridge",
+      "Alberta",
+      "Employment consultant"
+    ],
+    [
+      "Airdrie",
+      "Alberta",
+      "Employment agency"
+    ],
+    [
+      "Airdrie",
+      "Alberta",
+      "Temp agency"
+    ],
+    [
+      "Airdrie",
+      "Alberta",
+      "Human resource consulting"
+    ],
+    [
+      "Airdrie",
+      "Alberta",
+      "Recruiter"
+    ],
+    [
+      "Airdrie",
+      "Alberta",
+      "Employment consultant"
+    ],
+    [
+      "Medicine Hat",
+      "Alberta",
+      "Employment agency"
+    ],
+    [
+      "Medicine Hat",
+      "Alberta",
+      "Temp agency"
+    ],
+    [
+      "Medicine Hat",
+      "Alberta",
+      "Human resource consulting"
+    ],
+    [
+      "Medicine Hat",
+      "Alberta",
+      "Recruiter"
+    ],
+    [
+      "Medicine Hat",
+      "Alberta",
+      "Employment consultant"
+    ],
+    [
+      "Grande Prairie",
+      "Alberta",
+      "Employment agency"
+    ],
+    [
+      "Grande Prairie",
+      "Alberta",
+      "Temp agency"
+    ],
+    [
+      "Grande Prairie",
+      "Alberta",
+      "Human resource consulting"
+    ],
+    [
+      "Grande Prairie",
+      "Alberta",
+      "Recruiter"
+    ],
+    [
+      "Grande Prairie",
+      "Alberta",
+      "Employment consultant"
+    ],
+    [
+      "Winnipeg",
+      "Manitoba",
+      "Employment agency"
+    ],
+    [
+      "Winnipeg",
+      "Manitoba",
+      "Temp agency"
+    ],
+    [
+      "Winnipeg",
+      "Manitoba",
+      "Human resource consulting"
+    ],
+    [
+      "Winnipeg",
+      "Manitoba",
+      "Recruiter"
+    ],
+    [
+      "Winnipeg",
+      "Manitoba",
+      "Employment consultant"
+    ],
+    [
+      "Brandon",
+      "Manitoba",
+      "Employment agency"
+    ],
+    [
+      "Brandon",
+      "Manitoba",
+      "Temp agency"
+    ],
+    [
+      "Brandon",
+      "Manitoba",
+      "Human resource consulting"
+    ],
+    [
+      "Brandon",
+      "Manitoba",
+      "Recruiter"
+    ],
+    [
+      "Brandon",
+      "Manitoba",
+      "Employment consultant"
+    ],
+    [
+      "Saskatoon",
+      "Saskatchewan",
+      "Employment agency"
+    ],
+    [
+      "Saskatoon",
+      "Saskatchewan",
+      "Temp agency"
+    ],
+    [
+      "Saskatoon",
+      "Saskatchewan",
+      "Human resource consulting"
+    ],
+    [
+      "Saskatoon",
+      "Saskatchewan",
+      "Recruiter"
+    ],
+    [
+      "Saskatoon",
+      "Saskatchewan",
+      "Employment consultant"
+    ],
+    [
+      "Regina",
+      "Saskatchewan",
+      "Employment agency"
+    ],
+    [
+      "Regina",
+      "Saskatchewan",
+      "Temp agency"
+    ],
+    [
+      "Regina",
+      "Saskatchewan",
+      "Human resource consulting"
+    ],
+    [
+      "Regina",
+      "Saskatchewan",
+      "Recruiter"
+    ],
+    [
+      "Regina",
+      "Saskatchewan",
+      "Employment consultant"
+    ],
+    [
+      "Prince Albert",
+      "Saskatchewan",
+      "Employment agency"
+    ],
+    [
+      "Prince Albert",
+      "Saskatchewan",
+      "Temp agency"
+    ],
+    [
+      "Prince Albert",
+      "Saskatchewan",
+      "Human resource consulting"
+    ],
+    [
+      "Prince Albert",
+      "Saskatchewan",
+      "Recruiter"
+    ],
+    [
+      "Prince Albert",
+      "Saskatchewan",
+      "Employment consultant"
+    ],
+    [
+      "Halifax",
+      "Nova Scotia",
+      "Employment agency"
+    ],
+    [
+      "Halifax",
+      "Nova Scotia",
+      "Temp agency"
+    ],
+    [
+      "Halifax",
+      "Nova Scotia",
+      "Human resource consulting"
+    ],
+    [
+      "Halifax",
+      "Nova Scotia",
+      "Recruiter"
+    ],
+    [
+      "Halifax",
+      "Nova Scotia",
+      "Employment consultant"
+    ],
+    [
+      "Cape Breton",
+      "Nova Scotia",
+      "Employment agency"
+    ],
+    [
+      "Cape Breton",
+      "Nova Scotia",
+      "Temp agency"
+    ],
+    [
+      "Cape Breton",
+      "Nova Scotia",
+      "Human resource consulting"
+    ],
+    [
+      "Cape Breton",
+      "Nova Scotia",
+      "Recruiter"
+    ],
+    [
+      "Cape Breton",
+      "Nova Scotia",
+      "Employment consultant"
+    ],
+    [
+      "Moncton",
+      "New Brunswick",
+      "Employment agency"
+    ],
+    [
+      "Moncton",
+      "New Brunswick",
+      "Temp agency"
+    ],
+    [
+      "Moncton",
+      "New Brunswick",
+      "Human resource consulting"
+    ],
+    [
+      "Moncton",
+      "New Brunswick",
+      "Recruiter"
+    ],
+    [
+      "Moncton",
+      "New Brunswick",
+      "Employment consultant"
+    ],
+    [
+      "Fredericton",
+      "New Brunswick",
+      "Employment agency"
+    ],
+    [
+      "Fredericton",
+      "New Brunswick",
+      "Temp agency"
+    ],
+    [
+      "Fredericton",
+      "New Brunswick",
+      "Human resource consulting"
+    ],
+    [
+      "Fredericton",
+      "New Brunswick",
+      "Recruiter"
+    ],
+    [
+      "Fredericton",
+      "New Brunswick",
+      "Employment consultant"
+    ],
+    [
+      "Saint John",
+      "New Brunswick",
+      "Employment agency"
+    ],
+    [
+      "Saint John",
+      "New Brunswick",
+      "Temp agency"
+    ],
+    [
+      "Saint John",
+      "New Brunswick",
+      "Human resource consulting"
+    ],
+    [
+      "Saint John",
+      "New Brunswick",
+      "Recruiter"
+    ],
+    [
+      "Saint John",
+      "New Brunswick",
+      "Employment consultant"
+    ],
+    [
+      "St. John's",
+      "Newfoundland",
+      "Employment agency"
+    ],
+    [
+      "St. John's",
+      "Newfoundland",
+      "Temp agency"
+    ],
+    [
+      "St. John's",
+      "Newfoundland",
+      "Human resource consulting"
+    ],
+    [
+      "St. John's",
+      "Newfoundland",
+      "Recruiter"
+    ],
+    [
+      "St. John's",
+      "Newfoundland",
+      "Employment consultant"
+    ],
+    [
+      "Charlottetown",
+      "PEI",
+      "Employment agency"
+    ],
+    [
+      "Charlottetown",
+      "PEI",
+      "Temp agency"
+    ],
+    [
+      "Charlottetown",
+      "PEI",
+      "Human resource consulting"
+    ],
+    [
+      "Charlottetown",
+      "PEI",
+      "Recruiter"
+    ],
+    [
+      "Charlottetown",
+      "PEI",
+      "Employment consultant"
+    ]
+  ]
+}
