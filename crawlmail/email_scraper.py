@@ -36,6 +36,11 @@ elif len(sys.argv) == 2:
     print("Usage: python email_scraper.py [input_csv] [output_csv] [--retry-empty]")
     sys.exit(1)
 
+# Ensure output directory exists
+out_dir = os.path.dirname(os.path.abspath(OUTPUT_CSV))
+if out_dir:
+    os.makedirs(out_dir, exist_ok=True)
+
 # Email Regex & Invalid list
 EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]{1,255}\.[A-Z|a-z]{2,7}\b')
 INVALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.pdf', '.css', '.js', '.ico', '.woff', '.woff2', '.mp4', '.mp3')
