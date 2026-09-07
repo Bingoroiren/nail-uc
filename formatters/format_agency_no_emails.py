@@ -241,8 +241,8 @@ async def crawl_site_for_emails(page, url):
     return [em for sc, em in scored]
 
 async def main():
-    test_mode = "--test" in sys.argv
-    reset_mode = "--reset" in sys.argv
+    test_mode = "--test" in sys.argv or "test" in sys.argv
+    reset_mode = "--reset" in sys.argv or "reset" in sys.argv
 
     if reset_mode and os.path.exists(PROGRESS_FILE):
         os.remove(PROGRESS_FILE)

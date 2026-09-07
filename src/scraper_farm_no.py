@@ -357,8 +357,8 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     return extracted_count
 
 async def main():
-    test_mode = "--test" in sys.argv
-    reset_mode = "--reset" in sys.argv
+    test_mode = "--test" in sys.argv or "test" in sys.argv
+    reset_mode = "--reset" in sys.argv or "reset" in sys.argv
 
     if reset_mode:
         print("[!] Reset mode requested. Clearing raw CSV and progress file...")
