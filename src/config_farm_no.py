@@ -14,7 +14,9 @@ KEYWORDS = [
     "Bondebær",
     "Fruktgård",
     "Melkebruk",
-    "Husdyrbruk"
+    "Husdyrbruk",
+    "Gartneri",
+    "Drivhus"
 ]
 
 # Allowed Category Tags for strict filtering (lowercase matching)
@@ -41,7 +43,11 @@ ALLOWED_CATEGORIES = {
     "akvakultur",
     "fiskeoppdretter",
     "landbruksvirksomhet",
-    "bondegård"
+    "bondegård",
+    "gartneri",
+    "gartnerivirksomhet",
+    "drivhus",
+    "drivhusgartneri"
 }
 
 # Dynamic Output & Progress File Paths (Cross-machine / Git compatible)

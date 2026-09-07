@@ -23,41 +23,17 @@ if sys.platform.startswith('win') and hasattr(sys.stdout, 'buffer'):
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 
-INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "farm_finland.csv")
-OUTPUT_CSV = os.path.join(ROOT_DIR, "data", "formatted", "farm_finland_with_emails_formatted.csv")
-CLEAN_DEDUP_CSV = os.path.join(ROOT_DIR, "data", "formatted", "farm_finland_clean_dedup.csv")
-PROGRESS_FILE = os.path.join(ROOT_DIR, "data", "progress", "scraping_progress_farm_fi_emails.json")
+INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "agency_finland.csv")
+OUTPUT_CSV = os.path.join(ROOT_DIR, "data", "formatted", "agency_finland_with_emails_formatted.csv")
+CLEAN_DEDUP_CSV = os.path.join(ROOT_DIR, "data", "formatted", "agency_finland_clean_dedup.csv")
+PROGRESS_FILE = os.path.join(ROOT_DIR, "data", "progress", "scraping_progress_agency_fi_emails.json")
 
 EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b')
 
-# Finnish Category Translation Map to Vietnamese
-CATEGORY_TRANSLATIONS = {
-    "maatila": "Trang trại / Nông trại",
-    "luomutila": "Nông trại hữu cơ / Sinh thái",
-    "maitotila": "Trại chăn nuôi bò sữa",
-    "kalanviljelylaitos": "Trang trại / Cơ sở nuôi cá",
-    "kalanviljely": "Trang trại / Cơ sở nuôi cá",
-    "karjatila": "Trại chăn nuôi gia súc / bò",
-    "joulukuusitila": "Trang trại trồng cây thông Noel",
-    "siipikarjatila": "Trại chăn nuôi gia cầm",
-    "hunajatarha": "Trang trại nuôi ong lấy mật",
-    "viinitila": "Vườn nho / Nhà làm rượu vang",
-    "hedelmien ja vihannesten käsittelylaitos": "Cơ sở chế biến rau củ quả",
-    "puutarha": "Vườn cây / Trang trại hoa quả",
-    "marjatila": "Trang trại trồng quả mọng / dâu tây",
-    "kasvihuone": "Trang trại nhà kính",
-    "kasvihuoneviljely": "Trồng trọt nhà kính",
-    "kasvihuoneviljelmä": "Trang trại nhà kính",
-    "vihanneskasvihuone": "Trang trại nhà kính trồng rau",
-    "vihannesviljely": "Trang trại trồng rau",
-    "hedelmänviljely": "Trang trại trồng cây ăn quả",
-    "maatalousympäristö": "Khu vực / Cơ sở nông nghiệp",
-    "maatalousyritys": "Doanh nghiệp / Trang trại nông nghiệp",
-    "tila": "Trang trại / Nông trại gia đình",
-    "kotieläintila": "Trại chăn nuôi gia súc",
-    "sikala": "Trại chăn nuôi heo / lợn",
-    "lammastila": "Trại chăn nuôi cừu"
-}
+# Finnish Phone Number Regex (+358 or 010/020/040/050...)
+FI_PHONE_REGEX = re.compile(r'(?:\+358|0)\s?(?:[1-9]\d{0,3})\s?\d{3,4}\s?\d{3,4}')
+
+CATEGORY_VN = "Agency tuyển dụng & cung ứng nhân sự Phần Lan"
 
 JUNK_DOMAINS = [
     "facebook.com", "twitter.com", "instagram.com", "linkedin.com", "youtube.com",
@@ -78,15 +54,6 @@ def safe_print(msg):
     except Exception:
         pass
 
-def translate_category(cat_str):
-    if not cat_str:
-        return "Nông trại / Trang trại"
-    cat_lower = cat_str.lower().strip()
-    for key, trans in CATEGORY_TRANSLATIONS.items():
-        if key in cat_lower or cat_lower in key:
-            return trans
-    return cat_str
-
 def score_email(email):
     email = email.lower().strip()
     if "@" not in email or not EMAIL_REGEX.match(email):
@@ -100,8 +67,8 @@ def score_email(email):
     if any(jd in domain for jd in JUNK_DOMAINS):
         return 0
         
-    public_domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'luukku.com', 'suomi24.fi', 'pp.inet.fi', 'kolumbus.fi', 'elisa.fi']
-    generic_biz_usernames = ['info', 'asiakaspalvelu', 'posti', 'myynti', 'tilaus', 'toimisto', 'kontakt', 'tila', 'kala']
+    public_domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'kolumbus.fi', 'elisa.fi']
+    generic_biz_usernames = ['info', 'rekry', 'asiakaspalvelu', 'myynti', 'toimisto', 'post', 'contact', 'rekrytointi']
     
     if domain not in public_domains and username in generic_biz_usernames:
         return 10
@@ -129,32 +96,113 @@ def pick_best_single_email(email_str):
     valid_emails.sort(key=lambda x: (x[0], -len(x[1])), reverse=True)
     return valid_emails[0][1]
 
-async def crawl_site_for_emails(page, url):
-    if not url or "google.com" in url or "facebook.com" in url:
-        return []
-    emails = set()
+async def setup_vpn_speed_route(page):
+    """Blocks heavy static assets (images, fonts, media, css) to accelerate website loading over VPN."""
+    async def route_handler(route):
+        req = route.request
+        resource_type = req.resource_type
+        if resource_type in ["image", "media", "font", "stylesheet"]:
+            await route.abort()
+        else:
+            await route.continue_()
     try:
-        await page.goto(url, timeout=12000, wait_until="commit")
-        await page.wait_for_timeout(1000)
+        await page.route("**/*", route_handler)
+    except Exception:
+        pass
+
+async def extract_contacts_from_page(page, page_url, timeout=10000):
+    emails = set()
+    phones = set()
+    try:
+        await page.goto(page_url, timeout=timeout, wait_until="domcontentloaded")
+        await page.wait_for_timeout(500)
         
-        body_text = await page.locator("body").inner_text()
-        for email in EMAIL_REGEX.findall(body_text):
-            emails.add(email.lower())
+        try:
+            body_text = await page.locator("body").inner_text()
+            for email in EMAIL_REGEX.findall(body_text):
+                emails.add(email.lower())
+            for phone in FI_PHONE_REGEX.findall(body_text):
+                clean_p = phone.strip()
+                if len(clean_p) >= 8:
+                    phones.add(clean_p)
+        except Exception:
+            pass
             
-        html_content = await page.content()
-        for email in EMAIL_REGEX.findall(html_content):
-            emails.add(email.lower())
+        try:
+            html_content = await page.content()
+            for email in EMAIL_REGEX.findall(html_content):
+                emails.add(email.lower())
+        except Exception:
+            pass
             
-        mailto_links = await page.locator('a[href^="mailto:"]').all()
-        for link in mailto_links:
-            href = await link.get_attribute("href")
-            if href:
-                em = href.replace("mailto:", "").split("?")[0].strip().lower()
-                if EMAIL_REGEX.match(em):
-                    emails.add(em)
-                    
-        # Check subpages if no emails found on homepage
-        if not emails:
+        try:
+            mailto_links = await page.locator('a[href^="mailto:"]').all()
+            for link in mailto_links:
+                href = await link.get_attribute("href")
+                if href:
+                    em = href.replace("mailto:", "").split("?")[0].strip().lower()
+                    if EMAIL_REGEX.match(em):
+                        emails.add(em)
+        except Exception:
+            pass
+
+        try:
+            tel_links = await page.locator('a[href^="tel:"]').all()
+            for link in tel_links:
+                href = await link.get_attribute("href")
+                if href:
+                    ph = href.replace("tel:", "").strip()
+                    if len(ph) >= 8:
+                        phones.add(ph)
+        except Exception:
+            pass
+    except Exception:
+        pass
+    return emails, phones
+
+async def crawl_site_for_contacts(page, url):
+    if not url or "google.com" in url or "facebook.com" in url:
+        return [], ""
+    emails = set()
+    phones = set()
+    
+    parsed = urllib.parse.urlparse(url)
+    scheme = parsed.scheme if parsed.scheme in ['http', 'https'] else 'https'
+    netloc = parsed.netloc
+    root_url = f"{scheme}://{netloc}"
+    
+    # 1. Try initial URL
+    p_emails, p_phones = await extract_contacts_from_page(page, url, timeout=15000)
+    emails.update(p_emails)
+    phones.update(p_phones)
+    
+    # 2. If no emails found and URL was a subpath, try root domain homepage
+    if not emails and parsed.path and parsed.path not in ['', '/']:
+        r_emails, r_phones = await extract_contacts_from_page(page, root_url, timeout=12000)
+        emails.update(r_emails)
+        phones.update(r_phones)
+        
+    # 3. Try common contact subpages in Finnish (e.g. /yhteystiedot/, /contact/, /ota-yhteytta/)
+    if not emails:
+        contact_candidates = [
+            f"{root_url}/yhteystiedot/",
+            f"{root_url}/yhteystiedot",
+            f"{root_url}/contact/",
+            f"{root_url}/ota-yhteytta/",
+            f"{root_url}/meista/",
+            f"{root_url}/about/"
+        ]
+        for c_url in contact_candidates:
+            if c_url.rstrip('/') != url.rstrip('/'):
+                c_emails, c_phones = await extract_contacts_from_page(page, c_url, timeout=10000)
+                if c_emails:
+                    emails.update(c_emails)
+                    phones.update(c_phones)
+                    break
+
+    # 4. Check links on page for additional contact pages if still no emails
+    if not emails:
+        try:
             links = await page.locator('a[href]').all()
             subpage_urls = []
             for link in links:
@@ -165,22 +213,19 @@ async def crawl_site_for_emails(page, url):
                 
                 if href and not href_lower.startswith(('mailto:', 'tel:', 'javascript:', '#')):
                     full_url = urllib.parse.urljoin(url, href)
-                    if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
-                        if any(k in text_lower or k in href_lower for k in ['yhteystiedot', 'yhteys', 'contact', 'tietoa', 'about']):
+                    if urllib.parse.urlparse(full_url).netloc == netloc:
+                        if any(k in text_lower or k in href_lower for k in ['yhteystiedot', 'contact', 'ota-yhteytta', 'meista', 'about', 'rekry']):
                             subpage_urls.append(full_url.split('#')[0])
                             
             for sub_url in list(set(subpage_urls))[:2]:
-                try:
-                    await page.goto(sub_url, timeout=8000, wait_until="commit")
-                    await page.wait_for_timeout(1000)
-                    sub_text = await page.locator("body").inner_text()
-                    for email in EMAIL_REGEX.findall(sub_text):
-                        emails.add(email.lower())
-                except Exception:
-                    pass
-    except Exception:
-        pass
-        
+                s_emails, s_phones = await extract_contacts_from_page(page, sub_url, timeout=10000)
+                if s_emails:
+                    emails.update(s_emails)
+                    phones.update(s_phones)
+                    break
+        except Exception:
+            pass
+            
     scored = []
     for em in emails:
         sc = score_email(em)
@@ -188,18 +233,31 @@ async def crawl_site_for_emails(page, url):
             scored.append((sc, em))
             
     scored.sort(key=lambda x: (x[0], -len(x[1])), reverse=True)
-    return [em for sc, em in scored]
+    best_emails = [em for sc, em in scored]
+    
+    phone_str = list(phones)[0] if phones else ""
+    return best_emails, phone_str
 
 async def main():
+    test_mode = "--test" in sys.argv
+    reset_mode = "--reset" in sys.argv
+
+    if reset_mode and os.path.exists(PROGRESS_FILE):
+        os.remove(PROGRESS_FILE)
+
     if not os.path.exists(INPUT_CSV):
         safe_print(f"[-] Input raw CSV not found: {INPUT_CSV}")
         return
         
-    safe_print(f"[*] Processing Finland Farm listings from: {INPUT_CSV}")
+    safe_print(f"[*] Processing Finland Agency listings from: {INPUT_CSV}")
     
     with open(INPUT_CSV, mode="r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         input_rows = list(reader)
+
+    if test_mode:
+        input_rows = input_rows[:10]
+        safe_print(f"[!] TEST MODE ACTIVE: Crawling emails for top {len(input_rows)} records only.")
         
     fieldnames = [
         "No.", "Cong ty", "Chuc danh", "Nguoi lien he", "SDT", "Lien He", "Email", 
@@ -210,7 +268,7 @@ async def main():
     
     processed_companies = set()
     os.makedirs(os.path.dirname(PROGRESS_FILE), exist_ok=True)
-    if os.path.exists(PROGRESS_FILE):
+    if os.path.exists(PROGRESS_FILE) and not reset_mode:
         try:
             with open(PROGRESS_FILE, "r", encoding="utf-8") as f_p:
                 p_data = json.load(f_p)
@@ -223,16 +281,13 @@ async def main():
     
     for idx, row in enumerate(input_rows):
         comp_name = row.get("Business_Name", "").strip()
-        category = row.get("Category", "").strip()
         phone = row.get("Phone", "").strip()
-        address = row.get("Address", "").strip()
+        address = row.get("Address", "Phần Lan (Finland)").strip()
         website = row.get("Website", "").strip()
         
         if phone and not phone.startswith("'"):
             phone = f"'{phone}"
             
-        trans_cat = translate_category(category)
-        
         formatted_rows.append({
             "No.": str(idx + 1),
             "Cong ty": comp_name,
@@ -253,7 +308,7 @@ async def main():
             "Lan Follow-up": "0",
             "Ngay Follow-up gan nhat": "",
             "Mailbox da dung": "",
-            "Category": trans_cat
+            "Category": CATEGORY_VN
         })
 
     def save_progress(proc_set):
@@ -264,39 +319,45 @@ async def main():
         except Exception:
             pass
 
-    # Crawl website emails
+    # Crawl website emails & phone numbers with VPN asset blocking optimization
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         context = await browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            extra_http_headers={"Accept-Language": "fi-FI,fi;q=0.9,en-US;q=0.8,en;q=0.7"}
         )
         page = await context.new_page()
         await stealth_async(page)
+        await setup_vpn_speed_route(page)
         
         total = len(formatted_rows)
         for i, row in enumerate(formatted_rows):
             comp_name = row["Cong ty"]
             web_url = row["Lien He"]
             
-            if comp_name in processed_companies:
+            if comp_name in processed_companies and not test_mode:
                 continue
                 
             is_valid_site = web_url.startswith("http") and "google.com" not in web_url
             
             if is_valid_site:
-                safe_print(f"[{i+1}/{total}] Crawling emails for Finland Farm: '{comp_name}' -> {web_url}...")
-                found_emails = await crawl_site_for_emails(page, web_url)
+                safe_print(f"[{i+1}/{total}] Crawling contacts for Finland Agency: '{comp_name}' -> {web_url}...")
+                found_emails, found_phone = await crawl_site_for_contacts(page, web_url)
                 if found_emails:
                     row["Email"] = found_emails[0] # Pick single best email
                     safe_print(f"  [+] Found best email: {row['Email']}")
                 else:
                     safe_print("  [-] No emails found.")
+                    
+                if not row["SDT"] and found_phone:
+                    row["SDT"] = f"'{found_phone}"
+                    safe_print(f"  [+] Found phone: {row['SDT']}")
             else:
-                safe_print(f"[{i+1}/{total}] Skipping email crawl for: '{comp_name}' (No valid website)")
+                safe_print(f"[{i+1}/{total}] Skipping contact crawl for: '{comp_name}' (No valid website)")
                 
             processed_companies.add(comp_name)
             save_progress(processed_companies)
-            await page.wait_for_timeout(random.uniform(500, 1000))
+            await page.wait_for_timeout(random.uniform(300, 600))
             
         await browser.close()
 
@@ -343,10 +404,10 @@ async def main():
             safe_print(f"[-] Error writing CSV {out_path}: {e}")
 
     safe_print(f"\n==================================================")
-    safe_print(f"[SUCCESS] Finland Farm Data Processed & Formatted.")
-    safe_print(f" Total Unique Farms: {len(sorted_final)}")
-    safe_print(f" Farms WITH Single Email: {len(rows_with_email)}")
-    safe_print(f" Farms WITHOUT Email: {len(rows_without_email)}")
+    safe_print(f"[SUCCESS] Finland Agency Data Processed & Formatted.")
+    safe_print(f" Total Unique Agencies: {len(sorted_final)}")
+    safe_print(f" Agencies WITH Single Email: {len(rows_with_email)}")
+    safe_print(f" Agencies WITHOUT Email: {len(rows_without_email)}")
     safe_print(f"==================================================")
 
 if __name__ == "__main__":

@@ -53,7 +53,11 @@ CATEGORY_TRANSLATIONS = {
     "landwirt": "Cơ sở sản xuất nông nghiệp",
     "landwirtschaftlicher betrieb": "Cơ sở sản xuất nông nghiệp",
     "agrarbetrieb": "Doanh nghiệp nông nghiệp",
-    "weinbaubetrieb": "Cơ sở trồng nho và làm rượu"
+    "weinbaubetrieb": "Cơ sở trồng nho và làm rượu",
+    "gewächshaus": "Trang trại nhà kính",
+    "gewächshausbau": "Trồng trọt nhà kính",
+    "gärtnerei": "Vườn ươm / Trang trại làm vườn & nhà kính",
+    "gemüsegärtnerei": "Trang trại nhà kính trồng rau"
 }
 
 JUNK_DOMAINS = [
@@ -67,7 +71,7 @@ SYSTEM_USERNAMES = [
     "abuse", "security", "webmaster", "sentry", "admin", "mailer-daemon"
 ]
 
-IMAGE_EXTS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.js', '.css', '.ico', '.pdf')
+IMAGE_EXTS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.avif', '.js', '.css', '.ico', '.pdf')
 
 def safe_print(msg):
     try:

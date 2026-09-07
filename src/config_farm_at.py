@@ -15,7 +15,10 @@ KEYWORDS = [
     "Bauernhof",
     "Weingut",
     "Obstbau",
-    "Gemüsebaubetrieb"
+    "Gemüsebaubetrieb",
+    "Gewächshaus",
+    "Gewächshausbau",
+    "Gärtnerei"
 ]
 
 # Allowed Category Tags for strict filtering (lowercase matching)
@@ -42,7 +45,11 @@ ALLOWED_CATEGORIES = {
     "rinderzucht",
     "obst- und gemüsehandel",
     "agrarbetrieb",
-    "weinbaubetrieb"
+    "weinbaubetrieb",
+    "gewächshaus",
+    "gewächshausbau",
+    "gärtnerei",
+    "gemüsegärtnerei"
 }
 
 # Dynamic Output & Progress File Paths (Cross-machine / Git compatible)

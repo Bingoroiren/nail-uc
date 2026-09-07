@@ -153,7 +153,7 @@ def is_category_allowed(category_str):
             return True
     return False
 
-async def scrape_location_keyword(page, location, keyword, scraped_urls, completed_scans):
+async def scrape_location_keyword(page, location, keyword, scraped_urls, completed_scans, test_mode=False):
     loc_name = location["name"]
     state = location["state"]
     lat = location["lat"]
@@ -161,9 +161,9 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     zoom = location.get("zoom", 11)
     
     scan_key = (loc_name.lower(), state.lower(), keyword.lower())
-    if scan_key in completed_scans:
+    if scan_key in completed_scans and not test_mode:
         print(f"[*] Skipping completed scan: '{keyword}' in {loc_name}, {state}")
-        return
+        return 0
         
     search_query = f"{keyword} in {loc_name}, {state}, Austria"
     encoded_query = urllib.parse.quote(search_query)
@@ -176,14 +176,24 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     print(f"[*] URL: {url}")
     print(f"==================================================")
     
-    try:
-        await page.goto(url, timeout=config_farm_at.TIMEOUT)
-        await page.wait_for_timeout(3000)
-    except Exception as e:
-        print(f"[-] Failed to load search page: {e}")
+    loaded = False
+    for attempt in range(2):
+        try:
+            await page.goto(url, timeout=config_farm_at.TIMEOUT)
+            await page.wait_for_timeout(3000)
+            loaded = True
+            break
+        except Exception as e:
+            if attempt == 0:
+                print(f"[*] VPN network delay detected, retrying page load (1/2)...")
+                await asyncio.sleep(2)
+            else:
+                print(f"[-] Failed to load search page after retry: {e}")
+                
+    if not loaded:
         save_completed_scan(loc_name, state, keyword)
         completed_scans.add(scan_key)
-        return
+        return 0
         
     # Handle Cookie Consent modal if present
     try:
@@ -201,13 +211,13 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
         print(f"[-] No results container found for {search_query}")
         save_completed_scan(loc_name, state, keyword)
         completed_scans.add(scan_key)
-        return
+        return 0
 
     # Scroll results panel to load all listings
     print("[*] Scrolling search results panel...")
     previous_height = 0
     same_height_count = 0
-    max_scrolls = 20
+    max_scrolls = 5 if test_mode else 20
     
     for _ in range(max_scrolls):
         try:
@@ -234,6 +244,10 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     
     extracted_count = 0
     for i, link in enumerate(links):
+        if test_mode and extracted_count >= 3:
+            print("[*] Test mode limit reached for this keyword.")
+            break
+
         try:
             href = await link.get_attribute("href")
             place_id = extract_place_id(href)
@@ -267,7 +281,12 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
             addr_elem = page.locator(config_farm_at.SELECTORS["address"])
             address = ""
             if await addr_elem.count() > 0:
-                address = (await addr_elem.first.inner_text()).strip()
+                addr_label = await addr_elem.first.get_attribute("aria-label")
+                if addr_label:
+                    address = addr_label.replace("Address:", "").replace("Adresse:", "").replace("Địa chỉ:", "").strip()
+                else:
+                    address = await addr_elem.first.inner_text()
+                address = re.sub(r'[\uE000-\uF8FF]', '', address).strip()
                 
             # Austria Address Validation
             if address and not is_austria_address(address):
@@ -280,7 +299,12 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
             phone_elem = page.locator(config_farm_at.SELECTORS["phone"])
             phone = ""
             if await phone_elem.count() > 0:
-                phone = (await phone_elem.first.inner_text()).strip()
+                phone_attr = await phone_elem.first.get_attribute("data-item-id")
+                if phone_attr:
+                    phone = phone_attr.replace("phone:tel:", "").strip()
+                else:
+                    phone = await phone_elem.first.inner_text()
+                phone = re.sub(r'[\uE000-\uF8FF]', '', phone).strip()
 
             # Website extraction
             web_elem = page.locator(config_farm_at.SELECTORS["website"])
@@ -330,12 +354,25 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     save_completed_scan(loc_name, state, keyword)
     completed_scans.add(scan_key)
     print(f"[*] Completed search for '{keyword}' in {loc_name}. Extracted {extracted_count} valid farm listings.")
+    return extracted_count
 
 async def main():
+    test_mode = "--test" in sys.argv
+    reset_mode = "--reset" in sys.argv
+
+    if reset_mode:
+        print("[!] Reset mode requested. Clearing raw CSV and progress file...")
+        if os.path.exists(config_farm_at.OUTPUT_CSV):
+            os.remove(config_farm_at.OUTPUT_CSV)
+        if os.path.exists(config_farm_at.PROGRESS_FILE):
+            os.remove(config_farm_at.PROGRESS_FILE)
+
     scraped_urls = get_scraped_urls()
     completed_scans = load_completed_scans()
     
-    print(f"[*] Initialized Austria Farm Scraper.")
+    print(f"[*] Initialized Austria Farm Scraper (including Gewächshaus / Greenhouses).")
+    if test_mode:
+        print("[!] TEST MODE ACTIVE: Will scrape a small sample of locations and keywords.")
     print(f"[*] Loaded {len(scraped_urls)} existing Place IDs.")
     print(f"[*] Loaded {len(completed_scans)} completed scan pairs.")
 
@@ -352,9 +389,12 @@ async def main():
         )
         page = await context.new_page()
 
-        for location in locations_at.LOCATIONS:
-            for keyword in config_farm_at.KEYWORDS:
-                await scrape_location_keyword(page, location, keyword, scraped_urls, completed_scans)
+        target_locations = locations_at.LOCATIONS[:2] if test_mode else locations_at.LOCATIONS
+        target_keywords = config_farm_at.KEYWORDS[:2] if test_mode else config_farm_at.KEYWORDS
+
+        for location in target_locations:
+            for keyword in target_keywords:
+                await scrape_location_keyword(page, location, keyword, scraped_urls, completed_scans, test_mode=test_mode)
                 await asyncio.sleep(random.uniform(config_farm_at.MIN_DELAY, config_farm_at.MAX_DELAY))
 
         await browser.close()
@@ -364,3 +404,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+

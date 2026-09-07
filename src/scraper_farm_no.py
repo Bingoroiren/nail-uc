@@ -176,11 +176,21 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     print(f"[*] URL: {url}")
     print(f"==================================================")
     
-    try:
-        await page.goto(url, timeout=config_farm_no.TIMEOUT)
-        await page.wait_for_timeout(3000)
-    except Exception as e:
-        print(f"[-] Failed to load search page: {e}")
+    loaded = False
+    for attempt in range(2):
+        try:
+            await page.goto(url, timeout=config_farm_no.TIMEOUT)
+            await page.wait_for_timeout(3000)
+            loaded = True
+            break
+        except Exception as e:
+            if attempt == 0:
+                print(f"[*] VPN network delay detected, retrying page load (1/2)...")
+                await asyncio.sleep(2)
+            else:
+                print(f"[-] Failed to load search page after retry: {e}")
+                
+    if not loaded:
         save_completed_scan(loc_name, state, keyword)
         completed_scans.add(scan_key)
         return 0

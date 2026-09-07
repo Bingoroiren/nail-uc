@@ -53,7 +53,11 @@ CATEGORY_TRANSLATIONS = {
     "melkebruk": "Trang trại bò sữa / Sản xuất sữa",
     "husdyrbruk": "Trang trại chăn nuôi gia súc",
     "grønnsaksdyrking": "Trang trại trồng rau",
-    "landbruksvirksomhet": "Doanh nghiệp / Cơ sở nông nghiệp"
+    "landbruksvirksomhet": "Doanh nghiệp / Cơ sở nông nghiệp",
+    "gartneri": "Vườn ươm / Trang trại làm vườn & nhà kính",
+    "gartnerivirksomhet": "Doanh nghiệp / Trang trại làm vườn",
+    "drivhus": "Trang trại nhà kính",
+    "drivhusgartneri": "Trang trại nhà kính làm vườn"
 }
 
 JUNK_DOMAINS = [

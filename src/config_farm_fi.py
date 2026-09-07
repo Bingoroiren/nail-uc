@@ -15,7 +15,9 @@ KEYWORDS = [
     "Hedelmien ja vihannesten käsittelylaitos",
     "Puutarha",
     "Marjatila",
-    "Kasvihuone"
+    "Kasvihuone",
+    "Kasvihuoneviljely",
+    "Kasvihuoneviljelmä"
 ]
 
 # Allowed Category Tags for strict filtering (lowercase matching)
@@ -35,6 +37,9 @@ ALLOWED_CATEGORIES = {
     "puutarha",
     "marjatila",
     "kasvihuone",
+    "kasvihuoneviljely",
+    "kasvihuoneviljelmä",
+    "vihanneskasvihuone",
     "vihannesviljely",
     "hedelmänviljely",
     "maatalousympäristö",
