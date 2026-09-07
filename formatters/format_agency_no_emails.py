@@ -23,37 +23,34 @@ if sys.platform.startswith('win') and hasattr(sys.stdout, 'buffer'):
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 
-INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "farm_norway.csv")
-OUTPUT_CSV = os.path.join(ROOT_DIR, "data", "formatted", "farm_norway_with_emails_formatted.csv")
-CLEAN_DEDUP_CSV = os.path.join(ROOT_DIR, "data", "formatted", "farm_norway_clean_dedup.csv")
-PROGRESS_FILE = os.path.join(ROOT_DIR, "data", "progress", "scraping_progress_farm_no_emails.json")
+INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "agency_norway.csv")
+OUTPUT_CSV = os.path.join(ROOT_DIR, "data", "formatted", "agency_norway_with_emails_formatted.csv")
+CLEAN_DEDUP_CSV = os.path.join(ROOT_DIR, "data", "formatted", "agency_norway_clean_dedup.csv")
+PROGRESS_FILE = os.path.join(ROOT_DIR, "data", "progress", "scraping_progress_agency_no_emails.json")
 
 EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b')
 
 # Norwegian Category Translation Map to Vietnamese
 CATEGORY_TRANSLATIONS = {
-    "gård": "Trang trại / Nông trại",
-    "gårdsbruk": "Trang trại / Nông trại",
-    "bondegård": "Trang trại / Nông trại gia đình",
-    "organisk gård": "Nông trại hữu cơ / Sinh thái",
-    "øko-gård": "Nông trại hữu cơ / Sinh thái",
-    "økologisk gård": "Nông trại hữu cơ / Sinh thái",
-    "vingård": "Vườn nho / Nhà làm rượu vang",
-    "juletregård": "Trang trại trồng cây thông Noel",
-    "fiskeoppdrettsanlegg": "Trang trại / Cơ sở nuôi cá",
-    "fiskeoppdrett": "Trang trại / Cơ sở nuôi cá",
-    "fiskeoppdretter": "Cơ sở / Doanh nghiệp nuôi cá",
-    "oppdrettsanlegg for sjømat": "Trang trại / Cơ sở nuôi hải sản",
-    "sjømatoppdrett": "Trang trại / Cơ sở nuôi hải sản",
-    "akvakulturanlegg": "Cơ sở / Trang trại nuôi trồng thủy sản",
-    "akvakultur": "Nuôi trồng thủy sản",
-    "foredling av frukt og grønnsaker": "Cơ sở chế biến rau củ quả",
-    "fruktgård": "Vườn cây ăn quả / Trang trại hoa quả",
-    "bærgård": "Trang trại trồng quả mọng / Dâu tây",
-    "melkebruk": "Trang trại bò sữa / Sản xuất sữa",
-    "husdyrbruk": "Trang trại chăn nuôi gia súc",
-    "grønnsaksdyrking": "Trang trại trồng rau",
-    "landbruksvirksomhet": "Doanh nghiệp / Cơ sở nông nghiệp"
+    "landbrukstjenester": "Dịch vụ nông nghiệp",
+    "landbruksrådgiving": "Tư vấn & Dịch vụ nông nghiệp",
+    "landbruksservice": "Dịch vụ nông nghiệp",
+    "landbruksorganisasjon": "Tổ chức / Hiệp hội nông nghiệp",
+    "vikarbyrå": "Công ty môi giới / cho thuê lao động",
+    "vikarbyråer": "Công ty môi giới / cho thuê lao động",
+    "rekrutteringsbyrå": "Công ty tuyển dụng / Môi giới nhân sự",
+    "rekrutteringsbyråer": "Công ty tuyển dụng / Môi giới nhân sự",
+    "bemanningsbyrå": "Công ty cung ứng & Cho thuê nhân sự",
+    "bemanningsbyråer": "Công ty cung ứng & Cho thuê nhân sự",
+    "bemanningsselskap": "Doanh nghiệp cung ứng nhân sự",
+    "arbeidsformidling": "Agency / Trung tâm giới thiệu việc làm",
+    "rekruttering": "Dịch vụ tuyển dụng nhân sự",
+    "rekrutteringsselskap": "Công ty tuyển dụng nhân sự",
+    "personalutleie": "Dịch vụ cho thuê nhân lực",
+    "personaltjenester": "Dịch vụ nhân sự",
+    "bemanningsbyra": "Công ty cung ứng nhân sự",
+    "rekrutteringsbyra": "Công ty tuyển dụng",
+    "vikarbyra": "Công ty môi giới lao động"
 }
 
 JUNK_DOMAINS = [
@@ -77,7 +74,7 @@ def safe_print(msg):
 
 def translate_category(cat_str):
     if not cat_str:
-        return "Nông trại / Thủy sản"
+        return "Agency / Dịch vụ nông nghiệp"
     cat_lower = cat_str.lower().strip()
     for key, trans in CATEGORY_TRANSLATIONS.items():
         if key in cat_lower or cat_lower in key:
@@ -98,7 +95,7 @@ def score_email(email):
         return 0
         
     public_domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'online.no', 'broadpark.no', 'c2i.net']
-    generic_biz_usernames = ['post', 'postmottak', 'info', 'firmapost', 'kontakt', 'salg', 'office', 'gard', 'fisk']
+    generic_biz_usernames = ['post', 'postmottak', 'info', 'firmapost', 'kontakt', 'salg', 'office', 'jobb', 'rekruttering']
     
     if domain not in public_domains and username in generic_biz_usernames:
         return 10
@@ -145,6 +142,7 @@ async def crawl_site_for_emails(page, url):
         return []
     emails = set()
     try:
+        # Load page with 20s timeout and domcontentloaded strategy (VPN speed optimization)
         await page.goto(url, timeout=20000, wait_until="domcontentloaded")
         await page.wait_for_timeout(1000)
         
@@ -173,7 +171,7 @@ async def crawl_site_for_emails(page, url):
         except Exception:
             pass
                     
-        # Check subpages if no emails found on homepage
+        # Check contact / about subpages if no emails found on main page
         if not emails:
             try:
                 links = await page.locator('a[href]').all()
@@ -187,7 +185,7 @@ async def crawl_site_for_emails(page, url):
                     if href and not href_lower.startswith(('mailto:', 'tel:', 'javascript:', '#')):
                         full_url = urllib.parse.urljoin(url, href)
                         if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
-                            if any(k in text_lower or k in href_lower for k in ['kontakt', 'contact', 'om-oss', 'about', 'location']):
+                            if any(k in text_lower or k in href_lower for k in ['kontakt', 'contact', 'om-oss', 'about', 'karriere', 'jobb']):
                                 subpage_urls.append(full_url.split('#')[0])
                                 
                 for sub_url in list(set(subpage_urls))[:2]:
@@ -224,7 +222,7 @@ async def main():
         safe_print(f"[-] Input raw CSV not found: {INPUT_CSV}")
         return
         
-    safe_print(f"[*] Processing Norway Farm & Aquaculture listings from: {INPUT_CSV}")
+    safe_print(f"[*] Processing Norway Agency listings from: {INPUT_CSV}")
     
     with open(INPUT_CSV, mode="r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
@@ -297,7 +295,7 @@ async def main():
         except Exception:
             pass
 
-    # Crawl website emails with VPN asset blocking optimization
+    # Crawl website emails with VPN asset-blocking optimization
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         context = await browser.new_context(
@@ -319,7 +317,7 @@ async def main():
             is_valid_site = web_url.startswith("http") and "google.com" not in web_url
             
             if is_valid_site:
-                safe_print(f"[{i+1}/{total}] Crawling emails for Norway Farm/Aquaculture: '{comp_name}' -> {web_url}...")
+                safe_print(f"[{i+1}/{total}] Crawling emails for Norway Agency: '{comp_name}' -> {web_url}...")
                 found_emails = await crawl_site_for_emails(page, web_url)
                 if found_emails:
                     row["Email"] = found_emails[0] # Pick single best email
@@ -331,7 +329,7 @@ async def main():
                 
             processed_companies.add(comp_name)
             save_progress(processed_companies)
-            await page.wait_for_timeout(random.uniform(500, 1000))
+            await page.wait_for_timeout(random.uniform(300, 600))
             
         await browser.close()
 
@@ -378,10 +376,10 @@ async def main():
             safe_print(f"[-] Error writing CSV {out_path}: {e}")
 
     safe_print(f"\n==================================================")
-    safe_print(f"[SUCCESS] Norway Farm Data Processed & Formatted.")
-    safe_print(f" Total Unique Farms/Aquaculture: {len(sorted_final)}")
-    safe_print(f" Farms WITH Single Email: {len(rows_with_email)}")
-    safe_print(f" Farms WITHOUT Email: {len(rows_without_email)}")
+    safe_print(f"[SUCCESS] Norway Agency Data Processed & Formatted.")
+    safe_print(f" Total Unique Agencies: {len(sorted_final)}")
+    safe_print(f" Agencies WITH Single Email: {len(rows_with_email)}")
+    safe_print(f" Agencies WITHOUT Email: {len(rows_without_email)}")
     safe_print(f"==================================================")
 
 if __name__ == "__main__":

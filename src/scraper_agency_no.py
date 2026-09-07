@@ -10,7 +10,7 @@ from playwright.async_api import async_playwright
 
 # Import local modules dynamically
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import config_farm_no
+import config_agency_no
 import locations_no
 
 # Set console output encoding to UTF-8
@@ -30,9 +30,9 @@ def extract_place_id(url):
 def get_scraped_urls():
     """Loads already scraped business Place IDs from CSV file to avoid duplicate entries."""
     scraped_urls = set()
-    if os.path.exists(config_farm_no.OUTPUT_CSV):
+    if os.path.exists(config_agency_no.OUTPUT_CSV):
         try:
-            with open(config_farm_no.OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
+            with open(config_agency_no.OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     if 'URL' in row and row['URL']:
@@ -67,10 +67,10 @@ def is_norway_address(address):
 
 def append_to_csv(row_dict):
     """Appends a single scraped record to the raw CSV file."""
-    os.makedirs(os.path.dirname(config_farm_no.OUTPUT_CSV), exist_ok=True)
-    file_exists = os.path.isfile(config_farm_no.OUTPUT_CSV)
+    os.makedirs(os.path.dirname(config_agency_no.OUTPUT_CSV), exist_ok=True)
+    file_exists = os.path.isfile(config_agency_no.OUTPUT_CSV)
     try:
-        with open(config_farm_no.OUTPUT_CSV, mode='a', encoding='utf-8-sig', newline='') as f:
+        with open(config_agency_no.OUTPUT_CSV, mode='a', encoding='utf-8-sig', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=row_dict.keys())
             if not file_exists:
                 writer.writeheader()
@@ -78,7 +78,7 @@ def append_to_csv(row_dict):
     except Exception as e:
         print(f"[-] Failed to write row to CSV: {e}")
 
-PROGRESS_FILE = config_farm_no.PROGRESS_FILE
+PROGRESS_FILE = config_agency_no.PROGRESS_FILE
 
 def load_completed_scans():
     os.makedirs(os.path.dirname(PROGRESS_FILE), exist_ok=True)
@@ -90,11 +90,11 @@ def load_completed_scans():
         except Exception as e:
             print(f"[-] Error loading progress file: {e}")
             
-    if os.path.exists(config_farm_no.OUTPUT_CSV):
+    if os.path.exists(config_agency_no.OUTPUT_CSV):
         try:
             print("[*] Progress file not found. Initializing from existing CSV data...")
             completed_list = []
-            with open(config_farm_no.OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
+            with open(config_agency_no.OUTPUT_CSV, mode='r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     loc_name = row.get('Location_Name')
@@ -103,12 +103,12 @@ def load_completed_scans():
                     if loc_name and state:
                         found_kw = ""
                         if search_query:
-                            for kw in config_farm_no.KEYWORDS:
+                            for kw in config_agency_no.KEYWORDS:
                                 if kw.lower() in search_query.lower():
                                     found_kw = kw
                                     break
                         if not found_kw:
-                            found_kw = config_farm_no.KEYWORDS[0]
+                            found_kw = config_agency_no.KEYWORDS[0]
                             
                         pair = [loc_name.strip(), state.strip(), found_kw]
                         pair_lower = (loc_name.strip().lower(), state.strip().lower(), found_kw.lower())
@@ -142,13 +142,13 @@ def save_completed_scan(loc_name, state, keyword):
             json.dump({"completed": completed_list}, f, indent=2, ensure_ascii=False)
 
 def is_category_allowed(category_str):
-    """Strictly checks if the category matches allowed Norway farm & aquaculture tags."""
+    """Strictly checks if the category matches allowed Norway agency / recruitment / agricultural service tags."""
     if not category_str:
         return False
     cat_lower = category_str.lower().strip()
     
     # Check exact or substring match with ALLOWED_CATEGORIES
-    for allowed in config_farm_no.ALLOWED_CATEGORIES:
+    for allowed in config_agency_no.ALLOWED_CATEGORIES:
         if allowed in cat_lower or cat_lower in allowed:
             return True
     return False
@@ -168,7 +168,7 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     search_query = f"{keyword} in {loc_name}, {state}, Norway"
     encoded_query = urllib.parse.quote(search_query)
     
-    # Norwegian map URL with zoom level=11 or 10
+    # Norwegian map URL with zoom level=11 or 10 and hl=no language
     url = f"https://www.google.com/maps/search/{encoded_query}/@{lat},{lng},{zoom}z?hl=no"
     
     print(f"\n==================================================")
@@ -177,7 +177,7 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     print(f"==================================================")
     
     try:
-        await page.goto(url, timeout=config_farm_no.TIMEOUT)
+        await page.goto(url, timeout=config_agency_no.TIMEOUT)
         await page.wait_for_timeout(3000)
     except Exception as e:
         print(f"[-] Failed to load search page: {e}")
@@ -194,7 +194,7 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
     except Exception:
         pass
 
-    results_container = page.locator(config_farm_no.SELECTORS["results_container"])
+    results_container = page.locator(config_agency_no.SELECTORS["results_container"])
     try:
         await results_container.wait_for(state="visible", timeout=10000)
     except Exception:
@@ -203,7 +203,7 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
         completed_scans.add(scan_key)
         return 0
 
-    # Scroll results panel to load all listings
+    # Scroll results panel to load listings
     print("[*] Scrolling search results panel...")
     previous_height = 0
     same_height_count = 0
@@ -229,7 +229,7 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
         except Exception:
             break
 
-    links = await page.locator(config_farm_no.SELECTORS["listing_link"]).all()
+    links = await page.locator(config_agency_no.SELECTORS["listing_link"]).all()
     print(f"[+] Found {len(links)} potential listings.")
     
     extracted_count = 0
@@ -237,7 +237,7 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
         if test_mode and extracted_count >= 3:
             print("[*] Test mode limit reached for this keyword.")
             break
-
+            
         try:
             href = await link.get_attribute("href")
             place_id = extract_place_id(href)
@@ -249,26 +249,26 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
             await page.wait_for_timeout(random.uniform(1500, 2500))
             
             # Extract details
-            name_elem = page.locator(config_farm_no.SELECTORS["business_name"])
+            name_elem = page.locator(config_agency_no.SELECTORS["business_name"])
             if await name_elem.count() == 0:
                 continue
             biz_name = (await name_elem.first.inner_text()).strip()
             
             # Category extraction
-            cat_elem = page.locator(config_farm_no.SELECTORS["category"])
+            cat_elem = page.locator(config_agency_no.SELECTORS["category"])
             category = ""
             if await cat_elem.count() > 0:
                 category = (await cat_elem.first.inner_text()).replace('·', '').strip()
                 
-            # STRICT CATEGORY FILTERING
+            # STRICT CATEGORY FILTERING (must match Norway agency/recruitment/service tags)
             if not is_category_allowed(category):
-                print(f"  [-] Skipping '{biz_name}': Category '{category}' NOT in allowed Norway farm tags.")
+                print(f"  [-] Skipping '{biz_name}': Category '{category}' NOT in allowed Norway agency tags.")
                 if place_id:
                     scraped_urls.add(place_id)
                 continue
 
             # Address extraction
-            addr_elem = page.locator(config_farm_no.SELECTORS["address"])
+            addr_elem = page.locator(config_agency_no.SELECTORS["address"])
             address = ""
             if await addr_elem.count() > 0:
                 addr_label = await addr_elem.first.get_attribute("aria-label")
@@ -286,7 +286,7 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
                 continue
 
             # Phone extraction
-            phone_elem = page.locator(config_farm_no.SELECTORS["phone"])
+            phone_elem = page.locator(config_agency_no.SELECTORS["phone"])
             phone = ""
             if await phone_elem.count() > 0:
                 phone_attr = await phone_elem.first.get_attribute("data-item-id")
@@ -297,18 +297,18 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
                 phone = re.sub(r'[\uE000-\uF8FF]', '', phone).strip()
 
             # Website extraction
-            web_elem = page.locator(config_farm_no.SELECTORS["website"])
+            web_elem = page.locator(config_agency_no.SELECTORS["website"])
             website = ""
             if await web_elem.count() > 0:
                 website = await web_elem.first.get_attribute("href")
 
             # Rating & Reviews
-            rating_elem = page.locator(config_farm_no.SELECTORS["rating"])
+            rating_elem = page.locator(config_agency_no.SELECTORS["rating"])
             rating = ""
             if await rating_elem.count() > 0:
                 rating = (await rating_elem.first.inner_text()).strip()
 
-            reviews_elem = page.locator(config_farm_no.SELECTORS["reviews_count"])
+            reviews_elem = page.locator(config_agency_no.SELECTORS["reviews_count"])
             reviews_count = ""
             if await reviews_elem.count() > 0:
                 reviews_raw = await reviews_elem.first.inner_text()
@@ -343,24 +343,24 @@ async def scrape_location_keyword(page, location, keyword, scraped_urls, complet
 
     save_completed_scan(loc_name, state, keyword)
     completed_scans.add(scan_key)
-    print(f"[*] Completed search for '{keyword}' in {loc_name}. Extracted {extracted_count} valid farm/aquaculture listings.")
+    print(f"[*] Completed search for '{keyword}' in {loc_name}. Extracted {extracted_count} valid agency listings.")
     return extracted_count
 
 async def main():
     test_mode = "--test" in sys.argv
     reset_mode = "--reset" in sys.argv
-
+    
     if reset_mode:
         print("[!] Reset mode requested. Clearing raw CSV and progress file...")
-        if os.path.exists(config_farm_no.OUTPUT_CSV):
-            os.remove(config_farm_no.OUTPUT_CSV)
-        if os.path.exists(config_farm_no.PROGRESS_FILE):
-            os.remove(config_farm_no.PROGRESS_FILE)
+        if os.path.exists(config_agency_no.OUTPUT_CSV):
+            os.remove(config_agency_no.OUTPUT_CSV)
+        if os.path.exists(config_agency_no.PROGRESS_FILE):
+            os.remove(config_agency_no.PROGRESS_FILE)
 
     scraped_urls = get_scraped_urls()
     completed_scans = load_completed_scans()
     
-    print(f"[*] Initialized Norway Farm & Aquaculture Scraper.")
+    print(f"[*] Initialized Norway Agency Scraper (Landbrukstjenester, Vikarbyrå, Rekrutteringsbyrå).")
     if test_mode:
         print("[!] TEST MODE ACTIVE: Will scrape a small sample of locations and keywords.")
     print(f"[*] Loaded {len(scraped_urls)} existing Place IDs.")
@@ -368,8 +368,8 @@ async def main():
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-            headless=config_farm_no.HEADLESS,
-            slow_mo=config_farm_no.SLOW_MO
+            headless=config_agency_no.HEADLESS,
+            slow_mo=config_agency_no.SLOW_MO
         )
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -380,18 +380,17 @@ async def main():
         page = await context.new_page()
 
         target_locations = locations_no.LOCATIONS[:2] if test_mode else locations_no.LOCATIONS
-        target_keywords = config_farm_no.KEYWORDS[:2] if test_mode else config_farm_no.KEYWORDS
+        target_keywords = config_agency_no.KEYWORDS[:2] if test_mode else config_agency_no.KEYWORDS
 
         for location in target_locations:
             for keyword in target_keywords:
                 await scrape_location_keyword(page, location, keyword, scraped_urls, completed_scans, test_mode=test_mode)
-                await asyncio.sleep(random.uniform(config_farm_no.MIN_DELAY, config_farm_no.MAX_DELAY))
+                await asyncio.sleep(random.uniform(config_agency_no.MIN_DELAY, config_agency_no.MAX_DELAY))
 
         await browser.close()
         print("\n==================================================")
-        print("[SUCCESS] Norway Farm Scraper session completed.")
+        print("[SUCCESS] Norway Agency Scraper session completed.")
         print("==================================================")
 
 if __name__ == "__main__":
     asyncio.run(main())
-
