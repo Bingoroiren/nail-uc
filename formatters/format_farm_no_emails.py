@@ -140,12 +140,10 @@ async def setup_vpn_speed_route(page):
     except Exception:
         pass
 
-async def crawl_site_for_emails(page, url):
-    if not url or "google.com" in url or "facebook.com" in url:
-        return []
+async def extract_emails_from_page(page, page_url, timeout=15000):
     emails = set()
     try:
-        await page.goto(url, timeout=20000, wait_until="domcontentloaded")
+        await page.goto(page_url, timeout=timeout, wait_until="domcontentloaded")
         await page.wait_for_timeout(1000)
         
         try:
@@ -172,38 +170,70 @@ async def crawl_site_for_emails(page, url):
                         emails.add(em)
         except Exception:
             pass
-                    
-        # Check subpages if no emails found on homepage
-        if not emails:
-            try:
-                links = await page.locator('a[href]').all()
-                subpage_urls = []
-                for link in links:
-                    href = await link.get_attribute("href")
-                    text = await link.inner_text()
-                    text_lower = text.lower() if text else ""
-                    href_lower = href.lower() if href else ""
-                    
-                    if href and not href_lower.startswith(('mailto:', 'tel:', 'javascript:', '#')):
-                        full_url = urllib.parse.urljoin(url, href)
-                        if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
-                            if any(k in text_lower or k in href_lower for k in ['kontakt', 'contact', 'om-oss', 'about', 'location']):
-                                subpage_urls.append(full_url.split('#')[0])
-                                
-                for sub_url in list(set(subpage_urls))[:2]:
-                    try:
-                        await page.goto(sub_url, timeout=12000, wait_until="domcontentloaded")
-                        await page.wait_for_timeout(1000)
-                        sub_text = await page.locator("body").inner_text()
-                        for email in EMAIL_REGEX.findall(sub_text):
-                            emails.add(email.lower())
-                    except Exception:
-                        pass
-            except Exception:
-                pass
     except Exception:
         pass
+    return emails
+
+async def crawl_site_for_emails(page, url):
+    if not url or "google.com" in url or "facebook.com" in url:
+        return []
+    emails = set()
+    
+    parsed = urllib.parse.urlparse(url)
+    scheme = parsed.scheme if parsed.scheme in ['http', 'https'] else 'https'
+    netloc = parsed.netloc
+    root_url = f"{scheme}://{netloc}"
+    
+    # 1. Try initial Google Maps URL
+    page_emails = await extract_emails_from_page(page, url, timeout=15000)
+    emails.update(page_emails)
+    
+    # 2. If no emails found and URL was a subpath, try root domain homepage
+    if not emails and parsed.path and parsed.path not in ['', '/']:
+        root_emails = await extract_emails_from_page(page, root_url, timeout=12000)
+        emails.update(root_emails)
         
+    # 3. Try common contact subpages (e.g. /kontakt-oss/, /kontakt/, /contact/)
+    if not emails:
+        contact_candidates = [
+            f"{root_url}/kontakt-oss/",
+            f"{root_url}/kontakt/",
+            f"{root_url}/contact/",
+            f"{root_url}/om-oss/",
+            f"{root_url}/kontakt-oss"
+        ]
+        for c_url in contact_candidates:
+            if c_url.rstrip('/') != url.rstrip('/'):
+                c_emails = await extract_emails_from_page(page, c_url, timeout=10000)
+                if c_emails:
+                    emails.update(c_emails)
+                    break
+
+    # 4. Check links on page for additional contact pages if still no emails
+    if not emails:
+        try:
+            links = await page.locator('a[href]').all()
+            subpage_urls = []
+            for link in links:
+                href = await link.get_attribute("href")
+                text = await link.inner_text()
+                text_lower = text.lower() if text else ""
+                href_lower = href.lower() if href else ""
+                
+                if href and not href_lower.startswith(('mailto:', 'tel:', 'javascript:', '#')):
+                    full_url = urllib.parse.urljoin(url, href)
+                    if urllib.parse.urlparse(full_url).netloc == netloc:
+                        if any(k in text_lower or k in href_lower for k in ['kontakt', 'contact', 'om-oss', 'about', 'location']):
+                            subpage_urls.append(full_url.split('#')[0])
+                            
+            for sub_url in list(set(subpage_urls))[:2]:
+                sub_emails = await extract_emails_from_page(page, sub_url, timeout=10000)
+                if sub_emails:
+                    emails.update(sub_emails)
+                    break
+        except Exception:
+            pass
+            
     scored = []
     for em in emails:
         sc = score_email(em)
