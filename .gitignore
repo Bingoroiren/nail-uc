@@ -83,4 +83,9 @@ ehthumbs_vista.db
 data/raw/
 data/formatted/
 
+# Ngoại lệ: Cho phép đẩy file danh sách thịt Đan Mạch để đồng bộ sang máy khác chạy cào
+!thit_dan_mach.csv
+!thịt đan mạch.csv
+
+
 
