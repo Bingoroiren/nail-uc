@@ -26,8 +26,9 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
 
 SOURCE_CSV = os.path.join(PROJECT_ROOT, "thit_dan_mach.csv")
-OUTPUT_CSV = os.path.join(PROJECT_ROOT, "đanmạchFT.csv")
+OUTPUT_CSV = os.path.join(PROJECT_ROOT, "Thịt đan mạch enrich.csv")
 CACHE_FILE = os.path.join(CURRENT_DIR, "cache_thit_dan_mach.json")
+
 USER_DATA_DIR = os.path.join(PROJECT_ROOT, "chrome_user_data", "thit_dan_mach_profile")
 
 # Standard Cold Mail Output Columns (20 standard + 1 Link FB = 21 columns)
