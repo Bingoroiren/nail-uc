@@ -266,14 +266,35 @@ async def main():
         "Ngay Follow-up gan nhat", "Mailbox da dung", "Category"
     ]
     
-    processed_companies = set()
+    processed_emails = {}
     os.makedirs(os.path.dirname(PROGRESS_FILE), exist_ok=True)
+    
+    # Pre-populate from existing output CSV if present and not reset
+    if not reset_mode and os.path.exists(OUTPUT_CSV):
+        try:
+            with open(OUTPUT_CSV, mode="r", encoding="utf-8-sig") as f_out:
+                r_out = csv.DictReader(f_out)
+                for r in r_out:
+                    cname = r.get("Cong ty", "").strip()
+                    em = r.get("Email", "").strip()
+                    if cname:
+                        processed_emails[cname] = em
+            safe_print(f"[+] Loaded {len(processed_emails)} existing email records from output CSV.")
+        except Exception:
+            pass
+
+    # Load from progress file
     if os.path.exists(PROGRESS_FILE) and not reset_mode:
         try:
             with open(PROGRESS_FILE, "r", encoding="utf-8") as f_p:
                 p_data = json.load(f_p)
-                processed_companies = set(p_data.get("processed", []))
-            safe_print(f"[+] Loaded {len(processed_companies)} already processed records from progress file.")
+                if isinstance(p_data.get("emails"), dict):
+                    processed_emails.update(p_data["emails"])
+                elif isinstance(p_data.get("processed"), list):
+                    for name in p_data["processed"]:
+                        if name not in processed_emails:
+                            processed_emails[name] = ""
+            safe_print(f"[+] Loaded {len(processed_emails)} total progress records.")
         except Exception:
             pass
 
@@ -311,11 +332,14 @@ async def main():
             "Category": CATEGORY_VN
         })
 
-    def save_progress(proc_set):
+    def save_progress(proc_dict):
         os.makedirs(os.path.dirname(PROGRESS_FILE), exist_ok=True)
         try:
             with open(PROGRESS_FILE, "w", encoding="utf-8") as f_p:
-                json.dump({"processed": list(proc_set)}, f_p, indent=2, ensure_ascii=False)
+                json.dump({
+                    "processed": list(proc_dict.keys()),
+                    "emails": proc_dict
+                }, f_p, indent=2, ensure_ascii=False)
         except Exception:
             pass
 
@@ -335,7 +359,9 @@ async def main():
             comp_name = row["Cong ty"]
             web_url = row["Lien He"]
             
-            if comp_name in processed_companies and not test_mode:
+            # If already processed, restore found email and skip re-crawling
+            if comp_name in processed_emails and not test_mode and not reset_mode:
+                row["Email"] = processed_emails[comp_name]
                 continue
                 
             is_valid_site = web_url.startswith("http") and "google.com" not in web_url
@@ -355,8 +381,9 @@ async def main():
             else:
                 safe_print(f"[{i+1}/{total}] Skipping contact crawl for: '{comp_name}' (No valid website)")
                 
-            processed_companies.add(comp_name)
-            save_progress(processed_companies)
+            processed_emails[comp_name] = row["Email"]
+            save_progress(processed_emails)
+            await page.wait_for_timeout(random.uniform(300, 600))
             await page.wait_for_timeout(random.uniform(300, 600))
             
         await browser.close()

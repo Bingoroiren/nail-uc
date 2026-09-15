@@ -66,6 +66,16 @@
       "Kasvihuone"
     ],
     [
+      "Turku",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Turku",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Salo",
       "Varsinais-Suomi",
       "Maatila"
@@ -129,6 +139,16 @@
       "Salo",
       "Varsinais-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Salo",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Salo",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Loimaa",
@@ -196,6 +216,16 @@
       "Kasvihuone"
     ],
     [
+      "Loimaa",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Loimaa",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Uusikaupunki",
       "Varsinais-Suomi",
       "Maatila"
@@ -259,6 +289,16 @@
       "Uusikaupunki",
       "Varsinais-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Uusikaupunki",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Uusikaupunki",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Paimio",
@@ -326,6 +366,16 @@
       "Kasvihuone"
     ],
     [
+      "Paimio",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Paimio",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Seinäjoki",
       "Etelä-Pohjanmaa",
       "Maatila"
@@ -389,6 +439,16 @@
       "Seinäjoki",
       "Etelä-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Seinäjoki",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Seinäjoki",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Lapua",
@@ -456,6 +516,16 @@
       "Kasvihuone"
     ],
     [
+      "Lapua",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Lapua",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kauhajoki",
       "Etelä-Pohjanmaa",
       "Maatila"
@@ -519,6 +589,16 @@
       "Kauhajoki",
       "Etelä-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Kauhajoki",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kauhajoki",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kurikka",
@@ -586,6 +666,16 @@
       "Kasvihuone"
     ],
     [
+      "Kurikka",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kurikka",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Alavus",
       "Etelä-Pohjanmaa",
       "Maatila"
@@ -649,6 +739,16 @@
       "Alavus",
       "Etelä-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Alavus",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Alavus",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Vaasa",
@@ -716,6 +816,16 @@
       "Kasvihuone"
     ],
     [
+      "Vaasa",
+      "Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Vaasa",
+      "Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Pedersöre",
       "Pohjanmaa",
       "Maatila"
@@ -779,6 +889,16 @@
       "Pedersöre",
       "Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Pedersöre",
+      "Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pedersöre",
+      "Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kokkola",
@@ -846,6 +966,16 @@
       "Kasvihuone"
     ],
     [
+      "Kokkola",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kokkola",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Helsinki",
       "Uusimaa",
       "Maatila"
@@ -909,6 +1039,16 @@
       "Helsinki",
       "Uusimaa",
       "Kasvihuone"
+    ],
+    [
+      "Helsinki",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Helsinki",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Porvoo",
@@ -976,6 +1116,16 @@
       "Kasvihuone"
     ],
     [
+      "Porvoo",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Porvoo",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Lohja",
       "Uusimaa",
       "Maatila"
@@ -1039,6 +1189,16 @@
       "Lohja",
       "Uusimaa",
       "Kasvihuone"
+    ],
+    [
+      "Lohja",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Lohja",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Raasepori",
@@ -1106,6 +1266,16 @@
       "Kasvihuone"
     ],
     [
+      "Raasepori",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Raasepori",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Hyvinkää",
       "Uusimaa",
       "Maatila"
@@ -1169,6 +1339,16 @@
       "Hyvinkää",
       "Uusimaa",
       "Kasvihuone"
+    ],
+    [
+      "Hyvinkää",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Hyvinkää",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Mäntsälä",
@@ -1236,6 +1416,16 @@
       "Kasvihuone"
     ],
     [
+      "Mäntsälä",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Mäntsälä",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Pori",
       "Satakunta",
       "Maatila"
@@ -1299,6 +1489,16 @@
       "Pori",
       "Satakunta",
       "Kasvihuone"
+    ],
+    [
+      "Pori",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pori",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Rauma",
@@ -1366,6 +1566,16 @@
       "Kasvihuone"
     ],
     [
+      "Rauma",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Rauma",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Huittinen",
       "Satakunta",
       "Maatila"
@@ -1429,6 +1639,16 @@
       "Huittinen",
       "Satakunta",
       "Kasvihuone"
+    ],
+    [
+      "Huittinen",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Huittinen",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kankaanpää",
@@ -1496,6 +1716,16 @@
       "Kasvihuone"
     ],
     [
+      "Kankaanpää",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kankaanpää",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Tampere",
       "Pirkanmaa",
       "Maatila"
@@ -1559,6 +1789,16 @@
       "Tampere",
       "Pirkanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Tampere",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Tampere",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Sastamala",
@@ -1626,6 +1866,16 @@
       "Kasvihuone"
     ],
     [
+      "Sastamala",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Sastamala",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Orivesi",
       "Pirkanmaa",
       "Maatila"
@@ -1689,6 +1939,16 @@
       "Orivesi",
       "Pirkanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Orivesi",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Orivesi",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Hämeenlinna",
@@ -1756,6 +2016,16 @@
       "Kasvihuone"
     ],
     [
+      "Hämeenlinna",
+      "Kanta-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Hämeenlinna",
+      "Kanta-Häme",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Forssa",
       "Kanta-Häme",
       "Maatila"
@@ -1819,6 +2089,16 @@
       "Forssa",
       "Kanta-Häme",
       "Kasvihuone"
+    ],
+    [
+      "Forssa",
+      "Kanta-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Forssa",
+      "Kanta-Häme",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Lahti",
@@ -1886,6 +2166,16 @@
       "Kasvihuone"
     ],
     [
+      "Lahti",
+      "Päijät-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Lahti",
+      "Päijät-Häme",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Heinola",
       "Päijät-Häme",
       "Maatila"
@@ -1949,6 +2239,16 @@
       "Heinola",
       "Päijät-Häme",
       "Kasvihuone"
+    ],
+    [
+      "Heinola",
+      "Päijät-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Heinola",
+      "Päijät-Häme",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Mikkeli",
@@ -2016,6 +2316,16 @@
       "Kasvihuone"
     ],
     [
+      "Mikkeli",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Mikkeli",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Savonlinna",
       "Etelä-Savo",
       "Maatila"
@@ -2079,6 +2389,16 @@
       "Savonlinna",
       "Etelä-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Savonlinna",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Savonlinna",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Pieksämäki",
@@ -2146,6 +2466,16 @@
       "Kasvihuone"
     ],
     [
+      "Pieksämäki",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pieksämäki",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kuopio",
       "Pohjois-Savo",
       "Maatila"
@@ -2209,6 +2539,16 @@
       "Kuopio",
       "Pohjois-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Kuopio",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kuopio",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Iisalmi",
@@ -2276,6 +2616,16 @@
       "Kasvihuone"
     ],
     [
+      "Iisalmi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Iisalmi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kiuruvesi",
       "Pohjois-Savo",
       "Maatila"
@@ -2339,6 +2689,16 @@
       "Kiuruvesi",
       "Pohjois-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Kiuruvesi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kiuruvesi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Joensuu",
@@ -2406,6 +2766,16 @@
       "Kasvihuone"
     ],
     [
+      "Joensuu",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Joensuu",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Lieksa",
       "Pohjois-Karjala",
       "Maatila"
@@ -2469,6 +2839,16 @@
       "Lieksa",
       "Pohjois-Karjala",
       "Kasvihuone"
+    ],
+    [
+      "Lieksa",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Lieksa",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Jyväskylä",
@@ -2536,6 +2916,16 @@
       "Kasvihuone"
     ],
     [
+      "Jyväskylä",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Jyväskylä",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Äänekoski",
       "Keski-Suomi",
       "Maatila"
@@ -2599,6 +2989,16 @@
       "Äänekoski",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Äänekoski",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Äänekoski",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Jämsä",
@@ -2666,6 +3066,16 @@
       "Kasvihuone"
     ],
     [
+      "Jämsä",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Jämsä",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Oulu",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -2729,6 +3139,16 @@
       "Oulu",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Oulu",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Oulu",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Ylivieska",
@@ -2796,6 +3216,16 @@
       "Kasvihuone"
     ],
     [
+      "Ylivieska",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Ylivieska",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Raahe",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -2859,6 +3289,16 @@
       "Raahe",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Raahe",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Raahe",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kuusamo",
@@ -2926,6 +3366,16 @@
       "Kasvihuone"
     ],
     [
+      "Kuusamo",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kuusamo",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kajaani",
       "Kainuu",
       "Maatila"
@@ -2989,6 +3439,16 @@
       "Kajaani",
       "Kainuu",
       "Kasvihuone"
+    ],
+    [
+      "Kajaani",
+      "Kainuu",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kajaani",
+      "Kainuu",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Rovaniemi",
@@ -3056,6 +3516,16 @@
       "Kasvihuone"
     ],
     [
+      "Rovaniemi",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Rovaniemi",
+      "Lappi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kemi",
       "Lappi",
       "Maatila"
@@ -3119,6 +3589,16 @@
       "Kemi",
       "Lappi",
       "Kasvihuone"
+    ],
+    [
+      "Kemi",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kemi",
+      "Lappi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Tornio",
@@ -3186,6 +3666,16 @@
       "Kasvihuone"
     ],
     [
+      "Tornio",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Tornio",
+      "Lappi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Lappeenranta",
       "Etelä-Karjala",
       "Maatila"
@@ -3249,6 +3739,16 @@
       "Lappeenranta",
       "Etelä-Karjala",
       "Kasvihuone"
+    ],
+    [
+      "Lappeenranta",
+      "Etelä-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Lappeenranta",
+      "Etelä-Karjala",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kouvola",
@@ -3316,6 +3816,16 @@
       "Kasvihuone"
     ],
     [
+      "Kouvola",
+      "Kymenlaakso",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kouvola",
+      "Kymenlaakso",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kotka",
       "Kymenlaakso",
       "Maatila"
@@ -3379,6 +3889,16 @@
       "Kotka",
       "Kymenlaakso",
       "Kasvihuone"
+    ],
+    [
+      "Kotka",
+      "Kymenlaakso",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kotka",
+      "Kymenlaakso",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Järvenpää",
@@ -3446,6 +3966,16 @@
       "Kasvihuone"
     ],
     [
+      "Järvenpää",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Järvenpää",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kirkkonummi",
       "Uusimaa",
       "Maatila"
@@ -3509,6 +4039,16 @@
       "Kirkkonummi",
       "Uusimaa",
       "Kasvihuone"
+    ],
+    [
+      "Kirkkonummi",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kirkkonummi",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Imatra",
@@ -3576,6 +4116,16 @@
       "Kasvihuone"
     ],
     [
+      "Imatra",
+      "Etelä-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Imatra",
+      "Etelä-Karjala",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Vihti",
       "Uusimaa",
       "Maatila"
@@ -3639,6 +4189,16 @@
       "Vihti",
       "Uusimaa",
       "Kasvihuone"
+    ],
+    [
+      "Vihti",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Vihti",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Lempäälä",
@@ -3706,6 +4266,16 @@
       "Kasvihuone"
     ],
     [
+      "Lempäälä",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Lempäälä",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Siilinjärvi",
       "Pohjois-Savo",
       "Maatila"
@@ -3769,6 +4339,16 @@
       "Siilinjärvi",
       "Pohjois-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Siilinjärvi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Siilinjärvi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Varkaus",
@@ -3836,6 +4416,16 @@
       "Kasvihuone"
     ],
     [
+      "Varkaus",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Varkaus",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Laukaa",
       "Keski-Suomi",
       "Maatila"
@@ -3899,6 +4489,16 @@
       "Laukaa",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Laukaa",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Laukaa",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Orimattila",
@@ -3966,6 +4566,16 @@
       "Kasvihuone"
     ],
     [
+      "Orimattila",
+      "Päijät-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Orimattila",
+      "Päijät-Häme",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Loviisa",
       "Uusimaa",
       "Maatila"
@@ -4029,6 +4639,16 @@
       "Loviisa",
       "Uusimaa",
       "Kasvihuone"
+    ],
+    [
+      "Loviisa",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Loviisa",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kalajoki",
@@ -4096,6 +4716,16 @@
       "Kasvihuone"
     ],
     [
+      "Kalajoki",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kalajoki",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Eura",
       "Satakunta",
       "Maatila"
@@ -4159,6 +4789,16 @@
       "Eura",
       "Satakunta",
       "Kasvihuone"
+    ],
+    [
+      "Eura",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Eura",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Liperi",
@@ -4226,6 +4866,16 @@
       "Kasvihuone"
     ],
     [
+      "Liperi",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Liperi",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Mariehamn",
       "Åland",
       "Maatila"
@@ -4289,6 +4939,16 @@
       "Mariehamn",
       "Åland",
       "Kasvihuone"
+    ],
+    [
+      "Mariehamn",
+      "Åland",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Mariehamn",
+      "Åland",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Alajärvi",
@@ -4356,6 +5016,16 @@
       "Kasvihuone"
     ],
     [
+      "Alajärvi",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Alajärvi",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Nivala",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -4419,6 +5089,16 @@
       "Nivala",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Nivala",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Nivala",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Hämeenkyrö",
@@ -4486,6 +5166,16 @@
       "Kasvihuone"
     ],
     [
+      "Hämeenkyrö",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Hämeenkyrö",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Sotkamo",
       "Kainuu",
       "Maatila"
@@ -4549,6 +5239,16 @@
       "Sotkamo",
       "Kainuu",
       "Kasvihuone"
+    ],
+    [
+      "Sotkamo",
+      "Kainuu",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Sotkamo",
+      "Kainuu",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Liminka",
@@ -4616,6 +5316,16 @@
       "Kasvihuone"
     ],
     [
+      "Liminka",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Liminka",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Hanko",
       "Uusimaa",
       "Maatila"
@@ -4679,6 +5389,16 @@
       "Hanko",
       "Uusimaa",
       "Kasvihuone"
+    ],
+    [
+      "Hanko",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Hanko",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Ii",
@@ -4746,6 +5466,16 @@
       "Kasvihuone"
     ],
     [
+      "Ii",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Ii",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kitee",
       "Pohjois-Karjala",
       "Maatila"
@@ -4809,6 +5539,16 @@
       "Kitee",
       "Pohjois-Karjala",
       "Kasvihuone"
+    ],
+    [
+      "Kitee",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kitee",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Närpes",
@@ -4876,6 +5616,16 @@
       "Kasvihuone"
     ],
     [
+      "Närpes",
+      "Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Närpes",
+      "Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Keuruu",
       "Keski-Suomi",
       "Maatila"
@@ -4939,6 +5689,16 @@
       "Keuruu",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Keuruu",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Keuruu",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Nurmes",
@@ -5006,6 +5766,16 @@
       "Kasvihuone"
     ],
     [
+      "Nurmes",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Nurmes",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Leppävirta",
       "Pohjois-Savo",
       "Maatila"
@@ -5069,6 +5839,16 @@
       "Leppävirta",
       "Pohjois-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Leppävirta",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Leppävirta",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Lapinlahti",
@@ -5136,6 +5916,16 @@
       "Kasvihuone"
     ],
     [
+      "Lapinlahti",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Lapinlahti",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Saarijärvi",
       "Keski-Suomi",
       "Maatila"
@@ -5199,6 +5989,16 @@
       "Saarijärvi",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Saarijärvi",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Saarijärvi",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Muhos",
@@ -5266,6 +6066,16 @@
       "Kasvihuone"
     ],
     [
+      "Muhos",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Muhos",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Somero",
       "Varsinais-Suomi",
       "Maatila"
@@ -5329,6 +6139,16 @@
       "Somero",
       "Varsinais-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Somero",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Somero",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Haapajärvi",
@@ -5396,6 +6216,16 @@
       "Kasvihuone"
     ],
     [
+      "Haapajärvi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Haapajärvi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Haapavesi",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -5459,6 +6289,16 @@
       "Haapavesi",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Haapavesi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Haapavesi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Harjavalta",
@@ -5526,6 +6366,16 @@
       "Kasvihuone"
     ],
     [
+      "Harjavalta",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Harjavalta",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Juva",
       "Etelä-Savo",
       "Maatila"
@@ -5589,6 +6439,16 @@
       "Juva",
       "Etelä-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Juva",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Juva",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Loppi",
@@ -5656,6 +6516,16 @@
       "Kasvihuone"
     ],
     [
+      "Loppi",
+      "Kanta-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Loppi",
+      "Kanta-Häme",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Laihia",
       "Pohjanmaa",
       "Maatila"
@@ -5719,6 +6589,16 @@
       "Laihia",
       "Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Laihia",
+      "Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Laihia",
+      "Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kuhmo",
@@ -5786,6 +6666,16 @@
       "Kasvihuone"
     ],
     [
+      "Kuhmo",
+      "Kainuu",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kuhmo",
+      "Kainuu",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Iitti",
       "Kymenlaakso",
       "Maatila"
@@ -5849,6 +6739,16 @@
       "Iitti",
       "Kymenlaakso",
       "Kasvihuone"
+    ],
+    [
+      "Iitti",
+      "Kymenlaakso",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Iitti",
+      "Kymenlaakso",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Mynämäki",
@@ -5916,6 +6816,16 @@
       "Kasvihuone"
     ],
     [
+      "Mynämäki",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Mynämäki",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Ilomantsi",
       "Pohjois-Karjala",
       "Maatila"
@@ -5979,6 +6889,16 @@
       "Ilomantsi",
       "Pohjois-Karjala",
       "Kasvihuone"
+    ],
+    [
+      "Ilomantsi",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Ilomantsi",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kemijärvi",
@@ -6046,6 +6966,16 @@
       "Kasvihuone"
     ],
     [
+      "Kemijärvi",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kemijärvi",
+      "Lappi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Oulainen",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -6109,6 +7039,16 @@
       "Oulainen",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Oulainen",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Oulainen",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Suonenjoki",
@@ -6176,6 +7116,16 @@
       "Kasvihuone"
     ],
     [
+      "Suonenjoki",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Suonenjoki",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Juuka",
       "Pohjois-Karjala",
       "Maatila"
@@ -6239,6 +7189,16 @@
       "Juuka",
       "Pohjois-Karjala",
       "Kasvihuone"
+    ],
+    [
+      "Juuka",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Juuka",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Outokumpu",
@@ -6306,6 +7266,16 @@
       "Kasvihuone"
     ],
     [
+      "Outokumpu",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Outokumpu",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Mänttä",
       "Pirkanmaa",
       "Maatila"
@@ -6369,6 +7339,16 @@
       "Mänttä",
       "Pirkanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Mänttä",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Mänttä",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Pälkäne",
@@ -6436,6 +7416,16 @@
       "Kasvihuone"
     ],
     [
+      "Pälkäne",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pälkäne",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Virrat",
       "Pirkanmaa",
       "Maatila"
@@ -6499,6 +7489,16 @@
       "Virrat",
       "Pirkanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Virrat",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Virrat",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kristinestad",
@@ -6566,6 +7566,16 @@
       "Kasvihuone"
     ],
     [
+      "Kristinestad",
+      "Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kristinestad",
+      "Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Parkano",
       "Pirkanmaa",
       "Maatila"
@@ -6629,6 +7639,16 @@
       "Parkano",
       "Pirkanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Parkano",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Parkano",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Viitasaari",
@@ -6696,6 +7716,16 @@
       "Kasvihuone"
     ],
     [
+      "Viitasaari",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Viitasaari",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Hankasalmi",
       "Keski-Suomi",
       "Maatila"
@@ -6759,6 +7789,16 @@
       "Hankasalmi",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Hankasalmi",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Hankasalmi",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Ingå",
@@ -6826,6 +7866,16 @@
       "Kasvihuone"
     ],
     [
+      "Ingå",
+      "Uusimaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Ingå",
+      "Uusimaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Mäntyharju",
       "Etelä-Savo",
       "Maatila"
@@ -6889,6 +7939,16 @@
       "Mäntyharju",
       "Etelä-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Mäntyharju",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Mäntyharju",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Ähtäri",
@@ -6956,6 +8016,16 @@
       "Kasvihuone"
     ],
     [
+      "Ähtäri",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Ähtäri",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Karstula",
       "Keski-Suomi",
       "Maatila"
@@ -7019,6 +8089,16 @@
       "Karstula",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Karstula",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Karstula",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kannus",
@@ -7086,6 +8166,16 @@
       "Kasvihuone"
     ],
     [
+      "Kannus",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kannus",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Joutsa",
       "Keski-Suomi",
       "Maatila"
@@ -7149,6 +8239,16 @@
       "Joutsa",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Joutsa",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Joutsa",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kangasniemi",
@@ -7216,6 +8316,16 @@
       "Kasvihuone"
     ],
     [
+      "Kangasniemi",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kangasniemi",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Teuva",
       "Etelä-Pohjanmaa",
       "Maatila"
@@ -7279,6 +8389,16 @@
       "Teuva",
       "Etelä-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Teuva",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Teuva",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Pyhäjärvi",
@@ -7346,6 +8466,16 @@
       "Kasvihuone"
     ],
     [
+      "Pyhäjärvi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pyhäjärvi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Heinävesi",
       "Etelä-Savo",
       "Maatila"
@@ -7409,6 +8539,16 @@
       "Heinävesi",
       "Etelä-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Heinävesi",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Heinävesi",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Urjala",
@@ -7476,6 +8616,16 @@
       "Kasvihuone"
     ],
     [
+      "Urjala",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Urjala",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Parikkala",
       "Etelä-Karjala",
       "Maatila"
@@ -7539,6 +8689,16 @@
       "Parikkala",
       "Etelä-Karjala",
       "Kasvihuone"
+    ],
+    [
+      "Parikkala",
+      "Etelä-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Parikkala",
+      "Etelä-Karjala",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kaustinen",
@@ -7606,6 +8766,16 @@
       "Kasvihuone"
     ],
     [
+      "Kaustinen",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kaustinen",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Ruovesi",
       "Pirkanmaa",
       "Maatila"
@@ -7669,6 +8839,16 @@
       "Ruovesi",
       "Pirkanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Ruovesi",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Ruovesi",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kärkölä",
@@ -7736,6 +8916,16 @@
       "Kasvihuone"
     ],
     [
+      "Kärkölä",
+      "Päijät-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kärkölä",
+      "Päijät-Häme",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Pielavesi",
       "Pohjois-Savo",
       "Maatila"
@@ -7799,6 +8989,16 @@
       "Pielavesi",
       "Pohjois-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Pielavesi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pielavesi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Polvijärvi",
@@ -7866,6 +9066,16 @@
       "Kasvihuone"
     ],
     [
+      "Polvijärvi",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Polvijärvi",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Aura",
       "Varsinais-Suomi",
       "Maatila"
@@ -7929,6 +9139,16 @@
       "Aura",
       "Varsinais-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Aura",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Aura",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kolari",
@@ -7996,6 +9216,16 @@
       "Kasvihuone"
     ],
     [
+      "Kolari",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kolari",
+      "Lappi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Ylitornio",
       "Lappi",
       "Maatila"
@@ -8059,6 +9289,16 @@
       "Ylitornio",
       "Lappi",
       "Kasvihuone"
+    ],
+    [
+      "Ylitornio",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Ylitornio",
+      "Lappi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Pihtipudas",
@@ -8126,6 +9366,16 @@
       "Kasvihuone"
     ],
     [
+      "Pihtipudas",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pihtipudas",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Sonkajärvi",
       "Pohjois-Savo",
       "Maatila"
@@ -8189,6 +9439,16 @@
       "Sonkajärvi",
       "Pohjois-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Sonkajärvi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Sonkajärvi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Petäjävesi",
@@ -8256,6 +9516,16 @@
       "Kasvihuone"
     ],
     [
+      "Petäjävesi",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Petäjävesi",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Sysmä",
       "Päijät-Häme",
       "Maatila"
@@ -8319,6 +9589,16 @@
       "Sysmä",
       "Päijät-Häme",
       "Kasvihuone"
+    ],
+    [
+      "Sysmä",
+      "Päijät-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Sysmä",
+      "Päijät-Häme",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Vieremä",
@@ -8386,6 +9666,16 @@
       "Kasvihuone"
     ],
     [
+      "Vieremä",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Vieremä",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kuortane",
       "Etelä-Pohjanmaa",
       "Maatila"
@@ -8449,6 +9739,16 @@
       "Kuortane",
       "Etelä-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Kuortane",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kuortane",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Rantasalmi",
@@ -8516,6 +9816,16 @@
       "Kasvihuone"
     ],
     [
+      "Rantasalmi",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Rantasalmi",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Pello",
       "Lappi",
       "Maatila"
@@ -8579,6 +9889,16 @@
       "Pello",
       "Lappi",
       "Kasvihuone"
+    ],
+    [
+      "Pello",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pello",
+      "Lappi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kimito",
@@ -8646,6 +9966,16 @@
       "Kasvihuone"
     ],
     [
+      "Kimito",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kimito",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Savitaipale",
       "Etelä-Karjala",
       "Maatila"
@@ -8709,6 +10039,16 @@
       "Savitaipale",
       "Etelä-Karjala",
       "Kasvihuone"
+    ],
+    [
+      "Savitaipale",
+      "Etelä-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Savitaipale",
+      "Etelä-Karjala",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Evijärvi",
@@ -8776,6 +10116,16 @@
       "Kasvihuone"
     ],
     [
+      "Evijärvi",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Evijärvi",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Karvia",
       "Satakunta",
       "Maatila"
@@ -8839,6 +10189,16 @@
       "Karvia",
       "Satakunta",
       "Kasvihuone"
+    ],
+    [
+      "Karvia",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Karvia",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Paltamo",
@@ -8906,6 +10266,16 @@
       "Kasvihuone"
     ],
     [
+      "Paltamo",
+      "Kainuu",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Paltamo",
+      "Kainuu",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Pyhäjoki",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -8969,6 +10339,16 @@
       "Pyhäjoki",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Pyhäjoki",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pyhäjoki",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Merikarvia",
@@ -9036,6 +10416,16 @@
       "Kasvihuone"
     ],
     [
+      "Merikarvia",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Merikarvia",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Virolahti",
       "Kymenlaakso",
       "Maatila"
@@ -9099,6 +10489,16 @@
       "Virolahti",
       "Kymenlaakso",
       "Kasvihuone"
+    ],
+    [
+      "Virolahti",
+      "Kymenlaakso",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Virolahti",
+      "Kymenlaakso",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Toholampi",
@@ -9166,6 +10566,16 @@
       "Kasvihuone"
     ],
     [
+      "Toholampi",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Toholampi",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Tervola",
       "Lappi",
       "Maatila"
@@ -9229,6 +10639,16 @@
       "Tervola",
       "Lappi",
       "Kasvihuone"
+    ],
+    [
+      "Tervola",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Tervola",
+      "Lappi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Simo",
@@ -9296,6 +10716,16 @@
       "Kasvihuone"
     ],
     [
+      "Simo",
+      "Lappi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Simo",
+      "Lappi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Isojoki",
       "Etelä-Pohjanmaa",
       "Maatila"
@@ -9359,6 +10789,16 @@
       "Isojoki",
       "Etelä-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Isojoki",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Isojoki",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Padasjoki",
@@ -9426,6 +10866,16 @@
       "Kasvihuone"
     ],
     [
+      "Padasjoki",
+      "Päijät-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Padasjoki",
+      "Päijät-Häme",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Hirvensalmi",
       "Etelä-Savo",
       "Maatila"
@@ -9489,6 +10939,16 @@
       "Hirvensalmi",
       "Etelä-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Hirvensalmi",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Hirvensalmi",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Punkalaidun",
@@ -9556,6 +11016,16 @@
       "Kasvihuone"
     ],
     [
+      "Punkalaidun",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Punkalaidun",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Reisjärvi",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -9619,6 +11089,16 @@
       "Reisjärvi",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Reisjärvi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Reisjärvi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Vaala",
@@ -9686,6 +11166,16 @@
       "Kasvihuone"
     ],
     [
+      "Vaala",
+      "Kainuu",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Vaala",
+      "Kainuu",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Perho",
       "Keski-Pohjanmaa",
       "Maatila"
@@ -9749,6 +11239,16 @@
       "Perho",
       "Keski-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Perho",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Perho",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kaavi",
@@ -9816,6 +11316,16 @@
       "Kasvihuone"
     ],
     [
+      "Kaavi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kaavi",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Konnevesi",
       "Keski-Suomi",
       "Maatila"
@@ -9879,6 +11389,16 @@
       "Konnevesi",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Konnevesi",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Konnevesi",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Utajärvi",
@@ -9946,6 +11466,16 @@
       "Kasvihuone"
     ],
     [
+      "Utajärvi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Utajärvi",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kärsämäki",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -10009,6 +11539,16 @@
       "Kärsämäki",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Kärsämäki",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kärsämäki",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Toivakka",
@@ -10076,6 +11616,16 @@
       "Kasvihuone"
     ],
     [
+      "Toivakka",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Toivakka",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Sulkava",
       "Etelä-Savo",
       "Maatila"
@@ -10139,6 +11689,16 @@
       "Sulkava",
       "Etelä-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Sulkava",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Sulkava",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Koski Tl",
@@ -10206,6 +11766,16 @@
       "Kasvihuone"
     ],
     [
+      "Koski Tl",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Koski Tl",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Puumala",
       "Etelä-Savo",
       "Maatila"
@@ -10269,6 +11839,16 @@
       "Puumala",
       "Etelä-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Puumala",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Puumala",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kuhmoinen",
@@ -10336,6 +11916,16 @@
       "Kasvihuone"
     ],
     [
+      "Kuhmoinen",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kuhmoinen",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Keitele",
       "Pohjois-Savo",
       "Maatila"
@@ -10399,6 +11989,16 @@
       "Keitele",
       "Pohjois-Savo",
       "Kasvihuone"
+    ],
+    [
+      "Keitele",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Keitele",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Korsnäs",
@@ -10466,6 +12066,16 @@
       "Kasvihuone"
     ],
     [
+      "Korsnäs",
+      "Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Korsnäs",
+      "Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Pomarkku",
       "Satakunta",
       "Maatila"
@@ -10529,6 +12139,16 @@
       "Pomarkku",
       "Satakunta",
       "Kasvihuone"
+    ],
+    [
+      "Pomarkku",
+      "Satakunta",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pomarkku",
+      "Satakunta",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Enonkoski",
@@ -10596,6 +12216,16 @@
       "Kasvihuone"
     ],
     [
+      "Enonkoski",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Enonkoski",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Rääkkylä",
       "Pohjois-Karjala",
       "Maatila"
@@ -10659,6 +12289,16 @@
       "Rääkkylä",
       "Pohjois-Karjala",
       "Kasvihuone"
+    ],
+    [
+      "Rääkkylä",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Rääkkylä",
+      "Pohjois-Karjala",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Vesanto",
@@ -10726,6 +12366,16 @@
       "Kasvihuone"
     ],
     [
+      "Vesanto",
+      "Pohjois-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Vesanto",
+      "Pohjois-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Soini",
       "Etelä-Pohjanmaa",
       "Maatila"
@@ -10789,6 +12439,16 @@
       "Soini",
       "Etelä-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Soini",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Soini",
+      "Etelä-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kihniö",
@@ -10856,6 +12516,16 @@
       "Kasvihuone"
     ],
     [
+      "Kihniö",
+      "Pirkanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kihniö",
+      "Pirkanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Taivassalo",
       "Varsinais-Suomi",
       "Maatila"
@@ -10919,6 +12589,16 @@
       "Taivassalo",
       "Varsinais-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Taivassalo",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Taivassalo",
+      "Varsinais-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Pyhäntä",
@@ -10986,6 +12666,16 @@
       "Kasvihuone"
     ],
     [
+      "Pyhäntä",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pyhäntä",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Halsua",
       "Keski-Pohjanmaa",
       "Maatila"
@@ -11049,6 +12739,16 @@
       "Halsua",
       "Keski-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Halsua",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Halsua",
+      "Keski-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Pertunmaa",
@@ -11116,6 +12816,16 @@
       "Kasvihuone"
     ],
     [
+      "Pertunmaa",
+      "Etelä-Savo",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pertunmaa",
+      "Etelä-Savo",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kinnula",
       "Keski-Suomi",
       "Maatila"
@@ -11179,6 +12889,16 @@
       "Kinnula",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Kinnula",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kinnula",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Kyyjärvi",
@@ -11246,6 +12966,16 @@
       "Kasvihuone"
     ],
     [
+      "Kyyjärvi",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kyyjärvi",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kannonkoski",
       "Keski-Suomi",
       "Maatila"
@@ -11309,6 +13039,16 @@
       "Kannonkoski",
       "Keski-Suomi",
       "Kasvihuone"
+    ],
+    [
+      "Kannonkoski",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kannonkoski",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Hailuoto",
@@ -11376,6 +13116,16 @@
       "Kasvihuone"
     ],
     [
+      "Hailuoto",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Hailuoto",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Eckerö",
       "Åland",
       "Maatila"
@@ -11439,6 +13189,16 @@
       "Eckerö",
       "Åland",
       "Kasvihuone"
+    ],
+    [
+      "Eckerö",
+      "Åland",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Eckerö",
+      "Åland",
+      "Kasvihuoneviljelmä"
     ],
     [
       "Luhanka",
@@ -11506,6 +13266,16 @@
       "Kasvihuone"
     ],
     [
+      "Luhanka",
+      "Keski-Suomi",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Luhanka",
+      "Keski-Suomi",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Föglö",
       "Åland",
       "Maatila"
@@ -11571,6 +13341,16 @@
       "Kasvihuone"
     ],
     [
+      "Föglö",
+      "Åland",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Föglö",
+      "Åland",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Geta",
       "Åland",
       "Maatila"
@@ -11636,6 +13416,16 @@
       "Kasvihuone"
     ],
     [
+      "Geta",
+      "Åland",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Geta",
+      "Åland",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Vörå",
       "Pohjanmaa",
       "Maatila"
@@ -11701,6 +13491,16 @@
       "Kasvihuone"
     ],
     [
+      "Vörå",
+      "Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Vörå",
+      "Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Vårdö",
       "Åland",
       "Maatila"
@@ -11766,6 +13566,16 @@
       "Kasvihuone"
     ],
     [
+      "Vårdö",
+      "Åland",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Vårdö",
+      "Åland",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Kumlinge",
       "Åland",
       "Maatila"
@@ -11831,6 +13641,16 @@
       "Kasvihuone"
     ],
     [
+      "Kumlinge",
+      "Åland",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Kumlinge",
+      "Åland",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Åva",
       "Åland",
       "Maatila"
@@ -11896,6 +13716,16 @@
       "Kasvihuone"
     ],
     [
+      "Åva",
+      "Åland",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Åva",
+      "Åland",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Vääksy",
       "Päijät-Häme",
       "Maatila"
@@ -11961,6 +13791,16 @@
       "Kasvihuone"
     ],
     [
+      "Vääksy",
+      "Päijät-Häme",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Vääksy",
+      "Päijät-Häme",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Taavetti",
       "Etelä-Karjala",
       "Maatila"
@@ -12026,6 +13866,16 @@
       "Kasvihuone"
     ],
     [
+      "Taavetti",
+      "Etelä-Karjala",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Taavetti",
+      "Etelä-Karjala",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Karlby",
       "Åland",
       "Maatila"
@@ -12091,6 +13941,16 @@
       "Kasvihuone"
     ],
     [
+      "Karlby",
+      "Åland",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Karlby",
+      "Åland",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Siikajoki",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -12156,6 +14016,16 @@
       "Kasvihuone"
     ],
     [
+      "Siikajoki",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Siikajoki",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
+    ],
+    [
       "Pulkkila",
       "Pohjois-Pohjanmaa",
       "Maatila"
@@ -12219,6 +14089,16 @@
       "Pulkkila",
       "Pohjois-Pohjanmaa",
       "Kasvihuone"
+    ],
+    [
+      "Pulkkila",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljely"
+    ],
+    [
+      "Pulkkila",
+      "Pohjois-Pohjanmaa",
+      "Kasvihuoneviljelmä"
     ]
   ]
 }

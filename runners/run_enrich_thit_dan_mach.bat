@@ -10,10 +10,10 @@ echo ===============================================================
 
 echo.
 
-if exist .venv\Scripts\activate.bat (
-    call .venv\Scripts\activate.bat
+if exist .venv\Scripts\python.exe (
+    .venv\Scripts\python.exe -u crawlmail\enrich_thit_dan_mach_deep.py %*
+) else (
+    python -u crawlmail\enrich_thit_dan_mach_deep.py %*
 )
-
-python -u crawlmail\enrich_thit_dan_mach_deep.py %*
 echo.
 pause

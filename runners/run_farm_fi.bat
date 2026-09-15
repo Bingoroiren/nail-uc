@@ -45,7 +45,7 @@ echo.
 echo ======================================================
 echo STEP 2: Scrape Emails, Deduplicate and Translate Finnish Tags...
 echo ======================================================
-python formatters/format_farm_fi_emails.py
+python formatters/format_farm_fi_emails.py %*
 if errorlevel 1 goto FormatFailed
 
 goto End

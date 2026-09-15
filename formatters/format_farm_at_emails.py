@@ -30,34 +30,28 @@ PROGRESS_FILE = os.path.join(ROOT_DIR, "data", "progress", "scraping_progress_fa
 
 EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b')
 
-# German Category Translation Map to Vietnamese
+# Austrian German Category Translation Map to Vietnamese
 CATEGORY_TRANSLATIONS = {
-    "landwirtschaftsbetrieb": "Nông trại / Trại nông nghiệp",
-    "bio-landwirtschaftsbetrieb": "Nông trại hữu cơ / Sinh thái",
-    "weinkellerei": "Xưởng sản xuất / Nhà làm rượu vang",
-    "weingut": "Nhà làm rượu vang / Trang trại nho",
-    "rinderfarm": "Trại chăn nuôi bò",
-    "rinderzucht": "Trại chăn nuôi / Nhân giống bò",
-    "christbaumzucht": "Trại trồng cây thông Noel",
+    "bauernhof": "Trang trại / Nông trại",
+    "landwirtschaftlicher betrieb": "Cơ sở / Doanh nghiệp nông nghiệp",
+    "biobauernhof": "Nông trại hữu cơ / Sinh thái",
+    "biobauernhof": "Nông trại hữu cơ / Sinh thái",
     "milchviehbetrieb": "Trại chăn nuôi bò sữa",
-    "milchviehhaltung": "Trại chăn nuôi bò sữa",
+    "fischzucht": "Trang trại / Cơ sở nuôi cá",
+    "fischzuchtbetrieb": "Cơ sở / Doanh nghiệp nuôi cá",
+    "viehzuchtbetrieb": "Trại chăn nuôi gia súc / bò",
+    "christbaumkultur": "Trang trại trồng cây thông Noel",
     "geflügelhof": "Trại chăn nuôi gia cầm",
-    "geflügelzucht": "Trại chăn nuôi gia cầm",
-    "obstgarten": "Vườn cây ăn quả",
-    "obstbau": "Vườn cây ăn quả / Trồng hoa quả",
-    "obst- und gemüseverarbeitung": "Cơ sở chế biến rau củ quả",
-    "obst- und gemüsehandel": "Đại lý / Thương lái rau củ quả",
-    "bauernhof": "Nông trại / Trang trại gia đình",
-    "bio-bauernhof": "Nông trại hữu cơ gia đình",
-    "gemüsebaubetrieb": "Trang trại trồng rau",
-    "landwirt": "Cơ sở sản xuất nông nghiệp",
-    "landwirtschaftlicher betrieb": "Cơ sở sản xuất nông nghiệp",
-    "agrarbetrieb": "Doanh nghiệp nông nghiệp",
-    "weinbaubetrieb": "Cơ sở trồng nho và làm rượu",
+    "imkerei": "Trang trại nuôi ong lấy mật",
+    "weingut": "Vườn nho / Nhà làm rượu vang",
+    "winzer": "Vườn nho / Nhà làm rượu vang",
+    "obstbau": "Trang trại trồng cây ăn quả",
+    "obsthof": "Vườn cây ăn quả / Trang trại hoa quả",
+    "beerenhof": "Trang trại trồng quả mọng / dâu tây",
     "gewächshaus": "Trang trại nhà kính",
-    "gewächshausbau": "Trồng trọt nhà kính",
-    "gärtnerei": "Vườn ươm / Trang trại làm vườn & nhà kính",
-    "gemüsegärtnerei": "Trang trại nhà kính trồng rau"
+    "gemüsebau": "Trang trại trồng rau",
+    "landwirtschaft": "Nông nghiệp / Trang trại",
+    "almwirtschaft": "Trang trại chăn thả vùng núi"
 }
 
 JUNK_DOMAINS = [
@@ -101,8 +95,8 @@ def score_email(email):
     if any(jd in domain for jd in JUNK_DOMAINS):
         return 0
         
-    public_domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'gmx.at', 'gmx.de', 'web.de', 'aon.at', 'a1.net']
-    generic_biz_usernames = ['info', 'office', 'contact', 'hello', 'verkauf', 'post', 'farm', 'wein', 'poststelle']
+    public_domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'gmx.at', 'aon.at', 'chello.at', 'inode.at']
+    generic_biz_usernames = ['info', 'office', 'kunden', 'verkauf', 'bestellung', 'kontakt', 'hof', 'fisch']
     
     if domain not in public_domains and username in generic_biz_usernames:
         return 10
@@ -130,6 +124,19 @@ def pick_best_single_email(email_str):
     valid_emails.sort(key=lambda x: (x[0], -len(x[1])), reverse=True)
     return valid_emails[0][1]
 
+async def setup_vpn_speed_route(page):
+    """Blocks heavy static assets (images, fonts, media, css) to accelerate website loading over VPN."""
+    async def route_handler(route):
+        req = route.request
+        if req.resource_type in ["image", "media", "font", "stylesheet"]:
+            await route.abort()
+        else:
+            await route.continue_()
+    try:
+        await page.route("**/*", route_handler)
+    except Exception:
+        pass
+
 async def crawl_site_for_emails(page, url):
     if not url or "google.com" in url or "facebook.com" in url:
         return []
@@ -138,47 +145,59 @@ async def crawl_site_for_emails(page, url):
         await page.goto(url, timeout=12000, wait_until="commit")
         await page.wait_for_timeout(1000)
         
-        body_text = await page.locator("body").inner_text()
-        for email in EMAIL_REGEX.findall(body_text):
-            emails.add(email.lower())
+        try:
+            body_text = await page.locator("body").inner_text()
+            for email in EMAIL_REGEX.findall(body_text):
+                emails.add(email.lower())
+        except Exception:
+            pass
             
-        html_content = await page.content()
-        for email in EMAIL_REGEX.findall(html_content):
-            emails.add(email.lower())
+        try:
+            html_content = await page.content()
+            for email in EMAIL_REGEX.findall(html_content):
+                emails.add(email.lower())
+        except Exception:
+            pass
             
-        mailto_links = await page.locator('a[href^="mailto:"]').all()
-        for link in mailto_links:
-            href = await link.get_attribute("href")
-            if href:
-                em = href.replace("mailto:", "").split("?")[0].strip().lower()
-                if EMAIL_REGEX.match(em):
-                    emails.add(em)
+        try:
+            mailto_links = await page.locator('a[href^="mailto:"]').all()
+            for link in mailto_links:
+                href = await link.get_attribute("href")
+                if href:
+                    em = href.replace("mailto:", "").split("?")[0].strip().lower()
+                    if EMAIL_REGEX.match(em):
+                        emails.add(em)
+        except Exception:
+            pass
                     
         # Check subpages if no emails found on homepage
         if not emails:
-            links = await page.locator('a[href]').all()
-            subpage_urls = []
-            for link in links:
-                href = await link.get_attribute("href")
-                text = await link.inner_text()
-                text_lower = text.lower() if text else ""
-                href_lower = href.lower() if href else ""
-                
-                if href and not href_lower.startswith(('mailto:', 'tel:', 'javascript:', '#')):
-                    full_url = urllib.parse.urljoin(url, href)
-                    if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
-                        if any(k in text_lower or k in href_lower for k in ['kontakt', 'contact', 'impressum', 'ueber-uns', 'about', 'location']):
-                            subpage_urls.append(full_url.split('#')[0])
-                            
-            for sub_url in list(set(subpage_urls))[:2]:
-                try:
-                    await page.goto(sub_url, timeout=8000, wait_until="commit")
-                    await page.wait_for_timeout(1000)
-                    sub_text = await page.locator("body").inner_text()
-                    for email in EMAIL_REGEX.findall(sub_text):
-                        emails.add(email.lower())
-                except Exception:
-                    pass
+            try:
+                links = await page.locator('a[href]').all()
+                subpage_urls = []
+                for link in links:
+                    href = await link.get_attribute("href")
+                    text = await link.inner_text()
+                    text_lower = text.lower() if text else ""
+                    href_lower = href.lower() if href else ""
+                    
+                    if href and not href_lower.startswith(('mailto:', 'tel:', 'javascript:', '#')):
+                        full_url = urllib.parse.urljoin(url, href)
+                        if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
+                            if any(k in text_lower or k in href_lower for k in ['kontakt', 'impressum', 'contact', 'uber-uns', 'about']):
+                                subpage_urls.append(full_url.split('#')[0])
+                                
+                for sub_url in list(set(subpage_urls))[:2]:
+                    try:
+                        await page.goto(sub_url, timeout=8000, wait_until="commit")
+                        await page.wait_for_timeout(1000)
+                        sub_text = await page.locator("body").inner_text()
+                        for email in EMAIL_REGEX.findall(sub_text):
+                            emails.add(email.lower())
+                    except Exception:
+                        pass
+            except Exception:
+                pass
     except Exception:
         pass
         
@@ -192,6 +211,18 @@ async def crawl_site_for_emails(page, url):
     return [em for sc, em in scored]
 
 async def main():
+    test_mode = "--test" in sys.argv or "test" in sys.argv
+    reset_mode = "--reset" in sys.argv or "reset" in sys.argv
+
+    if reset_mode:
+        safe_print("[!] Reset mode active. Clearing progress and output CSV files...")
+        for p in [PROGRESS_FILE, OUTPUT_CSV, CLEAN_DEDUP_CSV]:
+            if os.path.exists(p):
+                try:
+                    os.remove(p)
+                except Exception:
+                    pass
+
     if not os.path.exists(INPUT_CSV):
         safe_print(f"[-] Input raw CSV not found: {INPUT_CSV}")
         return
@@ -201,6 +232,10 @@ async def main():
     with open(INPUT_CSV, mode="r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         input_rows = list(reader)
+
+    if test_mode:
+        input_rows = input_rows[:10]
+        safe_print(f"[!] TEST MODE ACTIVE: Crawling emails for top {len(input_rows)} records only.")
         
     fieldnames = [
         "No.", "Cong ty", "Chuc danh", "Nguoi lien he", "SDT", "Lien He", "Email", 
@@ -209,14 +244,35 @@ async def main():
         "Ngay Follow-up gan nhat", "Mailbox da dung", "Category"
     ]
     
-    processed_companies = set()
+    processed_emails = {}
     os.makedirs(os.path.dirname(PROGRESS_FILE), exist_ok=True)
-    if os.path.exists(PROGRESS_FILE):
+    
+    # Pre-populate from existing output CSV if present and not reset
+    if not reset_mode and os.path.exists(OUTPUT_CSV):
+        try:
+            with open(OUTPUT_CSV, mode="r", encoding="utf-8-sig") as f_out:
+                r_out = csv.DictReader(f_out)
+                for r in r_out:
+                    cname = r.get("Cong ty", "").strip()
+                    em = r.get("Email", "").strip()
+                    if cname:
+                        processed_emails[cname] = em
+            safe_print(f"[+] Loaded {len(processed_emails)} existing email records from output CSV.")
+        except Exception:
+            pass
+
+    # Load from progress file
+    if os.path.exists(PROGRESS_FILE) and not reset_mode:
         try:
             with open(PROGRESS_FILE, "r", encoding="utf-8") as f_p:
                 p_data = json.load(f_p)
-                processed_companies = set(p_data.get("processed", []))
-            safe_print(f"[+] Loaded {len(processed_companies)} already processed records from progress file.")
+                if isinstance(p_data.get("emails"), dict):
+                    processed_emails.update(p_data["emails"])
+                elif isinstance(p_data.get("processed"), list):
+                    for name in p_data["processed"]:
+                        if name not in processed_emails:
+                            processed_emails[name] = ""
+            safe_print(f"[+] Loaded {len(processed_emails)} total progress records.")
         except Exception:
             pass
 
@@ -257,11 +313,14 @@ async def main():
             "Category": trans_cat
         })
 
-    def save_progress(proc_set):
+    def save_progress(proc_dict):
         os.makedirs(os.path.dirname(PROGRESS_FILE), exist_ok=True)
         try:
             with open(PROGRESS_FILE, "w", encoding="utf-8") as f_p:
-                json.dump({"processed": list(proc_set)}, f_p, indent=2, ensure_ascii=False)
+                json.dump({
+                    "processed": list(proc_dict.keys()),
+                    "emails": proc_dict
+                }, f_p, indent=2, ensure_ascii=False)
         except Exception:
             pass
 
@@ -269,17 +328,21 @@ async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         context = await browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            extra_http_headers={"Accept-Language": "de-AT,de;q=0.9,en-US;q=0.8,en;q=0.7"}
         )
         page = await context.new_page()
         await stealth_async(page)
+        await setup_vpn_speed_route(page)
         
         total = len(formatted_rows)
         for i, row in enumerate(formatted_rows):
             comp_name = row["Cong ty"]
             web_url = row["Lien He"]
             
-            if comp_name in processed_companies:
+            # If already processed, restore found email and skip re-crawling
+            if comp_name in processed_emails and not test_mode and not reset_mode:
+                row["Email"] = processed_emails[comp_name]
                 continue
                 
             is_valid_site = web_url.startswith("http") and "google.com" not in web_url
@@ -295,9 +358,9 @@ async def main():
             else:
                 safe_print(f"[{i+1}/{total}] Skipping email crawl for: '{comp_name}' (No valid website)")
                 
-            processed_companies.add(comp_name)
-            save_progress(processed_companies)
-            await page.wait_for_timeout(random.uniform(500, 1000))
+            processed_emails[comp_name] = row["Email"]
+            save_progress(processed_emails)
+            await page.wait_for_timeout(random.uniform(300, 600))
             
         await browser.close()
 
