@@ -3,8 +3,8 @@ chcp 65001 >nul
 title Lam Giau Du Lieu Agency Phan Lan (Google Maps + Search + Facebook)
 
 echo ===========================================================================
-echo   LAM GIAU DU LIEU AGENCY PHAN LAN (HENKILOSTOVUOKRAUS & REKRYTOINTI)
-echo   (Google Maps hl=fi + Fallback Search + Facebook + Xu ly %20 + Anti-Bot)
+echo   LAM GIAU DU LIEU AGENCY PHAN LAN (HENKILOSTOVUOKRAUS VA REKRYTOINTI)
+echo   (Google Maps hl=fi + Fallback Search + Facebook + Xu ly ma 20 + Anti-Bot)
 echo   Trinh duyet se hien thi (Headless = False) de ban tien theo doi!
 echo ===========================================================================
 

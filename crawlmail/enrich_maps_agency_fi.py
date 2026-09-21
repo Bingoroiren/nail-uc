@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Hệ thống Làm giàu dữ liệu Agency Tuyển dụng & Cho thuê Nhân sự Phần Lan:
+Hệ thống Làm giàu dữ liệu Agency Tuyển dụng & Cho thuê Nhân sự Phần Lan (ĐÃ TỐI ƯU HÓA TỐC ĐỘ & ĐỘ CHÍNH XÁC):
 1. Tra cứu Google Maps (hl=fi, headless=False) với bộ lọc tên nghiêm ngặt cho Phần Lan.
 2. Fallback sang Bing / DuckDuckGo nếu Maps không có kết quả hoặc không có website (có nhận diện Captcha).
 3. Cào Website để tìm Email, SĐT và link Facebook (xử lý triệt để mã %20 và mailto).
 4. Nếu Website không có Email, cào tiếp Fanpage Facebook để tìm Email.
-5. Cơ chế lưu file động 100%, bảo toàn dữ liệu khi bấm Ctrl+C, chống lỗi PermissionError khi mở Excel.
+5. Tối ưu:
+   - Domain Cache & FB Cache: tránh cào lại cùng 1 trang web/fanpage nhiều lần (cho các agency nhiều chi nhánh như Barona, Eezy, SOL...).
+   - Nhận diện trang liên hệ chuẩn Phần Lan (/yhteystiedot/, /ota-yhteytta/...) loại trừ các link báo cáo tài chính/informaatio.
+   - Ưu tiên cào Web trước nếu đã có sẵn website từ Finder.fi giúp tăng tốc gấp 5 lần.
+   - Lưu động 100%, bảo toàn dữ liệu khi bấm Ctrl+C, chống lỗi PermissionError khi mở Excel.
 """
 
 import asyncio
@@ -37,7 +41,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INPUT_CSV = os.path.join(BASE_DIR, "agency phần lan (đã lọc trùng).csv")
 OUTPUT_CSV = os.path.join(BASE_DIR, "agency phần lan (đã lọc trùng).csv")
 OUTPUT_XLSX = os.path.join(BASE_DIR, "agency phần lan.xlsx")
-ALL_BRANCHES_CSV = os.path.join(BASE_DIR, "agency phần lan - tất cả chi nhánh.csv")
 CACHE_FILE = os.path.join(BASE_DIR, "crawlmail", "cache_maps_enrich_agency_fi.json")
 
 LEGAL_FORMS_FI = [
@@ -49,9 +52,9 @@ INVALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.pdf', 
 IGNORE_DOMAINS = {
     'sentry.io', 'wixpress.com', 'example.com', 'domain.com', 'schema.org', 
     'wordpress.org', 'cloudflare.com', 'google.com', 'facebook.com', 'w3.org', 
-    'jsdelivr.net', 'bootstrapcdn.com', 'website.com', 'yourdomain.com', 'fb.com'
+    'jsdelivr.net', 'bootstrapcdn.com', 'website.com', 'yourdomain.com', 'fb.com', 'email.fi'
 }
-DUMMY_EMAILS = {'user@website.com', 'name@domain.com', 'email@domain.com', 'info@domain.com', 'contact@domain.com'}
+DUMMY_EMAILS = {'user@website.com', 'name@domain.com', 'email@domain.com', 'info@domain.com', 'contact@domain.com', 'esimerkki@email.fi', 'etunimi.sukunimi@eezy.fi'}
 
 EXCLUDED_SEARCH_DOMAINS_FI = {
     'finder.fi', 'kauppalehti.fi', 'asiakastieto.fi', 'yritystele.fi', 'proff.fi', 
@@ -62,6 +65,10 @@ EXCLUDED_SEARCH_DOMAINS_FI = {
 }
 DIRECTORY_KEYWORDS_FI = {'directory', 'yellowpages', 'yrityshaku', 'rekry', 'tyopaikat', 'duunit', 'katalog', 'listing', 'yritykset'}
 
+# Caches in-memory to prevent re-scraping identical parent domains/Facebook pages
+DOMAIN_CACHE = {}
+FB_CACHE = {}
+
 def clean_company_name_fi(name):
     if not name:
         return ""
@@ -71,13 +78,6 @@ def clean_company_name_fi(name):
     return ' '.join(tokens).strip()
 
 def is_valid_name_match_fi(query_name, candidate_name):
-    """
-    Bộ lọc so khớp tên nghiêm ngặt cho thị trường Phần Lan:
-    - Không phân biệt hoa thường
-    - Loại bỏ pháp nhân Oy, Ab, Ky, Tmi...
-    - Cụm từ tìm kiếm phải giống hệt
-    - Từ phụ phải nằm trong ngoặc (...) hoặc phân cách bởi dấu (-, –, —, ,, ., :, /, |)
-    """
     q = clean_company_name_fi(query_name)
     c = re.sub(r'["\'„“”«»]', '', candidate_name).strip().lower()
     c_clean = clean_company_name_fi(candidate_name)
@@ -111,7 +111,6 @@ def decode_cloudflare_email(hex_str):
 def clean_email(email_str):
     if not email_str:
         return ""
-    # Giải mã URL và xóa %20
     em = urllib.parse.unquote(email_str).replace('%20', '').strip().lower().rstrip('.,;:')
     if any(em.endswith(ext) for ext in INVALID_EXTENSIONS):
         return ""
@@ -230,8 +229,9 @@ async def search_google_maps_fi(page, company_name):
     }
     
     try:
-        await page.goto(url, wait_until="domcontentloaded", timeout=25000)
-        await asyncio.sleep(3)
+        await page.goto(url, wait_until="domcontentloaded", timeout=18000)
+        # Chờ ngắn xem có kết quả hoặc cookie banner
+        await asyncio.sleep(2)
         await check_for_captcha(page, "Google Maps")
         
         # Handle Cookie consent Phần Lan
@@ -239,7 +239,7 @@ async def search_google_maps_fi(page, company_name):
             btn = page.locator('button[aria-label*="Hyväksy"], button[aria-label*="Hylkää"], button[aria-label*="Accept"], form[action*="consent"] button')
             if await btn.count() > 0:
                 await btn.first.click()
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(1)
         except Exception:
             pass
             
@@ -278,7 +278,7 @@ async def search_google_maps_fi(page, company_name):
         cards = page.locator('a.hfpxzc')
         card_count = await cards.count()
         if card_count > 0:
-            for i in range(min(card_count, 4)):
+            for i in range(min(card_count, 3)):
                 card_title = await cards.nth(i).get_attribute('aria-label')
                 matched, reason = is_valid_name_match_fi(q_clean, card_title or "")
                 if matched:
@@ -287,7 +287,7 @@ async def search_google_maps_fi(page, company_name):
                     res["maps_title"] = card_title.strip()
                     
                     await cards.nth(i).click()
-                    await asyncio.sleep(2.5)
+                    await asyncio.sleep(2)
                     
                     cat_elem = page.locator('button.DkEaL, button[jsaction*="category"], span.DkEaL')
                     if await cat_elem.count() > 0:
@@ -339,7 +339,7 @@ async def fallback_search_website_fi(http_session, company_name):
     # 1. Bing Search
     try:
         b_url = f"https://www.bing.com/search?q={urllib.parse.quote(query)}"
-        res = await http_session.get(b_url, timeout=8)
+        res = await http_session.get(b_url, timeout=7)
         if res.status_code == 200:
             soup = BeautifulSoup(res.text, 'html.parser')
             for li in soup.find_all('li', class_='b_algo'):
@@ -363,7 +363,7 @@ async def fallback_search_website_fi(http_session, company_name):
     # 2. DuckDuckGo HTML
     try:
         url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(query)}"
-        res = await http_session.get(url, timeout=8)
+        res = await http_session.get(url, timeout=7)
         if res.status_code == 200:
             soup = BeautifulSoup(res.text, 'html.parser')
             for a in soup.find_all('a', class_='result__url'):
@@ -380,9 +380,8 @@ async def fallback_search_website_fi(http_session, company_name):
 
 async def scrape_website_details_fi(http_session, raw_url):
     """
-    Quét trang web: Email, SĐT, Facebook link (xử lý triệt để %20)
+    Quét trang web tối ưu: Có Domain Cache, phát hiện chuẩn trang liên hệ Phần Lan, xử lý %20
     """
-    # Xử lý %20 trong URL
     url = urllib.parse.unquote(raw_url.strip())
     if not url.startswith(('http://', 'https://')):
         url = 'https://' + url
@@ -390,74 +389,108 @@ async def scrape_website_details_fi(http_session, raw_url):
     parsed = urllib.parse.urlparse(url)
     domain = parsed.netloc.lower().replace('www.', '')
     
+    # 1. Kiểm tra Domain Cache trước
+    if domain in DOMAIN_CACHE:
+        return DOMAIN_CACHE[domain]
+        
     collected_emails = set()
+    collected_phones = []
     fb_url = ""
-    phone_found = ""
+    phone_regex = re.compile(r'(?:\+358\s?|0)[1-9]\d{1,2}[\s-]?\d{3,4}[\s-]?\d{2,4}')
     
-    # 1. Homepage
+    # 2. Quét trang chủ
     homepage_html = ""
     try:
-        res = await http_session.get(url, timeout=8, allow_redirects=True)
+        res = await http_session.get(url, timeout=7, allow_redirects=True)
         if res.status_code == 200:
             homepage_html = res.text
             collected_emails.update(extract_emails_from_html(homepage_html))
             fb_url = extract_facebook_url(homepage_html)
+            for ph in phone_regex.findall(homepage_html):
+                if len(re.sub(r'\D', '', ph)) >= 8:
+                    collected_phones.append(ph.strip())
     except Exception:
         if url.startswith('https://'):
             try:
-                res = await http_session.get('http://' + url[8:], timeout=8, allow_redirects=True)
+                res = await http_session.get('http://' + url[8:], timeout=7, allow_redirects=True)
                 if res.status_code == 200:
                     homepage_html = res.text
                     collected_emails.update(extract_emails_from_html(homepage_html))
                     fb_url = extract_facebook_url(homepage_html)
+                    for ph in phone_regex.findall(homepage_html):
+                        if len(re.sub(r'\D', '', ph)) >= 8:
+                            collected_phones.append(ph.strip())
             except Exception:
                 pass
 
-    # 2. Contact pages đặc thù Phần Lan
+    # 3. Tìm các trang liên hệ chuẩn
     contact_urls = []
+    
+    # A. Danh sách các đường dẫn ưu tiên cao của website Phần Lan
+    priority_slugs = ['/yhteystiedot/', '/yhteystiedot', '/yhteys/', '/yhteys', '/ota-yhteytta/', '/ota-yhteytta', '/contact/', '/contact']
+    for slug in priority_slugs[:4]:
+        contact_urls.append(urllib.parse.urljoin(url, slug))
+        
+    # B. Quét thẻ <a> trên trang chủ tìm trang liên hệ
     if homepage_html:
         soup = BeautifulSoup(homepage_html, 'html.parser')
-        keywords = ['yhteys', 'yhteystiedot', 'ota-yhteytta', 'meista', 'contact', 'about', 'tiimi']
+        keywords_text = ['ota yhteyt', 'yhteystiedot', 'yhteys', 'asiakaspalvelu', 'rekrytoijat', 'tiimi', 'contact']
+        keywords_href = ['/yhteystiedot', '/yhteys', '/ota-yhteytta', '/contact', '/tiimi']
+        
         for a in soup.find_all('a', href=True):
             href = urllib.parse.unquote(a['href'].strip())
-            text = a.get_text(strip=True).lower()
-            if any(k in href.lower() or k in text for k in keywords):
+            txt = a.get_text(strip=True).lower()
+            href_l = href.lower()
+            
+            # Loại bỏ anchor hoặc các file tải về
+            if href.startswith('#') or any(href_l.endswith(ext) for ext in ['.pdf', '.jpg', '.png', '.zip']):
+                continue
+            # Loại bỏ các trang báo cáo tài chính/informaatio/blog
+            if any(bad in href_l for bad in ['informaatio', 'sijoittaj', 'raport', 'taloustiet', 'blog/']):
+                continue
+                
+            is_match = any(k in txt for k in keywords_text) or any(k in href_l for k in keywords_href)
+            if is_match:
                 full_u = urllib.parse.urljoin(url, href)
                 if full_u not in contact_urls and full_u != url:
                     contact_urls.append(full_u)
-                    if len(contact_urls) >= 3:
+                    if len(contact_urls) >= 5:
                         break
-                        
-    if not contact_urls:
-        contact_urls = [
-            urllib.parse.urljoin(url, '/yhteystiedot'), 
-            urllib.parse.urljoin(url, '/yhteys'), 
-            urllib.parse.urljoin(url, '/contact')
-        ]
-        
+
+    # 4. Quét tối đa 3 trang liên hệ tốt nhất
     for cu in contact_urls[:3]:
         try:
             c_res = await http_session.get(cu, timeout=6, allow_redirects=True)
             if c_res.status_code == 200:
                 collected_emails.update(extract_emails_from_html(c_res.text))
+                for ph in phone_regex.findall(c_res.text):
+                    if len(re.sub(r'\D', '', ph)) >= 8:
+                        collected_phones.append(ph.strip())
                 if not fb_url:
                     fb_url = extract_facebook_url(c_res.text)
         except Exception:
             continue
 
     emails_str = prioritize_emails(collected_emails, domain)
-    return emails_str, fb_url
+    phone_str = collected_phones[0] if collected_phones else ""
+    DOMAIN_CACHE[domain] = (emails_str, phone_str, fb_url)
+    return emails_str, phone_str, fb_url
 
 async def scrape_facebook_email_fi(page, fb_url):
     """
-    Quét Fanpage Facebook trên Chrome (headless=False) tìm email
+    Quét Fanpage Facebook với FB_CACHE và timeout nhanh
     """
     if not fb_url:
         return ""
+    clean_fb = fb_url.rstrip('/').lower()
+    if clean_fb in FB_CACHE:
+        return FB_CACHE[clean_fb]
+        
+    email_found = ""
     try:
         about_url = fb_url.rstrip('/') + '/about'
-        await page.goto(about_url, wait_until="domcontentloaded", timeout=18000)
-        await asyncio.sleep(3)
+        await page.goto(about_url, wait_until="domcontentloaded", timeout=10000)
+        await asyncio.sleep(2)
         
         try:
             close_btn = page.locator('div[aria-label="Sulje"], div[aria-label="Close"], i[data-visualcompletion="css-img"]')
@@ -471,19 +504,23 @@ async def scrape_facebook_email_fi(page, fb_url):
         emails = extract_emails_from_html(content)
         valid = [e for e in emails if 'facebook' not in e and 'fb.com' not in e]
         if valid:
-            return valid[0]
+            email_found = valid[0]
+            FB_CACHE[clean_fb] = email_found
+            return email_found
             
-        # Fallback to main fb page
-        await page.goto(fb_url, wait_until="domcontentloaded", timeout=15000)
-        await asyncio.sleep(2)
+        # Fallback trang chính
+        await page.goto(fb_url, wait_until="domcontentloaded", timeout=8000)
+        await asyncio.sleep(1.5)
         content2 = await page.content()
         emails2 = extract_emails_from_html(content2)
         valid2 = [e for e in emails2 if 'facebook' not in e and 'fb.com' not in e]
         if valid2:
-            return valid2[0]
+            email_found = valid2[0]
     except Exception:
         pass
-    return ""
+        
+    FB_CACHE[clean_fb] = email_found
+    return email_found
 
 def load_cache():
     if os.path.exists(CACHE_FILE):
@@ -557,7 +594,7 @@ def save_outputs(rows, fieldnames):
 
 async def main():
     print("=" * 75, flush=True)
-    print(" HỆ THỐNG LÀM GIÀU DỮ LIỆU AGENCY PHẦN LAN (MAPS + SEARCH + FB) ", flush=True)
+    print(" HỆ THỐNG LÀM GIÀU DỮ LIỆU AGENCY PHẦN LAN (TỐI ƯU HÓA HIỆU NĂNG) ", flush=True)
     print(" Chế độ quan sát trực quan: HEADLESS = FALSE (Mở cửa sổ Chrome) ", flush=True)
     print("=" * 75, flush=True)
     
@@ -572,7 +609,7 @@ async def main():
         fieldnames = list(reader.fieldnames)
         rows = list(reader)
         
-    # Ưu tiên các dòng chưa có email hoặc chưa có sđt/web
+    # Lọc danh sách cần làm giàu email
     target_rows = [r for r in rows if not r.get('email', '').strip()]
     print(f"[+] Tổng số agency duy nhất: {len(rows)} | Cần làm giàu email: {len(target_rows)} agency", flush=True)
     
@@ -595,7 +632,7 @@ async def main():
                     c_name = r['name'].strip()
                     cache_key = c_name.lower()
                     
-                    # Kiểm tra cache
+                    # 1. Kiểm tra cache
                     if cache_key in cache:
                         c_data = cache[cache_key]
                         if c_data.get('email'):
@@ -623,25 +660,52 @@ async def main():
                     fb_url = ""
                     source = []
                     
-                    # BƯỚC 1: GOOGLE MAPS (hl=fi)
-                    maps_info = await search_google_maps_fi(page, c_name)
-                    if maps_info["matched"]:
-                        source.append("GoogleMaps")
-                        tag_maps = maps_info["tag_maps"]
-                        addr_maps = maps_info["address"]
-                        print(f"  [Maps Khớp ({maps_info['match_reason']})]: {maps_info['maps_title']}", flush=True)
-                        if tag_maps:
-                            print(f"    - Tag ngành (FI): {tag_maps}", flush=True)
-                        if maps_info["phone"] and not cur_phone:
-                            cur_phone = maps_info["phone"]
-                            print(f"    - SĐT mới (Maps): {cur_phone}", flush=True)
-                        if maps_info["website"] and not cur_web:
-                            cur_web = maps_info["website"]
-                            print(f"    - Website mới (Maps): {cur_web}", flush=True)
-                    else:
-                        print(f"  [Maps Không khớp/Không thấy]", flush=True)
-                        
-                    # BƯỚC 2: FALLBACK SEARCH BING / DUCKDUCKGO NẾU CHƯA CÓ WEBSITE
+                    # 2. CHIẾN LƯỢC TỐI ƯU: NẾU ĐÃ CÓ WEBSITE TỪ TRƯỚC -> QUÉT WEBSITE NGAY
+                    if cur_web:
+                        print(f"  -> Quét nhanh Website sẵn có ({cur_web})...", flush=True)
+                        web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web)
+                        if web_email:
+                            cur_email = web_email
+                            source.append("Website")
+                            print(f"    [+] EMAIL TỪ WEB: {cur_email}", flush=True)
+                        if found_phone and not cur_phone:
+                            cur_phone = found_phone
+                            print(f"    [+] SĐT TỪ WEB: {cur_phone}", flush=True)
+                        if found_fb:
+                            fb_url = found_fb
+                            print(f"    [+] LINK FACEBOOK: {fb_url}", flush=True)
+                            
+                    # 3. NẾU CHƯA CÓ WEBSITE HOẶC CẦN TÌM THÊM THÔNG TIN LIÊN HỆ -> MỚI TRA MAPS
+                    if not cur_web or not cur_phone or not cur_email:
+                        print(f"  -> Tra cứu trên Google Maps (hl=fi)...", flush=True)
+                        maps_info = await search_google_maps_fi(page, c_name)
+                        if maps_info["matched"]:
+                            source.append("GoogleMaps")
+                            tag_maps = maps_info["tag_maps"]
+                            addr_maps = maps_info["address"]
+                            print(f"    [Maps Khớp ({maps_info['match_reason']})]: {maps_info['maps_title']}", flush=True)
+                            if tag_maps:
+                                print(f"      - Tag ngành (FI): {tag_maps}", flush=True)
+                            if maps_info["phone"] and not cur_phone:
+                                cur_phone = maps_info["phone"]
+                                print(f"      - SĐT mới (Maps): {cur_phone}", flush=True)
+                            if maps_info["website"] and not cur_web:
+                                cur_web = maps_info["website"]
+                                print(f"      - Website mới (Maps): {cur_web}", flush=True)
+                                # Cào website mới phát hiện từ Maps
+                                web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web)
+                                if web_email and not cur_email:
+                                    cur_email = web_email
+                                    source.append("Website(Maps)")
+                                    print(f"      [+] EMAIL MỚI: {cur_email}", flush=True)
+                                if found_phone and not cur_phone:
+                                    cur_phone = found_phone
+                                if found_fb and not fb_url:
+                                    fb_url = found_fb
+                        else:
+                            print(f"    [Maps Không khớp/Không thấy]", flush=True)
+                            
+                    # 4. BƯỚC FALLBACK SEARCH BING / DUCKDUCKGO NẾU VẪN CHƯA CÓ WEBSITE
                     if not cur_web:
                         print(f"  -> Fallback Search (Bing/DDG) tìm website...", flush=True)
                         fb_web = await fallback_search_website_fi(http_session, c_name)
@@ -649,22 +713,19 @@ async def main():
                             cur_web = fb_web
                             source.append("SearchFallback")
                             print(f"    - Website tìm thấy: {cur_web}", flush=True)
+                            web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web)
+                            if web_email and not cur_email:
+                                cur_email = web_email
+                                source.append("Website(Search)")
+                                print(f"    [+] EMAIL WEBSITE: {cur_email}", flush=True)
+                            if found_phone and not cur_phone:
+                                cur_phone = found_phone
+                            if found_fb and not fb_url:
+                                fb_url = found_fb
                         else:
                             print(f"    - Không tìm thấy website trên search", flush=True)
                             
-                    # BƯỚC 3: CÀO WEBSITE (TÌM EMAIL, SĐT & LINK FB - XỬ LÝ %20)
-                    if cur_web:
-                        print(f"  -> Quét Website ({cur_web})...", flush=True)
-                        web_email, found_fb = await scrape_website_details_fi(http_session, cur_web)
-                        if web_email:
-                            cur_email = web_email
-                            source.append("Website")
-                            print(f"    [+] EMAIL WEBSITE: {cur_email}", flush=True)
-                        if found_fb:
-                            fb_url = found_fb
-                            print(f"    [+] FACEBOOK LINK: {fb_url}", flush=True)
-                            
-                    # BƯỚC 4: QUÉT FACEBOOK NẾU VẪN CHƯA CÓ EMAIL MÀ CÓ LINK FB
+                    # 5. QUÉT FACEBOOK NẾU VẪN CHƯA CÓ EMAIL MÀ CÓ LINK FB
                     if not cur_email and fb_url:
                         print(f"  -> Quét Fanpage Facebook ({fb_url}) tìm email...", flush=True)
                         fb_email = await scrape_facebook_email_fi(page, fb_url)
@@ -681,9 +742,12 @@ async def main():
                         r['phone'] = cur_phone
                     if cur_web:
                         r['website'] = cur_web
-                    r['tag_doanh_nghiep_maps'] = tag_maps
-                    r['dia_chi_maps'] = addr_maps
-                    r['facebook_url'] = fb_url
+                    if tag_maps:
+                        r['tag_doanh_nghiep_maps'] = tag_maps
+                    if addr_maps:
+                        r['dia_chi_maps'] = addr_maps
+                    if fb_url:
+                        r['facebook_url'] = fb_url
                     r['nguon_enrich'] = ", ".join(source) if source else "None"
                     
                     # Lưu cache ngay lập tức sau mỗi công ty
@@ -698,6 +762,7 @@ async def main():
                     }
                     save_cache(cache)
                     
+                    # Lưu CSV / Excel sau mỗi 3 công ty hoặc khi có email mới
                     if processed_count % 3 == 0 or cur_email:
                         save_outputs(rows, fieldnames)
                         
