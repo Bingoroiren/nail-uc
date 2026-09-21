@@ -235,9 +235,20 @@ async def search_google_maps(page, company_name):
             btn = page.locator('button[aria-label*="Priimti"], button[aria-label*="Atmesti"], form[action*="consent"] button')
             if await btn.count() > 0:
                 await btn.first.click()
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(1)
         except Exception:
             pass
+            
+        # Chờ thông minh kết quả tải xong
+        try:
+            await page.wait_for_selector(
+                'h1.DUwDvf, h1[class*="fontHeadlineLarge"], a.hfpxzc, div[role="feed"], div.fontBodyMedium',
+                timeout=12000
+            )
+        except Exception:
+            await asyncio.sleep(2.5)
+            
+        await asyncio.sleep(1.5)
             
         # Case A: Direct Detail Page
         title_elem = page.locator('h1.DUwDvf, h1[class*="fontHeadlineLarge"]')

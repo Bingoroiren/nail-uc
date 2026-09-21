@@ -268,8 +268,10 @@ async def search_google_maps_fi(page, company_name):
     """
     Tra cứu Google Maps với ngôn ngữ Phần Lan (hl=fi).
     Từ khóa tra cứu đúng nguyên văn tên công ty, không thêm bớt.
+    Có cơ chế chờ thông minh thích ứng với mạng VPN (chờ kết quả thực tế xuất hiện).
     """
     query = company_name.strip()
+    q_clean = clean_company_name_fi(company_name)
     url = f"https://www.google.com/maps/search/{urllib.parse.quote(query)}?hl=fi"
     
     res = {
@@ -283,21 +285,37 @@ async def search_google_maps_fi(page, company_name):
     }
     
     try:
-        await page.goto(url, wait_until="domcontentloaded", timeout=18000)
-        # Chờ ngắn xem có kết quả hoặc cookie banner
-        await asyncio.sleep(2)
-        await check_for_captcha(page, "Google Maps")
+        # 1. Điều hướng với timeout dài (25s) thích ứng với mạng VPN
+        await page.goto(url, wait_until="domcontentloaded", timeout=25000)
         
-        # Handle Cookie consent Phần Lan
+        # Xử lý Cookie consent Phần Lan nếu có
         try:
-            btn = page.locator('button[aria-label*="Hyväksy"], button[aria-label*="Hylkää"], button[aria-label*="Accept"], form[action*="consent"] button')
-            if await btn.count() > 0:
-                await btn.first.click()
+            consent_btn = page.locator('button[aria-label*="Hyväksy"], button[aria-label*="Hylkää"], button[aria-label*="Accept"], form[action*="consent"] button')
+            if await consent_btn.count() > 0:
+                await consent_btn.first.click()
                 await asyncio.sleep(1)
         except Exception:
             pass
             
-        # Case A: Direct Detail View
+        await check_for_captcha(page, "Google Maps")
+        
+        # 2. CHỜ THÔNG MINH CHO VPN: Chờ một trong các dấu hiệu tải xong của Google Maps:
+        # - Hoặc thẻ chi tiết doanh nghiệp: h1.DUwDvf, h1[class*="fontHeadlineLarge"]
+        # - Hoặc danh sách kết quả tìm kiếm: a.hfpxzc, div[role="feed"]
+        # - Hoặc thông báo không tìm thấy kết quả: text="Ei tuloksia", text="tuloksia"
+        try:
+            await page.wait_for_selector(
+                'h1.DUwDvf, h1[class*="fontHeadlineLarge"], a.hfpxzc, div[role="feed"], div.fontBodyMedium, div:has-text("tuloksia")',
+                timeout=12000
+            )
+        except Exception:
+            # Nếu mạng VPN chậm, chờ thêm 2.5s
+            await asyncio.sleep(2.5)
+            
+        # Thêm 1.5s để các thành phần SĐT, website, địa chỉ hydrate xong trên DOM
+        await asyncio.sleep(1.5)
+        
+        # Case A: Direct Detail View (Trực tiếp mở trang chi tiết)
         title_elem = page.locator('h1.DUwDvf, h1[class*="fontHeadlineLarge"]')
         if await title_elem.count() > 0:
             title = await title_elem.first.text_content()
@@ -305,7 +323,7 @@ async def search_google_maps_fi(page, company_name):
             if matched:
                 res["matched"] = True
                 res["match_reason"] = reason
-                res["maps_title"] = title.strip()
+                res["maps_title"] = (title or "").strip()
                 
                 cat_elem = page.locator('button.DkEaL, button[jsaction*="category"], span.DkEaL')
                 if await cat_elem.count() > 0:
@@ -328,20 +346,26 @@ async def search_google_maps_fi(page, company_name):
                     res["address"] = clean_a.strip()
                 return res
 
-        # Case B: List of Results
+        # Case B: List of Results (Danh sách nhiều thẻ kết quả)
         cards = page.locator('a.hfpxzc')
         card_count = await cards.count()
         if card_count > 0:
-            for i in range(min(card_count, 3)):
+            for i in range(min(card_count, 4)):
                 card_title = await cards.nth(i).get_attribute('aria-label')
                 matched, reason = is_valid_name_match_fi(q_clean, card_title or "")
                 if matched:
                     res["matched"] = True
                     res["match_reason"] = reason
-                    res["maps_title"] = card_title.strip()
+                    res["maps_title"] = (card_title or "").strip()
                     
                     await cards.nth(i).click()
-                    await asyncio.sleep(2)
+                    # Chờ panel chi tiết mở ra
+                    try:
+                        await page.wait_for_selector('h1.DUwDvf, button[data-item-id*="phone"], a[data-item-id="authority"]', timeout=6000)
+                    except Exception:
+                        await asyncio.sleep(2)
+                        
+                    await asyncio.sleep(1)
                     
                     cat_elem = page.locator('button.DkEaL, button[jsaction*="category"], span.DkEaL')
                     if await cat_elem.count() > 0:
