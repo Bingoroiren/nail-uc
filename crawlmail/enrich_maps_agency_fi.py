@@ -58,7 +58,7 @@ DUMMY_EMAILS = {'user@website.com', 'name@domain.com', 'email@domain.com', 'info
 
 EXCLUDED_PLATFORMS_FI = {
     # Danh bạ, cổng thông tin doanh nghiệp, tra cứu mã số thuế Phần Lan & Quốc tế
-    'finder.fi', 'kauppalehti.fi', 'asiakastieto.fi', 'yritystele.fi', 'proff.fi',
+    'finder.fi', 'profinder.fi', 'kauppalehti.fi', 'asiakastieto.fi', 'yritystele.fi', 'proff.fi',
     'fonecta.fi', 'fonecta.com', 'suomi.fi', 'prh.fi', 'ytj.fi', 'vero.fi',
     'yritysopas.fi', 'yrityshaku.fi', 'yritykset.fi', 'yritysfakta.fi', 'taloustutka.fi',
     'almamedia.fi', 'directa.fi', 'eniro.fi', 'eniro.se', '0100100.fi', 'sinunyritys.fi',
@@ -253,10 +253,10 @@ async def check_for_captcha(page, platform_name="Google"):
 
 async def search_google_maps_fi(page, company_name):
     """
-    Tra cứu Google Maps với ngôn ngữ Phần Lan (hl=fi)
+    Tra cứu Google Maps với ngôn ngữ Phần Lan (hl=fi).
+    Từ khóa tra cứu đúng nguyên văn tên công ty, không thêm bớt.
     """
-    q_clean = clean_company_name_fi(company_name)
-    query = f"{q_clean} Suomi"
+    query = company_name.strip()
     url = f"https://www.google.com/maps/search/{urllib.parse.quote(query)}?hl=fi"
     
     res = {
@@ -413,10 +413,11 @@ async def fallback_search_website_fi(page, company_name):
     """
     Fallback tìm kiếm website qua DuckDuckGo / Bing TRỰC QUAN TRÊN TRÌNH DUYỆT (page)
     Người dùng quan sát trực tiếp từ khóa tìm kiếm và kết quả trên màn hình Chrome.
+    Từ khóa tra cứu chỉ tra đúng tên công ty, không thêm bớt bất kỳ từ nào.
     Chỉ chấp nhận WEBSITE RIÊNG của doanh nghiệp, loại trừ toàn bộ trang nền tảng/danh bạ/mạng xã hội.
     """
+    query = company_name.strip()
     q_clean = clean_company_name_fi(company_name)
-    query = f'"{q_clean}" Suomi yhteystiedot'
     
     # 1. Tìm kiếm trên DuckDuckGo (trực quan trên Chrome)
     try:

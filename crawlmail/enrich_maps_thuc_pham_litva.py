@@ -334,8 +334,8 @@ async def fallback_search_website(http_session, company_name):
     Fallback tìm kiếm website qua Bing / DuckDuckGo nếu Maps không có website
     Chỉ chấp nhận domain chính thức của công ty, loại bỏ hoàn toàn danh bạ.
     """
+    query = company_name.strip()
     q_clean = clean_company_name(company_name)
-    query = f'"{q_clean}" Lietuva kontaktai'
     
     # 1. Bing Search
     try:
