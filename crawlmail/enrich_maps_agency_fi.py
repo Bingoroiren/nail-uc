@@ -543,9 +543,11 @@ async def scrape_website_details_fi(http_session, raw_url, page=None):
     parsed = urllib.parse.urlparse(url)
     domain = parsed.netloc.lower().replace('www.', '')
     
-    # 1. Kiểm tra Domain Cache trước
+    # 1. Kiểm tra Domain Cache trước (chỉ trả về nếu đã tìm thấy email)
     if domain in DOMAIN_CACHE:
-        return DOMAIN_CACHE[domain]
+        cached_e, cached_p, cached_fb = DOMAIN_CACHE[domain]
+        if cached_e:
+            return cached_e, cached_p, cached_fb
         
     collected_emails = set()
     collected_phones = []
@@ -555,7 +557,7 @@ async def scrape_website_details_fi(http_session, raw_url, page=None):
     # 2. Quét trang chủ
     homepage_html = ""
     try:
-        res = await http_session.get(url, timeout=8, allow_redirects=True)
+        res = await http_session.get(url, timeout=12, allow_redirects=True)
         if res.status_code == 200:
             homepage_html = res.text
             collected_emails.update(extract_emails_from_html(homepage_html))
@@ -566,7 +568,7 @@ async def scrape_website_details_fi(http_session, raw_url, page=None):
     except Exception:
         if url.startswith('https://'):
             try:
-                res = await http_session.get('http://' + url[8:], timeout=8, allow_redirects=True)
+                res = await http_session.get('http://' + url[8:], timeout=10, allow_redirects=True)
                 if res.status_code == 200:
                     homepage_html = res.text
                     collected_emails.update(extract_emails_from_html(homepage_html))
@@ -576,6 +578,22 @@ async def scrape_website_details_fi(http_session, raw_url, page=None):
                             collected_phones.append(ph.strip())
             except Exception:
                 pass
+
+    # Nếu HTTP bị chặn/timeout (do tường lửa datacenter hoặc VPN) mà có browser page -> Mở trực tiếp Chrome
+    if not homepage_html and page:
+        try:
+            print(f"    [!] HTTP timeout/chặn -> Mở trực tiếp trên Chrome: {url}", flush=True)
+            await page.goto(url, wait_until="domcontentloaded", timeout=18000)
+            await asyncio.sleep(2)
+            homepage_html = await page.content()
+            collected_emails.update(extract_emails_from_html(homepage_html))
+            if not fb_url:
+                fb_url = extract_facebook_url(homepage_html)
+            for ph in phone_regex.findall(homepage_html):
+                if len(re.sub(r'\D', '', ph)) >= 8:
+                    collected_phones.append(ph.strip())
+        except Exception:
+            pass
 
     # 3. Quét thẻ <a> trên trang chủ tìm các trang liên hệ THỰC TẾ TRÊN MENU
     discovered_contact_urls = []
@@ -618,10 +636,10 @@ async def scrape_website_details_fi(http_session, raw_url, page=None):
         for slug in ['/yhteystiedot/', '/ota-yhteytta/', '/meista/', '/yhteystiedot', '/ota-yhteytta']:
             contact_urls.append(urllib.parse.urljoin(url, slug))
 
-    # 4. Quét tối đa 5 trang liên hệ tốt nhất
+    # 4. Quét tối đa 5 trang liên hệ tốt nhất qua HTTP
     for cu in contact_urls[:5]:
         try:
-            c_res = await http_session.get(cu, timeout=7, allow_redirects=True)
+            c_res = await http_session.get(cu, timeout=10, allow_redirects=True)
             if c_res.status_code == 200:
                 collected_emails.update(extract_emails_from_html(c_res.text))
                 for ph in phone_regex.findall(c_res.text):
@@ -634,19 +652,27 @@ async def scrape_website_details_fi(http_session, raw_url, page=None):
 
     # 5. Fallback Playwright (render JavaScript): Nếu vẫn chưa có email và có browser page
     if not collected_emails and page:
-        try:
-            await page.goto(url, wait_until="domcontentloaded", timeout=10000)
-            await asyncio.sleep(2)
-            rendered_html = await page.content()
-            collected_emails.update(extract_emails_from_html(rendered_html))
-            if not fb_url:
-                fb_url = extract_facebook_url(rendered_html)
-        except Exception:
-            pass
+        targets = [cu for cu in contact_urls[:2] if cu != url]
+        if not targets and not homepage_html:
+            targets = [url]
+        for t_url in targets:
+            try:
+                await page.goto(t_url, wait_until="domcontentloaded", timeout=15000)
+                await asyncio.sleep(2)
+                rendered_html = await page.content()
+                new_emails = extract_emails_from_html(rendered_html)
+                if new_emails:
+                    collected_emails.update(new_emails)
+                    break
+                if not fb_url:
+                    fb_url = extract_facebook_url(rendered_html)
+            except Exception:
+                pass
 
     emails_str = prioritize_emails(collected_emails, domain)
     phone_str = collected_phones[0] if collected_phones else ""
-    DOMAIN_CACHE[domain] = (emails_str, phone_str, fb_url)
+    if emails_str:
+        DOMAIN_CACHE[domain] = (emails_str, phone_str, fb_url)
     return emails_str, phone_str, fb_url
 
 async def scrape_facebook_email_fi(page, fb_url):
@@ -876,17 +902,29 @@ async def main():
                         c_data = cache[cache_key]
                         if c_data.get('email'):
                             r['email'] = c_data['email']
-                        if c_data.get('phone') and not r.get('phone'):
-                            r['phone'] = c_data['phone']
-                        if c_data.get('website') and not r.get('website'):
-                            r['website'] = c_data['website']
-                        if c_data.get('tag_maps'):
-                            r['tag_doanh_nghiep_maps'] = c_data['tag_maps']
-                        if c_data.get('facebook_url'):
-                            r['facebook_url'] = c_data['facebook_url']
-                        if c_data.get('address'):
-                            r['dia_chi_maps'] = c_data['address']
-                        continue
+                            if c_data.get('phone') and not r.get('phone'):
+                                r['phone'] = c_data['phone']
+                            if c_data.get('website') and not r.get('website'):
+                                r['website'] = c_data['website']
+                            if c_data.get('tag_maps'):
+                                r['tag_doanh_nghiep_maps'] = c_data['tag_maps']
+                            if c_data.get('facebook_url'):
+                                r['facebook_url'] = c_data['facebook_url']
+                            if c_data.get('address'):
+                                r['dia_chi_maps'] = c_data['address']
+                            continue
+                        else:
+                            # Cache chưa có email -> lấy các thông tin phụ trợ nhưng KHÔNG continue, tiếp tục cào web tìm email!
+                            if c_data.get('phone') and not r.get('phone'):
+                                r['phone'] = c_data['phone']
+                            if c_data.get('website') and not r.get('website'):
+                                r['website'] = c_data['website']
+                            if c_data.get('tag_maps'):
+                                r['tag_doanh_nghiep_maps'] = c_data['tag_maps']
+                            if c_data.get('facebook_url'):
+                                r['facebook_url'] = c_data['facebook_url']
+                            if c_data.get('address'):
+                                r['dia_chi_maps'] = c_data['address']
                         
                     processed_count += 1
                     print(f"\n[{processed_count}/{len(target_rows)}] Xử lý: {c_name}", flush=True)
