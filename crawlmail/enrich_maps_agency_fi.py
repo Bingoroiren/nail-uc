@@ -18,6 +18,7 @@ import json
 import os
 import re
 import sys
+import html
 import urllib.parse
 from bs4 import BeautifulSoup
 from curl_cffi.requests import AsyncSession
@@ -48,6 +49,10 @@ LEGAL_FORMS_FI = [
 ]
 
 EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]{1,255}\.[A-Za-z]{2,7}\b')
+OBF_EMAIL_REGEX = re.compile(
+    r'([A-Za-z0-9._%+-]{2,40})\s*(?:@|\[at\]|\(at\)|\[ät\]|\(ät\)|\s+at\s+|\s+ät\s+)\s*([A-Za-z0-9.-]+\.[A-Za-z]{2,7})',
+    re.IGNORECASE
+)
 INVALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.pdf', '.css', '.js', '.ico', '.woff', '.woff2', '.mp4', '.mp3', '.ttf')
 IGNORE_DOMAINS = {
     'sentry.io', 'wixpress.com', 'example.com', 'domain.com', 'schema.org', 
@@ -163,20 +168,21 @@ def clean_email(email_str):
         return ""
     return em
 
-def extract_emails_from_html(html):
-    if not html:
+def extract_emails_from_html(html_str):
+    if not html_str:
         return set()
     found = set()
+    unescaped = html.unescape(html_str)
     
     # 1. Cloudflare emails
-    for cf in re.findall(r'data-cfemail="([0-9a-fA-F]+)"', html):
+    for cf in re.findall(r'data-cfemail="([0-9a-fA-F]+)"', html_str):
         dec = decode_cloudflare_email(cf)
         em = clean_email(dec)
         if em:
             found.add(em)
             
     # 2. mailto: links (xử lý cả %20)
-    for mailto in re.findall(r'mailto:([^\s"\'<>]+)', html, re.IGNORECASE):
+    for mailto in re.findall(r'mailto:([^\s"\'<>]+)', unescaped, re.IGNORECASE):
         cleaned_m = mailto.split('?')[0]
         for sub_em in re.findall(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}', urllib.parse.unquote(cleaned_m)):
             em = clean_email(sub_em)
@@ -184,8 +190,15 @@ def extract_emails_from_html(html):
                 found.add(em)
                 
     # 3. Plain text regex
-    for match in EMAIL_REGEX.findall(html):
+    for match in EMAIL_REGEX.findall(unescaped):
         em = clean_email(match)
+        if em:
+            found.add(em)
+            
+    # 4. Obfuscated emails ([at], (at), [ät], (ät), at, ät) - phổ biến ở Phần Lan
+    for u_part, d_part in OBF_EMAIL_REGEX.findall(unescaped):
+        candidate = f"{u_part.strip()}@{d_part.strip()}"
+        em = clean_email(candidate)
         if em:
             found.add(em)
             
@@ -494,9 +507,10 @@ async def fallback_search_website_fi(page, company_name):
 
     return ""
 
-async def scrape_website_details_fi(http_session, raw_url):
+async def scrape_website_details_fi(http_session, raw_url, page=None):
     """
-    Quét trang web tối ưu: Có Domain Cache, phát hiện chuẩn trang liên hệ Phần Lan, xử lý %20
+    Quét trang web tối ưu: Có Domain Cache, phát hiện trang liên hệ thực tế trên menu,
+    hỗ trợ email chống bot Phần Lan (at / ät), decode HTML entities, và fallback Playwright render JS.
     """
     url = urllib.parse.unquote(raw_url.strip())
     if not url.startswith(('http://', 'https://')):
@@ -517,7 +531,7 @@ async def scrape_website_details_fi(http_session, raw_url):
     # 2. Quét trang chủ
     homepage_html = ""
     try:
-        res = await http_session.get(url, timeout=7, allow_redirects=True)
+        res = await http_session.get(url, timeout=8, allow_redirects=True)
         if res.status_code == 200:
             homepage_html = res.text
             collected_emails.update(extract_emails_from_html(homepage_html))
@@ -528,7 +542,7 @@ async def scrape_website_details_fi(http_session, raw_url):
     except Exception:
         if url.startswith('https://'):
             try:
-                res = await http_session.get('http://' + url[8:], timeout=7, allow_redirects=True)
+                res = await http_session.get('http://' + url[8:], timeout=8, allow_redirects=True)
                 if res.status_code == 200:
                     homepage_html = res.text
                     collected_emails.update(extract_emails_from_html(homepage_html))
@@ -539,44 +553,51 @@ async def scrape_website_details_fi(http_session, raw_url):
             except Exception:
                 pass
 
-    # 3. Tìm các trang liên hệ chuẩn
-    contact_urls = []
-    
-    # A. Danh sách các đường dẫn ưu tiên cao của website Phần Lan
-    priority_slugs = ['/yhteystiedot/', '/yhteystiedot', '/yhteys/', '/yhteys', '/ota-yhteytta/', '/ota-yhteytta', '/contact/', '/contact']
-    for slug in priority_slugs[:4]:
-        contact_urls.append(urllib.parse.urljoin(url, slug))
-        
-    # B. Quét thẻ <a> trên trang chủ tìm trang liên hệ
+    # 3. Quét thẻ <a> trên trang chủ tìm các trang liên hệ THỰC TẾ TRÊN MENU
+    discovered_contact_urls = []
     if homepage_html:
         soup = BeautifulSoup(homepage_html, 'html.parser')
-        keywords_text = ['ota yhteyt', 'yhteystiedot', 'yhteys', 'asiakaspalvelu', 'rekrytoijat', 'tiimi', 'contact']
-        keywords_href = ['/yhteystiedot', '/yhteys', '/ota-yhteytta', '/contact', '/tiimi']
+        keywords_contact = [
+            'ota yhteyt', 'yhteystiedot', 'yhteys', 'asiakaspalvelu', 
+            'rekrytoijat', 'tiimi', 'contact', 'meist', 'about', 
+            'tietoa', 'henkilost', 'henkilöst', 'ihmiset', 'toimisto'
+        ]
         
         for a in soup.find_all('a', href=True):
             href = urllib.parse.unquote(a['href'].strip())
             txt = a.get_text(strip=True).lower()
             href_l = href.lower()
             
-            # Loại bỏ anchor hoặc các file tải về
-            if href.startswith('#') or any(href_l.endswith(ext) for ext in ['.pdf', '.jpg', '.png', '.zip']):
+            # Loại bỏ anchor nội bộ, javascript:, tel:, mailto: hoặc file tải về
+            if href.startswith(('#', 'javascript:', 'tel:', 'mailto:')):
+                continue
+            if any(href_l.endswith(ext) for ext in ['.pdf', '.jpg', '.png', '.zip', '.docx']):
                 continue
             # Loại bỏ các trang báo cáo tài chính/informaatio/blog
             if any(bad in href_l for bad in ['informaatio', 'sijoittaj', 'raport', 'taloustiet', 'blog/']):
                 continue
                 
-            is_match = any(k in txt for k in keywords_text) or any(k in href_l for k in keywords_href)
+            is_match = any(k in txt for k in keywords_contact) or any(k in href_l for k in keywords_contact)
             if is_match:
                 full_u = urllib.parse.urljoin(url, href)
-                if full_u not in contact_urls and full_u != url:
-                    contact_urls.append(full_u)
-                    if len(contact_urls) >= 5:
-                        break
+                parsed_u = urllib.parse.urlparse(full_u)
+                if parsed_u.netloc.lower().replace('www.', '') == domain and full_u != url:
+                    if full_u not in discovered_contact_urls:
+                        discovered_contact_urls.append(full_u)
+                        if len(discovered_contact_urls) >= 8:
+                            break
 
-    # 4. Quét tối đa 3 trang liên hệ tốt nhất
-    for cu in contact_urls[:3]:
+    # Ưu tiên các trang liên hệ thực tế tìm thấy trên menu
+    contact_urls = discovered_contact_urls
+    # Nếu không tìm thấy link nào trên menu, mới thử các slug mặc định
+    if not contact_urls:
+        for slug in ['/yhteystiedot/', '/ota-yhteytta/', '/meista/', '/yhteystiedot', '/ota-yhteytta']:
+            contact_urls.append(urllib.parse.urljoin(url, slug))
+
+    # 4. Quét tối đa 5 trang liên hệ tốt nhất
+    for cu in contact_urls[:5]:
         try:
-            c_res = await http_session.get(cu, timeout=6, allow_redirects=True)
+            c_res = await http_session.get(cu, timeout=7, allow_redirects=True)
             if c_res.status_code == 200:
                 collected_emails.update(extract_emails_from_html(c_res.text))
                 for ph in phone_regex.findall(c_res.text):
@@ -586,6 +607,18 @@ async def scrape_website_details_fi(http_session, raw_url):
                     fb_url = extract_facebook_url(c_res.text)
         except Exception:
             continue
+
+    # 5. Fallback Playwright (render JavaScript): Nếu vẫn chưa có email và có browser page
+    if not collected_emails and page:
+        try:
+            await page.goto(url, wait_until="domcontentloaded", timeout=10000)
+            await asyncio.sleep(2)
+            rendered_html = await page.content()
+            collected_emails.update(extract_emails_from_html(rendered_html))
+            if not fb_url:
+                fb_url = extract_facebook_url(rendered_html)
+        except Exception:
+            pass
 
     emails_str = prioritize_emails(collected_emails, domain)
     phone_str = collected_phones[0] if collected_phones else ""
@@ -779,7 +812,7 @@ async def main():
                     # 2. CHIẾN LƯỢC TỐI ƯU: NẾU ĐÃ CÓ WEBSITE TỪ TRƯỚC -> QUÉT WEBSITE NGAY
                     if cur_web:
                         print(f"  -> Quét nhanh Website sẵn có ({cur_web})...", flush=True)
-                        web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web)
+                        web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web, page=page)
                         if web_email:
                             cur_email = web_email
                             source.append("Website")
@@ -816,7 +849,7 @@ async def main():
                                     cur_web = m_web
                                     print(f"      - Website mới (Maps): {cur_web}", flush=True)
                                     # Cào website mới phát hiện từ Maps
-                                    web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web)
+                                    web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web, page=page)
                                     if web_email and not cur_email:
                                         cur_email = web_email
                                         source.append("Website(Maps)")
@@ -836,7 +869,7 @@ async def main():
                             cur_web = fb_web
                             source.append("SearchFallback")
                             print(f"    - Website tìm thấy: {cur_web}", flush=True)
-                            web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web)
+                            web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web, page=page)
                             if web_email and not cur_email:
                                 cur_email = web_email
                                 source.append("Website(Search)")
