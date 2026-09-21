@@ -56,14 +56,54 @@ IGNORE_DOMAINS = {
 }
 DUMMY_EMAILS = {'user@website.com', 'name@domain.com', 'email@domain.com', 'info@domain.com', 'contact@domain.com', 'esimerkki@email.fi', 'etunimi.sukunimi@eezy.fi'}
 
-EXCLUDED_SEARCH_DOMAINS_FI = {
-    'finder.fi', 'kauppalehti.fi', 'asiakastieto.fi', 'yritystele.fi', 'proff.fi', 
-    'fonecta.fi', 'suomi.fi', 'duunitori.fi', 'oikotie.fi', 'monster.fi', 'jobly.fi', 
-    'tori.fi', 'yritysopas.fi', 'yrityshaku.fi', 'wikipedia.org', 'facebook.com', 
-    'linkedin.com', 'instagram.com', 'youtube.com', 'google.com', 'google.fi', 
-    'eniro.fi', 'tivi.fi', 'talouselama.fi', 'leadfeeder.com', 'is.fi', 'hs.fi', 'yle.fi'
+EXCLUDED_PLATFORMS_FI = {
+    # Danh bạ, cổng thông tin doanh nghiệp, tra cứu mã số thuế Phần Lan & Quốc tế
+    'finder.fi', 'kauppalehti.fi', 'asiakastieto.fi', 'yritystele.fi', 'proff.fi',
+    'fonecta.fi', 'fonecta.com', 'suomi.fi', 'prh.fi', 'ytj.fi', 'vero.fi',
+    'yritysopas.fi', 'yrityshaku.fi', 'yritykset.fi', 'yritysfakta.fi', 'taloustutka.fi',
+    'almamedia.fi', 'directa.fi', 'eniro.fi', 'eniro.se', '0100100.fi', 'sinunyritys.fi',
+    'suomenyritykset.fi', 'suomenyrityshaku.fi', 'yritysrekisteri.fi', 'bisnode.fi',
+    'bisnode.com', 'dnb.com', 'kompass.com', 'europages.com', 'infobel.com',
+    'firmaspraak.fi', 'tietopalvelut.fi', 'avointieto.fi', 'tulli.fi',
+
+    # Tuyển dụng, việc làm, sàn trung gian, rao vặt
+    'duunitori.fi', 'oikotie.fi', 'monster.fi', 'jobly.fi', 'tyomarkkinatori.fi',
+    'te-palvelut.fi', 'tori.fi', 'indeed.com', 'fi.indeed.com', 'glassdoor.com',
+    'glassdoor.fi', 'jooble.org', 'fi.jooble.org', 'stepstone.se', 'stepstone.de',
+    'rekrytointi.com', 'uranus.fi', 'workinfinland.com', 'cv-online.com', 'linkedin.com',
+    'staffpoint.fi', 'barona.fi', 'eezy.fi', 'bolt.works', 'vmp.fi', 'adecco.fi', 'manpower.fi',
+    
+    # Mạng xã hội & Video/Audio
+    'facebook.com', 'fb.com', 'instagram.com', 'twitter.com', 'x.com', 'youtube.com',
+    'tiktok.com', 'pinterest.com', 'wikipedia.org', 'reddit.com', 'vimeo.com',
+    
+    # Báo chí, truyền thông, diễn đàn Phần Lan
+    'yle.fi', 'is.fi', 'hs.fi', 'iltalehti.fi', 'uusisuomi.fi', 'talouselama.fi',
+    'tivi.fi', 'tekniikkatalous.fi', 'mtv.fi', 'mtvuutiset.fi', 'suomi24.fi',
+    'vauva.fi', 'helsinginuutiset.fi', 'tamperelainen.fi', 'turkulainen.fi',
+    'aamulehti.fi', 'kaleva.fi', 'ksml.fi', 'savonsanomat.fi', 'ess.fi',
+    'satakunnankansa.fi', 'lapinkansa.fi', 'karjalainen.fi', 'pohjalainen.fi',
+    'leadfeeder.com', 'tripadvisor.com', 'trustpilot.com', 'google.com', 'google.fi',
+    'bing.com', 'duckduckgo.com', 'yahoo.com', 'msn.com',
+    
+    # Nền tảng tạo web / blog miễn phí không có tên miền riêng (nếu là trang chủ nền tảng)
+    'wix.com', 'wixsite.com', 'wordpress.com', 'wordpress.org', 'weebly.com', 'squarespace.com',
+    'shopify.com', 'myshopify.com', 'site123.me', 'jimdosite.com', 'webnode.fi', 'webnode.com',
+    'blogspot.com', 'medium.com', 'github.io', 'sites.google.com'
 }
-DIRECTORY_KEYWORDS_FI = {'directory', 'yellowpages', 'yrityshaku', 'rekry', 'tyopaikat', 'duunit', 'katalog', 'listing', 'yritykset'}
+
+PLATFORM_KEYWORDS_FI = {
+    'directory', 'yellowpages', 'yrityshaku', 'rekry', 'tyopaikat', 'duunit',
+    'katalog', 'listing', 'yritykset', 'portaali', 'portal', 'rekisteri',
+    'tietokanta', 'uutiset', 'media', 'sanomat', 'lehti', 'forum', 'keskustelu',
+    'arvostelut', 'reviews', 'ratings'
+}
+
+GENERIC_NAME_TOKENS = {
+    'suomi', 'finland', 'palvelut', 'palvelu', 'group', 'nordic', 'holding', 
+    'consulting', 'management', 'international', 'services', 'service', 'team', 
+    'staff', 'work', 'works', 'yhtio', 'partner', 'partners', 'henkilosto', 'rekrytointi'
+}
 
 # Caches in-memory to prevent re-scraping identical parent domains/Facebook pages
 DOMAIN_CACHE = {}
@@ -315,25 +355,65 @@ async def search_google_maps_fi(page, company_name):
         
     return res
 
-def is_valid_company_domain_fi(domain, query_clean):
-    d = domain.lower()
-    if any(ex in d for ex in EXCLUDED_SEARCH_DOMAINS_FI):
+def normalize_fi_domain_token(text):
+    """Chuyển đổi ký tự tiếng Phần Lan ä->a, ö->o, å->a để so khớp với domain ASCII"""
+    t = text.lower()
+    t = t.replace('ä', 'a').replace('ö', 'o').replace('å', 'a')
+    return re.sub(r'[^a-z0-9]', '', t)
+
+def is_strictly_company_domain_fi(domain, company_name):
+    """
+    Kiểm tra tên miền có thực sự là WEB RIÊNG CỦA DOANH NGHIỆP hay không:
+    - Loại bỏ 100% các trang nền tảng chung, danh bạ, trang tuyển dụng, mạng xã hội, báo chí.
+    - Bắt buộc domain phải chứa từ khóa nhận diện đặc thù của thương hiệu công ty.
+    """
+    if not domain:
         return False
-    if any(kw in d for kw in DIRECTORY_KEYWORDS_FI):
-        return False
-    tokens = [t for t in query_clean.split() if len(t) > 3]
-    if tokens:
-        if any(t in d for t in tokens):
+    d = domain.lower().replace('www.', '').strip()
+    
+    # 1. Trực tiếp nằm trong danh sách đen các nền tảng/danh bạ
+    for plat in EXCLUDED_PLATFORMS_FI:
+        if d == plat or d.endswith('.' + plat):
+            return False
+            
+    q_clean = clean_company_name_fi(company_name)
+    tokens = q_clean.split()
+    
+    # 2. Kiểm tra từ khóa nền tảng/danh bạ (chỉ cấm nếu từ khóa đó không nằm trong tên cty)
+    for kw in PLATFORM_KEYWORDS_FI:
+        if kw in d and kw not in q_clean:
+            return False
+            
+    # 3. Phải chứa từ khóa thương hiệu đặc trưng của công ty
+    distinctive_tokens = [t for t in tokens if len(t) >= 3 and t not in GENERIC_NAME_TOKENS]
+    
+    # Lấy phần định danh chính của domain (bỏ TLD)
+    d_clean = re.sub(r'[^a-z0-9]', '', d.split('.')[0])
+    
+    if distinctive_tokens:
+        for t in distinctive_tokens:
+            t_norm = normalize_fi_domain_token(t)
+            if len(t_norm) >= 3 and (t_norm in d or t_norm in d_clean):
+                return True
+            
+    # Nếu toàn từ thông dụng (vd: Nordic Staff Oy -> tokens: nordic, staff)
+    clean_nospace = ''.join(normalize_fi_domain_token(t) for t in tokens)
+    if len(clean_nospace) >= 5 and clean_nospace in d:
+        return True
+        
+    # Ghép 2 từ đầu
+    if len(tokens) >= 2:
+        combo = normalize_fi_domain_token(tokens[0]) + normalize_fi_domain_token(tokens[1])
+        if len(combo) >= 5 and combo in d:
             return True
-        clean_q_nospace = query_clean.replace(' ', '')
-        if clean_q_nospace in d:
-            return True
+            
     return False
 
 async def fallback_search_website_fi(page, company_name):
     """
     Fallback tìm kiếm website qua DuckDuckGo / Bing TRỰC QUAN TRÊN TRÌNH DUYỆT (page)
     Người dùng quan sát trực tiếp từ khóa tìm kiếm và kết quả trên màn hình Chrome.
+    Chỉ chấp nhận WEBSITE RIÊNG của doanh nghiệp, loại trừ toàn bộ trang nền tảng/danh bạ/mạng xã hội.
     """
     q_clean = clean_company_name_fi(company_name)
     query = f'"{q_clean}" Suomi yhteystiedot'
@@ -349,16 +429,20 @@ async def fallback_search_website_fi(page, company_name):
         results = page.locator('article[data-testid="result"], div.result, [data-nrn="result"]')
         count = await results.count()
         if count > 0:
-            for i in range(min(count, 5)):
+            for i in range(min(count, 6)):
                 title_el = results.nth(i).locator('h2 a, a[data-testid="result-title-a"], .result__title a')
                 t_text = await title_el.first.text_content() if await title_el.count() > 0 else ""
                 href = await title_el.first.get_attribute('href') if await title_el.count() > 0 else ""
                 if href and href.startswith('http'):
                     domain = urllib.parse.urlparse(href).netloc.lower().replace('www.', '')
-                    if is_valid_company_domain_fi(domain, q_clean):
-                        return f"https://{domain}"
+                    
+                    # BẮT BUỘC: Không được là trang nền tảng chung và phải chứa tên thương hiệu
+                    if not is_strictly_company_domain_fi(domain, company_name):
+                        continue
+                        
                     matched, _ = is_valid_name_match_fi(q_clean, t_text)
-                    if matched and not any(kw in domain for kw in DIRECTORY_KEYWORDS_FI):
+                    if matched or any(normalize_fi_domain_token(t) in domain for t in q_clean.split() if len(t) >= 3):
+                        print(f"    [+] Tìm thấy Website riêng doanh nghiệp: https://{domain}", flush=True)
                         return f"https://{domain}"
     except Exception as e:
         pass
@@ -382,7 +466,7 @@ async def fallback_search_website_fi(page, company_name):
         results = page.locator('li.b_algo')
         count = await results.count()
         if count > 0:
-            for i in range(min(count, 5)):
+            for i in range(min(count, 6)):
                 h2_a = results.nth(i).locator('h2 a')
                 t_text = await h2_a.text_content() if await h2_a.count() > 0 else ""
                 href = await h2_a.get_attribute('href') if await h2_a.count() > 0 else ""
@@ -395,10 +479,14 @@ async def fallback_search_website_fi(page, company_name):
                         
                 if href and href.startswith('http'):
                     domain = urllib.parse.urlparse(href).netloc.lower().replace('www.', '')
-                    if is_valid_company_domain_fi(domain, q_clean):
-                        return f"https://{domain}"
+                    
+                    # BẮT BUỘC: Không được là trang nền tảng chung và phải chứa tên thương hiệu
+                    if not is_strictly_company_domain_fi(domain, company_name):
+                        continue
+                        
                     matched, _ = is_valid_name_match_fi(q_clean, t_text)
-                    if matched and not any(kw in domain for kw in DIRECTORY_KEYWORDS_FI):
+                    if matched or any(normalize_fi_domain_token(t) in domain for t in q_clean.split() if len(t) >= 3):
+                        print(f"    [+] Tìm thấy Website riêng doanh nghiệp: https://{domain}", flush=True)
                         return f"https://{domain}"
     except Exception:
         pass
@@ -717,18 +805,25 @@ async def main():
                                 cur_phone = maps_info["phone"]
                                 print(f"      - SĐT mới (Maps): {cur_phone}", flush=True)
                             if maps_info["website"] and not cur_web:
-                                cur_web = maps_info["website"]
-                                print(f"      - Website mới (Maps): {cur_web}", flush=True)
-                                # Cào website mới phát hiện từ Maps
-                                web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web)
-                                if web_email and not cur_email:
-                                    cur_email = web_email
-                                    source.append("Website(Maps)")
-                                    print(f"      [+] EMAIL MỚI: {cur_email}", flush=True)
-                                if found_phone and not cur_phone:
-                                    cur_phone = found_phone
-                                if found_fb and not fb_url:
-                                    fb_url = found_fb
+                                m_web = maps_info["website"].strip()
+                                m_dom = urllib.parse.urlparse(m_web).netloc.lower().replace('www.', '')
+                                if 'facebook.com' in m_dom or 'fb.com' in m_dom:
+                                    if not fb_url:
+                                        fb_url = m_web
+                                        print(f"      - Phát hiện Facebook từ Maps: {fb_url}", flush=True)
+                                elif is_strictly_company_domain_fi(m_dom, c_name):
+                                    cur_web = m_web
+                                    print(f"      - Website mới (Maps): {cur_web}", flush=True)
+                                    # Cào website mới phát hiện từ Maps
+                                    web_email, found_phone, found_fb = await scrape_website_details_fi(http_session, cur_web)
+                                    if web_email and not cur_email:
+                                        cur_email = web_email
+                                        source.append("Website(Maps)")
+                                        print(f"      [+] EMAIL MỚI: {cur_email}", flush=True)
+                                    if found_phone and not cur_phone:
+                                        cur_phone = found_phone
+                                    if found_fb and not fb_url:
+                                        fb_url = found_fb
                         else:
                             print(f"    [Maps Không khớp/Không thấy]", flush=True)
                             

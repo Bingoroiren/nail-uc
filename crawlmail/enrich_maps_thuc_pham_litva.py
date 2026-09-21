@@ -354,11 +354,6 @@ async def fallback_search_website(http_session, company_name):
                         domain = urllib.parse.urlparse(found_url).netloc.lower().replace('www.', '')
                         if is_valid_company_domain(domain, q_clean):
                             return f"https://{domain}"
-                        # If title matches strictly, also check
-                        t_text = h2.get_text(strip=True) if h2 else ""
-                        matched, _ = is_valid_name_match(q_clean, t_text)
-                        if matched and not any(kw in domain for kw in DIRECTORY_KEYWORDS):
-                            return f"https://{domain}"
     except Exception:
         pass
 
