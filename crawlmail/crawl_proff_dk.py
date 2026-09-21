@@ -44,7 +44,7 @@ def extract_firma_links(html: str):
         pass
     return links_by_id
 
-def crawl_proff(base_url=DEFAULT_URL, out_csv=DEFAULT_CSV, cache_file=DEFAULT_CACHE, max_pages=None, delay=1.0):
+def crawl_proff(base_url=DEFAULT_URL, out_csv=DEFAULT_CSV, cache_file=DEFAULT_CACHE, max_pages=None, delay=2.5, timeout=60):
     os.makedirs(os.path.dirname(cache_file) if os.path.dirname(cache_file) else '.', exist_ok=True)
     
     # 1. Đọc dữ liệu đã cào trước đó nếu có (Resume capability)
@@ -63,15 +63,16 @@ def crawl_proff(base_url=DEFAULT_URL, out_csv=DEFAULT_CSV, cache_file=DEFAULT_CA
     session = requests.Session()
     
     print(f"[*] Đang kết nối tới trang Proff.dk: {base_url}")
+    print(f"[*] Cấu hình mạng VPN: Timeout={timeout}s, Delay={delay}s")
     # Lấy trang 1 để phân tích tổng số trang
     first_url = base_url if "page=" in base_url else f"{base_url}&page=1" if "?" in base_url else f"{base_url}?page=1"
     
     total_pages = 1
     total_hits = 0
 
-    for attempt in range(3):
+    for attempt in range(4):
         try:
-            r = session.get(first_url, impersonate="chrome124", timeout=20)
+            r = session.get(first_url, impersonate="chrome124", timeout=timeout)
             if r.status_code == 200:
                 next_data = extract_next_data(r.text)
                 if next_data:
@@ -80,11 +81,17 @@ def crawl_proff(base_url=DEFAULT_URL, out_csv=DEFAULT_CSV, cache_file=DEFAULT_CA
                     total_pages = comp_store.get('pages', 1)
                     print(f"[*] Tìm thấy tổng cộng: {total_hits} công ty ({total_pages} trang kết quả).")
                     break
+                else:
+                    print(f"[!] Dữ liệu chưa kịp tải xong từ máy chủ, thử lại sau 3s (lần {attempt+1}/4)...")
+                    time.sleep(3)
+            else:
+                print(f"[!] Trang trả về mã HTTP {r.status_code}, thử lại sau 3s (lần {attempt+1}/4)...")
+                time.sleep(3)
         except Exception as e:
-            print(f"[!] Lỗi kết nối trang đầu (thử lại {attempt+1}/3): {e}")
-            time.sleep(2)
+            print(f"[!] Độ trễ VPN/Lỗi kết nối trang đầu (thử lại sau {3 + attempt*2}s - lần {attempt+1}/4): {e}")
+            time.sleep(3 + attempt * 2)
     else:
-        print("[!] Không thể lấy trang khởi đầu từ Proff.dk. Vui lòng kiểm tra kết nối mạng.")
+        print("[!] Không thể lấy trang khởi đầu từ Proff.dk. Vui lòng kiểm tra kết nối mạng VPN.")
         return
 
     if max_pages and max_pages < total_pages:
@@ -105,16 +112,18 @@ def crawl_proff(base_url=DEFAULT_URL, out_csv=DEFAULT_CSV, cache_file=DEFAULT_CA
         page_url = f"{clean_base}{sep}page={p}"
         success = False
 
-        for attempt in range(4):
+        for attempt in range(5):
             try:
-                r = session.get(page_url, impersonate="chrome124", timeout=20)
+                r = session.get(page_url, impersonate="chrome124", timeout=timeout)
                 if r.status_code != 200:
-                    time.sleep(1.5)
+                    print(f"[!] Trang {p} trả về mã HTTP {r.status_code}, thử lại sau 3s (lần {attempt+1}/5)...")
+                    time.sleep(3)
                     continue
 
                 next_data = extract_next_data(r.text)
                 if not next_data:
-                    time.sleep(1.5)
+                    print(f"[!] Trang {p} chưa có đủ cấu trúc dữ liệu JSON, thử lại sau 3s (lần {attempt+1}/5)...")
+                    time.sleep(3)
                     continue
 
                 links_map = extract_firma_links(r.text)
@@ -186,7 +195,8 @@ def crawl_proff(base_url=DEFAULT_URL, out_csv=DEFAULT_CSV, cache_file=DEFAULT_CA
                 break
 
             except Exception as e:
-                time.sleep(2)
+                print(f"[!] Độ trễ VPN/Lỗi kết nối trang {p} (thử lại sau {3 + attempt*2}s - lần {attempt+1}/5): {e}")
+                time.sleep(3 + attempt * 2)
 
         if not success:
             print(f"[!] Cảnh báo: Không tải được trang {p} sau các lần thử.")
@@ -195,8 +205,8 @@ def crawl_proff(base_url=DEFAULT_URL, out_csv=DEFAULT_CSV, cache_file=DEFAULT_CA
         if p % 5 == 0 or p == total_pages:
             save_cache_and_csv(cached_data, visited_pages, cache_file, out_csv)
 
-        # Delay ngẫu nhiên nhẹ nhàng tránh bị chặn
-        time.sleep(delay + random.uniform(0.1, 0.4))
+        # Delay ngẫu nhiên tránh nghẽn băng thông VPN và tránh bị chặn
+        time.sleep(delay + random.uniform(0.5, 1.5))
 
     # 3. Lưu lần cuối
     save_cache_and_csv(cached_data, visited_pages, cache_file, out_csv)
@@ -266,7 +276,8 @@ if __name__ == "__main__":
     parser.add_argument("--out-csv", default=DEFAULT_CSV, help="Tên file CSV kết quả")
     parser.add_argument("--cache", default=DEFAULT_CACHE, help="Đường dẫn file cache JSON")
     parser.add_argument("--max-pages", type=int, default=None, help="Số trang tối đa cần cào (mặc định cào hết)")
-    parser.add_argument("--delay", type=float, default=0.8, help="Thời gian delay giữa các trang (giây)")
+    parser.add_argument("--delay", type=float, default=2.5, help="Thời gian delay giữa các trang (giây, mặc định 2.5s phù hợp mạng VPN)")
+    parser.add_argument("--timeout", type=int, default=60, help="Thời gian timeout tải trang (giây, mặc định 60s phù hợp mạng VPN)")
 
     args = parser.parse_args()
     crawl_proff(
@@ -274,5 +285,6 @@ if __name__ == "__main__":
         out_csv=args.out_csv,
         cache_file=args.cache,
         max_pages=args.max_pages,
-        delay=args.delay
+        delay=args.delay,
+        timeout=args.timeout
     )
