@@ -695,6 +695,56 @@ async def scrape_facebook_email_fi(page, fb_url):
     FB_CACHE[clean_fb] = email_found
     return email_found
 
+def sync_to_all_branches(updated_rows):
+    """Đồng bộ các email/sđt/facebook mới tìm được sang file tất cả chi nhánh"""
+    all_branches_csv = os.path.join(BASE_DIR, "agency phần lan - tất cả chi nhánh.csv")
+    if not os.path.exists(all_branches_csv):
+        return
+    try:
+        enrich_map_bid = {}
+        enrich_map_name = {}
+        for r in updated_rows:
+            bid = r.get('business_id', '').strip()
+            name = clean_company_name_fi(r.get('name', ''))
+            em = r.get('email', '').strip()
+            ph = r.get('phone', '').strip()
+            fb = r.get('facebook_url', '').strip()
+            if em or ph or fb:
+                if bid:
+                    enrich_map_bid[bid] = (em, ph, fb)
+                if name:
+                    enrich_map_name[name] = (em, ph, fb)
+                    
+        with open(all_branches_csv, 'r', encoding='utf-8-sig') as f:
+            b_reader = csv.DictReader(f)
+            b_fields = list(b_reader.fieldnames)
+            b_rows = list(b_reader)
+            
+        modified = False
+        for br in b_rows:
+            bid = br.get('business_id', '').strip()
+            name = clean_company_name_fi(br.get('name', ''))
+            match = enrich_map_bid.get(bid) or enrich_map_name.get(name)
+            if match:
+                em, ph, fb = match
+                if em and not br.get('email', '').strip():
+                    br['email'] = em
+                    modified = True
+                if ph and not br.get('phone', '').strip():
+                    br['phone'] = ph
+                    modified = True
+                if fb and not br.get('facebook_url', '').strip():
+                    br['facebook_url'] = fb
+                    modified = True
+                    
+        if modified:
+            with open(all_branches_csv, 'w', encoding='utf-8-sig', newline='') as f:
+                writer = csv.DictWriter(f, fieldnames=b_fields)
+                writer.writeheader()
+                writer.writerows(b_rows)
+    except Exception:
+        pass
+
 def load_cache():
     if os.path.exists(CACHE_FILE):
         try:
@@ -734,6 +784,9 @@ def save_outputs(rows, fieldnames):
     except Exception as e:
         print(f"  [!] Lỗi lưu CSV: {e}", flush=True)
         
+    # Đồng bộ sang file tất cả chi nhánh
+    sync_to_all_branches(rows)
+        
     # Save Excel: bảo toàn các sheet hiện có
     try:
         if os.path.exists(OUTPUT_XLSX):
@@ -766,9 +819,14 @@ def save_outputs(rows, fieldnames):
         print(f"  [!] Lỗi lưu Excel: {e}", flush=True)
 
 async def main():
+    is_web_only = '--web-only' in sys.argv
     print("=" * 75, flush=True)
-    print(" HỆ THỐNG LÀM GIÀU DỮ LIỆU AGENCY PHẦN LAN (TỐI ƯU HÓA HIỆU NĂNG) ", flush=True)
-    print(" Chế độ quan sát trực quan: HEADLESS = FALSE (Mở cửa sổ Chrome) ", flush=True)
+    if is_web_only:
+        print(" CHẾ ĐỘ ƯU TIÊN: CÀO EMAIL CHO CÁC DOANH NGHIỆP CÓ SẴN WEBSITE ", flush=True)
+        print(" (Tối ưu tốc độ cao: Bỏ qua Maps/Search, tập trung quét Web + Facebook) ", flush=True)
+    else:
+        print(" HỆ THỐNG LÀM GIÀU DỮ LIỆU AGENCY PHẦN LAN (TỐI ƯU HÓA HIỆU NĂNG) ", flush=True)
+        print(" Chế độ quan sát trực quan: HEADLESS = FALSE (Mở cửa sổ Chrome) ", flush=True)
     print("=" * 75, flush=True)
     
     if not os.path.exists(INPUT_CSV):
@@ -783,8 +841,16 @@ async def main():
         rows = list(reader)
         
     # Lọc danh sách cần làm giàu email
-    target_rows = [r for r in rows if not r.get('email', '').strip()]
-    print(f"[+] Tổng số agency duy nhất: {len(rows)} | Cần làm giàu email: {len(target_rows)} agency", flush=True)
+    if is_web_only:
+        target_rows = [r for r in rows if r.get('website', '').strip() and not r.get('email', '').strip()]
+        print(f"[+] Tổng số agency duy nhất: {len(rows)} | Có website cần cào email: {len(target_rows)} agency", flush=True)
+    else:
+        target_rows = [r for r in rows if not r.get('email', '').strip()]
+        # Ưu tiên các dòng có sẵn website chạy trước
+        target_rows.sort(key=lambda r: 0 if r.get('website', '').strip() else 1)
+        has_web_count = sum(1 for r in target_rows if r.get('website', '').strip())
+        print(f"[+] Tổng số agency duy nhất: {len(rows)} | Cần làm giàu email: {len(target_rows)} agency", flush=True)
+        print(f"    -> Trong đó có {has_web_count} agency có sẵn website (được ưu tiên quét trước)", flush=True)
     
     cache = load_cache()
     print(f"[+] Đã có trong Cache: {len(cache)} agency đã xử lý trước đó", flush=True)
@@ -848,8 +914,8 @@ async def main():
                             fb_url = found_fb
                             print(f"    [+] LINK FACEBOOK: {fb_url}", flush=True)
                             
-                    # 3. NẾU CHƯA CÓ WEBSITE HOẶC CẦN TÌM THÊM THÔNG TIN LIÊN HỆ -> MỚI TRA MAPS
-                    if not cur_web or not cur_phone or not cur_email:
+                    # 3. NẾU CHƯA CÓ WEBSITE HOẶC CẦN TÌM THÊM THÔNG TIN LIÊN HỆ -> MỚI TRA MAPS (Chỉ chạy khi không ở chế độ --web-only)
+                    if not is_web_only and (not cur_web or not cur_phone or not cur_email):
                         print(f"  -> Tra cứu trên Google Maps (hl=fi)...", flush=True)
                         maps_info = await search_google_maps_fi(page, c_name)
                         if maps_info["matched"]:
@@ -885,8 +951,8 @@ async def main():
                         else:
                             print(f"    [Maps Không khớp/Không thấy]", flush=True)
                             
-                    # 4. BƯỚC FALLBACK SEARCH BING / DUCKDUCKGO NẾU VẪN CHƯA CÓ WEBSITE
-                    if not cur_web:
+                    # 4. BƯỚC FALLBACK SEARCH BING / DUCKDUCKGO NẾU VẪN CHƯA CÓ WEBSITE (Chỉ chạy khi không ở chế độ --web-only)
+                    if not is_web_only and not cur_web:
                         print(f"  -> Fallback Search (Bing/DDG) tìm website...", flush=True)
                         fb_web = await fallback_search_website_fi(page, c_name)
                         if fb_web:
