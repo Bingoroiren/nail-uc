@@ -156,9 +156,10 @@ def extract_facebook_url(html):
         return ""
     for match in re.findall(r'https?://(?:www\.)?facebook\.com/(?:[a-zA-Z0-9.\-_]+)', html, re.IGNORECASE):
         m_lower = match.lower()
-        if not any(x in m_lower for x in ['/sharer', '/share.php', '/tr', '/dialog', '/plugins', '/hashtag', '/pages']):
+        if not any(x in m_lower for x in ['/sharer', '/share.php', '/tr', '/dialog', '/plugins', '/hashtag', '/pages', '/profile.php', '/people', '/groups', '/login', '/home.php']):
             m_clean = urllib.parse.unquote(match).split('?')[0].rstrip('/')
-            if len(m_clean.split('/')[-1]) > 2:
+            last_slug = m_clean.split('/')[-1].lower()
+            if len(last_slug) > 2 and last_slug not in ['people', 'profile.php', 'pages', 'groups', 'login']:
                 return m_clean
     return ""
 
@@ -329,50 +330,76 @@ def is_valid_company_domain_fi(domain, query_clean):
             return True
     return False
 
-async def fallback_search_website_fi(http_session, company_name):
+async def fallback_search_website_fi(page, company_name):
     """
-    Fallback tìm kiếm website qua Bing / DuckDuckGo nếu Maps không có website
+    Fallback tìm kiếm website qua DuckDuckGo / Bing TRỰC QUAN TRÊN TRÌNH DUYỆT (page)
+    Người dùng quan sát trực tiếp từ khóa tìm kiếm và kết quả trên màn hình Chrome.
     """
     q_clean = clean_company_name_fi(company_name)
     query = f'"{q_clean}" Suomi yhteystiedot'
     
-    # 1. Bing Search
+    # 1. Tìm kiếm trên DuckDuckGo (trực quan trên Chrome)
     try:
-        b_url = f"https://www.bing.com/search?q={urllib.parse.quote(query)}"
-        res = await http_session.get(b_url, timeout=7)
-        if res.status_code == 200:
-            soup = BeautifulSoup(res.text, 'html.parser')
-            for li in soup.find_all('li', class_='b_algo'):
-                cite = li.find('cite')
-                h2 = li.find('h2')
-                if cite:
-                    cite_text = cite.get_text(strip=True)
-                    match = re.search(r'https?://[^\s›/]+', cite_text)
-                    if match:
-                        found_url = match.group(0)
-                        domain = urllib.parse.urlparse(found_url).netloc.lower().replace('www.', '')
-                        if is_valid_company_domain_fi(domain, q_clean):
-                            return f"https://{domain}"
-                        t_text = h2.get_text(strip=True) if h2 else ""
-                        matched, _ = is_valid_name_match_fi(q_clean, t_text)
-                        if matched and not any(kw in domain for kw in DIRECTORY_KEYWORDS_FI):
-                            return f"https://{domain}"
-    except Exception:
+        ddg_url = f"https://duckduckgo.com/?q={urllib.parse.quote(query)}"
+        print(f"    -> Tìm kiếm trên DuckDuckGo: {query}", flush=True)
+        await page.goto(ddg_url, wait_until="domcontentloaded", timeout=15000)
+        await asyncio.sleep(2)
+        await check_for_captcha(page, "DuckDuckGo Search")
+        
+        results = page.locator('article[data-testid="result"], div.result, [data-nrn="result"]')
+        count = await results.count()
+        if count > 0:
+            for i in range(min(count, 5)):
+                title_el = results.nth(i).locator('h2 a, a[data-testid="result-title-a"], .result__title a')
+                t_text = await title_el.first.text_content() if await title_el.count() > 0 else ""
+                href = await title_el.first.get_attribute('href') if await title_el.count() > 0 else ""
+                if href and href.startswith('http'):
+                    domain = urllib.parse.urlparse(href).netloc.lower().replace('www.', '')
+                    if is_valid_company_domain_fi(domain, q_clean):
+                        return f"https://{domain}"
+                    matched, _ = is_valid_name_match_fi(q_clean, t_text)
+                    if matched and not any(kw in domain for kw in DIRECTORY_KEYWORDS_FI):
+                        return f"https://{domain}"
+    except Exception as e:
         pass
 
-    # 2. DuckDuckGo HTML
+    # 2. Fallback sang Bing trên trình duyệt nếu DuckDuckGo không có
     try:
-        url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(query)}"
-        res = await http_session.get(url, timeout=7)
-        if res.status_code == 200:
-            soup = BeautifulSoup(res.text, 'html.parser')
-            for a in soup.find_all('a', class_='result__url'):
-                href = a.get('href', '')
-                text = a.get_text(strip=True).lower()
-                parsed = urllib.parse.urlparse(href if href.startswith('http') else 'https://' + text)
-                domain = parsed.netloc.lower().replace('www.', '')
-                if is_valid_company_domain_fi(domain, q_clean):
-                    return f"https://{domain}"
+        b_url = f"https://www.bing.com/search?q={urllib.parse.quote(query)}"
+        print(f"    -> Tìm kiếm trên Bing: {query}", flush=True)
+        await page.goto(b_url, wait_until="domcontentloaded", timeout=15000)
+        await asyncio.sleep(2)
+        await check_for_captcha(page, "Bing Search")
+        
+        try:
+            accept_btn = page.locator('#bnp_btn_accept, button#bnp_btn_accept, button:has-text("Hyväksy"), button:has-text("Accept")')
+            if await accept_btn.count() > 0:
+                await accept_btn.first.click()
+                await asyncio.sleep(1)
+        except Exception:
+            pass
+            
+        results = page.locator('li.b_algo')
+        count = await results.count()
+        if count > 0:
+            for i in range(min(count, 5)):
+                h2_a = results.nth(i).locator('h2 a')
+                t_text = await h2_a.text_content() if await h2_a.count() > 0 else ""
+                href = await h2_a.get_attribute('href') if await h2_a.count() > 0 else ""
+                if not href:
+                    cite = results.nth(i).locator('cite')
+                    cite_text = await cite.text_content() if await cite.count() > 0 else ""
+                    match = re.search(r'https?://[^\s›/]+', cite_text)
+                    if match:
+                        href = match.group(0)
+                        
+                if href and href.startswith('http'):
+                    domain = urllib.parse.urlparse(href).netloc.lower().replace('www.', '')
+                    if is_valid_company_domain_fi(domain, q_clean):
+                        return f"https://{domain}"
+                    matched, _ = is_valid_name_match_fi(q_clean, t_text)
+                    if matched and not any(kw in domain for kw in DIRECTORY_KEYWORDS_FI):
+                        return f"https://{domain}"
     except Exception:
         pass
 
@@ -708,7 +735,7 @@ async def main():
                     # 4. BƯỚC FALLBACK SEARCH BING / DUCKDUCKGO NẾU VẪN CHƯA CÓ WEBSITE
                     if not cur_web:
                         print(f"  -> Fallback Search (Bing/DDG) tìm website...", flush=True)
-                        fb_web = await fallback_search_website_fi(http_session, c_name)
+                        fb_web = await fallback_search_website_fi(page, c_name)
                         if fb_web:
                             cur_web = fb_web
                             source.append("SearchFallback")
