@@ -5,7 +5,9 @@ import csv
 import json
 import time
 import shutil
+import random
 import asyncio
+import argparse
 import urllib.parse
 from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright
@@ -93,6 +95,77 @@ def save_cache(cache):
             json.dump(cache, f, ensure_ascii=False, indent=2)
     except Exception as e:
         print(f"[!] Lỗi lưu cache: {e}")
+
+def is_valid_company_page(html_content):
+    """Kiểm tra HTML có đúng là trang chi tiết công ty trên Virk hay không"""
+    if not html_content:
+        return False
+    lower_head = html_content[:2500].lower()
+    if "just a moment" in lower_head or "<title>cloudflare" in lower_head:
+        return False
+    # Phải có một trong các dấu hiệu đặc trưng của Virk
+    return any(marker in html_content for marker in [
+        'CVR-nummer',
+        'accordion-udvidede-virksomhedsoplysninger',
+        'virksomhedsoplysninger',
+        'enhed/virksomhed'
+    ])
+
+async def wait_and_solve_cloudflare(page, timeout_sec=120):
+    """
+    Kiểm tra xem trang có dính Cloudflare Turnstile hay không.
+    Nếu có:
+    - In thông báo cảnh báo rõ ràng
+    - Thử tự động click vào checkbox xác minh (Turnstile checkbox)
+    - Tạm dừng chờ người dùng tích chọn trên màn hình Chrome
+    - CHỈ trả về True khi tiêu đề và nội dung đã vào trang Virk thật sự.
+    - Trả về False nếu quá timeout_sec mà vẫn bị Cloudflare chặn.
+    """
+    start_time = time.time()
+    notified = False
+
+    while time.time() - start_time < timeout_sec:
+        title = (await page.title()).lower()
+        content = (await page.content()).lower()
+
+        is_cf = (
+            "just a moment" in title
+            or "cloudflare" in title
+            or "security verification" in title
+            or "challenges.cloudflare.com" in content
+            or "verify you are human" in content
+        )
+
+        if not is_cf:
+            if notified:
+                print("   ✅ Đã vượt qua Cloudflare thành công! Đang tiếp tục cào...")
+                await asyncio.sleep(1.5)
+            return True
+
+        if not notified:
+            print("\n   " + "=" * 70)
+            print("   🛑 [PHÁT HIỆN CLOUDFLARE TURNSTILE TRÊN MÀN HÌNH CHROME!]")
+            print("   👉 Vui lòng nhìn màn hình Chrome và BẤM TÍCH VÀO HỘP XÁC MINH 'Verify you are human'!")
+            print("   ⏳ Script đang tạm dừng chờ bạn bấm xác minh hoặc tự động vượt...")
+            print("   " + "=" * 70 + "\n")
+            notified = True
+
+        # Thử tìm iframe Turnstile để click tự động
+        try:
+            for frame in page.frames:
+                if "cloudflare" in frame.url or "turnstile" in frame.url:
+                    cb = frame.locator('input[type="checkbox"], span.mark, .ctp-checkbox-label')
+                    if await cb.count() > 0 and await cb.first.is_visible():
+                        await cb.first.click()
+                        await asyncio.sleep(1)
+                        break
+        except Exception:
+            pass
+
+        await asyncio.sleep(2)
+
+    print("   ❌ Quá thời gian chờ Cloudflare (120s). Bỏ qua CVR này để thử lại sau, KHÔNG lưu cache lỗi.")
+    return False
 
 def extract_virk_data(html_content):
     """Trích xuất email, phone, người quản lý, địa chỉ từ HTML trang chi tiết Virk"""
@@ -316,10 +389,36 @@ async def main():
     print(f"    - Số dòng trùng CVR đã loại bỏ   : {dup_count}")
     print(f"    - Số dòng thiếu CVR hợp lệ       : {empty_cvr_count}")
 
-    # Đọc cache đã có
-    cache = load_cache()
+    parser = argparse.ArgumentParser(description="Enrich thông tin CVR, Email, SĐT từ DataCVR.virk.dk cho Proff.dk")
+    parser.add_argument("--timeout", type=int, default=90, help="Thời gian chờ tải trang (giây, mặc định 90s cho VPN)")
+    parser.add_argument("--delay", type=float, default=3.5, help="Thời gian delay giữa các công ty (giây, mặc định 3.5s cho VPN)")
+    parser.add_argument("--cf-timeout", type=int, default=180, help="Thời gian chờ vượt Cloudflare Turnstile (giây, mặc định 180s)")
+    parser.add_argument("--reset", action="store_true", help="Xóa sạch cache cũ để cào lại từ đầu")
+
+    args, unknown = parser.parse_known_args()
+
+    # Đọc cache đã có và kiểm tra lệnh reset
+    if args.reset or any(arg.lower() in ['--reset', '-r', 'reset'] for arg in sys.argv):
+        print("[!] Phát hiện lệnh RESET: Đang xóa sạch cache cũ để cào lại từ đầu...")
+        if os.path.exists(CACHE_FILE):
+            try:
+                os.remove(CACHE_FILE)
+            except Exception:
+                pass
+        cache = {}
+    else:
+        cache = load_cache()
+        # Tự động loại bỏ các bản ghi rác do bị dính Cloudflare trước đó (không có email, sđt, manager)
+        poisoned = [k for k, v in cache.items() if not v.get('email') and not v.get('phone') and not v.get('manager')]
+        if poisoned:
+            print(f"[*] Tự động thanh lọc {len(poisoned)} bản ghi cache rỗng do dính Cloudflare trước đó để cào lại chuẩn xác...")
+            for k in poisoned:
+                del cache[k]
+            save_cache(cache)
+
     cached_valid = sum(1 for c in unique_rows if clean_cvr(c.get('cvr')) in cache and cache[clean_cvr(c.get('cvr'))].get('done'))
     print(f"[*] Tiến độ trong cache: {cached_valid} / {len(unique_rows)} CVR đã quét thành công.")
+    print(f"[*] Cấu hình mạng VPN: Timeout={args.timeout}s, Delay={args.delay}s, Cloudflare-wait={args.cf_timeout}s")
 
     # Tìm các CVR cần cào
     pending_rows = [
@@ -340,16 +439,32 @@ async def main():
     os.makedirs(USER_DATA_DIR, exist_ok=True)
 
     async with async_playwright() as p:
-        context = await p.chromium.launch_persistent_context(
-            user_data_dir=USER_DATA_DIR,
-            headless=False,
-            viewport={"width": 1280, "height": 850},
-            args=[
-                "--disable-blink-features=AutomationControlled",
-                "--start-maximized"
-            ]
-        )
+        try:
+            context = await p.chromium.launch_persistent_context(
+                user_data_dir=USER_DATA_DIR,
+                channel="chrome",
+                headless=False,
+                viewport={"width": 1280, "height": 850},
+                args=[
+                    "--disable-blink-features=AutomationControlled",
+                    "--start-maximized"
+                ]
+            )
+        except Exception:
+            context = await p.chromium.launch_persistent_context(
+                user_data_dir=USER_DATA_DIR,
+                headless=False,
+                viewport={"width": 1280, "height": 850},
+                args=[
+                    "--disable-blink-features=AutomationControlled",
+                    "--start-maximized"
+                ]
+            )
         page = context.pages[0] if context.pages else await context.new_page()
+
+        # Đặt timeout cho trình duyệt phù hợp độ trễ VPN
+        page.set_default_timeout(args.timeout * 1000)
+        page.set_default_navigation_timeout(args.timeout * 1000)
 
         cookie_accepted = False
         processed_count = 0
@@ -370,21 +485,19 @@ async def main():
                 'status': '',
                 'done': False
             }
+            success = False
 
             for attempt in range(3):
                 try:
-                    resp = await page.goto(virk_url, timeout=35000, wait_until="domcontentloaded")
-                    await asyncio.sleep(1.5)
+                    resp = await page.goto(virk_url, timeout=args.timeout * 1000, wait_until="domcontentloaded")
+                    # Tăng thời gian chờ trang tải và nạp Vue.js trên đường truyền VPN
+                    await asyncio.sleep(3.5)
 
-                    # Kiểm tra Cloudflare Challenge
-                    title = await page.title()
-                    if "just a moment" in title.lower() or "cloudflare" in title.lower():
-                        print("   🛑 CLOUDFLARE TURNSTILE PHÁT HIỆN! Chờ tự động vượt hoặc bạn có thể click xác minh trên Chrome...")
-                        for _ in range(12):
-                            await asyncio.sleep(1.2)
-                            t = await page.title()
-                            if "just a moment" not in t.lower() and "cloudflare" not in t.lower():
-                                break
+                    # Kiểm tra và giải xác minh Cloudflare nếu xuất hiện
+                    cf_ok = await wait_and_solve_cloudflare(page, timeout_sec=args.cf_timeout)
+                    if not cf_ok:
+                        print(f"   [-] CVR {cvr}: Chưa vượt qua Cloudflare -> Thử lại...")
+                        continue
 
                     # Chấp nhận Cookie banner một lần đầu
                     if not cookie_accepted:
@@ -393,7 +506,7 @@ async def main():
                             if await cookie_btn.count() > 0 and await cookie_btn.first.is_visible():
                                 await cookie_btn.first.click()
                                 cookie_accepted = True
-                                await asyncio.sleep(0.8)
+                                await asyncio.sleep(1.2)
                         except Exception:
                             pass
 
@@ -405,15 +518,22 @@ async def main():
                             if is_exp != 'true':
                                 await acc_btn.first.scroll_into_view_if_needed()
                                 await acc_btn.first.click()
-                                await asyncio.sleep(1.0)
+                                # Chờ AJAX bung nội dung chi tiết
+                                await asyncio.sleep(2.5)
                         except Exception:
                             pass
 
-                    # Lấy HTML và trích xuất dữ liệu
+                    # Lấy HTML và kiểm tra cấu trúc trang hợp lệ
                     page_html = await page.content()
+                    if not is_valid_company_page(page_html):
+                        print(f"   [-] CVR {cvr}: Trang chưa tải đúng cấu trúc Virk (chờ mạng VPN nạp...) -> Thử lại...")
+                        await asyncio.sleep(3.0)
+                        continue
+
                     extracted = extract_virk_data(page_html)
                     extracted['cvr_url'] = virk_url
                     extracted['done'] = True
+                    success = True
 
                     email_found = extracted.get('email', '')
                     phone_found = extracted.get('phone', '')
@@ -432,20 +552,24 @@ async def main():
                     break
 
                 except Exception as e:
-                    print(f"   [!] Lỗi kết nối CVR {cvr} (lần {attempt+1}/3): {e}")
-                    await asyncio.sleep(2)
+                    wait_retry = 4.0 + attempt * 3.0
+                    print(f"   [!] Độ trễ VPN/Lỗi kết nối CVR {cvr} (lần {attempt+1}/3, chờ {wait_retry:.0f}s thử lại): {e}")
+                    await asyncio.sleep(wait_retry)
 
-            cache[cvr] = extracted
-            processed_count += 1
+            if success:
+                cache[cvr] = extracted
+                processed_count += 1
+            else:
+                print(f"   [!] CVR {cvr} chưa hoàn thành do lỗi mạng hoặc Cloudflare -> Sẽ quét lại ở lần chạy kế tiếp.")
 
             # Tự động lưu cache và cập nhật file CSV mỗi 5 công ty
-            if processed_count % 5 == 0 or idx == total_pending:
+            if processed_count > 0 and (processed_count % 5 == 0 or idx == total_pending):
                 save_cache(cache)
                 export_results(unique_rows, cache)
                 print(f"   💾 [Checkpoint]: Đã cập nhật cache và 2 file CSV ({processed_count} CVR đã quét)...")
 
-            # Delay an toàn cho VPN tránh bị hạn chế tần suất
-            await asyncio.sleep(1.2)
+            # Delay an toàn cho VPN tránh nghẽn băng thông và tránh bị chặn
+            await asyncio.sleep(args.delay + random.uniform(0.5, 1.5))
 
         await context.close()
 
