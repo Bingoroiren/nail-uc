@@ -19,6 +19,7 @@ from bs4 import BeautifulSoup
 from curl_cffi.requests import AsyncSession
 from playwright.async_api import async_playwright
 import openpyxl
+import unicodedata
 
 # Set Windows Proactor Event Loop Policy
 if sys.platform == 'win32':
@@ -58,24 +59,110 @@ EXCLUDED_SEARCH_DOMAINS = {
     'lrt.lt', 'facebook.com', 'linkedin.com', 'instagram.com', 'youtube.com', 
     'google.com', 'google.lt', 'firmos.lt', 'visalietuva.lt', 'infoplius.lt',
     'imoniukatalogai.lt', 'imones.lt', 'katalogas.lt', 'verslolink.lt', 'scannot.lt',
-    'spec.lt', 'manovos.lt', 'zemelapis.lt', 'reitingai.lt', 'marketnews.lt'
+    'spec.lt', 'manovos.lt', 'zemelapis.lt', 'reitingai.lt', 'marketnews.lt', 'lrimones.lt'
 }
 DIRECTORY_KEYWORDS = {'katalog', 'imoniu', 'imones', 'directory', 'yellowpages', 'registras', 'verslas', 'kontaktai.lt', 'rekvizit', 'listing'}
+GENERIC_COMPANY_WORDS = {
+    'imone', 'imones', 'bendrove', 'prekyba', 'gamyba', 'paslaugos', 'lietuva', 
+    'baltic', 'vilnius', 'kaunas', 'klaipeda', 'siauliai', 'panevezys', 'grupe', 
+    'group', 'company', 'holding', 'gaminiai', 'produktai', 'maistas', 'food'
+}
+
+def strip_accents(text):
+    if not text:
+        return ""
+    text = unicodedata.normalize('NFD', text)
+    text = ''.join(c for c in text if unicodedata.category(c) != 'Mn')
+    return text.lower()
+
+def is_acceptable_maps_website(url):
+    """
+    Kiểm tra website lấy từ Maps có hợp lệ không:
+    - Loại bỏ hoàn toàn các link dẫn về rekvizitai (rekvizitai.vz.lt, rekvizitai.lt)
+    - Loại bỏ các trang danh bạ doanh nghiệp trung gian (1551.lt, cr.lt, v.v.)
+    """
+    if not url:
+        return False
+    try:
+        domain = urllib.parse.urlparse(url).netloc.lower().replace('www.', '')
+        if not domain:
+            return False
+        if 'rekvizitai' in domain:
+            return False
+        if any(ex in domain for ex in EXCLUDED_SEARCH_DOMAINS):
+            return False
+        if any(kw in domain for kw in DIRECTORY_KEYWORDS):
+            return False
+        return True
+    except Exception:
+        return False
 
 def clean_company_name(name):
     if not name:
         return ""
-    n = re.sub(r'["\'„“”«»]', '', name).strip().lower()
+    # Chuẩn hóa khoảng trắng sau dấu chấm tên viết tắt (ví dụ: A.Mišeikio -> A. Mišeikio)
+    n = re.sub(r'(\b[A-Za-zĄČĘĖĮŠŲŪŽąčęėįšųūž])\.([A-Za-zĄČĘĖĮŠŲŪŽąčęėįšųūž])', r'\1. \2', name)
+    n = re.sub(r'["\'„“”«»]', '', n).strip().lower()
     tokens = n.split()
     tokens = [t for t in tokens if t not in LEGAL_PREFIXES]
     return ' '.join(tokens).strip()
 
+def extract_phones_from_text(text):
+    if not text:
+        return []
+    raw_phones = re.findall(r'(?:\+370|8)\s*\(?\d{1,3}\)?\s*\d{2,3}\s*\d{2,4}', text)
+    cleaned = []
+    for ph in raw_phones:
+        clean_p = re.sub(r'[^\d+]', '', ph)
+        if len(clean_p) >= 8:
+            cleaned.append(ph.strip())
+    return cleaned
+
+def extract_matched_company_name(query_name, candidate_title):
+    """
+    Trích xuất tên công ty sạch từ tiêu đề kết quả tìm kiếm (loại bỏ các hậu tố/tiền tố dư thừa)
+    Ví dụ: 'Kontaktai - AB Išlaužo žuvis' -> 'AB Išlaužo žuvis'
+           'SAMSONAS, UAB rekvizitai, kontaktai | 1551' -> 'SAMSONAS, UAB'
+           'UAB "Samsonas" - Pagrindinis' -> 'UAB "Samsonas"'
+    """
+    q_clean = clean_company_name(query_name)
+    if not candidate_title or not q_clean:
+        return ""
+    
+    # 1. Tách theo các dấu phân cách lớn (-, –, —, |, /, :)
+    parts = [p.strip() for p in re.split(r'[-–—|/:]', candidate_title) if p.strip()]
+    for p in parts:
+        if clean_company_name(p) == q_clean:
+            return p
+            
+    # 2. Tách tiếp theo dấu phẩy
+    for p in parts:
+        subparts = [sp.strip() for sp in p.split(',') if sp.strip()]
+        for sp in subparts:
+            if clean_company_name(sp) == q_clean:
+                return sp
+                
+    # 3. Lọc bỏ các từ thông dụng trên trang web (kontaktai, rekvizitai, oficialus puslapis, v.v.)
+    noise_pattern = r'\b(rekvizitai|kontaktai|informacija|apie mus|oficialus puslapis|titulinis|pradžia|home|page)\b'
+    for p in parts:
+        cleaned_p = re.sub(noise_pattern, '', p, flags=re.IGNORECASE).strip(' ,.-|')
+        if clean_company_name(cleaned_p) == q_clean:
+            return cleaned_p
+            
+    # 4. Nếu có phần chứa cụm q_clean
+    for p in parts:
+        cleaned_p = re.sub(noise_pattern, '', p, flags=re.IGNORECASE).strip(' ,.-|')
+        if q_clean in clean_company_name(cleaned_p):
+            return cleaned_p
+
+    return parts[0] if parts else candidate_title.strip()
+
 def is_valid_name_match(query_name, candidate_name):
     """
-    Bộ lọc so khớp tên nghiêm ngặt theo yêu cầu:
+    Bộ lọc so khớp tên nghiêm ngặt:
     - Không phân biệt hoa thường
     - Cụm từ tìm kiếm phải giống hệt
-    - Từ khác phải nằm trong ngoặc (...) hoặc phân cách bằng dấu (-, –, —, ,, ., :, |, /)
+    - Khớp từ trong ngoặc (...) hoặc phân cách bằng dấu (-, –, —, |, /, :)
     """
     q = clean_company_name(query_name)
     c = re.sub(r'["\'„“”«»]', '', candidate_name).strip().lower()
@@ -92,10 +179,21 @@ def is_valid_name_match(query_name, candidate_name):
     if q == c_without_brackets_clean:
         return True, "BRACKET_MATCH"
         
-    parts = re.split(r'[-–—,.:|/]', c)
+    # Tách theo các dấu phân tách thông dụng
+    parts = re.split(r'[-–—|/:]', c)
     parts_clean = [clean_company_name(p) for p in parts if p.strip()]
     if any(p == q for p in parts_clean):
         return True, "SEPARATOR_MATCH"
+        
+    # Tách thêm dấu phẩy nếu chưa khớp
+    for p in parts:
+        subparts = [clean_company_name(sp) for sp in p.split(',') if sp.strip()]
+        if any(sp == q for sp in subparts):
+            return True, "COMMA_MATCH"
+
+    # Khớp nguyên cụm từ đầy đủ nếu tên công ty dài từ 2 từ trở lên
+    if len(q.split()) >= 2 and re.search(r'\b' + re.escape(q) + r'\b', c_clean):
+        return True, "PHRASE_MATCH"
         
     return False, "NO_MATCH"
 
@@ -261,7 +359,11 @@ async def search_google_maps(page, company_name):
                     
                 web_elem = page.locator('a[data-item-id="authority"]')
                 if await web_elem.count() > 0:
-                    res["website"] = (await web_elem.first.get_attribute("href") or "").strip()
+                    raw_w = (await web_elem.first.get_attribute("href") or "").strip()
+                    if is_acceptable_maps_website(raw_w):
+                        res["website"] = raw_w
+                    else:
+                        res["rejected_website"] = raw_w
                     
                 addr_elem = page.locator('button[data-item-id="address"]')
                 if await addr_elem.count() > 0:
@@ -298,7 +400,11 @@ async def search_google_maps(page, company_name):
                         
                     web_elem = page.locator('a[data-item-id="authority"]')
                     if await web_elem.count() > 0:
-                        res["website"] = (await web_elem.first.get_attribute("href") or "").strip()
+                        raw_w = (await web_elem.first.get_attribute("href") or "").strip()
+                        if is_acceptable_maps_website(raw_w):
+                            res["website"] = raw_w
+                        else:
+                            res["rejected_website"] = raw_w
                         
                     addr_elem = page.locator('button[data-item-id="address"]')
                     if await addr_elem.count() > 0:
@@ -311,74 +417,188 @@ async def search_google_maps(page, company_name):
         
     return res
 
-def is_valid_company_domain(domain, query_clean):
-    d = domain.lower()
+def is_valid_company_domain(domain, company_name):
+    """
+    Kiểm tra mức độ tương đồng giữa domain và tên công ty:
+    - Loại trừ các trang danh bạ, trang tin tức, mạng xã hội, rekvizitai
+    - Bắt buộc domain phải tương đồng với tên công ty để tránh lấy nhầm trang
+    """
+    if not domain or not company_name:
+        return False
+        
+    d = strip_accents(domain).lower().replace('www.', '')
+    if 'rekvizitai' in d:
+        return False
     if any(ex in d for ex in EXCLUDED_SEARCH_DOMAINS):
         return False
     if any(kw in d for kw in DIRECTORY_KEYWORDS):
         return False
-    # Check if main word of company is in domain
-    tokens = [t for t in query_clean.split() if len(t) > 3]
-    if tokens:
-        # If at least one distinct company keyword is in domain, high confidence
-        if any(t in d for t in tokens):
+        
+    domain_body = d.split('.')[0]
+    domain_clean = domain_body.replace('-', '')
+    
+    clean_name = strip_accents(company_name).lower()
+    clean_name = re.sub(r'["\'„“”«».,()/\-–—:]', ' ', clean_name)
+    tokens = [t for t in clean_name.split() if t not in LEGAL_PREFIXES and len(t) >= 3]
+    if not tokens:
+        return False
+        
+    # 1. Toàn bộ tên công ty (không tính từ chung) viết liền xuất hiện trong domain
+    full_nospace = ''.join([t for t in tokens if t not in GENERIC_COMPANY_WORDS])
+    if full_nospace and len(full_nospace) >= 4:
+        if full_nospace in domain_clean or domain_clean in full_nospace:
             return True
-        # If short query, check full
-        clean_q_nospace = query_clean.replace(' ', '')
-        if clean_q_nospace in d:
+            
+    # 2. Từ khóa đặc trưng của công ty (độ dài >= 4 và không phải từ chung) xuất hiện trong domain
+    distinct_tokens = [t for t in tokens if t not in GENERIC_COMPANY_WORDS and len(t) >= 4]
+    for dt in distinct_tokens:
+        if dt in domain_clean:
             return True
+            
+    # 3. Domain body trùng với một trong các từ khóa của công ty
+    if domain_clean in [t for t in tokens if t not in GENERIC_COMPANY_WORDS and len(t) >= 3]:
+        return True
+        
     return False
 
-async def fallback_search_website(http_session, company_name):
+async def fallback_search_info(http_session, company_name):
     """
-    Fallback tìm kiếm website qua Bing / DuckDuckGo nếu Maps không có website
-    Chỉ chấp nhận domain chính thức của công ty, loại bỏ hoàn toàn danh bạ.
+    Tìm kiếm thông tin công ty qua DuckDuckGo và Bing Search:
+    - Tìm tên công ty xuất hiện trên web search (search_title)
+    - Tìm website chính thức của công ty (loại trừ danh bạ)
+    - Tìm số điện thoại & email từ đoạn trích (snippet)
     """
     q_clean = clean_company_name(company_name)
     query = f'"{q_clean}" Lietuva kontaktai'
     
-    # 1. Bing Search
+    result = {
+        "matched": False,
+        "search_title": "",
+        "raw_title": "",
+        "website": "",
+        "phone": "",
+        "email": "",
+        "match_reason": ""
+    }
+    
+    # 1. DuckDuckGo HTML (Ổn định, không chặn bot, kết quả chính xác)
+    try:
+        ddg_url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(query)}"
+        res = await http_session.get(ddg_url, timeout=9)
+        if res.status_code == 200:
+            soup = BeautifulSoup(res.text, 'html.parser')
+            for res_div in soup.find_all('div', class_='result'):
+                h2 = res_div.find('h2')
+                a_url = res_div.find('a', class_='result__url')
+                a_snip = res_div.find('a', class_='result__snippet')
+                
+                title_text = h2.get_text(strip=True) if h2 else ""
+                url_text = a_url.get_text(strip=True) if a_url else ""
+                snip_text = a_snip.get_text(strip=True) if a_snip else ""
+                
+                # Trích xuất URL đích thực
+                href = ""
+                if h2 and h2.find('a'):
+                    raw_href = h2.find('a').get('href', '')
+                    m_uddg = re.search(r'uddg=([^&]+)', raw_href)
+                    if m_uddg:
+                        href = urllib.parse.unquote(m_uddg.group(1))
+                if not href and url_text:
+                    href = url_text if url_text.startswith(('http://', 'https://')) else f"https://{url_text}"
+                    
+                domain = urllib.parse.urlparse(href).netloc.lower().replace('www.', '') if href else ""
+                
+                matched, reason = is_valid_name_match(q_clean, title_text)
+                if matched:
+                    if not result["matched"]:
+                        result["matched"] = True
+                        result["match_reason"] = reason
+                        result["raw_title"] = title_text
+                        result["search_title"] = extract_matched_company_name(company_name, title_text)
+                    
+                    # Kiểm tra website chính thức qua độ tương đồng domain & tên công ty
+                    if domain and not result["website"]:
+                        if is_valid_company_domain(domain, company_name):
+                            result["website"] = f"https://{domain}"
+                            
+                    # CHỈ lấy snippet phone / email nếu domain này chính là website công ty hợp lệ
+                    if result["website"] and domain in result["website"]:
+                        if snip_text:
+                            if not result["email"]:
+                                snip_emails = extract_emails_from_html(snip_text)
+                                if snip_emails:
+                                    result["email"] = prioritize_emails(snip_emails, domain)
+                            if not result["phone"]:
+                                snip_phones = extract_phones_from_text(snip_text)
+                                if snip_phones:
+                                    result["phone"] = snip_phones[0]
+                                
+                    if result["search_title"] and result["website"]:
+                        return result
+    except Exception:
+        pass
+        
+    # 2. Bing Search (Dự phòng)
     try:
         b_url = f"https://www.bing.com/search?q={urllib.parse.quote(query)}"
-        res = await http_session.get(b_url, timeout=8)
+        headers = {'Accept-Language': 'lt-LT,lt;q=0.9,en-US;q=0.8,en;q=0.7'}
+        res = await http_session.get(b_url, headers=headers, timeout=9)
         if res.status_code == 200:
             soup = BeautifulSoup(res.text, 'html.parser')
             for li in soup.find_all('li', class_='b_algo'):
-                cite = li.find('cite')
                 h2 = li.find('h2')
-                if cite:
-                    cite_text = cite.get_text(strip=True)
-                    match = re.search(r'https?://[^\s›/]+', cite_text)
-                    if match:
-                        found_url = match.group(0)
-                        domain = urllib.parse.urlparse(found_url).netloc.lower().replace('www.', '')
-                        if is_valid_company_domain(domain, q_clean):
-                            return f"https://{domain}"
-                        # If title matches strictly, also check
-                        t_text = h2.get_text(strip=True) if h2 else ""
-                        matched, _ = is_valid_name_match(q_clean, t_text)
-                        if matched and not any(kw in domain for kw in DIRECTORY_KEYWORDS):
-                            return f"https://{domain}"
+                cite = li.find('cite')
+                a_tag = h2.find('a') if h2 else None
+                found_url = a_tag.get('href', '') if a_tag else ''
+                if not found_url and cite:
+                    cite_m = re.search(r'https?://[^\s›/]+', cite.get_text(strip=True))
+                    if cite_m:
+                        found_url = cite_m.group(0)
+                        
+                caption = li.find('div', class_='b_caption')
+                snip_text = caption.get_text(strip=True) if caption else ""
+                title_text = h2.get_text(strip=True) if h2 else ""
+                
+                domain = urllib.parse.urlparse(found_url).netloc.lower().replace('www.', '') if found_url else ""
+                
+                matched, reason = is_valid_name_match(q_clean, title_text)
+                if matched:
+                    if not result["matched"]:
+                        result["matched"] = True
+                        result["match_reason"] = reason
+                        result["raw_title"] = title_text
+                        result["search_title"] = extract_matched_company_name(company_name, title_text)
+                        
+                    # Kiểm tra website chính thức qua độ tương đồng domain & tên công ty
+                    if domain and not result["website"]:
+                        if is_valid_company_domain(domain, company_name):
+                            result["website"] = f"https://{domain}"
+                            
+                    # CHỈ lấy snippet phone / email nếu domain này chính là website công ty hợp lệ
+                    if result["website"] and domain in result["website"]:
+                        if snip_text:
+                            if not result["email"]:
+                                snip_emails = extract_emails_from_html(snip_text)
+                                if snip_emails:
+                                    result["email"] = prioritize_emails(snip_emails, domain)
+                            if not result["phone"]:
+                                snip_phones = extract_phones_from_text(snip_text)
+                                if snip_phones:
+                                    result["phone"] = snip_phones[0]
+                                
+                    if result["search_title"] and result["website"]:
+                        return result
     except Exception:
         pass
+        
+    return result
 
-    # 2. DuckDuckGo HTML
-    try:
-        url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(query)}"
-        res = await http_session.get(url, timeout=8)
-        if res.status_code == 200:
-            soup = BeautifulSoup(res.text, 'html.parser')
-            for a in soup.find_all('a', class_='result__url'):
-                href = a.get('href', '')
-                text = a.get_text(strip=True).lower()
-                parsed = urllib.parse.urlparse(href if href.startswith('http') else 'https://' + text)
-                domain = parsed.netloc.lower().replace('www.', '')
-                if is_valid_company_domain(domain, q_clean):
-                    return f"https://{domain}"
-    except Exception:
-        pass
-
-    return ""
+async def fallback_search_website(http_session, company_name):
+    """
+    Wrapper tương thích ngược trả về website tìm thấy từ search
+    """
+    info = await fallback_search_info(http_session, company_name)
+    return info.get("website", "")
 
 async def scrape_website_details(http_session, raw_url):
     """
@@ -498,10 +718,23 @@ def save_cache(cache):
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
 def save_outputs(rows, fieldnames):
-    new_cols = ['tag_doanh_nghiep_maps', 'facebook_url', 'dia_chi_maps', 'nguon_enrich']
+    new_cols = [
+        'ten_cong_ty_maps',
+        'ten_cong_ty_search',
+        'tag_doanh_nghiep_maps',
+        'facebook_url',
+        'dia_chi_maps',
+        'nguon_enrich'
+    ]
     for c in new_cols:
         if c not in fieldnames:
             fieldnames.append(c)
+            
+    # Đảm bảo số điện thoại có dấu nháy đơn ' phía trước để Excel không tự ý đổi định dạng
+    for r in rows:
+        ph = r.get('so_dien_thoai', '').strip()
+        if ph and not ph.startswith("'"):
+            r['so_dien_thoai'] = f"'{ph}"
             
     # Save CSV UTF-8-BOM với fallback backup nếu file đang mở trong Excel
     try:
@@ -591,6 +824,10 @@ async def main():
                             r['so_dien_thoai'] = c_data['phone']
                         if c_data.get('website') and not r.get('website'):
                             r['website'] = c_data['website']
+                        if c_data.get('ten_cong_ty_maps'):
+                            r['ten_cong_ty_maps'] = c_data['ten_cong_ty_maps']
+                        if c_data.get('ten_cong_ty_search'):
+                            r['ten_cong_ty_search'] = c_data['ten_cong_ty_search']
                         if c_data.get('tag_maps'):
                             r['tag_doanh_nghiep_maps'] = c_data['tag_maps']
                         if c_data.get('facebook_url'):
@@ -605,6 +842,8 @@ async def main():
                     cur_phone = r.get('so_dien_thoai', '').strip()
                     cur_web = r.get('website', '').strip()
                     cur_email = r.get('email', '').strip()
+                    ten_cong_ty_maps = r.get('ten_cong_ty_maps', '').strip()
+                    ten_cong_ty_search = r.get('ten_cong_ty_search', '').strip()
                     tag_maps = ""
                     addr_maps = ""
                     fb_url = ""
@@ -614,6 +853,7 @@ async def main():
                     maps_info = await search_google_maps(page, c_name)
                     if maps_info["matched"]:
                         source.append("GoogleMaps")
+                        ten_cong_ty_maps = maps_info["maps_title"]
                         tag_maps = maps_info["tag_maps"]
                         addr_maps = maps_info["address"]
                         print(f"  [Maps Khớp ({maps_info['match_reason']})]: {maps_info['maps_title']}", flush=True)
@@ -625,19 +865,32 @@ async def main():
                         if maps_info["website"] and not cur_web:
                             cur_web = maps_info["website"]
                             print(f"    - Website mới (Maps): {cur_web}", flush=True)
+                        elif maps_info.get("rejected_website"):
+                            print(f"    - Bỏ qua website Maps vì là trang rekvizitai/danh bạ: {maps_info['rejected_website']}", flush=True)
                     else:
                         print(f"  [Maps Không khớp/Không thấy]", flush=True)
                         
-                    # BƯỚC 2: FALLBACK BING / DUCKDUCKGO NẾU CHƯA CÓ WEBSITE
-                    if not cur_web:
-                        print(f"  -> Fallback Search (Bing/DDG) tìm website...", flush=True)
-                        fb_web = await fallback_search_website(http_session, c_name)
-                        if fb_web:
-                            cur_web = fb_web
-                            source.append("SearchFallback")
-                            print(f"    - Website tìm thấy: {cur_web}", flush=True)
+                    # BƯỚC 2: TÌM KIẾM WEB SEARCH (BING / DUCKDUCKGO)
+                    # Tìm tên công ty trên web search, website chính thức và SĐT/Email
+                    if not cur_web or not ten_cong_ty_search:
+                        print(f"  -> Tìm kiếm Web Search (Bing/DDG) tìm tên cty & website...", flush=True)
+                        search_info = await fallback_search_info(http_session, c_name)
+                        if search_info and search_info["matched"]:
+                            ten_cong_ty_search = search_info["search_title"]
+                            print(f"    [Search Khớp Tên]: {ten_cong_ty_search} ({search_info['match_reason']})", flush=True)
+                            if search_info["website"] and not cur_web:
+                                cur_web = search_info["website"]
+                                source.append("SearchWebsite")
+                                print(f"    - Website tìm thấy: {cur_web}", flush=True)
+                            if search_info["phone"] and not cur_phone:
+                                cur_phone = search_info["phone"]
+                                print(f"    - SĐT mới (Search): {cur_phone}", flush=True)
+                            if search_info["email"] and not cur_email:
+                                cur_email = search_info["email"]
+                                source.append("SearchSnippet")
+                                print(f"    [+] EMAIL MỚI (SEARCH): {cur_email}", flush=True)
                         else:
-                            print(f"    - Không tìm thấy website trên search", flush=True)
+                            print(f"    - Không tìm thấy công ty/website trên search", flush=True)
                             
                     # BƯỚC 3: CÀO WEBSITE (TÌM EMAIL & FACEBOOK)
                     if cur_web:
@@ -663,6 +916,8 @@ async def main():
                             print(f"    - Không thấy email trên Facebook", flush=True)
                             
                     # CẬP NHẬT DỮ LIỆU
+                    r['ten_cong_ty_maps'] = ten_cong_ty_maps
+                    r['ten_cong_ty_search'] = ten_cong_ty_search
                     r['email'] = cur_email
                     if cur_phone:
                         r['so_dien_thoai'] = cur_phone
@@ -675,6 +930,8 @@ async def main():
                     
                     # Lưu vào cache ngay lập tức sau mỗi công ty
                     cache[cache_key] = {
+                        "ten_cong_ty_maps": ten_cong_ty_maps,
+                        "ten_cong_ty_search": ten_cong_ty_search,
                         "email": cur_email,
                         "phone": cur_phone,
                         "website": cur_web,
