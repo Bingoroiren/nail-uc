@@ -62,3 +62,35 @@ Bộ quy chuẩn này áp dụng bắt buộc cho **tất cả** các script cà
 - **Stealth & User-Agent thật**: Sử dụng User-Agent Chrome máy tính hiện đại, kết hợp `playwright-stealth`.
 - **Cuộn trang (Infinite Scroll / Lazy Load)**: Cuộn từng đoạn kèm thời gian chờ DOM nạp đầy đủ.
 - **Lọc trùng lặp (Deduplication)**: Kiểm tra trùng theo Số điện thoại, Domain website, hoặc Tên + Địa chỉ.
+
+---
+
+## 7. Bóc Tách Email Đa Tầng (Website + Facebook Crawl)
+- Khi dữ liệu có trường `Website`:
+  - **Tầng 1 (Website Deep Crawl)**: Tự động quét Trang chủ và các trang con liên hệ (`/contact`, `/contacts`, `/kontaktai`, `/apie-mus`, `/careers`, `/karjera`...) để trích xuất email doanh nghiệp chính thức.
+  - **Tầng 2 (Bóc tách Link Mạng Xã Hội)**: Tự động tìm kiếm và lưu lại link Facebook Fanpage (`facebook.com/...`, `fb.com/...`) và LinkedIn.
+  - **Tầng 3 (Facebook Email Extraction)**: Trong trường hợp website không công khai email (hoặc chỉ dùng form liên hệ), tiến hành quét trang giới thiệu / About của Facebook Fanpage để tìm email dự phòng.
+  - **Tầng 4 (Ghi nhận nguồn `Email_Source`)**: Luôn có cột ghi nhận nguồn gốc email (`Website`, `Facebook`, `Directory`) và cột lưu link `Facebook_URL`.
+
+---
+
+## 8. Quy Chuẩn File Launcher Batch Script (`.bat`) Trên Windows
+
+Khi tạo file batch launcher (`runners/run_*.bat`) để người dùng nhấp đúp hoặc chạy trong terminal:
+
+1. **Tuyệt Đối KHÔNG Dùng Ký Tự `&` Trần**:
+   - Trong Windows `cmd.exe`, `&` là toán tử nối lệnh (command chaining operator).
+   - Nếu viết: `title Scraper & Enrichment` hoặc `echo Cào & Làm giàu`, CMD sẽ tách từ sau `&` thành một câu lệnh độc lập để thực thi và văng lỗi:
+     `'Enrichment' is not recognized as an internal or external command`
+     `'Làm' is not recognized as an internal or external command`
+   - **Khắc phục**: Luôn dùng chữ `and`, dấu `+`, hoặc escape bằng dấu mũ `^&`.
+
+2. **Tuyệt Đối KHÔNG Viết Tiếng Việt Có Dấu Trong File `.bat`**:
+   - Trình phân tích lệnh của `cmd.exe` trên Windows xử lý các ký tự UTF-8 đa byte (multibyte) rất kém. Khi đọc file batch UTF-8 có dấu tiếng Việt, con trỏ file (seek pointer) bị lệch byte (desync offset).
+   - Hậu quả: Các dòng lệnh bên dưới bị nuốt hoặc cắt cụt ký tự đầu tiên, sinh ra hàng loạt lỗi kỳ lạ:
+     `'~dp0\.."' is not recognized...` (do `cd /d "%~dp0\.."` bị nuốt mất phần đầu)
+     `'aper_rekvizitai.py' is not recognized...` (do `python src\scraper...` bị cắt cụt)
+     `'DỮ' is not recognized...`, `'bạ' is not recognized...`
+   - **Khắc phục**: Toàn bộ nội dung trong file `.bat` (echo, title, comment, đường dẫn) **BẮT BUỘC dùng tiếng Anh hoặc tiếng Việt KHÔNG DẤU thuần ASCII**.
+
+

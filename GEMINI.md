@@ -44,3 +44,11 @@ Toàn bộ các quy trình phức tạp đã được module hóa thành các Sk
 4. **Bật Trình Duyệt Thực Tế (`headless=False`)**: Viewport tối thiểu `1280x800` để USER quan sát trực quan tiến độ và dễ dàng xử lý Captcha khi có chuông báo `\a`.
 5. **Lưu Tăng Dần (Incremental Auto-Save) & Checkpoint**: Ghi ngay vào CSV sau mỗi vài dòng cào được (`mode='a'` kèm `flush()`) và lưu cache JSON để hỗ trợ Resume 100%, không cào lại từ đầu.
 6. **Lọc Trùng Lặp & Loại Trừ Domain Rác**: Lọc bỏ các mạng xã hội và thư bạ (`facebook`, `instagram`, `linkedin`, `google.com/maps`, `yellowpages`, `proff.no`...).
+7. **Bóc Tách Email Đa Tầng (Website + Facebook Crawl)**:
+   - Khi có `Website`: Bắt buộc quét Website (Trang chủ + các trang con `/contact`, `/contacts`, `/kontaktai`, `/careers`, `/about`) để bóc tách email doanh nghiệp chính thức.
+   - Bắt buộc quét trích xuất link Fanpage Facebook (`facebook.com/...`, `fb.com/...`) từ Website.
+   - Nếu Website không có email hoặc chỉ có form, tiếp tục truy cập/bóc tách email từ Facebook Fanpage để tối đa hóa tỷ lệ tìm thấy email liên hệ.
+   - Luôn lưu trường `Facebook_URL` và ghi nhận nguồn `Email_Source` (`Website` hoặc `Facebook`).
+8. **Quy Chuẩn File Launcher Batch (`.bat`) Trên Windows**:
+   - **TUYỆT ĐỐI KHÔNG dùng ký tự `&` trần**: Trong CMD, `&` là toán tử nối lệnh (command chaining). Viết `Scraper & Enrichment` sẽ khiến CMD tách `Enrichment` thành một lệnh độc lập và báo lỗi `'Enrichment' is not recognized`. Hãy dùng `and`, `+` hoặc escape `^&`.
+   - **TUYỆT ĐỐI KHÔNG dùng tiếng Việt có dấu trong `.bat`**: Windows CMD xử lý ký tự UTF-8 đa byte (multibyte) làm lệch offset con trỏ đọc file (file seek pointer desync), khiến các dòng lệnh bên dưới bị nuốt/cắt cụt ký tự đầu (ví dụ `python src\...` bị nuốt thành `'aper_...py'`, `cd /d` bị nuốt thành `'~dp0\.."'`). File `.bat` bắt buộc dùng tiếng Anh hoặc tiếng Việt KHÔNG DẤU thuần ASCII.

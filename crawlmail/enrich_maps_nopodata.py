@@ -261,7 +261,8 @@ async def handle_captcha_interactive(page):
 
 async def search_google_maps_company(page, company_name, city):
     """Tra cứu tên công ty trên Google Maps với giao diện Na Uy."""
-    query = f"{company_name}, {city}, Norway" if city else f"{company_name}, Norway"
+    clean_name = clean_company_name_no(company_name)
+    query = f"{clean_name} Norway" if clean_name else f"{company_name} Norway"
     search_url = f"https://www.google.com/maps/search/{urllib.parse.quote(query)}?hl=no"
     
     result = {
@@ -272,6 +273,7 @@ async def search_google_maps_company(page, company_name, city):
         "website": "",
         "address": ""
     }
+
     
     try:
         await page.goto(search_url, wait_until="domcontentloaded", timeout=25000)
@@ -413,6 +415,10 @@ async def main():
     to_process = []
     for idx, r in enumerate(rows):
         orgnr = r.get("orgnr", "").strip()
+        status = r.get("status_brreg", "").strip().lower()
+        if status in ['konkurs', 'avvikling']:
+            continue
+            
         has_web = bool(r.get("website", "").strip())
         has_phone = bool(r.get("phone", "").strip())
         has_email = bool(r.get("email", "").strip())
@@ -421,16 +427,23 @@ async def main():
         if has_web and has_phone and has_email:
             continue
             
-        # Nếu đã có trong cache và đã hoàn thành tra cứu Maps
-        if orgnr in cache:
+        # Chỉ bỏ qua nếu trong cache ĐÃ KHỚP THÀNH CÔNG trên Maps
+        if cache.get(orgnr, {}).get("matched") is True:
             continue
             
         to_process.append((idx, r))
+        
+    # Ưu tiên các doanh nghiệp có SĐT hoặc có Nhân viên >= 1 lên đầu (xác suất có địa điểm thực tế cao nhất)
+    to_process.sort(key=lambda item: (
+        0 if (item[1].get("phone", "").strip() or item[1].get("employees", "").strip() not in ['0', '']) else 1,
+        item[1].get("name", "").lower()
+    ))
         
     print(f"[*] Số công ty cần tra cứu Google Maps: {len(to_process)}")
     if not to_process:
         print("[+] Toàn bộ công ty đã được làm giàu đầy đủ!")
         return
+
         
     # Khởi tạo Playwright với headless=False theo Rule workspace
     async with async_playwright() as p:
@@ -502,7 +515,63 @@ async def main():
                     writer = csv.DictWriter(f, fieldnames=fieldnames)
                     writer.writeheader()
                     writer.writerows(rows)
-                print(f"  [✓] Đã tự động lưu dữ liệu tăng dần vào NOPODATA.csv ({saved_count} công ty đã duyệt).")
+                    
+                # Đồng bộ sang các file Cold Mail Na Uy
+                coldmail_path = os.path.join(ROOT_DIR, "Môi giới Na Uy - ColdMail.csv")
+                if os.path.exists(coldmail_path):
+                    try:
+                        with open(coldmail_path, 'r', encoding='utf-8-sig') as f_cm:
+                            cm_reader = csv.DictReader(f_cm)
+                            cm_fields = cm_reader.fieldnames
+                            cm_rows = list(cm_reader)
+                            
+                        # Tạo map theo Tên công ty
+                        data_map = {r.get('name', '').strip(): r for r in rows if r.get('name')}
+                        cm_updated = False
+                        for cm_r in cm_rows:
+                            cname = cm_r.get('Công ty', '').strip()
+                            if cname in data_map:
+                                src_r = data_map[cname]
+                                # Đồng bộ SĐT nếu có mới
+                                if src_r.get('phone') and not cm_r.get('SĐT'):
+                                    cm_r['SĐT'] = src_r['phone']
+                                    cm_updated = True
+                                # Đồng bộ Website nếu có mới
+                                if src_r.get('website') and (not cm_r.get('Liên Hệ') or 'proff.no' in cm_r.get('Liên Hệ', '')):
+                                    cm_r['Liên Hệ'] = src_r['website']
+                                    cm_updated = True
+                                # Đồng bộ Email nếu có mới
+                                if src_r.get('email') and not cm_r.get('Email'):
+                                    cm_r['Email'] = src_r['email']
+                                    cm_r['Check gửi'] = 'OK'
+                                    cm_updated = True
+                                    
+                        if cm_updated:
+                            # Sắp xếp OK lên đầu
+                            cm_rows.sort(key=lambda x: (
+                                0 if x['Check gửi'] == 'OK' else 1,
+                                0 if x['Người liên hệ'] else 1,
+                                x['Công ty'].lower()
+                            ))
+                            for idx_cm, r_cm in enumerate(cm_rows, 1):
+                                r_cm['No.'] = str(idx_cm)
+                                
+                            with open(coldmail_path, 'w', encoding='utf-8-sig', newline='') as f_cm:
+                                cm_writer = csv.DictWriter(f_cm, fieldnames=cm_fields)
+                                cm_writer.writeheader()
+                                cm_writer.writerows(cm_rows)
+                                
+                            # Cập nhật bản sao NOPODATA_ColdMail.csv
+                            copy_coldmail = os.path.join(ROOT_DIR, "NOPODATA_ColdMail.csv")
+                            with open(copy_coldmail, 'w', encoding='utf-8-sig', newline='') as f_copy:
+                                cm_writer = csv.DictWriter(f_copy, fieldnames=cm_fields)
+                                cm_writer.writeheader()
+                                cm_writer.writerows(cm_rows)
+                    except Exception as e:
+                        pass
+                        
+                print(f"  [✓] Đã tự động lưu dữ liệu tăng dần vào NOPODATA.csv và Cold Mail ({saved_count} công ty đã duyệt).")
+
                 
             await asyncio.sleep(1.0)
             
