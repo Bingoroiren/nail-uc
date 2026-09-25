@@ -594,4 +594,29 @@ LOCATIONS = [
         "zoom": 11,
         "covered_suburbs": ['Palasë']
     },
+    {
+        "name": "Theth",
+        "state": "Shkodër",
+        "lat": 42.3920,
+        "lng": 19.7758,
+        "zoom": 13,
+        "covered_suburbs": ['Theth', 'Ndërlysaj', 'Okol']
+    },
+    {
+        "name": "Valbonë",
+        "state": "Kukës",
+        "lat": 42.4533,
+        "lng": 19.8944,
+        "zoom": 13,
+        "covered_suburbs": ['Valbonë', 'Rragam', 'Dragobi']
+    },
+    {
+        "name": "Velipojë",
+        "state": "Shkodër",
+        "lat": 41.8650,
+        "lng": 19.4310,
+        "zoom": 13,
+        "covered_suburbs": ['Velipojë', 'Baks-Rrjoll', 'Pulaj']
+    },
 ]
+

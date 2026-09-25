@@ -20,15 +20,27 @@ env/
 # =======================================================
 chrome_user_data/
 *user_data*/
+data/cache/
+*/data/cache/
+*profile*/
+*browser_profile*/
 playwright-report/
 test-results/
 
 # =======================================================
-# Scraper Cache & Intermediate State
+# Scraper Cache & Intermediate State / Progress
 # =======================================================
 cache_*.json
 */cache_*.json
 crawlmail/cache_*.json
+data/progress/
+*/progress/
+progress/
+
+# =======================================================
+# Scratch & Temporary Testing Scripts
+# =======================================================
+scratch/
 
 # =======================================================
 # IDEs & Editors
