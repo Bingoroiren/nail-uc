@@ -36,6 +36,21 @@ echo    (Chrome browser will open for visual monitoring and captcha check)
 echo ======================================================================
 echo.
 python src/scraper_hotel_al.py
+if errorlevel 1 (
+    echo.
+    echo [-] Google Maps scraper was stopped or encountered an error.
+    echo [-] Skipping Step 2.
+    pause
+    exit /b 1
+)
+
+if not exist data\raw\hotel_albania.csv (
+    echo.
+    echo [*] No raw data file found yet (scraper might have been closed early).
+    echo [*] Exiting cleanly. Run again whenever you are ready!
+    pause
+    exit /b 0
+)
 
 echo.
 echo ======================================================================
@@ -43,6 +58,7 @@ echo    STEP 2: ENRICHING EMAILS AND FORMATTING TO 20-COLUMN COLD MAIL
 echo ======================================================================
 echo.
 python formatters/format_hotel_al_emails.py
+
 
 echo.
 echo ======================================================================

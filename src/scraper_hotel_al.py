@@ -470,28 +470,39 @@ async def main():
         total_scans = len(config_hotel_al.KEYWORDS) * len(locations_al.LOCATIONS)
         curr_scan = 0
         
-        for loc in locations_al.LOCATIONS:
-            for kw in config_hotel_al.KEYWORDS:
-                curr_scan += 1
-                scan_key = (loc['name'].lower(), loc['state'].lower(), kw.lower())
-                
-                if scan_key in completed_scans:
-                    continue
+        try:
+            for loc in locations_al.LOCATIONS:
+                for kw in config_hotel_al.KEYWORDS:
+                    curr_scan += 1
+                    scan_key = (loc['name'].lower(), loc['state'].lower(), kw.lower())
                     
-                print(f"\n[{curr_scan}/{total_scans}] Tiến trình: '{kw}' tại {loc['name']} ({loc['state']})...")
-                success = await process_search(page, kw, loc, scraped_urls)
-                if success:
-                    save_completed_scan(loc['name'], loc['state'], kw)
-                    completed_scans.add(scan_key)
-                    
-                await asyncio.sleep(random.uniform(0.5, 1.2))
+                    if scan_key in completed_scans:
+                        continue
+                        
+                    print(f"\n[{curr_scan}/{total_scans}] Tiến trình: '{kw}' tại {loc['name']} ({loc['state']})...")
+                    success = await process_search(page, kw, loc, scraped_urls)
+                    if success:
+                        save_completed_scan(loc['name'], loc['state'], kw)
+                        completed_scans.add(scan_key)
+                        
+                    await asyncio.sleep(random.uniform(0.5, 1.2))
+        except Exception as e:
+            if "closed" in str(e).lower():
+                print("\n[*] Cửa sổ trình duyệt đã được đóng bởi người dùng. Tiến trình dừng lại an toàn.")
+                return
+            else:
+                raise e
+        finally:
+            try:
+                await browser.close()
+            except Exception:
+                pass
                 
-        await browser.close()
-        
     print("\n" + "=" * 70)
     print("   HOÀN TẤT CHIẾN DỊCH CÀO KHÁCH SẠN ALBANIA THÀNH CÔNG!")
     print(f"   Dữ liệu đã được lưu tăng dần tại: {config_hotel_al.OUTPUT_CSV}")
     print("=" * 70)
+
 
 if __name__ == '__main__':
     asyncio.run(main())
