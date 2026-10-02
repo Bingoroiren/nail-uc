@@ -53,12 +53,115 @@ OBFUSCATED_PATTERNS = [
     re.compile(r'([A-Za-z0-9._%+-]{1,64})\s+AT\s+([A-Za-z0-9.-]{1,255})\s+DOT\s+([A-Za-z]{2,7})'),
 ]
 
-# Common contact page paths to guess if no emails found
+# Common contact & recruitment page paths to guess if no emails found (Central European & Global)
 CONTACT_PAGE_GUESSES = [
-    '/contact', '/contact-us', '/contact-us/', '/contact/',
-    '/about', '/about-us', '/about-us/', '/about/',
-    '/get-in-touch', '/get-in-touch/',
+    # Slovakia, Czech Republic, Central Europe - Contact & Recruitment
+    '/kontakt', '/kontakt.html', '/kontakt.php',
+    '/kontakty', '/kontakty.html',
+    '/kariera', '/kariera.html', '/kariera.php',
+    '/praca', '/praca.html', '/praca.php',
+    '/o-nas', '/o-nas.html', '/onas.html',
+    '/napiste-nam', '/impressum',
+    # Global / English
+    '/contact', '/contact-us', '/contact.html',
+    '/careers', '/career', '/jobs',
+    '/about', '/about-us', '/about.html',
+    '/get-in-touch',
 ]
+
+JUNK_EMAIL_DOMAINS = {
+    # System & Tracking
+    'sentry.io', 'sentry-next.wixpress.com', 'sentry.wixpress.com', 'wixpress.com',
+    'wix.com', 'wixsite.com', 'wordpress.com', 'squarespace.com', 'weebly.com',
+    'godaddy.com', 'schema.org', 'trustpilot.com', 'google.com', 'facebook.com',
+    'instagram.com', 'twitter.com', 'tiktok.com', 'youtube.com', 'linkedin.com',
+    # Templates, Themes & Placeholders
+    'example.com', 'example.org', 'example.net', 'domain.com', 'yourdomain.com',
+    'yourcompany.com', 'your-domain.com', 'your-site.com', 'mydomain.com',
+    'mycompany.com', 'company.com', 'website.com', 'site.com', 'placeholder.com',
+    'sample.com', 'demo.com', 'templatemonster.com', 'themeforest.net', 'envato.com',
+    'colorlib.com', 'bootstrapmade.com', 'htmlstream.com', 'nicepage.com', 'mobirise.com'
+}
+
+SYSTEM_USERNAMES = {
+    'noreply', 'no-reply', 'donotreply', 'privacy', 'terms', 'cookies', 'gdpr',
+    'abuse', 'security', 'webmaster', 'sentry', 'mailer-daemon', 'test', 'example',
+    'hostmaster', 'postmaster', 'root'
+}
+
+TEMPLATE_USERNAMES = {
+    'youremail', 'your-email', 'your_email', 'your.email',
+    'yourname', 'your-name', 'your_name', 'your.name',
+    'yourcompany', 'myemail', 'myname',
+    'username', 'user', 'name', 'sample', 'demo', 'test', 'testing',
+    'placeholder', 'someone', 'nobody',
+    'john.doe', 'johndoe', 'jane.doe', 'janedoe',
+    'first.last', 'firstname.lastname'
+}
+
+TEMPLATE_USERNAME_PATTERNS = [
+    re.compile(r'^(your|my)[-_.]?(email|mail|name|domain|company)', re.IGNORECASE),
+    re.compile(r'^(sample|demo|test|testing|placeholder|fake|template)', re.IGNORECASE),
+    re.compile(r'^(john\.doe|jane\.doe|johndoe|janedoe)$', re.IGNORECASE),
+]
+
+def score_email_b2b(email, website_domain=""):
+    """
+    Chấm điểm email tối ưu cho B2B Manpower Agency (Môi giới lao động B2B):
+    - Tuyệt đối ưu tiên: Bộ phận Nhân sự / Tuyển dụng / Việc làm (HR, Recruitment).
+    - Ưu tiên cao: Ban Giám đốc / Điều hành (CEO, Vedenie, Director) & Bộ phận thông tin (Info, Kontakt, Office).
+    - Trả về -1 nếu là mail rác, mail template hoặc file giả mạo.
+    """
+    if not email or not isinstance(email, str):
+        return -1
+    e = email.replace('%20', '').strip().lower().rstrip('.,;:')
+    if not EMAIL_REGEX.match(e):
+        return -1
+    u, d = e.split('@', 1)
+
+    # 1. Loại trừ blacklist & mail template / demo
+    if d in JUNK_EMAIL_DOMAINS or any(d.endswith('.' + jd) for jd in JUNK_EMAIL_DOMAINS):
+        return -1
+    if u in SYSTEM_USERNAMES or u in TEMPLATE_USERNAMES:
+        return -1
+    if any(p.search(u) for p in TEMPLATE_USERNAME_PATTERNS):
+        return -1
+    if any(k in u for k in ['youremail', 'your-email', 'yourname', 'your-name']):
+        return -1
+    if u in ['email', 'mail'] and d in ['email.com', 'mail.com', 'domain.com', 'company.com']:
+        return -1
+    if any(e.endswith(ext) for ext in INVALID_EXTENSIONS):
+        return -1
+
+    score = 10
+
+    # 2. Thưởng điểm trùng domain website (+50đ)
+    clean_domain = website_domain.lower().replace('www.', '').split('/')[0] if website_domain else ""
+    if clean_domain and (clean_domain in d or d in clean_domain):
+        score += 50
+
+    # 3. ƯU TIÊN SỐ 1: Bộ phận Nhân sự / Tuyển dụng / Việc làm (+50đ) -> Trúng đích 100% Agency lao động!
+    if u in ['praca', 'kariera', 'hr', 'personalne', 'jobs', 'recruitment', 'nabor', 'zamestnanie', 'career', 'careers', 'talent', 'people', 'rekrutacja']:
+        score += 50
+    # 4. ƯU TIÊN SỐ 2: Ban Giám đốc / Lãnh đạo điều hành (+45đ) -> Người quyết định hợp đồng cung ứng!
+    elif u in ['vedenie', 'riaditel', 'konatel', 'ceo', 'director', 'manager', 'obchod', 'sales', 'management', 'owner']:
+        score += 45
+    # 5. ƯU TIÊN SỐ 3: Cổng liên hệ chính thức / Bộ phận thông tin (+40đ) -> Cổng kết nối B2B chính thức!
+    elif u in ['info', 'kontakt', 'contact', 'office', 'biuro', 'sekretariat', 'recepcia', 'kancelaria', 'mail']:
+        score += 40
+    # 6. Email đích danh cá nhân theo domain riêng (+25đ)
+    elif '.' in u and score >= 60:
+        score += 25
+    # 7. Webmail miễn phí (+10đ - chỉ nhận nếu không có mail domain riêng)
+    elif d in ['gmail.com', 'seznam.cz', 'zoznam.sk', 'post.sk', 'azet.sk']:
+        score += 10
+    # 8. Email kỹ thuật / hỗ trợ chung (+5đ)
+    elif u in ['support', 'admin', 'help', 'webmaster']:
+        score += 5
+
+    return score
+
+
 
 def extract_emails_from_text(text):
     if not text:
@@ -297,31 +400,45 @@ async def crawl_regular_site(page, url):
                     full_url = urllib.parse.urljoin(url, href)
                     if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
                         full_url_clean = full_url.split('#')[0]
-                        priority = 0
-                        if any(k in text_lower or k in href_lower for k in ['contact', 'about', 'support', 'reach', 'info', 'location', 'salon', 'find', 'store', 'kontak', 'nas', 'mums', 'sobre', 'επικοινων', 'epikoinon', '聯絡', '關於', '关于', '联系', 'contat', 'impressum', 'team', 'enquir', 'inquiry']):
-                            priority = 2
-                        elif any(k in text_lower or k in href_lower for k in ['services', 'book', 'us', 'pakalpojumi', 'sluzby', 'servicos', 'υπηρεσιες', '服務', '服务', 'help', 'footer', 'sitemap']):
-                            priority = 1
+                        priority = 1
+                        if any(k in text_lower or k in href_lower for k in [
+                            # HR & Recruitment (Highest B2B Agency value)
+                            'kariera', 'praca', 'nabor', 'personalne', 'zamestnanie',
+                            'career', 'careers', 'jobs', 'recruitment', 'hr', 'hiring',
+                            # Official Contact & Info
+                            'kontakt', 'contact', 'kontakty', 'napiste', 'impressum',
+                            'about', 'o-nas', 'onas', 'support', 'reach', 'info',
+                            'location', 'salon', 'find', 'store', 'mums', 'sobre',
+                            'επικοινων', 'epikoinon', '聯絡', '關於', '关于', '联系',
+                            'contat', 'team', 'enquir', 'inquiry'
+                        ]):
+                            priority = 10  # Highest priority: Real contact & recruitment links in website navigation
+                        elif any(k in text_lower or k in href_lower for k in [
+                            'services', 'sluzby', 'book', 'us', 'pakalpojumi',
+                            'servicos', 'υπηρεσιες', '服務', '服务', 'help', 'footer', 'sitemap'
+                        ]):
+                            priority = 5
                         
                         candidate_links.append((priority, full_url_clean))
         except Exception:
             pass
 
-        # Also guess common contact page URLs that might not be linked
+        # Fallback guesses for common contact pages (priority 2: only after real links)
         parsed_base = urllib.parse.urlparse(url)
         base_origin = f"{parsed_base.scheme}://{parsed_base.netloc}"
         for guess_path in CONTACT_PAGE_GUESSES:
             guess_url = base_origin + guess_path
-            candidate_links.append((3, guess_url))  # Highest priority for direct guesses
+            candidate_links.append((2, guess_url))
 
         candidate_links.sort(key=lambda x: x[0], reverse=True)
         unique_sub_urls = []
         for priority, sub_url in candidate_links:
-            if sub_url not in unique_sub_urls and sub_url != url:
+            clean_sub = sub_url.rstrip('/')
+            if clean_sub not in [u.rstrip('/') for u in unique_sub_urls] and clean_sub != url.rstrip('/'):
                 unique_sub_urls.append(sub_url)
 
-        # Scrape up to 6 subpages (increased from 4)
-        for sub_url in unique_sub_urls[:6]:
+        # Scrape up to 8 subpages (prioritizing real contact links)
+        for sub_url in unique_sub_urls[:8]:
             try:
                 print(f"[*] Navigating to Subpage: {sub_url}")
                 await page.goto(sub_url, timeout=15000, wait_until="domcontentloaded")
@@ -483,11 +600,13 @@ async def process_row(row, semaphore, writer, output_file, processed_urls):
                     print(f"[!] Timeout Error: Scanning {website} took longer than 90 seconds. Aborting task to prevent hang.")
                     emails = []
 
-                # Clean and save row
-                emails = list(set(emails))
-                email_str = ", ".join(emails)
-                row['Email'] = email_str
-                print(f"[+] URL: {website} -> Emails: {email_str if email_str else 'None found'}")
+                # Clean, filter junk, score, and select ONLY 1 BEST EMAIL
+                parsed_domain = urllib.parse.urlparse(website).netloc.lower().replace('www.', '')
+                valid_emails = [e for e in set(emails) if score_email_b2b(e, parsed_domain) > 0]
+                best_email = max(valid_emails, key=lambda e: score_email_b2b(e, parsed_domain)) if valid_emails else ""
+                row['Email'] = best_email
+                print(f"[+] URL: {website} -> Best Email: {best_email if best_email else 'None found'} (selected from {len(emails)} raw)")
+
                 
                 if writer:
                     try:
@@ -642,4 +761,11 @@ async def main():
     print(f"\n[+] Email scraping complete! Output saved to {OUTPUT_CSV}")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        print("\n[*] Tác vụ đã được dừng thủ công bởi người dùng.")
+    except Exception as e:
+        if "closed" not in str(e).lower() and "pipe" not in str(e).lower():
+            print(f"[!] Lỗi phát sinh: {e}")
+

@@ -28,16 +28,73 @@ Bộ quy chuẩn này áp dụng bắt buộc cho **tất cả** các script cà
 
 ---
 
-## 3. Chuẩn Hóa & Làm Sạch Email
+## 3. Bộ Chấm Điểm Tuyển Chọn 1 Mail Giá Trị Nhất & Lọc Mail Rác (BẮT BUỘC NHƯ SĐT CÓ NHÁY ĐƠN `'`)
+
+> **QUY CHUẨN CỐT LÕI**: Việc thiết lập bộ chấm điểm để giữ lại **DUY NHẤT 1 EMAIL CÓ GIÁ TRỊ NHẤT** cho từng công ty và loại bỏ 100% email rác/template có **tầm quan trọng tuyệt đối ngang hàng với việc thêm dấu nháy đơn `'` trước số điện thoại**. Không bao giờ được phép để sót mail rác hoặc nhét danh sách nhiều mail vào 1 ô gây rối loạn hệ thống Cold Mail.
+
+### A. Lọc bỏ 100% Email Rác & Email Mẫu Template:
 - **Làm sạch URL encoding / Ký tự lạ**:
-  - Tự động decode và loại bỏ triệt để `%20` (khoảng trắng mã hóa), `%0A`, `%0D`, khoảng trắng thừa hoặc ký tự rác bám vào email.
   ```python
   email = urllib.parse.unquote(str(email)).replace('%20', '').strip().lower().rstrip('.,;:')
   ```
-- **Lọc bỏ email rác & Email mẫu template**:
-  - Loại bỏ hoàn toàn email mặc định của template web, theme, framework (`example@example.com`, `user@domain.com`, `yourname@email.com`, `test@...`).
-  - Loại bỏ các mail hệ thống không nhận liên hệ trực tiếp (`sentry@...`, `wordpress@...`, `wix@...`, `no-reply@...`, `mailer-daemon@...`).
-  - Đảm bảo email đầu ra hợp lệ theo regex chuẩn.
+- **Loại trừ domain hệ thống, Theme builders & Placeholders**:
+  - `sentry.io`, `wix.com`, `wixpress.com`, `wordpress.com`, `squarespace.com`, `weebly.com`, `godaddy.com`, `example.com`, `example.org`, `domain.com`, `yourdomain.com`, `yourcompany.com`, `placeholder.com`, `templatemonster.com`, `themeforest.net`, `bootstrapmade.com`, `schema.org`, `trustpilot.com`, `google.com`.
+- **Loại trừ tiền tố hệ thống & Tiền tố mẫu Template**:
+  - Tiền tố mẫu của web developer: `youremail`, `your-email`, `your_email`, `yourname`, `your-name`, `yourcompany`, `myemail`, `myname`, `someone`, `nobody`, `john.doe`, `johndoe`, `jane.doe`, `first.last`, `username`, `user`, `sample`, `demo`.
+  - Tiền tố hệ thống/tracking: `noreply`, `no-reply`, `donotreply`, `privacy`, `terms`, `cookies`, `gdpr`, `abuse`, `security`, `sentry`, `mailer-daemon`, `test`, `example`.
+  - Bộ kết hợp mẫu: `email@email.com`, `mail@domain.com`, `info@yourdomain.com`.
+- **Loại bỏ extension file giả mạo email**: `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`, `.webp`, `.pdf`, `.css`, `.js`, `.woff`.
+
+### B. Thuật Toán Chấm Điểm Heuristic (`score_email_b2b`):
+Khi cào được nhiều email trên cùng một website, bắt buộc dùng thuật toán chấm điểm để **CHỌN RA DUY NHẤT 1 EMAIL TỐT NHẤT**:
+
+```python
+def score_email_b2b(email, website_domain=""):
+    if not email or not isinstance(email, str):
+        return -1
+    e = email.strip().lower()
+    if not EMAIL_REGEX.match(e):
+        return -1
+    u, d = e.split('@', 1)
+    
+    # 1. Kiểm tra blacklist
+    if d in JUNK_EMAIL_DOMAINS or u in SYSTEM_USERNAMES:
+        return -1
+    if any(e.endswith(ext) for ext in INVALID_EXTENSIONS):
+        return -1
+
+    score = 10
+    
+    # 2. Điểm cộng trùng Domain Website (+50đ)
+    clean_domain = website_domain.lower().replace('www.', '').split('/')[0] if website_domain else ""
+    if clean_domain and (clean_domain in d or d in clean_domain):
+        score += 50
+
+    # 3. ƯU TIÊN SỐ 1 TUYỆT ĐỐI CHO B2B AGENCY: Nhân sự / Tuyển dụng / Việc làm (+50đ)
+    if u in ['praca', 'kariera', 'hr', 'personalne', 'jobs', 'recruitment', 'nabor', 'zamestnanie', 'career', 'careers', 'talent', 'people', 'rekrutacja']:
+        score += 50
+    # 4. ƯU TIÊN SỐ 2: Ban Giám Đốc / Lãnh đạo điều hành (+45đ)
+    elif u in ['vedenie', 'riaditel', 'konatel', 'ceo', 'director', 'manager', 'obchod', 'sales', 'management', 'owner']:
+        score += 45
+    # 5. ƯU TIÊN SỐ 3: Cổng liên hệ chính thức / Bộ phận thông tin B2B (+40đ)
+    elif u in ['info', 'kontakt', 'contact', 'office', 'biuro', 'sekretariat', 'recepcia', 'kancelaria', 'mail']:
+        score += 40
+    # 6. Email đích danh cá nhân theo domain riêng (+25đ)
+    elif '.' in u and score >= 60:
+        score += 25
+    # 7. Webmail miễn phí (+10đ - chỉ nhận nếu không có mail domain riêng)
+    elif d in ['gmail.com', 'seznam.cz', 'zoznam.sk', 'post.sk', 'azet.sk']:
+        score += 10
+    # 8. Email kỹ thuật / hỗ trợ chung / kế toán (+5đ)
+    elif u in ['support', 'admin', 'help', 'webmaster', 'servis', 'faktury', 'uctaren']:
+        score += 5
+
+    return score
+```
+
+### C. Quy Chuẩn Xuất File:
+- Cột `Email` trong CSV: Luôn lấy `max(found_emails, key=lambda e: score_email_b2b(e, domain))`.
+- Tuyệt đối chỉ ghi **1 email duy nhất** có điểm cao nhất vào cột `Email`.
 
 ---
 
@@ -65,12 +122,21 @@ Bộ quy chuẩn này áp dụng bắt buộc cho **tất cả** các script cà
 
 ---
 
-## 7. Bóc Tách Email Đa Tầng (Website + Facebook Crawl)
-- Khi dữ liệu có trường `Website`:
-  - **Tầng 1 (Website Deep Crawl)**: Tự động quét Trang chủ và các trang con liên hệ (`/contact`, `/contacts`, `/kontaktai`, `/apie-mus`, `/careers`, `/karjera`...) để trích xuất email doanh nghiệp chính thức.
-  - **Tầng 2 (Bóc tách Link Mạng Xã Hội)**: Tự động tìm kiếm và lưu lại link Facebook Fanpage (`facebook.com/...`, `fb.com/...`) và LinkedIn.
-  - **Tầng 3 (Facebook Email Extraction)**: Trong trường hợp website không công khai email (hoặc chỉ dùng form liên hệ), tiến hành quét trang giới thiệu / About của Facebook Fanpage để tìm email dự phòng.
-  - **Tầng 4 (Ghi nhận nguồn `Email_Source`)**: Luôn có cột ghi nhận nguồn gốc email (`Website`, `Facebook`, `Directory`) và cột lưu link `Facebook_URL`.
+## 7. Bóc Tách Email Đa Tầng (Website + Facebook Crawl) & Bản Địa Hóa
+- **QUY TẮC BẮT BUỘC 1: Luôn Tham Khảo Thư Mục `crawlmail/`**:
+  - Mọi script cào/làm giàu email PHẢI tham khảo các công cụ và bộ cache có sẵn trong thư mục [`crawlmail/`](file:///d:/glc/nail%20uc/crawlmail/) (như `email_scraper.py`, `enrich_maps_*.py`, cache JSON) để tái sử dụng logic giải mã Cloudflare, regex obfuscated emails, anti-bot và tránh lặp lại bug cũ.
+- **QUY TẮC BẮT BUỘC 2: Thiết Kế Bộ Cào Riêng Theo Từng Quốc Gia Mục Tiêu**:
+  - Không dùng chung bộ đoán link tiếng Anh một cách mù quáng cho mọi quốc gia.
+  - Phải tích hợp trọn bộ từ khóa menu và danh sách subpaths bản địa (ví dụ: Slovakia/Séc là `/kontakt`, `/kontakt.html`, `/kontakty`, `/o-nas`; Đức/Áo là `/kontakt`, `/impressum`; Ba Lan là `/kontakt`, `/o-nas`; Bắc Âu là `/kontakt-oss`...). Xem chi tiết tại [`.agents/skills/crawl-mail/SKILL.md`](file:///d:/glc/nail%20uc/.agents/skills/crawl-mail/SKILL.md).
+- **QUY TẮC BẮT BUỘC 3: Đảo Chiều Ưu Tiên Link (Tuyệt Đối Không Để Đoán Mò Chèn Ép Link Thật)**:
+  - Thẻ link thực tế `<a href="...">` có trên DOM menu trang chủ chứa từ khóa liên hệ bản địa luôn có **Priority = 10** (cao nhất, duyệt đầu tiên).
+  - Danh sách đường dẫn đoán mò chỉ có **Priority = 2** làm phương án dự phòng khi trang chủ ẩn menu hoặc dùng JavaScript.
+  - Luôn chuẩn hóa khử trùng lặp trailing slash (`rstrip('/')`) và mở rộng độ sâu quét lên **8–10 subpages**.
+- **Quy trình bóc tách đa tầng**:
+  - **Tầng 1 (Website Deep Crawl)**: Quét Trang chủ và các trang con liên hệ bản địa hóa theo Priority 10.
+  - **Tầng 2 (Bóc tách Link Mạng Xã Hội)**: Tự động gom link Facebook Fanpage (`facebook.com/...`, `fb.com/...`) từ Website.
+  - **Tầng 3 (Facebook Email Extraction)**: Trong trường hợp website không công khai email (hoặc chỉ dùng form), tiến hành quét trang giới thiệu / About của Facebook Fanpage để tìm email dự phòng.
+  - **Tầng 4 (Ghi nhận nguồn `Email_Source`)**: Luôn lưu cột `Facebook_URL` và `Email_Source` (`Website` hoặc `Facebook`).
 
 ---
 
@@ -92,5 +158,13 @@ Khi tạo file batch launcher (`runners/run_*.bat`) để người dùng nhấp 
      `'aper_rekvizitai.py' is not recognized...` (do `python src\scraper...` bị cắt cụt)
      `'DỮ' is not recognized...`, `'bạ' is not recognized...`
    - **Khắc phục**: Toàn bộ nội dung trong file `.bat` (echo, title, comment, đường dẫn) **BẮT BUỘC dùng tiếng Anh hoặc tiếng Việt KHÔNG DẤU thuần ASCII**.
+
+3. **Luôn Cung Cấp Câu Lệnh Chạy Terminal Cho Người Dùng IDE**:
+   - USER chủ yếu làm việc trực tiếp bên trong IDE (Antigravity IDE / VS Code) và sử dụng Terminal tích hợp, không mở Windows File Explorer để nhấp đúp chuột.
+   - Do đó, **BẤT CỨ KHI NÀO** tạo mới hoặc đề cập đến file batch launcher (`.bat`), **BẮT BUỘC** phải cung cấp kèm theo câu lệnh chạy trực tiếp trong Terminal:
+     * **PowerShell**: `.\runners\<tên_file>.bat` hoặc `cmd /c runners\<tên_file>.bat`
+     * **Command Prompt (CMD)**: `runners\<tên_file>.bat`
+     * **Lệnh chạy Python trực tiếp tương ứng**: `.venv\Scripts\python.exe <script.py>`
+
 
 

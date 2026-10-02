@@ -28,9 +28,14 @@ Khi nhận được câu lệnh, Agent **KHÔNG HỎI NHIỀU CÂU HỎI RƯỜM
 
 3. **Tạo Launcher 1-Click**: `runners/run_enrich_maps_<dataset_name>.bat`
    - Tự động kích hoạt `.venv`, cài dependencies nếu thiếu, mở Chrome trực quan để người dùng quan sát.
+   - Tuân thủ quy chuẩn không dùng dấu tiếng Việt và không dùng `&` trần trong file `.bat`.
 
-4. **Báo cáo kết quả và sẵn sàng chạy**:
-   - Tóm tắt nhanh số lượng dòng cần enrich, các cột đã map, và cung cấp lệnh chạy ngay cho người dùng.
+4. **Báo cáo kết quả & Cung cấp lệnh chạy Terminal trực tiếp cho IDE**:
+   - Tóm tắt nhanh số lượng dòng cần enrich, các cột đã map.
+   - **Bắt buộc cung cấp câu lệnh chạy ngay trong Terminal của IDE**:
+     * PowerShell: `.\runners\run_enrich_maps_<dataset_name>.bat` hoặc `cmd /c runners\run_enrich_maps_<dataset_name>.bat`
+     * Command Prompt: `runners\run_enrich_maps_<dataset_name>.bat`
+     * Python trực tiếp: `.venv\Scripts\python.exe crawlmail\enrich_maps_<dataset_name>.py`
 
 ---
 
@@ -80,11 +85,14 @@ def is_valid_name_match(query_name, candidate_name, legal_forms=None):
 ### C. Lọc Website chính thức:
 - Loại bỏ 100% link mạng xã hội và sàn danh bạ (`facebook.com`, `instagram.com`, `linkedin.com`, `youtube.com`, `google.com`, `proff.no`, `brreg.no`, `yellowpages`, `wikipedia`...).
 
-### D. Quét & Làm sạch Email B2B:
-- Quét trang chủ và các subpage liên hệ (`/contact`, `/kontakt`, `/about`, `/om-oss`...).
-- Giải mã Cloudflare email (`data-cfemail`), regex chuẩn, loại bỏ triệt để `%20` và khoảng trắng thừa.
-- Lọc bỏ mail hệ thống/template rác (`example@...`, `sentry@...`, `wix@...`, `no-reply@...`).
-- Chấm điểm ưu tiên email liên hệ chính (`post@`, `kontakt@`, `info@`, `office@`...).
+### D. Quét & Làm sạch Email B2B (Tuân thủ skill `crawl-mail`):
+- **Tham khảo thư mục `crawlmail/`**: Tái sử dụng các module bóc tách, regex obfuscation và giải mã Cloudflare có sẵn.
+- **Bản địa hóa theo quốc gia**: Sử dụng đúng từ khóa menu và subpaths bản địa theo quy chuẩn tại [`.agents/skills/crawl-mail/SKILL.md`](file:///d:/glc/nail%20uc/.agents/skills/crawl-mail/SKILL.md) (bao gồm cả định dạng tĩnh `.html`, `.php`).
+- **Ưu tiên thẻ `<a>` DOM thực tế (Priority 10)**: Không bao giờ để link đoán mò chèn ép các link thật trên menu trang chủ.
+- **Bóc tách đa tầng**: Giải mã Cloudflare email (`data-cfemail`), regex chuẩn, loại bỏ triệt để `%20` và khoảng trắng thừa, fallback Facebook Fanpage.
+- **Lọc bỏ mail hệ thống/template rác** (`example@...`, `sentry@...`, `wix@...`, `no-reply@...`).
+- **Chấm điểm ưu tiên email liên hệ chính** (`post@`, `kontakt@`, `info@`, `office@`...).
+
 
 ### E. Vận hành an toàn & Trực quan:
 - **`headless=False`**: Luôn mở Chrome trực quan để người dùng theo dõi tiến độ thực tế.
