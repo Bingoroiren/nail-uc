@@ -20,7 +20,7 @@ ALLOWED_CATEGORIES = [
 
 # Output settings
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUTPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "auto_slovakia.csv")
+OUTPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "SK_AUTO_GMAP_0RAW.csv")
 
 # Playwright Browser Settings
 HEADLESS = False  # Set to True to run the browser hidden in the background

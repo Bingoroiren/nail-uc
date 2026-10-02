@@ -57,6 +57,7 @@ Toàn bộ các quy trình phức tạp đã được module hóa thành các Sk
      * Email kỹ thuật / hỗ trợ chung / kế toán: `support@`, `admin@`, `servis@`, `faktury@` (+5đ)
      * Email rác / template / crawler trap: 0 điểm (loại bỏ tuyệt đối).
    - Đầu ra cột `Email` trong tệp CSV Cold Mail chỉ được lưu **DUY NHẤT 1 EMAIL TỐI ƯU NHẤT**.
+   - **Luôn đẩy công ty có Email lên đầu danh sách**: Mọi script chuẩn hóa/format đầu ra (`_formatted.csv`, `_ColdMail.csv`) BẮT BUỘC phân loại `with_email + without_email` để 100% doanh nghiệp có email nằm ngay các dòng đầu tiên, không để dòng trống mail xen kẽ phía trên.
 4. **Bật Trình Duyệt Thực Tế (`headless=False`)**: Viewport tối thiểu `1280x800` để USER quan sát trực quan tiến độ và dễ dàng xử lý Captcha khi có chuông báo `\a`.
 5. **Lưu Tăng Dần (Incremental Auto-Save) & Checkpoint**: Ghi ngay vào CSV sau mỗi vài dòng cào được (`mode='a'` kèm `flush()`) và lưu cache JSON để hỗ trợ Resume 100%, không cào lại từ đầu.
 6. **Lọc Trùng Lặp & Loại Trừ Domain Rác**: Lọc bỏ các mạng xã hội và thư bạ (`facebook`, `instagram`, `linkedin`, `google.com/maps`, `yellowpages`, `proff.no`...).
@@ -73,4 +74,13 @@ Toàn bộ các quy trình phức tạp đã được module hóa thành các Sk
      * **PowerShell**: `.\runners\<file>.bat` hoặc `cmd /c runners\<file>.bat`
      * **CMD**: `runners\<file>.bat`
      * **Lệnh Python trực tiếp**: `.venv\Scripts\python.exe <script.py>`
+10. **Quy Chuẩn Đặt Tên File 17 Ký Tự Cố Định (`[CC]_[IND4]_[SRC4]_[STG4].csv`)**:
+    - Để tránh bão hòa file và nhận diện ngay trong 1 giây, mọi file dữ liệu bắt buộc tuân thủ cấu trúc 4 khối cố định (độ dài đúng 17 ký tự):
+      * **`CC` (2 ký tự Quốc gia)**: `SK` (Slovakia), `AU` (Úc), `NO` (Na Uy), `FI` (Phần Lan), `PL` (Ba Lan), `DE` (Đức), `TW` (Đài Loan)...
+      * **`IND4` (4 ký tự Ngành)**: `AUTO` (Ô tô), `AGCY` (Agency môi giới), `MANU` (Sản xuất), `HOTL` (Khách sạn), `FARM` (Nông trại), `MEAT` (Thực phẩm), `CNST` (Xây dựng), `PRIN` (Principal DMW).
+      * **`SRC4` (4 ký tự Nguồn cào)**: `GMAP` (Google Maps), `WEBD` (Web danh bạ do user cấp link), `ZLAT` (Zlaté Stránky), `DMWP` (DMW Philippines), `ENRC` (Làm giàu đa nguồn).
+      * **`STG4` (4 ký tự Giai đoạn)**:
+        + `0RAW`: File thô vừa cào về (chưa bóc tách email, chưa format).
+        + `1ENR`: Đã quét và làm giàu Email đầy đủ qua website/mạng xã hội.
+        + `2COL`: File chuẩn Cold Mail 20 cột, đẩy 100% email lên đầu, nháy đơn `'` SĐT, sẵn sàng gửi ngay!
 

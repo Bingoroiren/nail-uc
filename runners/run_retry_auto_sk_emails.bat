@@ -4,8 +4,8 @@ cd /d "%~dp0.."
 
 echo ======================================================
 echo    RETRY SCRAPING EMPTY EMAILS - SLOVAKIA AUTO
-echo    Input: data/raw/auto_slovakia.csv
-echo    Output: data/formatted/auto_slovakia_with_emails.csv
+echo    Input: data/raw/SK_AUTO_GMAP_0RAW.csv
+echo    Output: data/formatted/SK_AUTO_GMAP_1ENR.csv
 echo    Mode: --retry-empty (Only scan companies with missing emails)
 echo ======================================================
 
@@ -18,7 +18,7 @@ exit /b
 call .venv\Scripts\activate.bat
 
 echo [*] Launching Email Scraper with --retry-empty...
-python -u crawlmail/email_scraper.py data/raw/auto_slovakia.csv data/formatted/auto_slovakia_with_emails.csv --retry-empty
+python -u crawlmail/email_scraper.py data/raw/SK_AUTO_GMAP_0RAW.csv data/formatted/SK_AUTO_GMAP_1ENR.csv --retry-empty
 if errorlevel 1 goto RunFailed
 
 echo.
@@ -29,7 +29,7 @@ if errorlevel 1 goto RunFailed
 echo.
 echo ======================================================
 echo    RETRY COMPLETE!
-echo    Final File: data/formatted/auto_slovakia_with_emails_formatted.csv
+echo    Final File: data/formatted/SK_AUTO_GMAP_2COL.csv and SK_AUTO_GMAP_2COL.csv
 echo ======================================================
 pause
 goto End

@@ -3,8 +3,8 @@ import os
 import shutil
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "auto_slovakia.csv")
-BACKUP_CSV = os.path.join(ROOT_DIR, "data", "raw", "auto_slovakia_backup.csv")
+INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "SK_AUTO_GMAP_0RAW.csv")
+BACKUP_CSV = os.path.join(ROOT_DIR, "data", "raw", "SK_AUTO_GMAP_0RAW_backup.csv")
 
 ALLOWED_CATEGORIES = {
     "Továreň na automobily",

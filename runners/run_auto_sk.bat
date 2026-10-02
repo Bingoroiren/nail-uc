@@ -43,7 +43,7 @@ echo.
 echo ======================================================
 echo STEP 3: Launching Deep Email Scraper for Slovakia Auto...
 echo ======================================================
-python -u crawlmail/email_scraper.py data/raw/auto_slovakia.csv data/formatted/auto_slovakia_with_emails.csv
+python -u crawlmail/email_scraper.py data/raw/SK_AUTO_GMAP_0RAW.csv data/formatted/SK_AUTO_GMAP_1ENR.csv
 if errorlevel 1 goto RunFailed
 
 echo.
@@ -56,7 +56,7 @@ if errorlevel 1 goto RunFailed
 echo.
 echo ======================================================
 echo    SLOVAKIA AUTO SCRAPING AND ENRICHMENT COMPLETE!
-echo    Final File: data/formatted/auto_slovakia_with_emails_formatted.csv
+echo    Final File: data/formatted/SK_AUTO_GMAP_2COL.csv and SK_AUTO_GMAP_2COL.csv
 echo ======================================================
 pause
 goto End

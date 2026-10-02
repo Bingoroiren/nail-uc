@@ -3,11 +3,20 @@ import os
 import shutil
 import re
 import urllib.parse
+import sys
+
+# Đảm bảo UTF-8 cho Windows Console
+if sys.platform.startswith('win'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', line_buffering=True)
+        sys.stderr.reconfigure(encoding='utf-8', line_buffering=True)
+    except Exception:
+        pass
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INPUT_CSV = os.path.join(ROOT_DIR, "data", "formatted", "auto_slovakia_with_emails.csv")
-BACKUP_CSV = os.path.join(ROOT_DIR, "data", "formatted", "auto_slovakia_with_emails_backup.csv")
-FORMATTED_CSV = os.path.join(ROOT_DIR, "data", "formatted", "auto_slovakia_with_emails_formatted.csv")
+INPUT_CSV = os.path.join(ROOT_DIR, "data", "formatted", "SK_AUTO_GMAP_1ENR.csv")
+BACKUP_CSV = os.path.join(ROOT_DIR, "data", "formatted", "SK_AUTO_GMAP_1ENR_backup.csv")
+FORMATTED_CSV = os.path.join(ROOT_DIR, "data", "formatted", "SK_AUTO_GMAP_2COL.csv")
 
 GENERIC_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 
@@ -106,15 +115,25 @@ def format_data():
 
         cleaned_rows.append(r)
 
-    # Deduplicate by Phone or Website
+    # Deduplicate by (Name, Address)
     seen_keys = set()
-    final_rows = []
+    deduped_rows = []
     for r in cleaned_rows:
         key = (r.get("Name", "").lower(), r.get("Address", "").lower())
         if key in seen_keys:
             continue
         seen_keys.add(key)
-        final_rows.append(r)
+        deduped_rows.append(r)
+
+    # Quy chuẩn Workspace: Luôn đẩy toàn bộ công ty CÓ EMAIL lên đầu danh sách
+    with_email = [r for r in deduped_rows if r.get("Email", "").strip()]
+    without_email = [r for r in deduped_rows if not r.get("Email", "").strip()]
+    final_rows = with_email + without_email
+
+    print(f"[*] Phân loại và sắp xếp dữ liệu:")
+    print(f"    - Có Email (Đẩy lên đầu): {len(with_email):,} công ty")
+    print(f"    - Không có Email: {len(without_email):,} công ty")
+    print(f"    - Tổng cộng: {len(final_rows):,} công ty")
 
     os.makedirs(os.path.dirname(FORMATTED_CSV), exist_ok=True)
     with open(FORMATTED_CSV, mode="w", encoding="utf-8-sig", newline="") as f:
@@ -123,6 +142,11 @@ def format_data():
         writer.writerows(final_rows)
 
     print(f"[SUCCESS] Formatted {len(final_rows)} companies saved to {FORMATTED_CSV}")
+
+    # Đồng bộ sang SK_AUTO_GMAP_2COL.csv ở thư mục gốc
+    root_coldmail = os.path.join(ROOT_DIR, "SK_AUTO_GMAP_2COL.csv")
+    shutil.copy2(FORMATTED_CSV, root_coldmail)
+    print(f"[SUCCESS] Đã đồng bộ sang {root_coldmail}")
 
 if __name__ == "__main__":
     format_data()

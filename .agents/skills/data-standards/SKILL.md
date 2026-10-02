@@ -92,9 +92,17 @@ def score_email_b2b(email, website_domain=""):
     return score
 ```
 
-### C. Quy Chuẩn Xuất File:
+### C. Quy Chuẩn Xuất File & Sắp Xếp:
 - Cột `Email` trong CSV: Luôn lấy `max(found_emails, key=lambda e: score_email_b2b(e, domain))`.
 - Tuyệt đối chỉ ghi **1 email duy nhất** có điểm cao nhất vào cột `Email`.
+- **BẮT BUỘC ĐẨY CÔNG TY CÓ EMAIL LÊN ĐẦU (SORT WITH_EMAIL FIRST)**:
+  Mọi script format / chuẩn hóa dữ liệu đầu ra (kể cả file cào maps hay file Cold Mail) **LUÔN LUÔN** tách và đẩy 100% công ty có Email lên trước, các công ty không có Email ra sau:
+  ```python
+  with_email = [r for r in rows if r.get('Email', '').strip()]
+  without_email = [r for r in rows if not r.get('Email', '').strip()]
+  sorted_rows = with_email + without_email
+  ```
+  Mục đích: Giúp USER và hệ thống gửi Cold Mail ngay lập tức xử lý các lead nóng ở các dòng đầu tiên, không phải cuộn tìm các dòng có mail.
 
 ---
 
@@ -165,6 +173,40 @@ Khi tạo file batch launcher (`runners/run_*.bat`) để người dùng nhấp 
      * **PowerShell**: `.\runners\<tên_file>.bat` hoặc `cmd /c runners\<tên_file>.bat`
      * **Command Prompt (CMD)**: `runners\<tên_file>.bat`
      * **Lệnh chạy Python trực tiếp tương ứng**: `.venv\Scripts\python.exe <script.py>`
+
+---
+
+## 9. Quy Chuẩn Đặt Tên File Đồng Bộ (Standardized 17-Char File Naming)
+
+> **MỤC ĐÍCH**: Khi cào số lượng lớn data hàng ngày từ nhiều nguồn (Google Maps vs Web danh bạ do người dùng cấp), tên file phải có **độ dài cố định bằng nhau (17 ký tự)**, nhìn vào mã số và chữ là nhận biết ngay lập tức: **Quốc gia nào - Ngành gì - Nền tảng nào - Trạng thái file là Raw, Đã quét mail hay Chuẩn Cold Mail**.
+
+### Cấu Trúc Khung 4 Khối Cố Định: `[CC]_[IND4]_[SRC4]_[STG4].csv`
+
+```text
+ ┌── [CC]: Mã Quốc gia (2 ký tự ISO)
+ │    ┌── [IND4]: Mã Ngành / Đối tượng (4 ký tự)
+ │    │    ┌── [SRC4]: Nền tảng / Nguồn cào (4 ký tự)
+ │    │    │    ┌── [STG4]: Giai đoạn / Trạng thái file (4 ký tự)
+ │    │    │    │
+[SK]_[AUTO]_[GMAP]_[2COL].csv   <-- Độ dài chuẩn 17 ký tự (không tính .csv)
+```
+
+### Bảng Mã Quy Chiếu Toàn Diện:
+
+| Khối | Ý Nghĩa | Độ Dài | Các Mã Quy Chuẩn |
+| :--- | :--- | :--- | :--- |
+| **`CC`** | **Quốc Gia** (ISO 3166-1 alpha-2) | 2 ký tự | `SK` (Slovakia), `AU` (Úc), `NO` (Na Uy), `FI` (Phần Lan), `PL` (Ba Lan), `DE` (Đức), `GR` (Hy Lạp), `PT` (Bồ Đào Nha), `TW` (Đài Loan), `KR` (Hàn Quốc), `CA` (Canada), `AL` (Albania)... |
+| **`IND4`** | **Ngành Nghề / Đối Tượng** | 4 ký tự | `AUTO`: Ô tô, gara, phụ tùng, xe cơ giới<br>`AGCY`: Agency, môi giới việc làm, lao động<br>`MANU`: Sản xuất chế tạo, nhà máy, xưởng cơ khí<br>`HOTL`: Khách sạn, resort, lưu trú<br>`FARM`: Nông nghiệp, nông trại, chăn nuôi<br>`MEAT`: Chế biến thực phẩm, thịt, thủy hải sản<br>`CNST`: Xây dựng, hoàn thiện công trình<br>`PRIN`: Principal, chủ sử dụng nước ngoài (DMW Philippines)<br>`LAWY`: Luật sư, dịch vụ tư vấn pháp lý di trú |
+| **`SRC4`** | **Nguồn / Nền Tảng Cào** | 4 ký tự | `GMAP`: Cào từ Google Maps<br>`WEBD`: Cào từ Web người dùng cấp link / Web danh bạ chung<br>`ZLAT`: Cào từ Zlaté Stránky (Slovakia)<br>`DMWP`: Cào từ DMW Philippines (Job orders)<br>`REKV`: Cào từ Rekvizitai (Litva)<br>`PROF`: Cào từ Proff (Na Uy / Đan Mạch)<br>`ENRC`: Dữ liệu có sẵn mang đi làm giàu qua nhiều nguồn |
+| **`STG4`** | **Giai Đoạn / Trạng Thái** | 4 ký tự | `0RAW`: File thô ban đầu vừa cào về (chưa bóc tách email, chưa format)<br>`1ENR`: Đã quét và làm giàu Email đầy đủ qua website/mạng xã hội<br>`2COL`: File chuẩn hóa Cold Mail 20 cột, đã đẩy 100% email lên đầu, nháy đơn `'` SĐT, sẵn sàng chạy chiến dịch! |
+
+### Ví Dụ Chuyển Đổi Thực Tế:
+* File cào Google Maps ô tô Slovakia (chuẩn Cold Mail): `autoslovamap.csv` ➔ **`SK_AUTO_GMAP_2COL.csv`**
+* File cào Web Zlaté Stránky ô tô Slovakia (chuẩn Cold Mail): `AutoSlovakia_ColdMail.csv` ➔ **`SK_AUTO_ZLAT_2COL.csv`**
+* File cào Web DMW Job Orders Principal Slovakia (chuẩn Cold Mail): `slovakiaphilip_ColdMail.csv` ➔ **`SK_PRIN_DMWP_2COL.csv`**
+* File cào Web danh bạ Agency Slovakia (chuẩn Cold Mail): `môi giới Slovakia...csv` ➔ **`SK_AGCY_WEBD_2COL.csv`**
+* File thô vừa cào Maps chưa quét mail: `auto_slovakia.csv` ➔ **`SK_AUTO_GMAP_0RAW.csv`**
+* File đã quét mail xong đang đợi format: `auto_slovakia_with_emails.csv` ➔ **`SK_AUTO_GMAP_1ENR.csv`**
 
 
 
