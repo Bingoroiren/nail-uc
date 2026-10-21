@@ -58,6 +58,13 @@ BLACKLIST_DOMAINS = [
     'cvmarket.lt', 'rekv.lt', 'proton.me', 'lovejob.lt'
 ]
 
+# Danh sách công ty loại trừ vĩnh viễn khỏi danh sách kết nối
+EXCLUDED_COMPANIES = [
+    'scandi standard', 'scandi-standard', 'scandi standart',
+    'biliarta',
+    'daigre'
+]
+
 JUNK_EMAIL_DOMAINS = set(BLACKLIST_DOMAINS) | {
     'example.com', 'domain.com', 'yourdomain.com', 'yourcompany.com',
     'company.com', 'website.com', 'site.com', 'pavyzdys.lt', 'imone.lt', 'email.com', 'mail.com'
@@ -353,6 +360,13 @@ def crawl_site_for_emails(web_url):
 def save_and_reorder(df):
     """Save progress and generate standard 2COL Cold Mail CSV."""
     df_out = df.copy()
+    if 'Công ty' in df_out.columns:
+        df_out = df_out[
+            ~df_out['Công ty'].astype(str).str.lower().apply(
+                lambda c: any(ex in unicodedata.normalize('NFKD', str(c)).lower() for ex in EXCLUDED_COMPANIES)
+            )
+        ].reset_index(drop=True)
+
     df_out['SĐT'] = df_out['SĐT'].apply(clean_phone_lt)
 
     # Separate with email and without email (100% emails on top)

@@ -208,5 +208,41 @@ Khi tạo file batch launcher (`runners/run_*.bat`) để người dùng nhấp 
 * File thô vừa cào Maps chưa quét mail: `auto_slovakia.csv` ➔ **`SK_AUTO_GMAP_0RAW.csv`**
 * File đã quét mail xong đang đợi format: `auto_slovakia_with_emails.csv` ➔ **`SK_AUTO_GMAP_1ENR.csv`**
 
+---
+
+## 10. Danh Sách Đen Doanh Nghiệp Cố Định (Permanent Company Blacklist / Hard Exclusion)
+
+> **QUY ĐỊNH BẮT BUỘC**: Tuyệt đối **KHÔNG thu thập, làm giàu hoặc lưu trữ** thông tin của các doanh nghiệp thuộc danh sách đen cố định dưới đây trong bất kỳ bộ cào hoặc script nào (kể cả cào mới hay làm giàu file cũ). Không cần người dùng phải nhắc lại trong các lần prompt sau.
+
+### Danh Sách Doanh Nghiệp Cấm Thu Thập:
+1. **Scandi Standard Baltics** (bao gồm: `Scandi Standard`, `Scandi -Standard Baltics`, `Scandi Standart - Baltics, UAB`, `Scandi Standard - Baltics, UAB`...)
+2. **UAB “Biliarta”** (bao gồm: `Biliarta, UAB`, `UAB Biliarta`, `Biliarta`...)
+3. **UAB Daigre / Daigrė, UAB** (bao gồm: `Daigre, UAB`, `Daigrė, UAB`, `UAB Daigre`, `Daigre`...)
+
+### Cơ Chế Lọc Trong Mã Nguồn:
+Mọi script cào (`crawl_*.py`), làm giàu Maps (`enrich_maps_*.py`) và chuẩn hóa xuất file (`consolidate_*.py`, format Cold Mail) **bắt buộc** nhúng bộ lọc sau:
+
+```python
+import unicodedata
+
+PERMANENT_BLACKLIST_COMPANIES = [
+    'scandi standard', 'scandi-standard', 'scandi standart',
+    'biliarta',
+    'daigre'
+]
+
+def is_blacklisted_company(name):
+    if not name or not isinstance(name, str):
+        return False
+    # Khử dấu Unicode NFKD để bắt trúng cả Daigrė -> daigre
+    n = unicodedata.normalize('NFKD', str(name)).lower()
+    n_clean = ''.join(c for c in n if not unicodedata.combining(c))
+    return any(b in n_clean for b in PERMANENT_BLACKLIST_COMPANIES)
+```
+
+- **Khi đọc dữ liệu ban đầu**: Loại bỏ ngay các dòng vi phạm bằng `df = df[~df['Công ty'].apply(is_blacklisted_company)].reset_index(drop=True)`.
+- **Khi làm giàu Google Maps / Web**: Bỏ qua ngay lập tức, không gửi request tìm kiếm.
+- **Khi xuất file `_0RAW.csv`, `_1ENR.csv`, `_2COL.csv`**: Lọc sạch trước khi lưu.
+
 
 
