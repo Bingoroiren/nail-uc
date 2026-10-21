@@ -71,6 +71,11 @@ BLACKLIST_DOMAINS = [
     'cvmarket.lt', 'rekv.lt', 'proton.me', 'lovejob.lt', 'tinklalapiai.lt'
 ]
 
+# Danh sách công ty loại trừ khỏi danh sách kết nối / tuyển dụng
+EXCLUDED_COMPANIES = [
+    'biliarta'
+]
+
 JUNK_EMAIL_PARTS = [
     'sentry', 'wixpress', 'wordpress', 'example', 'domain', 'youremail',
     'your-email', 'someone', 'john.doe', 'user@domain', 'name@domain',
@@ -387,6 +392,14 @@ def save_and_reorder_master(df):
     if 'SĐT' in df_out.columns:
         df_out['SĐT'] = df_out['SĐT'].apply(clean_phone_lt)
 
+    # Loại bỏ triệt để các công ty thuộc EXCLUDED_COMPANIES
+    if 'Công ty' in df_out.columns:
+        df_out = df_out[
+            ~df_out['Công ty'].astype(str).str.lower().apply(
+                lambda c: any(ex in normalize_text_core(c) or ex in c.lower() for ex in EXCLUDED_COMPANIES)
+            )
+        ].reset_index(drop=True)
+
     # Phân loại có email và không có email
     has_em = df_out[df_out['Email'].notna() & (df_out['Email'].astype(str).str.strip() != '') & (df_out['Email'].astype(str).str.strip() != 'nan')].copy()
     no_em = df_out[df_out['Email'].isna() | (df_out['Email'].astype(str).str.strip() == '') | (df_out['Email'].astype(str).str.strip() == 'nan')].copy()
@@ -424,6 +437,12 @@ async def run_enrichment(headless=False, limit=0):
         return
 
     df = pd.read_csv(TARGET_CSV_ROOT, encoding='utf-8-sig', dtype=str).fillna('')
+    if 'Công ty' in df.columns:
+        df = df[
+            ~df['Công ty'].astype(str).str.lower().apply(
+                lambda c: any(ex in normalize_text_core(c) or ex in c.lower() for ex in EXCLUDED_COMPANIES)
+            )
+        ].reset_index(drop=True)
     total_companies = len(df)
 
     cache = {}
