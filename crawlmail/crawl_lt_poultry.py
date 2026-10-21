@@ -78,7 +78,7 @@ def clean_phone_lt(raw):
         return ""
     if p.startswith("8") and len(p) == 9:
         p = "+370" + p[1:]
-    elif p.startswith("0") and len(p) == 10:
+    elif p.startswith("0") and (len(p) == 9 or len(p) == 10):
         p = "+370" + p[1:]
     elif not p.startswith("+") and len(p) == 8:
         p = "+370" + p
@@ -106,18 +106,24 @@ def decode_cf(hex_str):
 # ----------------------------------------------------------------------
 # XỬ LÝ CAPTCHA & SECURITY CHECKPOINTS
 # ----------------------------------------------------------------------
-async def handle_security_challenges(page, context_label=""):
+async def handle_security_challenges(page, context_label="", max_wait_seconds=60):
     """
     Tự động kiểm tra và chờ người dùng giải quyết Captcha thủ công nếu có:
     - Cloudflare Turnstile / Just a moment
     - Vercel Security Checkpoint
     - Rekvizitai 3-char code verification
     """
+    start_t = time.time()
     alerted = False
     while True:
         try:
             if page.is_closed():
                 return False
+            if time.time() - start_t > max_wait_seconds:
+                if alerted:
+                    print(f"[!] [TIMEOUT] Qua thoi gian cho ({max_wait_seconds}s) tai {context_label}. Bo qua checkpoint.")
+                return False
+
             title = await page.title()
             content = await page.content()
             
@@ -264,13 +270,15 @@ async def crawl_infolt(page, checklist, seen_keys, raw_file_writer, csv_file):
             p_content = await page.content()
             p_soup = BeautifulSoup(p_content, "html.parser")
             
-            # Lay danh sach link chi tiet cong ty
+            # Lay danh sach link chi tiet cong ty (URL tren info.lt co dang /imones/Ten-Cong-Ty/id)
             firm_links = []
             for a in p_soup.find_all("a", href=True):
                 href = a["href"]
-                if "/imone/" in href and href not in firm_links:
-                    if not any(k in href for k in ["#", "javascript", "skelbimai"]):
-                        firm_links.append(urllib.parse.urljoin("https://www.info.lt", href))
+                if "/imones/" in href:
+                    if not any(k in href for k in ["/mano-imones", "/imonems/", "/shop", "/sodra", "#", "javascript", "skelbimai"]):
+                        full_u = urllib.parse.urljoin("https://www.info.lt", href)
+                        if full_u not in firm_links:
+                            firm_links.append(full_u)
             
             print(f"    -> Tim thay {len(firm_links)} doanh nghiep tren trang nay.")
             
@@ -278,7 +286,7 @@ async def crawl_infolt(page, checklist, seen_keys, raw_file_writer, csv_file):
                 try:
                     await page.goto(f_url, wait_until="domcontentloaded", timeout=20000)
                     await handle_security_challenges(page, "info.lt detail")
-                    await asyncio.sleep(1.0)
+                    await asyncio.sleep(0.8)
                     
                     d_content = await page.content()
                     d_soup = BeautifulSoup(d_content, "html.parser")
@@ -297,55 +305,90 @@ async def crawl_infolt(page, checklist, seen_keys, raw_file_writer, csv_file):
                     if key in seen_keys:
                         continue
                     
-                    # 2. Email XOR
+                    full_text = d_soup.get_text(" ", strip=True)
+
+                    # 2. Email (Uu tien XOR data-text-ob / data-link-ob, fallback mailto:)
                     email = ""
                     em_el = d_soup.select_one("[data-text-ob], [data-link-ob]")
                     if em_el:
                         raw_ob = em_el.get("data-text-ob") or em_el.get("data-link-ob")
                         email = decode_infolt_email(raw_ob)
-                    
-                    # 3. Thong tin khac
-                    full_text = d_soup.get_text(" ", strip=True)
-                    
+                    if not email:
+                        for a in d_soup.find_all("a", href=True):
+                            if a["href"].startswith("mailto:"):
+                                email = a["href"].replace("mailto:", "").split("?")[0].strip().lower()
+                                break
+                    if not email:
+                        m_em = re.search(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", full_text)
+                        if m_em and not any(ex in m_em.group(0).lower() for ex in ["info.lt", "saulesspektras"]):
+                            email = m_em.group(0).lower()
+
+                    # 3. IČO
                     ico = ""
                     m_ico = re.search(r"Įmonės kodas\s*[:\s]*(\d{7,10})", full_text)
                     if m_ico:
                         ico = m_ico.group(1).strip()
                         
+                    # 4. Director
                     director = ""
                     m_dir = re.search(r"(?:Direktorius|Vadovas|Generalinis direktorius)\s*[:\s]*([A-ZĄČĘĖĮŠŲŪŽ][a-ząčęėįšųūž]+\s+[A-ZĄČĘĖĮŠŲŪŽ][a-ząčęėįšųūž]+)", full_text)
                     if m_dir:
                         director = m_dir.group(1).strip()
                         
+                    # 5. Employees
                     employees = ""
                     m_emp = re.search(r"Darbuotojai\s*[:\s]*(\d+\s*darbuotojai?[^\n,]*)", full_text, re.IGNORECASE)
                     if m_emp:
                         employees = m_emp.group(1).strip()
                         
+                    # 6. Phone (Tel a hoac text Telefonas / Mob.)
                     phone = ""
-                    tel_a = d_soup.select_one('a[href^="tel:"]')
+                    tel_a = d_soup.find("a", href=lambda h: h and h.startswith("tel:"))
                     if tel_a:
-                        phone = clean_phone_lt(tel_a.get_text(strip=True))
+                        phone = clean_phone_lt(tel_a.get_text(strip=True) or tel_a["href"])
+                    if not phone:
+                        m_tel = re.search(r"(?:Telefonas|Mob\.\s*telefonas|Tel\.)\s*[:\s]*([+0-9\s()/-]{7,25})", full_text, re.I)
+                        if m_tel:
+                            phone = clean_phone_lt(m_tel.group(1))
                         
+                    # 7. Website chinh thuc (Loc bo mang xa hoi & platform noi bo)
                     web = ""
                     for a in d_soup.find_all("a", href=True):
                         h = a["href"]
                         t = a.get_text(strip=True).lower()
-                        if h.startswith("http") and not any(x in h for x in ["info.lt", "facebook", "linkedin", "waze", "google.com"]):
-                            if "tinklalapis" in t or "." in t:
+                        if h.startswith("http") and not any(x in h.lower() for x in [
+                            "info.lt", "saulesspektras.lt", "facebook", "linkedin", "waze", "google.com",
+                            "apple.com", "maps", "statyba.lt", "medicina.lt", "auto.lt", "turizmas.lt", "balticexport.com", "zl.lv"
+                        ]):
+                            if "tinklalapis" in t or "." in t or "www." in h:
                                 web = h
                                 break
                                 
+                    # 8. Dia chi & Thanh pho
                     addr = ""
                     city = ""
-                    addr_el = d_soup.select_one('[itemprop="streetAddress"]')
-                    loc_el = d_soup.select_one('[itemprop="addressLocality"]')
-                    if addr_el and addr_el.get_text(strip=True):
-                        addr = addr_el.get_text(strip=True)
-                    if loc_el and loc_el.get_text(strip=True):
-                        city = loc_el.get_text(strip=True)
-                    if city and city not in addr:
-                        addr = f"{addr}, {city}" if addr else city
+                    h1_div = d_soup.find("div", class_=lambda c: c and "h1_div" in c)
+                    if h1_div:
+                        for child in h1_div.find_all(["div", "p"]):
+                            txt = child.get_text(strip=True)
+                            if txt and txt != comp_name and (any(k in txt for k in ["g.", "pl.", "pr.", "al.", "kel.", "k.", "Raj.", "raj."]) or any(c.isdigit() for c in txt)):
+                                addr = txt
+                                break
+                    if not addr:
+                        addr_el = d_soup.select_one('[itemprop="streetAddress"]')
+                        if addr_el and addr_el.get_text(strip=True):
+                            addr = addr_el.get_text(strip=True)
+                    if not addr:
+                        m_addr = re.search(r"Adresas\s*[:\s]*([^,\n]+(?:g\.|pl\.|al\.|k\.|pr\.)[^,\n]+,\s*[0-9]{4,5}\s*[^,\n]+)", full_text, re.I)
+                        if m_addr:
+                            addr = m_addr.group(1).strip()
+
+                    # Lam sach danh gia / atsiliepimai o cuoi dia chi
+                    if addr:
+                        addr = re.sub(r"\d*\s*atsiliepim.*$", "", addr, flags=re.I).strip()
+                        parts = [p.strip() for p in addr.split(",") if p.strip()]
+                        if len(parts) >= 2:
+                            city = re.sub(r"^\d{4,5}\s*", "", parts[-1]).strip()
 
                     row = {
                         "No.": len(seen_keys) + 1,
