@@ -83,4 +83,8 @@ Toàn bộ các quy trình phức tạp đã được module hóa thành các Sk
         + `0RAW`: File thô vừa cào về (chưa bóc tách email, chưa format).
         + `1ENR`: Đã quét và làm giàu Email đầy đủ qua website/mạng xã hội.
         + `2COL`: File chuẩn Cold Mail 20 cột, đẩy 100% email lên đầu, nháy đơn `'` SĐT, sẵn sàng gửi ngay!
-
+11. **So Khớp Tên Doanh Nghiệp Thông Minh & Nghiêm Ngặt (Smart & Strict Name Matching)**:
+    - Khi làm giàu dữ liệu qua Google Maps hoặc danh bạ, **BẮT BUỘC** áp dụng chuẩn hóa:
+      * **Khử dấu Unicode NFKD bản địa đa quốc gia**: Đưa `ė` $\rightarrow$ `e`, `ų` $\rightarrow$ `u`, `š` $\rightarrow$ `s`, `ž` $\rightarrow$ `z`, `á` $\rightarrow$ `a`, `ä` $\rightarrow$ `a`, `ö` $\rightarrow$ `o`, `ü` $\rightarrow$ `u`, `ł` $\rightarrow$ `l`, `ą` $\rightarrow$ `a`... để khớp hoàn toàn với tên địa điểm ASCII không dấu trên Google Maps.
+      * **Làm sạch triệt để dấu câu sau loại hình**: Khi loại bỏ legal forms (`UAB`, `MB`, `s.r.o.`, `a.s.`, `GmbH`...), cắt sạch dấu phẩy `,`, dấu chấm `.`, gạch nối ở đầu/cuối chuỗi để tránh lệch chuỗi so khớp.
+      * **Tách phần dịch tiếng Anh tự động trong ngoặc**: Tự động bóc tách phần chú thích/dịch tiếng Anh mà Google Maps tự chèn vào tên trong ngoặc `(...)` hoặc `[...]` (ví dụ `(Meat menu)`, `(Bakery)`...).

@@ -1,0 +1,30 @@
+================================================================================
+ BÁO CÁO ĐỐI CHIẾU VÀ LỌC TRÙNG CSDL MÔI GIỚI LAO ĐỘNG SLOVAKIA
+================================================================================
+Thời gian thực hiện : 2026-10-16
+1. Thống kê nguồn dữ liệu ban đầu:
+   - ADZC (Dočasné zamestnávanie ÚPSVaR)      : 383 dòng
+   - UDZC (Sprostredkovanie zamestnania ÚPSVaR): 3,061 dòng
+   - D&B (Dun & Bradstreet Slovakia)          : 1,000 dòng
+   - GreenPages Slovakia                      : 45 dòng
+   - PersonalneAgentury.sk                    : 14 dòng
+   -----------------------------------------------------------------------------
+   TỔNG SỐ BẢN GHI BAN ĐẦU                    : 4,503 dòng
+
+2. Kết quả đối chiếu & Lọc trùng lặp:
+   - Số doanh nghiệp bị trùng lặp đã gộp      : 658 lượt
+   - Trùng theo Domain Website chính thức      : 232 lượt
+   - Trùng theo Tên công ty cốt lõi (NFKD)    : 426 lượt
+   -----------------------------------------------------------------------------
+   TỔNG SỐ CÔNG TY DUY NHẤT SAU GỘP (MASTER)  : 3,845 doanh nghiệp
+
+3. Chất lượng dữ liệu liên hệ:
+   - Số công ty CÓ EMAIL (Đẩy 100% lên đầu)   : 715 (18.6%)
+   - Số công ty có SĐT (Chuẩn hóa nháy đơn ')  : 771
+   - Số công ty có Website                    : 512
+   - Số công ty có Tên Giám Đốc/Người đại diện: 959
+
+4. File xuất thành phẩm:
+   - CSDL Chi Tiết Master : D:\glc\nail uc\csdl_sk_agcy\SK_AGCY_ALL_1ENR.csv
+   - Cold Mail 20 Cột     : D:\glc\nail uc\csdl_sk_agcy\SK_AGCY_ALL_2COL.csv
+================================================================================
