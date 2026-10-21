@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-cd /d "%~dp0"
+cd /d "%~dp0.."
 title RESET CACHE VA CVR ENRICH PROFF.DK QUA VIRK
 echo ======================================================================
 echo    RESET TOAN BO CACHE VA CAO LAI TU DAU CHO PROFF.DK QUA VIRK

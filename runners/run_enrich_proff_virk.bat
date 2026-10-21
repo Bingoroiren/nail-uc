@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-cd /d "%~dp0"
+cd /d "%~dp0.."
 title Enrich Proff.dk qua DataCVR.virk.dk (Loc trung va Lay Email Chinh Thuc)
 echo ======================================================================
 echo    BO LOC TRUNG THEO CVR VA ENRICH EMAIL TU DATACVR.VIRK.DK

@@ -27,9 +27,13 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
 
 INPUT_CSV = os.path.join(PROJECT_ROOT, "proff_arbejdskrafts_tjenester.csv")
-BACKUP_CSV = os.path.join(PROJECT_ROOT, "proff_arbejdskrafts_tjenester_backup.csv")
-OUTPUT_ENRICHED_CSV = os.path.join(PROJECT_ROOT, "proff_arbejdskrafts_tjenester_enriched.csv")
-OUTPUT_COLD_MAIL_CSV = os.path.join(PROJECT_ROOT, "proff_arbejdskrafts_tjenester_cold_mail.csv")
+if not os.path.exists(INPUT_CSV):
+    alt_path = os.path.join(PROJECT_ROOT, "archive", "legacy_campaigns", "denmark_proff", "proff_arbejdskrafts_tjenester.csv")
+    if os.path.exists(alt_path):
+        INPUT_CSV = alt_path
+BACKUP_CSV = os.path.join(PROJECT_ROOT, "archive", "legacy_campaigns", "denmark_proff", "proff_arbejdskrafts_tjenester_backup.csv")
+OUTPUT_ENRICHED_CSV = os.path.join(PROJECT_ROOT, "archive", "legacy_campaigns", "denmark_proff", "proff_arbejdskrafts_tjenester_enriched.csv")
+OUTPUT_COLD_MAIL_CSV = os.path.join(PROJECT_ROOT, "archive", "legacy_campaigns", "denmark_proff", "proff_arbejdskrafts_tjenester_cold_mail.csv")
 CACHE_FILE = os.path.join(CURRENT_DIR, "cache_proff_virk.json")
 USER_DATA_DIR = os.path.abspath(os.path.join(PROJECT_ROOT, "chrome_user_data", "virk_profile"))
 
