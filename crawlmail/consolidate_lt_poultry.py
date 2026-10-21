@@ -340,6 +340,9 @@ def main():
             r_dict["Email"] = existing_email
             return r_dict
 
+        # Neu email hien tai khong hop le (vi du saulesspektras.lt), xoa trang de tim mail website
+        r_dict["Email"] = ""
+
         if web:
             parsed = urllib.parse.urlparse(web if web.startswith("http") else "http://" + web)
             domain = parsed.netloc.replace("www.", "").lower()
@@ -347,7 +350,7 @@ def main():
             with cache_lock:
                 if domain in email_cache:
                     cached_mail = email_cache[domain]
-                    if cached_mail:
+                    if cached_mail and is_valid_email(cached_mail):
                         r_dict["Email"] = cached_mail
                     return r_dict
                     
@@ -355,7 +358,7 @@ def main():
             with cache_lock:
                 email_cache[domain] = crawled_mail
                 
-            if crawled_mail:
+            if crawled_mail and is_valid_email(crawled_mail):
                 r_dict["Email"] = crawled_mail
                 print(f"    [+] Bóc tách email mới: {r_dict['Công ty']} -> {crawled_mail}")
                 
@@ -375,6 +378,8 @@ def main():
     # 3. Phân loại và đẩy 100% doanh nghiệp có Email lên đầu
     with_email = [r for r in enriched_rows if r.get("Email") and is_valid_email(r.get("Email"))]
     without_email = [r for r in enriched_rows if not (r.get("Email") and is_valid_email(r.get("Email")))]
+    for r in without_email:
+        r["Email"] = ""
     sorted_rows = with_email + without_email
 
     # Gán lại No.
