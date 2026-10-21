@@ -73,7 +73,9 @@ BLACKLIST_DOMAINS = [
 
 # Danh sách công ty loại trừ khỏi danh sách kết nối / tuyển dụng
 EXCLUDED_COMPANIES = [
-    'biliarta'
+    'scandi standard', 'scandi-standard', 'scandi standart',
+    'biliarta',
+    'daigre'
 ]
 
 JUNK_EMAIL_PARTS = [

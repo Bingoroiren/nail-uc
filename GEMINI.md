@@ -88,3 +88,22 @@ Toàn bộ các quy trình phức tạp đã được module hóa thành các Sk
       * **Khử dấu Unicode NFKD bản địa đa quốc gia**: Đưa `ė` $\rightarrow$ `e`, `ų` $\rightarrow$ `u`, `š` $\rightarrow$ `s`, `ž` $\rightarrow$ `z`, `á` $\rightarrow$ `a`, `ä` $\rightarrow$ `a`, `ö` $\rightarrow$ `o`, `ü` $\rightarrow$ `u`, `ł` $\rightarrow$ `l`, `ą` $\rightarrow$ `a`... để khớp hoàn toàn với tên địa điểm ASCII không dấu trên Google Maps.
       * **Làm sạch triệt để dấu câu sau loại hình**: Khi loại bỏ legal forms (`UAB`, `MB`, `s.r.o.`, `a.s.`, `GmbH`...), cắt sạch dấu phẩy `,`, dấu chấm `.`, gạch nối ở đầu/cuối chuỗi để tránh lệch chuỗi so khớp.
       * **Tách phần dịch tiếng Anh tự động trong ngoặc**: Tự động bóc tách phần chú thích/dịch tiếng Anh mà Google Maps tự chèn vào tên trong ngoặc `(...)` hoặc `[...]` (ví dụ `(Meat menu)`, `(Bakery)`...).
+12. **Danh Sách Đen Doanh Nghiệp Cố Định (Permanent Company Blacklist / Hard Exclusion)**:
+    - **TUYỆT ĐỐI KHÔNG thu thập hoặc lưu thông tin** của các doanh nghiệp sau trong **mọi bộ cào hiện tại và tương lai** (ở mọi khâu: cào thô, làm giàu Maps, bóc tách email và xuất file Cold Mail):
+      * `Scandi Standard Baltics` (bao gồm `Scandi Standard`, `Scandi Standart`, `Scandi -Standard Baltics`, `Scandi Standard - Baltics, UAB`...)
+      * `Biliarta` (bao gồm `Biliarta, UAB`, `UAB Biliarta`, `UAB “Biliarta”`...)
+      * `Daigre` / `Daigrė` (bao gồm `Daigre, UAB`, `Daigrė, UAB`, `UAB Daigre`...)
+    - **Cơ chế triển khai bắt buộc trong mã nguồn**:
+      ```python
+      PERMANENT_BLACKLIST_COMPANIES = [
+          'scandi standard', 'scandi-standard', 'scandi standart',
+          'biliarta',
+          'daigre', 'daigre'
+      ]
+      def is_blacklisted_company(name):
+          if not name: return False
+          n = unicodedata.normalize('NFKD', str(name)).lower()
+          n_clean = ''.join(c for c in n if not unicodedata.combining(c))
+          return any(b in n_clean for b in ['scandi standard', 'scandi-standard', 'scandi standart', 'biliarta', 'daigre'])
+      ```
+    - Mọi script đọc dữ liệu, làm giàu Google Maps (`enrich_maps_*.py`) và chuẩn hóa đầu ra (`consolidate_*.py`, format Cold Mail) **BẮT BUỘC** loại trừ tự động các công ty này ra khỏi danh sách kết nối.
