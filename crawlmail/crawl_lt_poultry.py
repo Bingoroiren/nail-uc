@@ -642,38 +642,86 @@ async def crawl_rekvizitai_target(page, target_key, base_url, category_name, che
                         
                     # Phone
                     phone = ""
-                    for a in d_soup.find_all("a", href=True):
-                        if a["href"].startswith("tel:"):
-                            phone = clean_phone_lt(a.get_text(strip=True))
-                            break
+                    tel_a = d_soup.find("a", href=lambda h: h and h.startswith("tel:"))
+                    if tel_a:
+                        phone = clean_phone_lt(tel_a.get_text(strip=True) or tel_a["href"])
+                    if not phone:
+                        m_tel = re.search(r"(?:Telefonas|Mob\.\s*telefonas|Tel\.)\s*[:\s]*([+0-9\s()/-]{7,25})", full_text, re.I)
+                        if m_tel:
+                            phone = clean_phone_lt(m_tel.group(1))
                             
-                    # Email
+                    # Email (Cloudflare cfemail decode, mailto:, regex)
                     email = ""
-                    for a in d_soup.find_all("a", href=True):
-                        if a["href"].startswith("mailto:"):
-                            email = a.get_text(strip=True).replace("mailto:", "").strip().lower()
-                            break
-                            
-                    # Website
-                    web = ""
-                    for a in d_soup.find_all("a", href=True):
-                        h = a["href"]
-                        t = a.get_text(strip=True).lower()
-                        if h.startswith("http") and not any(x in h for x in ["rekvizitai.vz.lt", "vz.lt", "facebook", "linkedin", "google.com", "cvbankas"]):
-                            if "tinklalapis" in t or "website" in t or "." in t:
-                                web = h
+                    cf_el = d_soup.select_one("[data-cfemail]")
+                    if cf_el:
+                        email = decode_cf(cf_el.get("data-cfemail", ""))
+                    if not email:
+                        for a in d_soup.find_all("a", href=True):
+                            if a["href"].startswith("mailto:"):
+                                email = a.get_text(strip=True).replace("mailto:", "").split("?")[0].strip().lower()
                                 break
+                    if not email:
+                        m_em = re.search(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b", full_text)
+                        if m_em and not any(ex in m_em.group(0).lower() for ex in ["rekvizitai", "vz.lt", "branch.io", "cookiebot"]):
+                            email = m_em.group(0).lower()
+                            
+                    # Website (Loc bo triet de branch.io va tracking/ad links)
+                    EXCLUDED_REKV_DOMAINS = [
+                        "rekvizitai.vz.lt", "rekvizitai.lt", "vz.lt", "facebook.com", "linkedin.com",
+                        "google.com", "cvbankas.lt", "branch.io", "cookiebot.com", "cloudflare.com",
+                        "apple.com", "twitter.com", "x.com", "youtube.com", "instagram.com",
+                        "waze.com", "statyba.lt", "info.lt", "vmi.lt", "sodra.lt", "registrucentras.lt",
+                        "legal.", "privacy", "policies", "discovery"
+                    ]
+                    
+                    web = ""
+                    # 1. The website theo class hoac itemprop
+                    web_a = d_soup.select_one("a.website, [itemprop='url']")
+                    if web_a and web_a.get("href"):
+                        h = web_a["href"].strip()
+                        if h.startswith("http") and not any(ex in h.lower() for ex in EXCLUDED_REKV_DOMAINS):
+                            web = h
+
+                    # 2. Tim trong hang / the chua Tinklalapis, Svetaine, Website
+                    if not web:
+                        for tr in d_soup.find_all(["tr", "div", "li"]):
+                            lbl = tr.get_text(" ", strip=True).lower()
+                            if any(k in lbl for k in ["tinklalapis", "svetainė", "website"]):
+                                for a in tr.find_all("a", href=True):
+                                    h = a["href"].strip()
+                                    if h.startswith("http") and not any(ex in h.lower() for ex in EXCLUDED_REKV_DOMAINS):
+                                        web = h
+                                        break
+                            if web:
+                                break
+
+                    # 3. Tim link co text la ten mien (.lt, .com, .eu...)
+                    if not web:
+                        for a in d_soup.find_all("a", href=True):
+                            h = a["href"].strip()
+                            t = a.get_text(strip=True).lower()
+                            if h.startswith("http") and not any(ex in h.lower() for ex in EXCLUDED_REKV_DOMAINS):
+                                if (t.startswith("www.") or any(t.endswith(ext) for ext in [".lt", ".com", ".eu", ".net", ".org", ".de"])) and len(t) < 40:
+                                    web = h
+                                    break
                                 
                     # Address & City
                     addr = ""
                     city = ""
-                    addr_el = d_soup.select_one(".address, [itemprop='streetAddress'], td:contains('Adresas') + td")
+                    addr_el = d_soup.select_one(".address, [itemprop='streetAddress']")
                     if addr_el:
                         addr = addr_el.get_text(strip=True)
-                        
-                    loc_el = d_soup.select_one(".city, [itemprop='addressLocality']")
-                    if loc_el:
-                        city = loc_el.get_text(strip=True)
+                    if not addr:
+                        for td in d_soup.find_all("td"):
+                            if "Adresas" in td.get_text():
+                                nxt = td.find_next_sibling("td")
+                                if nxt:
+                                    addr = nxt.get_text(strip=True)
+                                    break
+                    if addr:
+                        parts = [p.strip() for p in addr.split(",") if p.strip()]
+                        if len(parts) >= 2:
+                            city = re.sub(r"^(?:LT-)?\d{4,5}\s*", "", parts[-1]).strip()
                         
                     # Director
                     director = ""
