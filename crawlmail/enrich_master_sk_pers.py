@@ -530,7 +530,23 @@ def main():
     df_out = pd.DataFrame(sorted_rows, columns=COLDMAIL_COLUMNS)
 
     # Xuất ra các tệp đích UTF-8 with BOM
-    df_out.to_csv(TARGET_2COL, index=False, encoding="utf-8-sig")
+    backup_file = BASE_DIR / "SK_AGCY_PERS_2COL_UPDATED.csv"
+    df_out.to_csv(backup_file, index=False, encoding="utf-8-sig")
+    print(f"[*] Đã lưu bản cập nhật an toàn vào: {backup_file.name}")
+    try:
+        df_out.to_csv(TARGET_1ENR, index=False, encoding="utf-8-sig")
+    except Exception:
+        pass
+
+    try:
+        df_out.to_csv(TARGET_2COL, index=False, encoding="utf-8-sig")
+        print(f"[*] Đã cập nhật thành công vào file chính: {TARGET_2COL.name}")
+    except PermissionError:
+        print("\n" + "!" * 75)
+        print(f"[!] CẢNH BÁO: Tệp {TARGET_2COL.name} đang được mở trong EXCEL hoặc phần mềm khác!")
+        print(f"    Hệ thống đã lưu toàn bộ dữ liệu mới nhất vào: {backup_file.name}")
+        print("    Vui lòng đóng file trong Excel nếu muốn ghi đè trực tiếp.")
+        print("!" * 75 + "\n")
 
     print("\n" + "=" * 80)
     print(" KẾT QUẢ LÀM GIÀU DỮ LIỆU SLOVAKIA AGENCIES (SK_AGCY_PERS):")
