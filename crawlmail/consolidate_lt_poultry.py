@@ -24,7 +24,6 @@ import urllib.parse
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
-import pandas as pd
 from bs4 import BeautifulSoup
 from curl_cffi import requests
 
@@ -73,7 +72,7 @@ JUNK_PREFIXES = {
 DEMO_DOMAINS = {
     'example.com', 'domain.com', 'email.com', 'yoursite.com', 'yourdomain.com',
     'wix.com', 'wixpress.com', 'sentry.io', 'wordpress.com', 'github.com',
-    'mysite.com', 'sitename.com', 'company.com'
+    'mysite.com', 'sitename.com', 'company.com', 'saulesspektras.lt', 'info.lt'
 }
 
 def clean_phone_lt(raw):
@@ -289,9 +288,10 @@ def main():
         except Exception:
             pass
 
-    # Đọc dữ liệu thô
-    raw_df = pd.read_csv(INPUT_RAW, encoding="utf-8-sig", dtype=str).fillna("")
-    print(f"[*] Tổng số dòng dữ liệu thô: {len(raw_df)}")
+    # Đọc dữ liệu thô bằng csv.DictReader
+    with open(INPUT_RAW, "r", encoding="utf-8-sig", errors="ignore") as f:
+        raw_rows = list(csv.DictReader(f))
+    print(f"[*] Tổng số dòng dữ liệu thô: {len(raw_rows)}")
 
     # 1. Khử trùng lặp theo tên và IČO + Áp dụng Rule #12 Permanent Blacklist
     dedup_rows = []
@@ -299,7 +299,7 @@ def main():
     seen_icos = set()
     blacklisted_count = 0
 
-    for _, row in raw_df.iterrows():
+    for row in raw_rows:
         comp_name = str(row.get("Công ty", "")).strip()
         if not comp_name:
             continue
@@ -321,7 +321,7 @@ def main():
         if ico:
             seen_icos.add(ico)
 
-        r_dict = row.to_dict()
+        r_dict = dict(row)
         # Chuẩn hóa SĐT
         r_dict["SĐT"] = clean_phone_lt(r_dict.get("SĐT", ""))
         dedup_rows.append(r_dict)
@@ -382,9 +382,13 @@ def main():
         r["No."] = i
 
     # Xuất file 1ENR
-    df_1enr = pd.DataFrame(sorted_rows)
-    df_1enr.to_csv(OUTPUT_1ENR, index=False, encoding="utf-8-sig")
-    print(f"[*] Đã xuất {len(df_1enr)} dòng vào file 1ENR: {OUTPUT_1ENR}")
+    if sorted_rows:
+        fieldnames_1enr = list(sorted_rows[0].keys())
+        with open(OUTPUT_1ENR, "w", encoding="utf-8-sig", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames_1enr)
+            writer.writeheader()
+            writer.writerows(sorted_rows)
+    print(f"[*] Đã xuất {len(sorted_rows)} dòng vào file 1ENR: {OUTPUT_1ENR}")
 
     # 4. Xuất file 2COL (Cold Mail)
     cold_rows = []
@@ -413,13 +417,16 @@ def main():
         }
         cold_rows.append(cold_dict)
 
-    df_2col = pd.DataFrame(cold_rows, columns=COLDMAIL_COLUMNS)
-    df_2col.to_csv(OUTPUT_2COL, index=False, encoding="utf-8-sig")
+    with open(OUTPUT_2COL, "w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=COLDMAIL_COLUMNS)
+        writer.writeheader()
+        writer.writerows(cold_rows)
 
     print("\n" + "=" * 80)
-    print(" TỔNG KẾT BỘ DỮ LIỆU XƯỞNG GÀ LITVA (LT_POUL):")
-    print(f" - Tổng số công ty: {len(df_2col)}")
-    print(f" - Có Email: {len(with_email)} ({len(with_email)/len(df_2col)*100:.1f}%) -> Nằm ngay các dòng 1..{len(with_email)}")
+    total_cold = len(cold_rows)
+    pct_email = (len(with_email) / total_cold * 100) if total_cold > 0 else 0
+    print(f" - Tổng số công ty: {total_cold}")
+    print(f" - Có Email: {len(with_email)} ({pct_email:.1f}%) -> Nằm ngay các dòng 1..{len(with_email)}")
     print(f" - Không có Email: {len(without_email)}")
     print(f" - File Cold Mail 20 cột: {OUTPUT_2COL}")
     print("=" * 80)
