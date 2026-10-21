@@ -144,7 +144,17 @@ async def handle_security_challenges(page, context_label="", max_wait_seconds=18
                 continue
 
             # 2. Vercel Security Checkpoint (ensun.io)
-            is_vercel = "Vercel Security Checkpoint" in title or "checkpoint" in content.lower()
+            # Chỉ cảnh báo nếu thực sự có ô checkbox tương tác, bỏ qua nếu là trang lỗi 429
+            has_chk = False
+            for frame in page.frames:
+                try:
+                    if await frame.query_selector("input[type='checkbox'], #challenge-stage, .cb-lb"):
+                        has_chk = True
+                        break
+                except Exception:
+                    pass
+
+            is_vercel = ("Vercel Security Checkpoint" in title or "checkpoint" in content.lower()) and has_chk
             if is_vercel:
                 if not alerted:
                     try:
@@ -455,7 +465,17 @@ async def crawl_ensun(page, checklist, seen_keys, raw_file_writer, csv_file):
     
     try:
         print("[*] Dang mo ensun.io tren trinh duyet Chrome...")
-        await page.goto(url, wait_until="domcontentloaded", timeout=35000)
+        resp = await page.goto(url, wait_until="domcontentloaded", timeout=35000)
+        c_test = await page.content()
+        t_test = await page.title()
+        if (resp and resp.status == 429) or "429" in t_test or "too many requests" in c_test.lower():
+            print("[!] Ensun.io dang bi loi may chu 429 (Too Many Requests tu may chu Vercel).")
+            print("    Trang hien ma loi code cua server, khong co ma Captcha. Tu dong bo qua sang Rekvizitai!")
+            cfg["completed"] = True
+            checklist["ensun_io"] = cfg
+            save_checklist(checklist)
+            return
+
         await handle_security_challenges(page, "ensun.io Search")
         await asyncio.sleep(4.0)
         
