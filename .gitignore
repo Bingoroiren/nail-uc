@@ -33,6 +33,9 @@ test-results/
 cache_*.json
 */cache_*.json
 crawlmail/cache_*.json
+checkpoint_*.json
+*/checkpoint_*.json
+crawlmail/checkpoint_*.json
 data/progress/
 */progress/
 progress/
@@ -41,6 +44,7 @@ progress/
 # Scratch & Temporary Testing Scripts
 # =======================================================
 scratch/
+archive/
 
 # =======================================================
 # IDEs & Editors
@@ -92,6 +96,7 @@ ehthumbs_vista.db
 *.csv.xlsx
 *.pdf
 *.crdownload
+*.json
 data/raw/
 data/formatted/
 

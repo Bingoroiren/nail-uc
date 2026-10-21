@@ -58,3 +58,6 @@ Agent lập tức tạo trọn gói 5 module chuẩn theo cấu trúc dự án:
 
 ### Module 5: Launcher 1-Click (`runners/run_<industry>_<country_code>.bat`)
 - Batch script tự động kích hoạt `.venv`, cài dependencies nếu thiếu, cài Playwright Chromium, và chạy tuần tự từ cào thô ➜ lọc ➜ quét mail ➜ xuất CSV cuối.
+- Luôn cung cấp cú pháp chạy trực tiếp trong Terminal của IDE cho người dùng:
+  * PowerShell: `.\runners\run_<industry>_<country_code>.bat` hoặc `cmd /c runners\run_<industry>_<country_code>.bat`
+  * Command Prompt: `runners\run_<industry>_<country_code>.bat`
