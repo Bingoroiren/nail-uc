@@ -106,7 +106,7 @@ def decode_cf(hex_str):
 # ----------------------------------------------------------------------
 # XỬ LÝ CAPTCHA & SECURITY CHECKPOINTS
 # ----------------------------------------------------------------------
-async def handle_security_challenges(page, context_label="", max_wait_seconds=60):
+async def handle_security_challenges(page, context_label="", max_wait_seconds=180):
     """
     Tự động kiểm tra và chờ người dùng giải quyết Captcha thủ công nếu có:
     - Cloudflare Turnstile / Just a moment
@@ -131,6 +131,10 @@ async def handle_security_challenges(page, context_label="", max_wait_seconds=60
             has_rekv_captcha = await page.query_selector("#formFirmsCaptcha, input#security_code") is not None
             if has_rekv_captcha:
                 if not alerted:
+                    try:
+                        await page.bring_to_front()
+                    except Exception:
+                        pass
                     print("\a\n" + "!" * 75)
                     print(f"[!] [CAPTCHA REKVIZITAI] {context_label}: PHAT HIEN MA 3 KY TU TRONG ANH!")
                     print("    Vui long nhin vao man hinh Chrome, nhap 3 ky tu va an Tiep tuc (Continue)...")
@@ -143,6 +147,10 @@ async def handle_security_challenges(page, context_label="", max_wait_seconds=60
             is_vercel = "Vercel Security Checkpoint" in title or "checkpoint" in content.lower()
             if is_vercel:
                 if not alerted:
+                    try:
+                        await page.bring_to_front()
+                    except Exception:
+                        pass
                     print("\a\n" + "!" * 75)
                     print(f"[!] [VERCEL CHECKPOINT] {context_label}: XAC THUC AN TOAN VERCEL / ENSUN.IO!")
                     print("    Vui long nhin vao man hinh Chrome va tich vao o xac thuc / lam theo huong dan...")
@@ -169,6 +177,10 @@ async def handle_security_challenges(page, context_label="", max_wait_seconds=60
             )
             if is_cf:
                 if not alerted:
+                    try:
+                        await page.bring_to_front()
+                    except Exception:
+                        pass
                     print("\a\n" + "!" * 75)
                     print(f"[!] [CLOUDFLARE TURNSTILE] {context_label}: PHAT HIEN XAC THUC CLOUDFLARE!")
                     print("    Vui long tich vao o xac nhan tren cua so Chrome...")
