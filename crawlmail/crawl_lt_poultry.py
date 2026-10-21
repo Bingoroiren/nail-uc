@@ -782,9 +782,9 @@ async def main():
             await crawl_infolt(page, checklist, seen_keys, writer, csv_f)
 
             # ----------------------------------------------------------
-            # NGUON 2: Ensun.io (Poultry & Meat Processing)
+            # NGUON 2: Ensun.io (Da bo qua theo yeu cau cua nguoi dung)
             # ----------------------------------------------------------
-            await crawl_ensun(page, checklist, seen_keys, writer, csv_f)
+            print("\n[*] Da bo qua nguon ensun.io theo yeu cau. Chuyen thang sang cac danh muc cua Rekvizitai.vz.lt.")
 
             # ----------------------------------------------------------
             # NGUON 3: Rekvizitai - gyvuliai_zverys_pauksciai_ir_ju_veisimas
