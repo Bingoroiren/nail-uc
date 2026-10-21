@@ -634,27 +634,132 @@ async def crawl_rekvizitai_target(page, target_key, base_url, category_name, che
                         
                     full_text = d_soup.get_text(" ", strip=True)
                     
-                    # IČO
-                    ico = ""
-                    m_ico = re.search(r"(?:Įmonės kodas|Registration code)[:\s]*(\d{7,10})", full_text)
-                    if m_ico:
-                        ico = m_ico.group(1).strip()
+                    # Danh sách domain rác, tracking, social, chính phủ và chính sách bảo mật
+                    EXCLUDED_REKV_DOMAINS = [
+                        "rekvizitai.vz.lt", "rekvizitai.lt", "vz.lt", "facebook.com", "linkedin.com",
+                        "google.com", "cvbankas.lt", "branch.io", "cookiebot.com", "cloudflare.com",
+                        "014on.com", "apple.com", "twitter.com", "x.com", "youtube.com", "instagram.com",
+                        "waze.com", "statyba.lt", "info.lt", "vmi.lt", "sodra.lt", "registrucentras.lt",
+                        "privacidad", "privacy", "policies", "discovery", "legal", "terms", "policy"
+                    ]
+
+                    # 1. Quét bảng thông tin chi tiết (Bảng chứa td.name và td.value nơi SĐT và Web cùng nằm chung)
+                    tb_phone = ""
+                    tb_web = ""
+                    tb_email = ""
+                    tb_ico = ""
+                    tb_addr = ""
+                    tb_director = ""
+                    tb_emp = ""
+
+                    for tr in d_soup.find_all("tr"):
+                        td_name = tr.find(["td", "th"], class_=lambda c: c and any(k in str(c).lower() for k in ["name", "label", "title", "col-name"]))
+                        td_val = tr.find(["td", "div"], class_=lambda c: c and any(k in str(c).lower() for k in ["value", "val", "data", "col-value"]))
                         
-                    # Phone
-                    phone = ""
+                        if not td_name or not td_val:
+                            cells = tr.find_all(["td", "th"])
+                            if len(cells) >= 2:
+                                td_name, td_val = cells[0], cells[1]
+                            else:
+                                continue
+
+                        k = td_name.get_text(" ", strip=True).lower()
+                        v = td_val.get_text(" ", strip=True)
+
+                        # SĐT
+                        if any(term in k for term in ["telefon", "mob.", "tel.", "phone", "mobile"]):
+                            p_a = td_val.find("a", href=lambda h: h and h.startswith("tel:"))
+                            raw_p = (p_a.get_text(strip=True) or p_a["href"]) if p_a else v
+                            if raw_p and not tb_phone:
+                                tb_phone = clean_phone_lt(raw_p)
+
+                        # Website (Nằm ngay cùng khu vực / cùng hàng / cùng bảng với SĐT)
+                        elif any(term in k for term in ["tinklalap", "svetain", "website", "web"]):
+                            w_a = td_val.find("a", href=True)
+                            if w_a and w_a["href"].strip().startswith("http"):
+                                cand = w_a["href"].strip()
+                                if not any(ex in cand.lower() for ex in EXCLUDED_REKV_DOMAINS):
+                                    tb_web = cand
+                            elif not tb_web:
+                                raw_w = v.replace("Uždaryti", "").replace("Close", "").strip()
+                                if ("." in raw_w or raw_w.startswith("http")) and not any(ex in raw_w.lower() for ex in EXCLUDED_REKV_DOMAINS):
+                                    tb_web = f"https://{raw_w}" if not raw_w.startswith("http") else raw_w
+
+                        # Email
+                        elif any(term in k for term in ["el. pašt", "el.pašt", "email", "e-mail", "paštas"]):
+                            cf = td_val.select_one("[data-cfemail]")
+                            if cf:
+                                tb_email = decode_cf(cf.get("data-cfemail", ""))
+                            if not tb_email:
+                                m_a = td_val.find("a", href=lambda h: h and h.startswith("mailto:"))
+                                if m_a:
+                                    tb_email = m_a.get_text(strip=True).replace("mailto:", "").split("?")[0].strip().lower()
+                            if not tb_email:
+                                m_e = re.search(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b", v)
+                                if m_e:
+                                    tb_email = m_e.group(0).lower()
+
+                        # Mã doanh nghiệp (IČO)
+                        elif any(term in k for term in ["įmonės kodas", "imones kodas", "registration code", "kodas", "code"]):
+                            m_c = re.search(r"\b(\d{7,10})\b", v)
+                            if m_c and not tb_ico:
+                                tb_ico = m_c.group(1)
+
+                        # Địa chỉ
+                        elif any(term in k for term in ["adresas", "address", "buveinė"]):
+                            addr_a = td_val.find("a", href=True)
+                            tb_addr = addr_a.get_text(" ", strip=True).strip() if addr_a else v.strip()
+
+                        # Giám đốc / Người đại diện
+                        elif any(term in k for term in ["vadovas", "direktorius", "manager", "director"]):
+                            tb_director = v.replace("More ›", "").replace("Daugiau ›", "").replace("Vadovas", "").strip()
+
+                        # Số lượng nhân sự
+                        elif any(term in k for term in ["apdraustieji", "darbuotojai", "employees"]):
+                            m_em = re.search(r"(\d+)", v)
+                            if m_em and not tb_emp:
+                                tb_emp = f"{m_em.group(1)} darbuotojai"
+
+                    # 2. Định vị vùng chứa SĐT để bóc tách Website nằm cùng khu vực (nếu chưa lấy được từ bảng)
+                    phone = tb_phone
                     tel_a = d_soup.find("a", href=lambda h: h and h.startswith("tel:"))
                     if tel_a:
-                        phone = clean_phone_lt(tel_a.get_text(strip=True) or tel_a["href"])
+                        if not phone:
+                            phone = clean_phone_lt(tel_a.get_text(strip=True) or tel_a["href"])
+                        
+                        # Vùng chứa SĐT (bảng hoặc khối contact xung quanh tel_a)
+                        contact_box = (
+                            tel_a.find_parent("table") 
+                            or tel_a.find_parent("div", class_=lambda c: c and any(k in str(c).lower() for k in ["company", "contact", "info", "detail"]))
+                        )
+                        if contact_box and not tb_web:
+                            for wa in contact_box.find_all("a", href=True):
+                                wh = wa["href"].strip()
+                                wt = wa.get_text(strip=True).lower()
+                                if wh.startswith("http") and not any(ex in wh.lower() for ex in EXCLUDED_REKV_DOMAINS):
+                                    if (
+                                        any(k in wt for k in ["tinklalapis", "svetainė", "www."]) 
+                                        or any(wt.endswith(ext) for ext in [".lt", ".com", ".eu", ".net", ".org", ".de"])
+                                        or "www." in wh
+                                    ) and len(wt) < 45:
+                                        tb_web = wh
+                                        break
+
+                    # Fallback SĐT từ full_text nếu chưa có
                     if not phone:
                         m_tel = re.search(r"(?:Telefonas|Mob\.\s*telefonas|Tel\.)\s*[:\s]*([+0-9\s()/-]{7,25})", full_text, re.I)
                         if m_tel:
                             phone = clean_phone_lt(m_tel.group(1))
-                            
-                    # Email (Cloudflare cfemail decode, mailto:, regex)
-                    email = ""
-                    cf_el = d_soup.select_one("[data-cfemail]")
-                    if cf_el:
-                        email = decode_cf(cf_el.get("data-cfemail", ""))
+
+                    # Website: TUYỆT ĐỐI chỉ lấy trong bảng/khu vực liên hệ với SĐT, KHÔNG quét toàn bộ trang web (tránh link quảng cáo footer)
+                    web = tb_web
+
+                    # Email: lấy từ bảng -> cfemail -> mailto: -> regex an toàn
+                    email = tb_email
+                    if not email:
+                        cf_el = d_soup.select_one("[data-cfemail]")
+                        if cf_el:
+                            email = decode_cf(cf_el.get("data-cfemail", ""))
                     if not email:
                         for a in d_soup.find_all("a", href=True):
                             if a["href"].startswith("mailto:"):
@@ -662,55 +767,23 @@ async def crawl_rekvizitai_target(page, target_key, base_url, category_name, che
                                 break
                     if not email:
                         m_em = re.search(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b", full_text)
-                        if m_em and not any(ex in m_em.group(0).lower() for ex in ["rekvizitai", "vz.lt", "branch.io", "cookiebot"]):
+                        if m_em and not any(ex in m_em.group(0).lower() for ex in EXCLUDED_REKV_DOMAINS):
                             email = m_em.group(0).lower()
-                            
-                    # Website (Loc bo triet de branch.io va tracking/ad links)
-                    EXCLUDED_REKV_DOMAINS = [
-                        "rekvizitai.vz.lt", "rekvizitai.lt", "vz.lt", "facebook.com", "linkedin.com",
-                        "google.com", "cvbankas.lt", "branch.io", "cookiebot.com", "cloudflare.com",
-                        "apple.com", "twitter.com", "x.com", "youtube.com", "instagram.com",
-                        "waze.com", "statyba.lt", "info.lt", "vmi.lt", "sodra.lt", "registrucentras.lt",
-                        "legal.", "privacy", "policies", "discovery"
-                    ]
-                    
-                    web = ""
-                    # 1. The website theo class hoac itemprop
-                    web_a = d_soup.select_one("a.website, [itemprop='url']")
-                    if web_a and web_a.get("href"):
-                        h = web_a["href"].strip()
-                        if h.startswith("http") and not any(ex in h.lower() for ex in EXCLUDED_REKV_DOMAINS):
-                            web = h
 
-                    # 2. Tim trong hang / the chua Tinklalapis, Svetaine, Website
-                    if not web:
-                        for tr in d_soup.find_all(["tr", "div", "li"]):
-                            lbl = tr.get_text(" ", strip=True).lower()
-                            if any(k in lbl for k in ["tinklalapis", "svetainė", "website"]):
-                                for a in tr.find_all("a", href=True):
-                                    h = a["href"].strip()
-                                    if h.startswith("http") and not any(ex in h.lower() for ex in EXCLUDED_REKV_DOMAINS):
-                                        web = h
-                                        break
-                            if web:
-                                break
+                    # IČO
+                    ico = tb_ico
+                    if not ico:
+                        m_ico = re.search(r"(?:Įmonės kodas|Registration code)[:\s]*(\d{7,10})", full_text)
+                        if m_ico:
+                            ico = m_ico.group(1).strip()
 
-                    # 3. Tim link co text la ten mien (.lt, .com, .eu...)
-                    if not web:
-                        for a in d_soup.find_all("a", href=True):
-                            h = a["href"].strip()
-                            t = a.get_text(strip=True).lower()
-                            if h.startswith("http") and not any(ex in h.lower() for ex in EXCLUDED_REKV_DOMAINS):
-                                if (t.startswith("www.") or any(t.endswith(ext) for ext in [".lt", ".com", ".eu", ".net", ".org", ".de"])) and len(t) < 40:
-                                    web = h
-                                    break
-                                
-                    # Address & City
-                    addr = ""
+                    # Địa chỉ & Thành phố
+                    addr = tb_addr
                     city = ""
-                    addr_el = d_soup.select_one(".address, [itemprop='streetAddress']")
-                    if addr_el:
-                        addr = addr_el.get_text(strip=True)
+                    if not addr:
+                        addr_el = d_soup.select_one(".address, [itemprop='streetAddress']")
+                        if addr_el:
+                            addr = addr_el.get_text(strip=True)
                     if not addr:
                         for td in d_soup.find_all("td"):
                             if "Adresas" in td.get_text():
@@ -722,18 +795,19 @@ async def crawl_rekvizitai_target(page, target_key, base_url, category_name, che
                         parts = [p.strip() for p in addr.split(",") if p.strip()]
                         if len(parts) >= 2:
                             city = re.sub(r"^(?:LT-)?\d{4,5}\s*", "", parts[-1]).strip()
-                        
-                    # Director
-                    director = ""
-                    m_dir = re.search(r"(?:Vadovas|Direktorius|Manager)[:\s]*([A-ZĄČĘĖĮŠŲŪŽ][a-ząčęėįšųūž]+\s+[A-ZĄČĘĖĮŠŲŪŽ][a-ząčęėįšųūž]+)", full_text)
-                    if m_dir:
-                        director = m_dir.group(1).strip()
-                        
-                    # Employees
-                    emp = ""
-                    m_emp = re.search(r"(?:Apdraustieji|Darbuotojai|Employees)[:\s]*(\d+)", full_text)
-                    if m_emp:
-                        emp = f"{m_emp.group(1)} darbuotojai"
+
+                    # Giám đốc & Nhân sự
+                    director = tb_director
+                    if not director:
+                        m_dir = re.search(r"(?:Vadovas|Direktorius|Manager)[:\s]*([A-ZĄČĘĖĮŠŲŪŽ][a-ząčęėįšųūž]+\s+[A-ZĄČĘĖĮŠŲŪŽ][a-ząčęėįšųūž]+)", full_text)
+                        if m_dir:
+                            director = m_dir.group(1).strip()
+
+                    emp = tb_emp
+                    if not emp:
+                        m_emp = re.search(r"(?:Apdraustieji|Darbuotojai|Employees)[:\s]*(\d+)", full_text)
+                        if m_emp:
+                            emp = f"{m_emp.group(1)} darbuotojai"
 
                     row = {
                         "No.": len(seen_keys) + 1,

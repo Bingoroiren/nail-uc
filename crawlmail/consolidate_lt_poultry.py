@@ -72,7 +72,8 @@ JUNK_PREFIXES = {
 DEMO_DOMAINS = {
     'example.com', 'domain.com', 'email.com', 'yoursite.com', 'yourdomain.com',
     'wix.com', 'wixpress.com', 'sentry.io', 'wordpress.com', 'github.com',
-    'mysite.com', 'sitename.com', 'company.com', 'saulesspektras.lt', 'info.lt'
+    'mysite.com', 'sitename.com', 'company.com', 'saulesspektras.lt', 'info.lt',
+    '014on.com', 'branch.io'
 }
 
 def clean_phone_lt(raw):
@@ -342,6 +343,10 @@ def main():
 
         # Neu email hien tai khong hop le (vi du saulesspektras.lt), xoa trang de tim mail website
         r_dict["Email"] = ""
+
+        if any(ex in web.lower() for ex in ['014on.com', 'branch.io', 'cookiebot', 'apple.com', 'statyba.lt', 'info.lt', 'rekvizitai', 'saulesspektras', 'privacy', 'privacidad']):
+            web = ""
+            r_dict["Web"] = ""
 
         if web:
             parsed = urllib.parse.urlparse(web if web.startswith("http") else "http://" + web)
