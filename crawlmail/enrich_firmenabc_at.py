@@ -65,6 +65,19 @@ EXCLUDED_DOMAINS = {
     'creditreform', 'tripadvisor', 'yellowpages', 'herold.at', 'wko.at'
 }
 
+PERMANENT_BLACKLIST_COMPANIES = [
+    'scandi standard', 'scandi-standard', 'scandi standart',
+    'biliarta',
+    'daigre'
+]
+
+def is_blacklisted_company(name):
+    if not name:
+        return False
+    n = unicodedata.normalize('NFKD', str(name)).lower()
+    n_clean = ''.join(c for c in n if not unicodedata.combining(c))
+    return any(b in n_clean for b in PERMANENT_BLACKLIST_COMPANIES)
+
 def clean_phone_format(raw_phone):
     if not raw_phone:
         return ""
@@ -241,7 +254,12 @@ async def main():
     with open(MAIN_CSV, 'r', encoding='utf-8-sig', errors='ignore') as f:
         reader = csv.DictReader(f)
         fieldnames = list(reader.fieldnames)
-        rows = list(reader)
+        raw_rows = list(reader)
+
+    # Loc bo vinh vien cac cong ty trong Blacklist (Rule 12)
+    rows = [r for r in raw_rows if not is_blacklisted_company(r.get('Company', ''))]
+    if len(rows) < len(raw_rows):
+        print(f"[*] Da tu dong loai bo {len(raw_rows) - len(rows)} cong ty thuoc Blacklist.")
 
     total_rows = len(rows)
     initial_with_email = len([r for r in rows if r.get('Email', '').strip()])
