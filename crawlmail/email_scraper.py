@@ -53,11 +53,19 @@ OBFUSCATED_PATTERNS = [
     re.compile(r'([A-Za-z0-9._%+-]{1,64})\s+AT\s+([A-Za-z0-9.-]{1,255})\s+DOT\s+([A-Za-z]{2,7})'),
 ]
 
-# Common contact page paths to guess if no emails found
+# Common contact page paths to guess if no emails found (Multilingual: EN, Albanian SQ, Italian IT)
 CONTACT_PAGE_GUESSES = [
+    # English (Chuẩn CMS quốc tế WordPress/Wix)
     '/contact', '/contact-us', '/contact-us/', '/contact/',
     '/about', '/about-us', '/about-us/', '/about/',
     '/get-in-touch', '/get-in-touch/',
+    # Albanian (Ngôn ngữ bản địa Albania)
+    '/kontakt', '/kontakti', '/kontakt/', '/kontakti/',
+    '/na-kontaktoni', '/na-kontaktoni/',
+    '/rreth-nesh', '/rreth-nesh/', '/per-ne', '/per-ne/',
+    '/rezervime', '/rezervime/', '/dhomat', '/dhomat/',
+    # Italian (Khách du lịch và ngôn ngữ kinh doanh phổ biến tại Albania)
+    '/contatti', '/contatti/', '/chi-siamo', '/chi-siamo/'
 ]
 
 def extract_emails_from_text(text):
@@ -208,8 +216,8 @@ async def safe_scroll_to_bottom(page):
 async def crawl_regular_site(page, url):
     try:
         print(f"[*] Navigating to Website: {url}")
-        await page.goto(url, timeout=25000, wait_until="domcontentloaded")
-        await page.wait_for_timeout(2000)
+        await page.goto(url, timeout=35000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(3000)
         await safe_scroll_to_bottom(page)
         try:
             title = await page.title()
@@ -298,9 +306,9 @@ async def crawl_regular_site(page, url):
                     if urllib.parse.urlparse(full_url).netloc == urllib.parse.urlparse(url).netloc:
                         full_url_clean = full_url.split('#')[0]
                         priority = 0
-                        if any(k in text_lower or k in href_lower for k in ['contact', 'about', 'support', 'reach', 'info', 'location', 'salon', 'find', 'store', 'kontak', 'nas', 'mums', 'sobre', 'επικοινων', 'epikoinon', '聯絡', '關於', '关于', '联系', 'contat', 'impressum', 'team', 'enquir', 'inquiry']):
+                        if any(k in text_lower or k in href_lower for k in ['contact', 'about', 'support', 'reach', 'info', 'location', 'salon', 'find', 'store', 'kontak', 'rreth', 'per-ne', 'dhomat', 'rezerv', 'nas', 'mums', 'sobre', 'επικοινων', 'epikoinon', '聯絡', '關於', '关于', '联系', 'contat', 'impressum', 'team', 'enquir', 'inquiry']):
                             priority = 2
-                        elif any(k in text_lower or k in href_lower for k in ['services', 'book', 'us', 'pakalpojumi', 'sluzby', 'servicos', 'υπηρεσιες', '服務', '服务', 'help', 'footer', 'sitemap']):
+                        elif any(k in text_lower or k in href_lower for k in ['services', 'book', 'us', 'pakalpojumi', 'sluzby', 'servicos', 'υπηρεσιες', 'camere', 'prenotaz', '服務', '服务', 'help', 'footer', 'sitemap']):
                             priority = 1
                         
                         candidate_links.append((priority, full_url_clean))
@@ -324,8 +332,8 @@ async def crawl_regular_site(page, url):
         for sub_url in unique_sub_urls[:6]:
             try:
                 print(f"[*] Navigating to Subpage: {sub_url}")
-                await page.goto(sub_url, timeout=15000, wait_until="domcontentloaded")
-                await page.wait_for_timeout(1000)
+                await page.goto(sub_url, timeout=25000, wait_until="domcontentloaded")
+                await page.wait_for_timeout(2000)
                 await safe_scroll_to_bottom(page)
                 await extract_links_and_emails(page)
                 # Stop early if emails found
@@ -478,9 +486,9 @@ async def process_row(row, semaphore, writer, output_file, processed_urls):
                     return found_emails
 
                 try:
-                    emails = await asyncio.wait_for(do_scrape(), timeout=90.0)
+                    emails = await asyncio.wait_for(do_scrape(), timeout=120.0)
                 except asyncio.TimeoutError:
-                    print(f"[!] Timeout Error: Scanning {website} took longer than 90 seconds. Aborting task to prevent hang.")
+                    print(f"[!] Timeout Error: Scanning {website} took longer than 120 seconds. Aborting task to prevent hang.")
                     emails = []
 
                 # Clean and save row

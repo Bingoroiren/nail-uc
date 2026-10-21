@@ -6,19 +6,18 @@ echo ======================================================
 echo       AUTOMATIC SETUP AND SCRAPER RUN (ALBANIA BROKERS)
 echo ======================================================
 
-:: Check if Python is installed
+:: Ensure Python is in PATH if installed locally
+if exist "C:\Users\PC\python311\tools\python.exe" (
+    set "PATH=C:\Users\PC\python311\tools;C:\Users\PC\python311\tools\Scripts;%PATH%"
+)
+
+:: Activate Virtual Environment if it exists
+if exist ".venv\Scripts\activate.bat" call ".venv\Scripts\activate.bat"
+if exist "%~dp0..\.venv\Scripts\activate.bat" call "%~dp0..\.venv\Scripts\activate.bat"
+
+:: Verify Python is installed and working
 python --version >nul 2>&1
 if errorlevel 1 goto NoPython
-
-:: Activate Virtual Environment if it exists or create one
-if exist .venv goto ActivateVenv
-echo [*] Creating virtual environment (.venv)...
-python -m venv .venv
-if errorlevel 1 goto VenvFailed
-
-:ActivateVenv
-echo [*] Activating virtual environment...
-call .venv\Scripts\activate.bat
 
 :: Install Dependencies
 echo [*] Upgrading pip...

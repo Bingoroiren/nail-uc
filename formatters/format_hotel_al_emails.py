@@ -36,7 +36,12 @@ if sys.platform.startswith('win'):
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 
-INPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "hotel_albania.csv")
+CANDIDATE_INPUTS = [
+    os.path.join(ROOT_DIR, "data", "formatted", "hotel_albania_with_emails.csv"),
+    os.path.join(ROOT_DIR, "data", "raw", "hotel_albania.csv")
+]
+
+INPUT_CSV = CANDIDATE_INPUTS[0] if os.path.exists(CANDIDATE_INPUTS[0]) else CANDIDATE_INPUTS[1]
 OUTPUT_FORMATTED = os.path.join(ROOT_DIR, "data", "formatted", "hotel_albania_with_emails_formatted.csv")
 OUTPUT_COLDMAIL_ROOT = os.path.join(ROOT_DIR, "Khách sạn Albania - ColdMail.csv")
 PROGRESS_FILE = os.path.join(ROOT_DIR, "data", "progress", "scraping_progress_hotel_al_emails.json")
@@ -110,8 +115,132 @@ BAD_KEYWORDS = {
 DISCARD_DOMAINS = {
     'example.com', 'example.org', 'example.net', 'yourdomain.com', 
     'email.com', 'domain.com', 'website.com', 'company.com', 
-    'sentry.io', 'git.com', 'github.com', 'test.com', 'g.co'
+    'sentry.io', 'git.com', 'github.com', 'test.com', 'g.co',
+    'booking.com', 'agoda.com', 'airbnb.com', 'expedia.com', 'tripadvisor.com',
+    'hotels.com', 'trivago.com', 'kayak.com', 'priceline.com', 'hostelworld.com',
+    'vrbo.com', 'viator.com', 'getyourguide.com', 'freecancellations.com',
+    'bluepillow.com', 'bluepillow.it', 'bluepillow.de', 'placescollective.com',
+    'highlandhikecottage.eu', 'ocean-vista-lodge.eu', 'brit-voyager.eu',
+    'backpackinghaven.eu', 'reservation.expert', 'exelentbnb.com',
+    'pik-host.al', 'gs-collection.com', 'kondostays.com', 'tirent.al',
+    'albania-hotel.top', 'hotelalbanian.com', 'albania-hotels.net'
 }
+
+DISCARD_EXACT_EMAILS = {
+    'albania@gmail.com', 'info@pik-host.al', 's.giordani@bluepillow.com',
+    'support@freecancellations.com', 'info@kondostays.com', 'info@tirent.al',
+    'reservations@gs-collection.com', 'support@elementor.com', 'info@mysite.com'
+}
+
+def normalize_text(text):
+    if not text:
+        return ""
+    t = text.lower().strip()
+    t = re.sub(r'[\s\-_\.,\|/]+', ' ', t)
+    return t.strip()
+
+def deduplicate_and_merge_hotels(rows):
+    merged_dict = {}
+    for r in rows:
+        name = normalize_text(r.get('Name', ''))
+        if not name:
+            continue
+        phone = re.sub(r'[^0-9+]', '', r.get('Phone', ''))
+        web = normalize_text(r.get('Website', ''))
+        loc = normalize_text(r.get('Location_Name', ''))
+        addr = normalize_text(r.get('Address', ''))[:30]
+        pid = extract_place_id(r.get('URL', ''))
+        
+        match_id = None
+        for k, v in merged_dict.items():
+            if pid and v['pid'] and pid == v['pid']:
+                match_id = k; break
+            if name == v['norm_name']:
+                if phone and v['clean_phone'] and phone == v['clean_phone']:
+                    match_id = k; break
+                if web and v['norm_web'] and web == v['norm_web']:
+                    match_id = k; break
+                if addr and v['norm_addr'] and (addr in v['norm_addr'] or v['norm_addr'] in addr):
+                    match_id = k; break
+                if loc and v['norm_loc'] and loc == v['norm_loc']:
+                    match_id = k; break
+                if not phone and not web and not addr:
+                    match_id = k; break
+
+        if match_id is not None:
+            target = merged_dict[match_id]['data']
+            if not target.get('Phone') and r.get('Phone'):
+                target['Phone'] = r['Phone']
+                merged_dict[match_id]['clean_phone'] = phone
+            if not target.get('Website') and r.get('Website'):
+                target['Website'] = r['Website']
+                merged_dict[match_id]['norm_web'] = web
+            if not target.get('Address') and r.get('Address'):
+                target['Address'] = r['Address']
+                merged_dict[match_id]['norm_addr'] = addr
+            if r.get('Permanently_Closed', '').strip().lower() == 'yes':
+                target['Permanently_Closed'] = 'Yes'
+        else:
+            new_id = len(merged_dict)
+            merged_dict[new_id] = {
+                'norm_name': name,
+                'clean_phone': phone,
+                'norm_web': web,
+                'norm_loc': loc,
+                'norm_addr': addr,
+                'pid': pid,
+                'data': dict(r)
+            }
+            
+    return [v['data'] for v in merged_dict.values()]
+
+OTA_AND_DIRECTORY_DOMAINS = {
+    # Global OTAs & Booking Platforms
+    'booking.com', 'agoda.com', 'airbnb.com', 'expedia.com', 'tripadvisor.com', 
+    'hotels.com', 'trivago.com', 'kayak.com', 'priceline.com', 'hostelworld.com', 
+    'vrbo.com', 'viator.com', 'getyourguide.com', 'makemytrip.com', 'trip.com', 
+    'orbitz.com', 'travelocity.com', 'hotwire.com', 'skyscanner.com', 'opentable.com',
+    'booking.al', 'albania-booking.com', 'albania-hotels.net', 'albanian-hotels.com',
+    
+    # Affiliates & Booking Aggregators
+    'freecancellations.com', 'bluepillow.com', 'bluepillow.it', 'bluepillow.de', 'bluepillow.fr',
+    'placescollective.com', 'highlandhikecottage.eu', 'ocean-vista-lodge.eu', 
+    'brit-voyager.eu', 'backpackinghaven.eu', 'reservation.expert', 'exelentbnb.com',
+    'linktr.ee', 'yellowpages.com', 'yellowpages.al', 'yellowpages.com.al',
+    
+    # Social Media & Generic platforms
+    'facebook.com', 'fb.com', 'instagram.com', 'linkedin.com', 'youtube.com', 
+    'twitter.com', 'x.com', 'pinterest.com', 'tiktok.com', 'google.com', 'g.co',
+    'google.al', 'wikipedia.org'
+}
+
+def is_ota_or_directory_link(url):
+    if not url:
+        return True
+    url_clean = urllib.parse.unquote(str(url)).strip().lower()
+    if not url_clean.startswith(('http://', 'https://')):
+        url_clean = f"https://{url_clean}"
+    try:
+        parsed = urllib.parse.urlparse(url_clean)
+        netloc = parsed.netloc.lower()
+        if netloc.startswith('www.'):
+            netloc = netloc[4:]
+            
+        # Check direct domain or subdomains
+        for d in OTA_AND_DIRECTORY_DOMAINS:
+            if netloc == d or netloc.endswith(f".{d}"):
+                return True
+                
+        # Check URL path patterns typical of affiliate/OTA search links
+        path = parsed.path.lower()
+        if '/search/' in path or '/search?' in url_clean:
+            return True
+        if any(x in netloc for x in ['pillow', 'cancellation', 'booking', 'voyager', 'haven', 'lodge', 'reservation']):
+            if not any(x in netloc for x in ['hotel', 'resort', 'villa', 'bujtina', 'guest']):
+                return True
+    except Exception:
+        pass
+    return False
 
 CONTACT_PATHS = [
     'kontakt', 'contact', 'kontakti', 'contact-us', 'kontakt-oss',
@@ -149,13 +278,17 @@ def clean_email(em_raw):
     valid = []
     for f in found:
         f_low = f.lower()
+        if f_low in DISCARD_EXACT_EMAILS:
+            continue
         if any(bad in f_low for bad in BAD_KEYWORDS):
             continue
         parts = f_low.split('@')
         if len(parts) != 2:
             continue
         domain = parts[1]
-        if domain in DISCARD_DOMAINS or domain.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.css', '.js')):
+        if any(domain == d or domain.endswith(f".{d}") for d in DISCARD_DOMAINS):
+            continue
+        if domain.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.css', '.js')):
             continue
         valid.append(f_low)
     
@@ -262,7 +395,7 @@ async def crawl_hotel_website(session, url):
     # 1. Fetch homepage
     home_html = ""
     try:
-        resp = await session.get(url, timeout=10, headers=headers)
+        resp = await session.get(url, timeout=25, headers=headers)
         if resp.status_code == 200:
             home_html = resp.text
             found = await extract_emails_from_html(home_html, url)
@@ -275,7 +408,7 @@ async def crawl_hotel_website(session, url):
         subpages = find_contact_subpages(home_html, url)
         for sub in subpages:
             try:
-                resp_sub = await session.get(sub, timeout=8, headers=headers)
+                resp_sub = await session.get(sub, timeout=20, headers=headers)
                 if resp_sub.status_code == 200:
                     found_sub = await extract_emails_from_html(resp_sub.text, sub)
                     all_emails.update(found_sub)
@@ -324,24 +457,22 @@ async def main():
         
     print(f"[*] Đã tải {len(raw_rows)} bản ghi khách sạn thô từ: {INPUT_CSV}")
     
-    # 1. Khử trùng triệt để bằng Google Place ID
-    seen_place_ids = set()
-    dedup_rows = []
-    
-    for r in raw_rows:
-        url = r.get('URL', '').strip()
-        pid = extract_place_id(url)
-        if pid and pid in seen_place_ids:
-            continue
-        if pid:
-            seen_place_ids.add(pid)
-        dedup_rows.append(r)
-        
-    print(f"[*] Sau khử trùng Place ID: {len(dedup_rows)} cơ sở lưu trú duy nhất.")
+    # 1. Khử trùng nâng cao theo Tên, SĐT, Website, Địa chỉ và hợp nhất đa thuộc tính
+    dedup_rows = deduplicate_and_merge_hotels(raw_rows)
+    print(f"[*] Sau khử trùng và hợp nhất đa thuộc tính: {len(dedup_rows)} cơ sở lưu trú duy nhất thực tế (loại bỏ hoàn toàn {len(raw_rows) - len(dedup_rows)} bản ghi trùng lặp ảo).")
     
     # 2. Quét Email từ Website với Cache Checkpoint
-    cache = load_progress()
-    print(f"[*] Đã tải {len(cache)} kết quả email từ cache.")
+    raw_cache = load_progress()
+    # Làm sạch cache khỏi các email rác/hosting đã biết
+    cache = {}
+    for k, v in raw_cache.items():
+        if not v:
+            continue
+        v_clean = clean_email(v)
+        if v_clean:
+            cache[k] = v_clean
+    save_progress(cache)
+    print(f"[*] Đã tải {len(cache)} kết quả email sạch từ cache.")
     
     sem = asyncio.Semaphore(6)
     lock = asyncio.Lock()
@@ -352,6 +483,10 @@ async def main():
         pid = extract_place_id(r.get('URL', ''))
         
         if not web or not web.startswith('http'):
+            return ""
+            
+        if is_ota_or_directory_link(web):
+            print(f"[{idx}/{total}] [BỎ QUA NỀN TẢNG BOOKING/OTA] '{comp_name}' -> {web}")
             return ""
             
         if pid in cache:
@@ -379,6 +514,33 @@ async def main():
             tasks = [process_hotel(session, r, idx, len(dedup_rows)) for idx, r in enumerate(dedup_rows, 1)]
             emails = await asyncio.gather(*tasks)
 
+    # 3. Hậu kiểm tần suất email toàn bộ dataset:
+    # Nếu 1 email xuất hiện ở >= 3 khách sạn và domain email không match tên/website của khách sạn -> Đánh dấu email rác/agency/hosting và loại bỏ!
+    emails = list(emails)
+    from collections import Counter
+    email_counts = Counter(e.lower() for e in emails if e)
+    
+    for idx, em in enumerate(emails):
+        if not em:
+            continue
+        em_low = em.lower()
+        if em_low in DISCARD_EXACT_EMAILS:
+            emails[idx] = ""
+            continue
+        d = em_low.split('@')[-1]
+        if any(d == bad or d.endswith(f".{bad}") for bad in DISCARD_DOMAINS):
+            emails[idx] = ""
+            continue
+        if email_counts[em_low] >= 3:
+            comp_name = normalize_text(dedup_rows[idx].get('Name', ''))
+            comp_web = normalize_text(dedup_rows[idx].get('Website', ''))
+            em_user = em_low.split('@')[0]
+            words = [w for w in comp_name.split() if len(w) > 3]
+            match_name = any(w in em_user or w in d for w in words) if words else False
+            match_web = (comp_web and (d in comp_web or comp_web in d))
+            if not match_name and not match_web:
+                emails[idx] = ""
+
     # 3. Chuẩn hóa sang Template Cold Mail 20 cột chuẩn
     formatted_rows = []
     for r, em in zip(dedup_rows, emails):
@@ -387,7 +549,8 @@ async def main():
         if phone and not phone.startswith("'"):
             phone = f"'{phone}"
             
-        website = r.get('Website', '').strip()
+        raw_website = r.get('Website', '').strip()
+        official_website = "" if is_ota_or_directory_link(raw_website) else raw_website
         maps_url = r.get('URL', '').strip()
         address = r.get('Address', '').strip()
         category = translate_category(r.get('Category', ''))
@@ -402,8 +565,8 @@ async def main():
         else:
             check_gui = ""
             
-        contact_link = website if website else maps_url
-        contact_mail = maps_url if website else ""
+        contact_link = official_website if official_website else maps_url
+        contact_mail = maps_url if official_website else ""
         
         formatted_rows.append({
             'No.': 0,

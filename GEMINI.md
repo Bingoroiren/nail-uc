@@ -12,7 +12,7 @@ Toàn bộ các quy trình phức tạp đã được module hóa thành các Sk
 | :--- | :--- | :--- |
 | **`data-standards`** | [`.agents/skills/data-standards/SKILL.md`](file:///d:/glc/nail%20uc/.agents/skills/data-standards/SKILL.md) | **Quy chuẩn cốt lõi**: CSV UTF-8 with BOM (`utf-8-sig`), KHÔNG EXCEL, SĐT luôn có `'`, làm sạch Email `%20`, `headless=False`, lưu tăng dần `mode='a'`. |
 | **`scrape-maps`** | [`.agents/skills/scrape-maps/SKILL.md`](file:///d:/glc/nail%20uc/.agents/skills/scrape-maps/SKILL.md) | **Cào Google Maps Đa Quốc Gia**:<br>Kích hoạt: `Tôi muốn cào thị trường [Quốc gia], từ khoá lọc là [X, Y, Z...]`. Tự sinh trọn gói 5 module cào từ A-Z. |
-| **`scrape-hotel`** | [`.agents/skills/scrape-hotel/SKILL.md`](file:///d:/glc/nail%20uc/.agents/skills/scrape-hotel/SKILL.md) | **Đặc Thù Ngành Khách Sạn / Lưu Trú**:<br>Khử trùng bằng Google Place ID (`0x...:0x...`), selector Category đa năng kèm wait loop, bộ lọc `ALLOWED_CATEGORIES`, loại bỏ OTA, nhận diện Permanently Closed. |
+| **`scrape-hotel`** | [`.agents/skills/scrape-hotel/SKILL.md`](file:///c:/Users/PC/.gemini/antigravity-ide/scratch/nail-uc-main/.agents/skills/scrape-hotel/SKILL.md) | **Đặc Thù Ngành Khách Sạn / Lưu Trú**:<br>Khử trùng bằng Google Place ID (`0x...:0x...`), selector Category đa năng kèm wait loop, bộ lọc `ALLOWED_CATEGORIES`, **tiền xử lý lọc triệt để OTA / Aggregator trước khi cào mail**, nhận diện Permanently Closed. |
 | **`enrich-maps`** | [`.agents/skills/enrich-maps/SKILL.md`](file:///d:/glc/nail%20uc/.agents/skills/enrich-maps/SKILL.md) | **Làm Giàu Dữ Liệu Bằng Google Maps**:<br>Kích hoạt: `Tôi muốn làm giàu data [tên file CSV hoặc dữ liệu này] bằng ggmap`. So khớp tên nghiêm ngặt, bóc tách SĐT & Web, quét email B2B, lưu tăng dần. |
 
 ---

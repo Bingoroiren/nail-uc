@@ -338,7 +338,7 @@ async def scroll_feed(page):
     
     for _ in range(max_scrolls):
         await feed_loc.evaluate("node => node.scrollTop = node.scrollHeight")
-        await asyncio.sleep(1.2)
+        await asyncio.sleep(2.0)
         
         cards = page.locator(config_hotel_al.SELECTORS["listing_link"])
         curr_count = await cards.count()
@@ -373,13 +373,13 @@ async def process_search(page, keyword, loc_info, scraped_urls):
     for attempt in range(1, 4):
         try:
             await page.goto(search_url, timeout=config_hotel_al.TIMEOUT, wait_until="domcontentloaded")
-            await asyncio.sleep(2.0)
+            await asyncio.sleep(3.5)
             break
         except Exception as e:
             if attempt == 3:
                 print(f"[-] Lỗi nạp trang tìm kiếm: {e}")
                 return False
-            await asyncio.sleep(3.0)
+            await asyncio.sleep(5.0)
             
     await handle_captcha(page)
     await bypass_consent_screen(page)
@@ -414,14 +414,28 @@ async def process_search(page, keyword, loc_info, scraped_urls):
             if pid in scraped_urls:
                 continue
                 
+            old_name = ""
+            name_loc = page.locator(config_hotel_al.SELECTORS["business_name"])
+            if await name_loc.count() > 0:
+                try:
+                    old_name = (await name_loc.first.inner_text()).strip()
+                except Exception:
+                    pass
+
             await item.scroll_into_view_if_needed()
             await item.click()
             
-            # Chờ panel chi tiết mở ra
+            # Chờ panel chi tiết mở ra và cập nhật đúng thực thể mới (VPN buffer)
             try:
-                await page.wait_for_selector(config_hotel_al.SELECTORS["business_name"], timeout=7000)
+                await page.wait_for_selector(config_hotel_al.SELECTORS["business_name"], timeout=15000)
+                for _ in range(20):
+                    if await name_loc.count() > 0:
+                        cur_name = (await name_loc.first.inner_text()).strip()
+                        if cur_name and cur_name != old_name:
+                            break
+                    await asyncio.sleep(0.25)
             except Exception:
-                await asyncio.sleep(1.0)
+                await asyncio.sleep(2.0)
                 
             await handle_captcha(page)
             record = await extract_details(page, place_url, search_query, loc_info)

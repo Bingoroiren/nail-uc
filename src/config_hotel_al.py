@@ -81,14 +81,14 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_CSV = os.path.join(ROOT_DIR, "data", "raw", "hotel_albania.csv")
 PROGRESS_FILE = os.path.join(ROOT_DIR, "data", "progress", "scraping_progress_hotel_al.json")
 
-# Playwright Browser Settings (Visual UI per workspace rules)
+# Playwright Browser Settings (Visual UI per workspace rules, tuned for VPN)
 HEADLESS = False  # Headless=False for visual monitoring & Captcha alerts
-SLOW_MO = 5       # Milliseconds between actions
-TIMEOUT = 60000   # 60s timeout
+SLOW_MO = 30      # Milliseconds between actions
+TIMEOUT = 120000  # 120s timeout for stable VPN loading
 
-# Delay Settings (Seconds)
-MIN_DELAY = 0.1
-MAX_DELAY = 0.4
+# Delay Settings (Seconds - relaxed for VPN stability)
+MIN_DELAY = 1.0
+MAX_DELAY = 2.5
 
 # Google Maps Selectors (Hotel specific)
 SELECTORS = {
