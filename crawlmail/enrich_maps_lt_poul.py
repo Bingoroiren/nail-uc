@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-GOOGLE MAPS DATA ENRICHMENT - LITHUANIAN POULTRY & MEAT PROCESSING (LT_POUL_WEBD)
+GOOGLE MAPS DATA ENRICHMENT - LITHUANIAN POULTRY & MEAT ENTERPRISES (LT_POUL_WEBD)
 Built strictly adhering to:
 - Skill enrich-maps & Skill data-standards (Strict Name Matching, headless=False, incremental save)
 - Skill crawl-mail (Priority 10 DOM menu, Cloudflare XOR decode, B2B email scoring)
 - 100% Aggregator & Junk Email Filtering (Blacklisting all Lithuanian directory/yellowpage portals)
-- Rule 1: CSV UTF-8 with BOM (utf-8-sig) ONLY (Native csv, zero pandas dependency)
+- Rule 1: CSV UTF-8 with BOM (utf-8-sig) ONLY (Zero pandas dependency)
 - Rule 2: Phone numbers with leading single quote (')
 - Rule 3: 1 Best B2B email only, 100% emails sorted to the top
 - Rule 10: 17-character fixed filename convention (LT_POUL_WEBD_1ENR.csv / LT_POUL_WEBD_2COL.csv)
@@ -22,7 +22,7 @@ import json
 import argparse
 import unicodedata
 import urllib.parse
-import urllib.request
+from pathlib import Path
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
 
@@ -32,18 +32,14 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding='utf-8', line_buffering=True)
 
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CSV_PATH = os.path.join(ROOT_DIR, "LT_POUL_WEBD_1ENR.csv")
-CSV_CSDL_PATH = os.path.join(ROOT_DIR, "csdl_mlt", "LT_POUL_WEBD_1ENR.csv")
-COLDMAIL_CSV_PATH = os.path.join(ROOT_DIR, "LT_POUL_WEBD_2COL.csv")
-COLDMAIL_CSDL_PATH = os.path.join(ROOT_DIR, "csdl_mlt", "LT_POUL_WEBD_2COL.csv")
-CACHE_PATH = os.path.join(ROOT_DIR, "crawlmail", "cache_enrich_maps_lt_poul.json")
+ROOT_DIR = Path(__file__).resolve().parent.parent
+CSV_PATH = ROOT_DIR / "LT_POUL_WEBD_1ENR.csv"
+CSV_CSDL_PATH = ROOT_DIR / "csdl_mlt" / "LT_POUL_WEBD_1ENR.csv"
+COLDMAIL_CSV_PATH = ROOT_DIR / "LT_POUL_WEBD_2COL.csv"
+COLDMAIL_CSDL_PATH = ROOT_DIR / "csdl_mlt" / "LT_POUL_WEBD_2COL.csv"
+CACHE_PATH = ROOT_DIR / "crawlmail" / "cache_enrich_maps_lt_poul.json"
+PROFILE_DIR = ROOT_DIR / "chrome_user_data" / "lt_poul_maps_profile"
 
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
-
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}
 EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]+\.[A-Za-z]{2,10}\b')
 INVALID_EXTS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.css', '.js', '.pdf', '.woff', '.woff2', '.ico', '.mp4')
 
@@ -64,7 +60,7 @@ BLACKLIST_DOMAINS = [
     'cookiebot.com', 'cloudflare.com', 'apple.com'
 ]
 
-# Rule 12: Danh sách công ty loại trừ vĩnh viễn khỏi danh sách kết nối
+# Rule 12: Permanent Blacklist
 EXCLUDED_COMPANIES = [
     'scandi standard', 'scandi-standard', 'scandi standart',
     'biliarta',
@@ -105,11 +101,10 @@ LT_PRIORITY_KEYWORDS = [
 ]
 
 LT_GUESS_SUBPATHS = [
-    '/kontaktai', '/kontaktai/', '/kontaktai.html', '/kontaktai.php',
-    '/apie-mus', '/apie-mus/', '/apie-mus.html',
+    '/kontaktai', '/kontaktai/', '/kontaktai.html',
+    '/apie-mus', '/apie-mus/',
     '/karjera', '/karjera/', '/darbas',
-    '/rekvizitai', '/susisiekite',
-    '/contact', '/contacts', '/contact-us', '/about', '/about-us'
+    '/contact', '/contacts', '/about', '/about-us'
 ]
 
 COLDMAIL_COLUMNS = [
@@ -202,11 +197,9 @@ def is_valid_name_match(query_name, candidate_name):
     if q_clean == c_clean:
         return True, "EXACT"
         
-    # Check if candidate or query is substring with at least 5 chars
     if len(q_clean) >= 5 and (q_clean in c_clean or c_clean in q_clean):
         return True, "SUBSTRING_MATCH"
         
-    # Token set intersection
     q_tokens = set(q_clean.split())
     c_tokens = set(c_clean.split())
     if q_tokens and c_tokens:
@@ -268,37 +261,33 @@ def score_email_b2b(email, domain=""):
     return score
 
 
-def select_best_email(emails, domain=""):
-    """Select the single best B2B email with the highest score."""
-    valid = [clean_extracted_email(e) for e in set(emails) if score_email_b2b(e, domain) > 0]
-    if not valid:
-        return ""
-    return max(valid, key=lambda e: score_email_b2b(e, domain))
+def is_valid_website(comp_name, url):
+    """Check if URL is valid official company website (not social or ad banner)."""
+    if not url or not isinstance(url, str) or not url.startswith('http'):
+        return False
+    u_low = url.lower()
+    if any(bad in u_low for bad in BLACKLIST_DOMAINS):
+        return False
+    if 'citma.lt' in u_low and 'citma' not in comp_name.lower():
+        return False
+    return True
 
 
-def fetch_html_stealth(url):
-    """Fetch HTML with curl_cffi Chrome120 or fallback urllib."""
+def fetch_html_quick(url, timeout_s=4):
+    """Fetch HTML with curl_cffi Chrome120 and strict timeout."""
     try:
         from curl_cffi import requests as c_requests
-        r = c_requests.get(url, impersonate='chrome120', timeout=7, verify=False)
+        r = c_requests.get(url, impersonate='chrome120', timeout=timeout_s, verify=False)
         if r.status_code == 200:
             return r.text
-    except Exception:
-        pass
-    try:
-        req = urllib.request.Request(url, headers=HEADERS)
-        with urllib.request.urlopen(req, context=ctx, timeout=5) as r:
-            return r.read().decode('utf-8', errors='ignore')
     except Exception:
         pass
     return ""
 
 
-def crawl_site_for_emails(web_url):
-    """DOM-First Multi-Tier Email Extractor per Skill crawl-mail (Lithuania)."""
-    if not web_url or not web_url.startswith('http'):
-        return ""
-    if any(bad in web_url.lower() for bad in BLACKLIST_DOMAINS):
+def crawl_site_for_emails_quick(web_url, comp_name=""):
+    """Quick DOM-First Multi-Tier Email Extractor with strict timeouts."""
+    if not is_valid_website(comp_name, web_url):
         return ""
         
     parsed = urllib.parse.urlparse(web_url)
@@ -306,9 +295,9 @@ def crawl_site_for_emails(web_url):
     found = set()
     
     # 1. Fetch Homepage
-    home_html = fetch_html_stealth(web_url)
+    home_html = fetch_html_quick(web_url, timeout_s=4)
     if not home_html and web_url != root:
-        home_html = fetch_html_stealth(root)
+        home_html = fetch_html_quick(root, timeout_s=4)
         
     if home_html:
         for m in re.findall(r'href=["\']mailto:([^"?\'>]+)', home_html, re.I):
@@ -323,8 +312,8 @@ def crawl_site_for_emails(web_url):
             if score_email_b2b(em, root) > 0:
                 found.add(clean_extracted_email(em))
                 
-        best_home = select_best_email(found, root)
-        if best_home and score_email_b2b(best_home, root) >= 80:
+        best_home = max(found, key=lambda e: score_email_b2b(e, root)) if found else ""
+        if best_home and score_email_b2b(best_home, root) >= 70:
             return best_home
 
         # Priority 10: Extract real DOM contact links from homepage
@@ -339,8 +328,8 @@ def crawl_site_for_emails(web_url):
                     if full not in dom_contact_links and '#' not in a['href'] and not any(full.lower().endswith(ext) for ext in INVALID_EXTS):
                         dom_contact_links.append(full)
                         
-            for cl in dom_contact_links[:4]:
-                chtml = fetch_html_stealth(cl)
+            for cl in dom_contact_links[:3]:
+                chtml = fetch_html_quick(cl, timeout_s=3)
                 if not chtml:
                     continue
                 for m in re.findall(r'href=["\']mailto:([^"?\'>]+)', chtml, re.I):
@@ -354,16 +343,16 @@ def crawl_site_for_emails(web_url):
                 for em in EMAIL_REGEX.findall(chtml):
                     if score_email_b2b(em, root) > 0:
                         found.add(clean_extracted_email(em))
-                if found:
+                if found and any(score_email_b2b(e, root) >= 70 for e in found):
                     break
         except Exception:
             pass
 
     # Priority 2: Fallback Guess Paths if still nothing found
     if not found:
-        for gp in LT_GUESS_SUBPATHS[:6]:
+        for gp in LT_GUESS_SUBPATHS[:4]:
             guess_url = urllib.parse.urljoin(root, gp)
-            ghtml = fetch_html_stealth(guess_url)
+            ghtml = fetch_html_quick(guess_url, timeout_s=2)
             if not ghtml:
                 continue
             for m in re.findall(r'href=["\']mailto:([^"?\'>]+)', ghtml, re.I):
@@ -376,7 +365,8 @@ def crawl_site_for_emails(web_url):
             if found:
                 break
 
-    return select_best_email(found, root)
+    valid = [e for e in found if score_email_b2b(e, root) > 0]
+    return max(valid, key=lambda e: score_email_b2b(e, root)) if valid else ""
 
 
 def load_dataset(csv_path):
@@ -414,7 +404,7 @@ def save_and_reorder(fieldnames, rows):
         writer.writeheader()
         writer.writerows(sorted_rows)
 
-    if os.path.exists(os.path.dirname(CSV_CSDL_PATH)):
+    if CSV_CSDL_PATH.parent.exists():
         with open(CSV_CSDL_PATH, mode='w', encoding='utf-8-sig', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
@@ -444,7 +434,7 @@ def save_and_reorder(fieldnames, rows):
         writer.writeheader()
         writer.writerows(coldmail_rows)
 
-    if os.path.exists(os.path.dirname(COLDMAIL_CSDL_PATH)):
+    if COLDMAIL_CSDL_PATH.parent.exists():
         with open(COLDMAIL_CSDL_PATH, mode='w', encoding='utf-8-sig', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=COLDMAIL_COLUMNS)
             writer.writeheader()
@@ -459,10 +449,11 @@ async def run_enrichment(headless=False, limit=None):
     print(f"  Target File : {CSV_PATH}")
     print(f"  Cold Mail   : {COLDMAIL_CSV_PATH}")
     print(f"  Cache File  : {CACHE_PATH}")
+    print(f"  Profile Dir : {PROFILE_DIR}")
     print(f"  View Mode   : {'HEADLESS (Background)' if headless else 'VISUAL (Headless=False)'}")
     print("=" * 80 + "\n")
 
-    if not os.path.exists(CSV_PATH):
+    if not CSV_PATH.exists():
         print(f"[ERROR] Target file '{CSV_PATH}' not found!")
         return
 
@@ -472,192 +463,221 @@ async def run_enrichment(headless=False, limit=None):
             fieldnames.append(col)
 
     cache = {}
-    if os.path.exists(CACHE_PATH):
+    if CACHE_PATH.exists():
         try:
             with open(CACHE_PATH, 'r', encoding='utf-8') as f:
                 cache = json.load(f)
-            print(f"[*] Loaded {len(cache)} cached company profiles from {CACHE_PATH}.")
+            print(f"[*] Nạp Cache Checkpoint: {len(cache):,} công ty đã kiểm tra từ trước.")
         except Exception as e:
             print(f"[WARN] Could not load cache: {e}")
 
-    # Step 0: Quick direct crawl for companies already having Web but no Email
-    has_web_no_email_rows = [
-        r for r in rows
-        if not r.get('Email', '').strip() 
-        and r.get('Web', '').strip().startswith('http') 
-        and not any(bad in r.get('Web', '').lower() for bad in BLACKLIST_DOMAINS)
-        and not ('citma.lt' in r.get('Web', '').lower() and 'citma' not in r.get('Công ty', '').lower())
-    ]
-    if has_web_no_email_rows:
-        print(f"\n[*] STEP 0: Direct Website Crawling for {len(has_web_no_email_rows)} companies with existing Web link...")
-        direct_found = 0
-        for i_idx, r in enumerate(has_web_no_email_rows, 1):
-            w = r.get('Web', '').strip()
-            comp = r.get('Công ty', '').strip()
-            em = crawl_site_for_emails(w)
-            if em:
-                r['Email'] = em
-                direct_found += 1
-                print(f"    [{i_idx}/{len(has_web_no_email_rows)}] [+] DIRECT EMAIL: {comp} -> {em}")
-            if i_idx % 10 == 0:
-                save_and_reorder(fieldnames, rows)
-        print(f"[*] STEP 0 COMPLETED: Discovered +{direct_found} emails directly from existing websites!\n")
-        save_and_reorder(fieldnames, rows)
+    # Lọc danh sách công ty cần xử lý (Chưa có Email)
+    pending_rows = []
+    for r in rows:
+        em = r.get('Email', '').strip()
+        comp = r.get('Công ty', '').strip()
+        cache_key = comp.lower()
+        if em:
+            continue
+        if cache_key in cache:
+            c = cache[cache_key]
+            if c.get('Email'):
+                r['Email'] = c['Email']
+            if c.get('Web') and not r.get('Web', '').strip():
+                r['Web'] = c['Web']
+            if c.get('SĐT') and not r.get('SĐT', '').strip():
+                r['SĐT'] = c['SĐT']
+            continue
+        pending_rows.append(r)
 
-    # Find rows needing Google Maps enrichment
-    pending_rows = [
-        r for r in rows
-        if not r.get('Email', '').strip()
-    ]
-
-    if limit and limit > 0:
-        pending_rows = pending_rows[:limit]
-
-    print(f"[*] Total companies: {len(rows)} | Already have Email: {len(rows) - len(pending_rows)} | Needing Maps: {len(pending_rows)}")
+    already_has = sum(1 for r in rows if r.get('Email', '').strip())
+    print(f"[*] Tổng số doanh nghiệp       : {len(rows):,}")
+    print(f"[*] Đã có Email B2B            : {already_has:,} ({already_has/len(rows)*100:.1f}%)")
+    print(f"[*] Đã lưu trong Cache         : {len(cache):,} công ty")
+    print(f"[*] CẦN LÀM GIÀU GOOGLE MAPS   : {len(pending_rows):,} công ty\n")
 
     if not pending_rows:
-        print("[+] All companies already have emails!")
+        print("[✔] Toàn bộ công ty đã có email hoặc đã kiểm tra xong!")
         save_and_reorder(fieldnames, rows)
         return
 
+    if limit and limit > 0:
+        pending_rows = pending_rows[:limit]
+        print(f"[*] Giới hạn xử lý: {limit} công ty theo tùy chọn --limit.")
+
+    PROFILE_DIR.mkdir(parents=True, exist_ok=True)
+
+    print("[*] Đang khởi động Google Chrome trực quan (Headless=False)...")
     async with async_playwright() as p:
-        browser = await p.chromium.launch(
+        browser = await p.chromium.launch_persistent_context(
+            user_data_dir=str(PROFILE_DIR),
             headless=headless,
+            viewport={'width': 1280, 'height': 800},
+            locale="lt-LT",
             args=[
                 "--disable-blink-features=AutomationControlled",
+                "--start-maximized",
                 "--disable-dev-shm-usage",
-                "--disable-gpu",
-                "--no-sandbox",
-                "--js-flags=--max-old-space-size=512"
+                "--no-sandbox"
             ]
         )
-        context = await browser.new_context(
-            viewport={'width': 1280, 'height': 800},
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-            locale="lt-LT"
-        )
-        await context.add_cookies([
+
+        await browser.add_cookies([
             {'name': 'SOCS', 'value': 'CAESEwgDEgk2OTQ0NTgyODQaAmVuIAEaBgiA_LyaBg', 'domain': '.google.com', 'path': '/'}
         ])
-        page = await context.new_page()
+        page = browser.pages[0] if browser.pages else await browser.new_page()
 
         processed = 0
         newly_found = 0
 
         for r in pending_rows:
+            if page.is_closed():
+                try:
+                    page = await browser.new_page()
+                except Exception:
+                    pass
+
             comp = r.get('Công ty', '').strip()
             city = r.get('Thành phố', '').strip()
-            ico = r.get('IČO', '').strip()
-            cache_key = ico if ico else f"{comp}::{city}".lower()
+            curr_web = r.get('Web', '').strip()
+            cache_key = comp.lower()
 
             processed += 1
+            print(f"[{processed:04d}/{len(pending_rows):04d}] {comp[:35]:<35} | ", end="", flush=True)
 
-            if cache_key in cache:
-                c = cache[cache_key]
-                if c.get('Email'):
-                    r['Email'] = c['Email']
-                if c.get('Web') and not r.get('Web', '').strip():
-                    r['Web'] = c['Web']
-                if c.get('SĐT') and not r.get('SĐT', '').strip():
-                    r['SĐT'] = c['SĐT']
-                continue
+            found_email = ""
+            gmap_web = None
+            gmap_phone = None
+            gmap_addr = None
 
-            # Query Google Maps
-            q = f"{comp} {city} Lietuva".strip() if city else f"{comp} Lietuva".strip()
-            url = f"https://www.google.com/maps/search/{urllib.parse.quote_plus(q)}"
-            web_url = None
-            phone_val = None
-            addr_val = None
-            matched = False
+            # BƯỚC 1: Nếu công ty đã có website hợp lệ sẵn từ file
+            if curr_web and is_valid_website(comp, curr_web):
+                found_email = crawl_site_for_emails_quick(curr_web, comp)
+                if found_email:
+                    print(f"WEB SẴN: {curr_web[:22]:<22} | EMAIL: {found_email}")
+                    r['Email'] = found_email
+                    newly_found += 1
 
-            try:
-                await page.goto(url, wait_until='domcontentloaded', timeout=12000)
-                await page.wait_for_timeout(2000)
+            # BƯỚC 2: Nếu chưa có Email -> Tìm kiếm trên Google Maps
+            if not found_email:
+                queries = []
+                if city:
+                    queries.append(f"{comp} {city} Lietuva")
+                queries.append(f"{comp} Lietuva")
 
-                # Consent handle
-                if "consent.google.com" in page.url or await page.query_selector("iframe[src*='recaptcha']"):
-                    print("\n\a[WARNING] Google Captcha / Consent detected! Please solve it on browser window...\n")
-                    await page.wait_for_timeout(10000)
+                matched = False
+                for q_term in queries:
+                    if matched:
+                        break
+                    url = f"https://www.google.com/maps/search/{urllib.parse.quote_plus(q_term)}"
 
-                items = await page.query_selector_all('a[href*="/maps/place/"]')
-                if items:
-                    for item in items[:3]:
-                        aria_label = await item.get_attribute('aria-label') or ""
-                        is_ok, reason = is_valid_name_match(comp, aria_label)
-                        if is_ok:
-                            await item.click()
-                            await page.wait_for_timeout(2000)
-                            matched = True
-                            break
-                else:
-                    title_elem = await page.query_selector('h1.DUwDvf')
-                    if title_elem:
-                        t_text = await title_elem.inner_text()
-                        is_ok, reason = is_valid_name_match(comp, t_text)
-                        matched = is_ok
+                    try:
+                        await page.goto(url, wait_until='domcontentloaded', timeout=14000)
+                        await asyncio.sleep(1.2)
 
-                if matched:
-                    # Website link
-                    web_btn = await page.query_selector('a[data-item-id="authority"], a[aria-label*="Svetainė"], a[aria-label*="Website"]')
-                    if web_btn:
-                        cand_web = await web_btn.get_attribute('href')
-                        if cand_web and not any(bad in cand_web.lower() for bad in BLACKLIST_DOMAINS) and not ('citma.lt' in cand_web.lower() and 'citma' not in comp.lower()):
-                            web_url = cand_web
+                        # Bấm nút đồng ý Cookie nếu có
+                        try:
+                            consent_btn = await page.query_selector(
+                                'button:has-text("Priimti viską"), button:has-text("Accept all"), button:has-text("Sutinku")'
+                            )
+                            if consent_btn:
+                                await consent_btn.click()
+                                await asyncio.sleep(0.8)
+                        except Exception:
+                            pass
 
-                    # Phone button
-                    phone_btn = await page.query_selector('button[data-item-id^="phone:"], button[aria-label*="Telefonas"]')
-                    if phone_btn:
-                        p_attr = await phone_btn.get_attribute('data-item-id')
-                        if p_attr and p_attr.startswith('phone:tel:'):
-                            phone_val = p_attr.replace('phone:tel:', '').strip()
+                        # Chờ kết quả hiển thị
+                        for _ in range(6):
+                            if await page.query_selector('a[href*="/maps/place/"], h1.DUwDvf'):
+                                break
+                            await asyncio.sleep(0.5)
+
+                        # 1. Danh sách nhiều kết quả
+                        items = await page.query_selector_all('a[href*="/maps/place/"]')
+                        if items:
+                            for item in items[:3]:
+                                aria_label = await item.get_attribute('aria-label') or ""
+                                is_ok, reason = is_valid_name_match(comp, aria_label)
+                                if is_ok:
+                                    await item.click()
+                                    await asyncio.sleep(1.5)
+                                    matched = True
+                                    break
                         else:
-                            p_txt = await phone_btn.inner_text()
-                            if p_txt:
-                                phone_val = p_txt.strip()
+                            # 2. Trang chi tiết địa điểm duy nhất
+                            title_elem = await page.query_selector('h1.DUwDvf')
+                            if title_elem:
+                                t_text = await title_elem.inner_text()
+                                is_ok, reason = is_valid_name_match(comp, t_text)
+                                matched = is_ok
 
-                    # Address button
-                    addr_btn = await page.query_selector('button[data-item-id="address"]')
-                    if addr_btn:
-                        a_txt = await addr_btn.inner_text()
-                        if a_txt:
-                            addr_val = a_txt.strip()
+                        if matched:
+                            # Lấy website
+                            web_btn = await page.query_selector('a[data-item-id="authority"], a[aria-label*="Svetainė"], a[aria-label*="Website"]')
+                            if web_btn:
+                                cand_web = await web_btn.get_attribute('href')
+                                if cand_web and is_valid_website(comp, cand_web):
+                                    gmap_web = cand_web
 
-            except Exception:
-                pass
+                            # Lấy SĐT
+                            phone_btn = await page.query_selector('button[data-item-id^="phone:"], button[aria-label*="Telefonas"]')
+                            if phone_btn:
+                                p_attr = await phone_btn.get_attribute('data-item-id')
+                                if p_attr and p_attr.startswith('phone:tel:'):
+                                    gmap_phone = p_attr.replace('phone:tel:', '').strip()
+                                else:
+                                    p_txt = await phone_btn.inner_text()
+                                    if p_txt:
+                                        gmap_phone = p_txt.strip()
 
-            email = ""
-            if web_url and matched:
-                email = crawl_site_for_emails(web_url)
+                            # Lấy Địa chỉ
+                            addr_btn = await page.query_selector('button[data-item-id="address"]')
+                            if addr_btn:
+                                a_txt = await addr_btn.inner_text()
+                                if a_txt:
+                                    gmap_addr = a_txt.strip()
 
-            if web_url and matched and not r.get('Web', '').strip():
-                r['Web'] = web_url
-            if email:
-                r['Email'] = email
-                newly_found += 1
-                print(f"[{processed}/{len(pending_rows)}] [+] NEW EMAIL: {comp} -> {email} ({web_url})")
-            elif matched and web_url:
-                print(f"[{processed}/{len(pending_rows)}] [~] MATCHED WEB: {comp} -> {web_url} (No direct email)")
-            elif matched and phone_val:
-                print(f"[{processed}/{len(pending_rows)}] [~] MATCHED PHONE: {comp} -> {phone_val}")
+                    except Exception:
+                        pass
 
-            if phone_val and matched and not r.get('SĐT', '').strip():
-                r['SĐT'] = clean_phone_lt(phone_val)
-            if addr_val and matched and not r.get('Địa chỉ', '').strip():
-                r['Địa chỉ'] = addr_val
+                # Cập nhật kết quả từ Maps
+                if matched:
+                    if gmap_web:
+                        if not r.get('Web', '').strip():
+                            r['Web'] = gmap_web
+                        # Quét email từ website vừa tìm được
+                        found_email = crawl_site_for_emails_quick(gmap_web, comp)
+                        if found_email:
+                            r['Email'] = found_email
+                            newly_found += 1
+                            print(f"GMAP WEB: {gmap_web[:22]:<22} | EMAIL: {found_email}")
+                        else:
+                            print(f"GMAP WEB: {gmap_web[:22]:<22} | (Không có mail)")
+                    elif gmap_phone:
+                        print(f"GMAP PHONE: {gmap_phone} (Không có web)")
+                    else:
+                        print("Khớp tên trên Maps (Không có web/sđt)")
 
-            # Record in cache
+                    if gmap_phone and not r.get('SĐT', '').strip():
+                        r['SĐT'] = clean_phone_lt(gmap_phone)
+                    if gmap_addr and not r.get('Địa chỉ', '').strip():
+                        r['Địa chỉ'] = gmap_addr
+                else:
+                    print("Không tìm thấy trên Maps")
+
+            # Lưu vào Cache
             cache[cache_key] = {
-                'Web': web_url if (web_url and matched) else "",
-                'Email': email,
-                'SĐT': clean_phone_lt(phone_val) if (phone_val and matched) else ""
+                'Web': r.get('Web', ''),
+                'Email': r.get('Email', ''),
+                'SĐT': clean_phone_lt(r.get('SĐT', ''))
             }
 
-            # Incremental auto-save every 5 companies
+            # Checkpoint tự động sau mỗi 5 công ty
             if processed % 5 == 0:
                 with open(CACHE_PATH, 'w', encoding='utf-8') as f:
                     json.dump(cache, f, ensure_ascii=False, indent=2)
                 cnt = save_and_reorder(fieldnames, rows)
-                print(f"[*] Checkpoint saved ({processed}/{len(pending_rows)} processed, {cnt} total valid emails, +{newly_found} new)")
+                print(f"[*] Checkpoint saved: {cnt} công ty có email (+{newly_found} mới)")
 
         # Final Save
         with open(CACHE_PATH, 'w', encoding='utf-8') as f:
@@ -666,10 +686,10 @@ async def run_enrichment(headless=False, limit=None):
 
         print("\n" + "=" * 80)
         print("  GOOGLE MAPS ENRICHMENT COMPLETED SUCCESSFULLY!")
-        print(f"  Total companies: {len(rows)}")
-        print(f"  Final emails with clean data: {final_cnt} / {len(rows)} ({(final_cnt/len(rows))*100:.1f}%)")
-        print(f"  Newly discovered: +{newly_found}")
-        print("  Files saved:")
+        print(f"  Tổng doanh nghiệp  : {len(rows):,}")
+        print(f"  Tổng số có Email   : {final_cnt:,} ({(final_cnt/len(rows))*100:.1f}%)")
+        print(f"  Email mới tìm thấy : +{newly_found:,}")
+        print("  Đã lưu đồng bộ:")
         print(f"    - {CSV_PATH}")
         print(f"    - {COLDMAIL_CSV_PATH}")
         print("=" * 80)
