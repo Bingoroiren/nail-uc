@@ -108,6 +108,6 @@ data/formatted/
 !ADENVMAP.csv
 !NOPROFF.csv
 !NOPODATA.csv
-
-
-
+!AT_AGCY_COMB_2COL.csv
+!AT_AGCY_GMAP_2COL.csv
+!data/AT_AGCY_COMB_2COL.csv
