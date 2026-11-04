@@ -378,6 +378,44 @@ def load_dataset(csv_path):
     return fieldnames, rows
 
 
+def guess_emails_from_domains_poul(rows):
+    """Đoán email ghép theo tiền tố phổ biến nhất (info@) cho các website chưa có email."""
+    prefix_counts = {}
+    for r in rows:
+        em = str(r.get('Email', '')).strip().lower()
+        if em and '@' in em and '.' in em:
+            pref = em.split('@')[0].strip()
+            prefix_counts[pref] = prefix_counts.get(pref, 0) + 1
+    sorted_prefixes = sorted(prefix_counts.items(), key=lambda x: x[1], reverse=True)
+    chosen_prefix = sorted_prefixes[0][0] if sorted_prefixes else 'info'
+
+    guessed_count = 0
+    for r in rows:
+        if is_blacklisted_company(r.get('Công ty', '')):
+            continue
+        em = str(r.get('Email', '')).strip()
+        if not em or '@' not in em:
+            web = r.get('Web', '')
+            domain = None
+            if web:
+                try:
+                    u = web.strip().lower()
+                    if not u.startswith(('http://', 'https://')):
+                        u = 'http://' + u
+                    netloc = urllib.parse.urlparse(u).netloc.split(':')[0].lower()
+                    if netloc.startswith('www.'):
+                        netloc = netloc[4:]
+                    if '.' in netloc and len(netloc.split('.')[-1]) >= 2 and not any(b in netloc for b in BLACKLIST_DOMAINS):
+                        domain = netloc
+                except Exception:
+                    pass
+            if domain:
+                r['Email'] = f"{chosen_prefix}@{domain}"
+                guessed_count += 1
+    if guessed_count > 0:
+        print(f"\n[*] [BƯỚC ĐOÁN EMAIL] Tiền tố '{chosen_prefix}': đã ghép thành công +{guessed_count} email mới từ website!")
+
+
 def save_and_reorder(fieldnames, rows):
     """Save progress and generate standard 2COL Cold Mail CSV with 100% emails on top."""
     # Rule 12: Exclude blacklisted companies
@@ -679,9 +717,10 @@ async def run_enrichment(headless=False, limit=None):
                 cnt = save_and_reorder(fieldnames, rows)
                 print(f"[*] Checkpoint saved: {cnt} công ty có email (+{newly_found} mới)")
 
-        # Final Save
+        # Final Save with Email Guessing
         with open(CACHE_PATH, 'w', encoding='utf-8') as f:
             json.dump(cache, f, ensure_ascii=False, indent=2)
+        guess_emails_from_domains_poul(rows)
         final_cnt = save_and_reorder(fieldnames, rows)
 
         print("\n" + "=" * 80)

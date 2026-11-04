@@ -33,9 +33,22 @@ Bộ quy chuẩn này áp dụng bắt buộc cho **tất cả** các script cà
 > **QUY CHUẨN CỐT LÕI**: Việc thiết lập bộ chấm điểm để giữ lại **DUY NHẤT 1 EMAIL CÓ GIÁ TRỊ NHẤT** cho từng công ty và loại bỏ 100% email rác/template có **tầm quan trọng tuyệt đối ngang hàng với việc thêm dấu nháy đơn `'` trước số điện thoại**. Không bao giờ được phép để sót mail rác hoặc nhét danh sách nhiều mail vào 1 ô gây rối loạn hệ thống Cold Mail.
 
 ### A. Lọc bỏ 100% Email Rác & Email Mẫu Template:
-- **Làm sạch URL encoding / Ký tự lạ**:
+- **Làm sạch URL encoding / Ký tự lạ / Khoảng trắng ẩn (Tuyệt đối không để lẫn `\u00a0`)**:
   ```python
-  email = urllib.parse.unquote(str(email)).replace('%20', '').strip().lower().rstrip('.,;:')
+  def clean_email(email):
+      if not email or not isinstance(email, str):
+          return ""
+      em = urllib.parse.unquote(str(email).strip())
+      # Loại bỏ triệt để \u00a0 (non-breaking space / &nbsp; / \xa0), %20, zero-width và khoảng trắng lạ
+      for bad in ['\u00a0', '\xa0', '&nbsp;', '%20', '\u200b', '\u200e', '\u200f', '\ufeff', '\u202f', '\u3000']:
+          em = em.replace(bad, '')
+      em = re.sub(r'^mailto:\s*', '', em, flags=re.I)
+      em = re.sub(r'\s+', '', em)
+      em = em.strip(" .,;:\"'<>[](){}\\/")
+      if re.match(r'^20[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', em) and not em.startswith('202'):
+          if re.match(r'^20[a-zA-Z]', em):
+              em = em[2:]
+      return em.lower()
   ```
 - **Loại trừ domain hệ thống, Theme builders & Placeholders**:
   - `sentry.io`, `wix.com`, `wixpress.com`, `wordpress.com`, `squarespace.com`, `weebly.com`, `godaddy.com`, `example.com`, `example.org`, `domain.com`, `yourdomain.com`, `yourcompany.com`, `placeholder.com`, `templatemonster.com`, `themeforest.net`, `bootstrapmade.com`, `schema.org`, `trustpilot.com`, `google.com`.

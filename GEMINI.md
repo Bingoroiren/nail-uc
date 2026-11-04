@@ -46,7 +46,10 @@ Toàn bộ các quy trình phức tạp đã được module hóa thành các Sk
 1. **CSV ONLY**: Tuyệt đối không xuất `.xlsx`/`.xls`. Luôn dùng CSV UTF-8 with BOM (`utf-8-sig`).
 2. **SĐT Có Nháy Đơn**: `phone = f"'{phone}" if phone and not phone.startswith("'") else phone`.
 3. **Bộ Chấm Điểm Tuyển Chọn 1 Mail Giá Trị Nhất & Lọc Mail Rác (BẮT BUỘC NHƯ SĐT CÓ NHÁY ĐƠN `'`)**:
-   - **Lọc bỏ 100% mail rác/template**: Decode và loại bỏ triệt để `%20`, loại bỏ hoàn toàn email demo/placeholder của theme và web developer (`youremail@...`, `your-email@...`, `yourname@...`, `yourcompany@...`, `someone@...`, `john.doe@...`, `user@domain.com`, `name@...`, `example@...`, `domain@...`, `yourdomain.com`, `email@email.com`), mail hệ thống/tracking (`sentry@...`, `wix@...`, `wixpress@...`, `wordpress@...`, `no-reply@...`, `donotreply@...`, `privacy@...`, `gdpr@...`).
+   - **Lọc bỏ 100% mail rác/template & làm sạch triệt để khoảng trắng lạ**:
+     * **Tuyệt đối không để lẫn `\u00a0` (non-breaking space / `&nbsp;` / `\xa0`)**: Decode URL và cắt sạch 100% các ký tự ẩn nguy hiểm: `\u00a0`, `\xa0`, `&nbsp;`, `%20`, zero-width space `\u200b`, `\ufeff`, dấu cách thừa hoặc tiền tố `20` do decode sót (`clean_email`).
+     * **Loại bỏ hoàn toàn email demo/placeholder của theme và web developer**: `youremail@...`, `your-email@...`, `yourname@...`, `yourcompany@...`, `someone@...`, `john.doe@...`, `user@domain.com`, `name@...`, `example@...`, `domain@...`, `yourdomain.com`, `email@email.com`.
+     * **Loại bỏ mail hệ thống/tracking & mail sàn danh bạ địa phương**: `sentry@...`, `wix@...`, `wixpress@...`, `wordpress@...`, `no-reply@...`, `donotreply@...`, `privacy@...`, `gdpr@...`, `localservices.be`, `bizbook.be`, `pagesdor.be`, `goudengids.be`.
    - **Bắt buộc có hàm chấm điểm (`score_email_b2b`) tối ưu cho B2B Manpower Agency (Môi giới lao động B2B)**: Khi website có nhiều email, **PHẢI CHẤM ĐIỂM ĐỂ GIỮ LẠI DUY NHẤT 1 EMAIL CÓ GIÁ TRỊ NHẤT**:
      * Trùng domain website (+50đ)
      * **Ưu tiên số 1 - Bộ phận Nhân sự / Tuyển dụng / Việc làm**: `praca@`, `kariera@`, `hr@`, `personalne@`, `jobs@`, `recruitment@`, `nabor@`, `career@` (+50đ - trúng đích 100% người tuyển dụng)
@@ -60,7 +63,7 @@ Toàn bộ các quy trình phức tạp đã được module hóa thành các Sk
    - **Luôn đẩy công ty có Email lên đầu danh sách**: Mọi script chuẩn hóa/format đầu ra (`_formatted.csv`, `_ColdMail.csv`) BẮT BUỘC phân loại `with_email + without_email` để 100% doanh nghiệp có email nằm ngay các dòng đầu tiên, không để dòng trống mail xen kẽ phía trên.
 4. **Bật Trình Duyệt Thực Tế (`headless=False`)**: Viewport tối thiểu `1280x800` để USER quan sát trực quan tiến độ và dễ dàng xử lý Captcha khi có chuông báo `\a`.
 5. **Lưu Tăng Dần (Incremental Auto-Save) & Checkpoint**: Ghi ngay vào CSV sau mỗi vài dòng cào được (`mode='a'` kèm `flush()`) và lưu cache JSON để hỗ trợ Resume 100%, không cào lại từ đầu.
-6. **Lọc Trùng Lặp & Loại Trừ Domain Rác**: Lọc bỏ các mạng xã hội và thư bạ (`facebook`, `instagram`, `linkedin`, `google.com/maps`, `yellowpages`, `proff.no`...).
+6. **Lọc Trùng Lặp & Loại Trừ Domain Rác**: Lọc bỏ các mạng xã hội và thư bạ (`facebook`, `instagram`, `linkedin`, `google.com/maps`, `yellowpages`, `proff.no`, `localservices.be`, `goudengids.be`, `pagesdor.be`, `bizbook.be`...).
 7. **Bóc Tách Email Đa Tầng Bản Địa Hóa (Tham Khảo `crawlmail/`)**:
    - **Luôn Tham Khảo `crawlmail/`**: Tái sử dụng logic decode Cloudflare, obfuscated regex và cache domain đã giải mã.
    - **Bản Địa Hóa Theo Quốc Gia**: Sử dụng đúng từ khóa menu và subpaths của quốc gia mục tiêu (`kontakt`, `kontakt.html`, `o-nas`, `impressum`, `kontakt-oss`...), bao gồm cả đuôi tĩnh `.html`, `.php`.

@@ -37,6 +37,8 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace", line_buffering=True)
 
+import unicodedata
+
 # ----------------------------------------------------------------------
 # ĐƯỜNG DẪN TỆP & CẤU HÌNH
 # ----------------------------------------------------------------------
@@ -71,12 +73,19 @@ BLACKLIST_DOMAINS = [
     'cvmarket.lt', 'rekv.lt', 'proton.me', 'lovejob.lt', 'tinklalapiai.lt'
 ]
 
-# Danh sách công ty loại trừ khỏi danh sách kết nối / tuyển dụng
-EXCLUDED_COMPANIES = [
+# Rule #12: Danh sách đen doanh nghiệp cố định
+PERMANENT_BLACKLIST_COMPANIES = [
     'scandi standard', 'scandi-standard', 'scandi standart',
     'biliarta',
-    'daigre'
+    'daigre', 'daigrė'
 ]
+
+def is_blacklisted_company(name):
+    if not name:
+        return False
+    n = unicodedata.normalize('NFKD', str(name)).lower()
+    n_clean = ''.join(c for c in n if not unicodedata.combining(c))
+    return any(b in n_clean for b in ['scandi standard', 'scandi-standard', 'scandi standart', 'biliarta', 'daigre'])
 
 JUNK_EMAIL_PARTS = [
     'sentry', 'wixpress', 'wordpress', 'example', 'domain', 'youremail',
@@ -132,8 +141,13 @@ def extract_city(addr):
             return city
     return ""
 
+GAMBLING_KEYWORDS = [
+    'casino', 'kazino', 'ggbet', 'vulkan', 'betting', 'lažybos', 'lazybos',
+    'poker', 'slots', 'jackpot', 'roulette', 'bukmeker', 'gambling', 'guarana.lt'
+]
+
 def is_valid_website(url):
-    """Kiểm tra website hợp lệ và không nằm trong danh sách đen."""
+    """Kiểm tra website hợp lệ và không nằm trong danh sách đen hoặc cờ bạc."""
     if not url or not isinstance(url, str):
         return False
     u = url.strip().lower()
@@ -145,6 +159,8 @@ def is_valid_website(url):
         if not domain or '.' not in domain or len(domain) < 4:
             return False
         if any(bad in domain for bad in BLACKLIST_DOMAINS):
+            return False
+        if any(g in domain for g in GAMBLING_KEYWORDS):
             return False
         return True
     except Exception:
@@ -294,7 +310,16 @@ async def crawl_site_for_email(page, web_url):
         if parsed_actual.netloc:
             domain = parsed_actual.netloc.replace('www.', '').lower()
             root = f"{parsed_actual.scheme}://{parsed_actual.netloc}"
-        
+
+        # Kiểm tra nếu trang chuyển hướng sang casino / cờ bạc / cá cược
+        try:
+            p_title = (await page.title() or "").lower()
+            if any(g in p_title or g in actual_url.lower() or g in domain for g in GAMBLING_KEYWORDS):
+                print(f"  ⚠️ [BỎ QUA WEB ĐÁNH BẠC/CASINO] {web_url} -> '{p_title[:35]}'")
+                return ""
+        except Exception:
+            pass
+
         html = await page.content()
         
         # Bóc tách mailto:
@@ -386,6 +411,77 @@ async def crawl_site_for_email(page, web_url):
     return max(found_emails, key=lambda e: score_email_b2b(e, domain))
 
 # ----------------------------------------------------------------------
+# ĐOÁN EMAIL DỰA TRÊN TIỀN TỐ PHỔ BIẾN NHẤT & DOMAIN WEBSITE
+# ----------------------------------------------------------------------
+def get_clean_domain(url):
+    """Trích xuất root domain sạch, loại trừ blacklist mạng xã hội và web cờ bạc."""
+    if not is_valid_website(url):
+        return None
+    try:
+        u = str(url).strip().lower()
+        if not u.startswith("http"):
+            u = "https://" + u
+        parsed = urllib.parse.urlparse(u)
+        netloc = parsed.netloc.split(':')[0].lower()
+        if netloc.startswith('www.'):
+            netloc = netloc[4:]
+        if any(b in netloc for b in BLACKLIST_DOMAINS):
+            return None
+        if any(g in netloc for g in GAMBLING_KEYWORDS):
+            return None
+        parts = netloc.split('.')
+        if len(parts) >= 2 and len(parts[-1]) >= 2:
+            return netloc
+        return None
+    except Exception:
+        return None
+
+def guess_emails_from_domains(df, force_prefix=None):
+    """
+    Thực hiện bước đoán mail:
+    1. Tổng hợp lượng mail trước @ để chọn ra đầu mail phổ biến nhất.
+    2. Đoán ghép với các website chưa có email: <tiền tố>@[domain].
+    """
+    email_col = 'Email'
+    web_col = 'Liên Hệ'
+    
+    # 1. Thống kê tiền tố trước @
+    prefix_counts = {}
+    for idx in df.index:
+        em = str(df.at[idx, email_col]).strip().lower()
+        if em and em != 'nan' and '@' in em and '.' in em:
+            pref = em.split('@')[0].strip()
+            prefix_counts[pref] = prefix_counts.get(pref, 0) + 1
+            
+    sorted_prefixes = sorted(prefix_counts.items(), key=lambda x: x[1], reverse=True)
+    if force_prefix:
+        chosen_prefix = force_prefix.strip().lower()
+    else:
+        chosen_prefix = sorted_prefixes[0][0] if sorted_prefixes else 'info'
+        
+    print(f"\n[*] [BƯỚC ĐOÁN EMAIL] Tiền tố phổ biến nhất được chọn: '{chosen_prefix}' ({prefix_counts.get(chosen_prefix, 0)} lần)")
+    
+    # 2. Đoán ghép
+    guessed_count = 0
+    df_res = df.copy()
+    for idx in df_res.index:
+        comp = str(df_res.at[idx, 'Công ty']).strip()
+        if is_blacklisted_company(comp):
+            continue
+        em = str(df_res.at[idx, email_col]).strip()
+        if not em or em.lower() == 'nan' or '@' not in em:
+            web = df_res.at[idx, web_col]
+            domain = get_clean_domain(web)
+            if domain:
+                guessed_em = f"{chosen_prefix}@{domain}"
+                df_res.at[idx, email_col] = guessed_em
+                df_res.at[idx, 'Liên Hệ mail'] = f"mailto:{guessed_em}"
+                guessed_count += 1
+                
+    print(f"[*] [BƯỚC ĐOÁN EMAIL] Đã ghép thành công +{guessed_count:,} email mới từ domain website!\n")
+    return df_res
+
+# ----------------------------------------------------------------------
 # LƯU VÀ ĐỒNG BỘ ĐẦU RA (100% EMAIL LÊN ĐẦU DANH SÁCH)
 # ----------------------------------------------------------------------
 def save_and_reorder_master(df):
@@ -394,12 +490,10 @@ def save_and_reorder_master(df):
     if 'SĐT' in df_out.columns:
         df_out['SĐT'] = df_out['SĐT'].apply(clean_phone_lt)
 
-    # Loại bỏ triệt để các công ty thuộc EXCLUDED_COMPANIES
+    # Loại bỏ triệt để các công ty thuộc Permanent Blacklist
     if 'Công ty' in df_out.columns:
         df_out = df_out[
-            ~df_out['Công ty'].astype(str).str.lower().apply(
-                lambda c: any(ex in normalize_text_core(c) or ex in c.lower() for ex in EXCLUDED_COMPANIES)
-            )
+            ~df_out['Công ty'].astype(str).apply(is_blacklisted_company)
         ].reset_index(drop=True)
 
     # Phân loại có email và không có email
@@ -441,9 +535,7 @@ async def run_enrichment(headless=False, limit=0):
     df = pd.read_csv(TARGET_CSV_ROOT, encoding='utf-8-sig', dtype=str).fillna('')
     if 'Công ty' in df.columns:
         df = df[
-            ~df['Công ty'].astype(str).str.lower().apply(
-                lambda c: any(ex in normalize_text_core(c) or ex in c.lower() for ex in EXCLUDED_COMPANIES)
-            )
+            ~df['Công ty'].astype(str).apply(is_blacklisted_company)
         ].reset_index(drop=True)
     total_companies = len(df)
 
@@ -456,14 +548,14 @@ async def run_enrichment(headless=False, limit=0):
         except Exception:
             pass
 
-    # Lọc danh sách công ty cần xử lý: Chưa có Email VÀ chưa từng xử lý trong Cache
+    # Lọc danh sách công ty cần xử lý: Chưa có Email
     unprocessed_indices = []
     for idx in df.index:
-        em = str(df.at[idx, 'Email']).strip()
         comp = str(df.at[idx, 'Công ty']).strip()
-        c_key = comp.lower()
-        if em and em != 'nan':
+        if is_blacklisted_company(comp):
             continue
+
+        c_key = comp.lower()
         if c_key in cache:
             # Áp dụng dữ liệu từ cache nếu có
             cached_item = cache[c_key]
@@ -474,17 +566,22 @@ async def run_enrichment(headless=False, limit=0):
                 df.at[idx, 'Liên Hệ'] = cached_item['Web']
             if cached_item.get('Phone') and not str(df.at[idx, 'SĐT']).strip():
                 df.at[idx, 'SĐT'] = cached_item['Phone']
+
+        em = str(df.at[idx, 'Email']).strip()
+        if em and em != 'nan' and is_valid_email(em):
             continue
+
         unprocessed_indices.append(idx)
 
     already_has = sum(1 for idx in df.index if str(df.at[idx, 'Email']).strip() and str(df.at[idx, 'Email']).strip() != 'nan')
     print(f"[*] Tổng số doanh nghiệp trong tệp : {total_companies:,}")
     print(f"[*] Đã có Email xác thực           : {already_has:,} ({already_has/total_companies*100:.1f}%)")
     print(f"[*] Đã kiểm tra & lưu Cache        : {len(cache):,} công ty")
-    print(f"[*] CẦN LÀM GIÀU GOOGLE MAPS       : {len(unprocessed_indices):,} công ty\n")
+    print(f"[*] CẦN TIẾP TỤC LÀM GIÀU          : {len(unprocessed_indices):,} công ty\n")
 
     if not unprocessed_indices:
         print("[✔] 100% công ty trong danh sách đã được làm giàu đầy đủ!")
+        df = guess_emails_from_domains(df)
         save_and_reorder_master(df)
         return
 
@@ -552,14 +649,15 @@ async def run_enrichment(headless=False, limit=0):
 
             # BƯỚC 2: Nếu vẫn chưa có Email -> Tìm kiếm trên Google Maps
             if not found_email:
+                clean_comp = re.sub(r'["\'„“”«»]', '', comp).strip()
                 core_name = normalize_text_core(comp)
                 queries = []
                 if city:
-                    queries.append(f"{core_name} {city} Lietuva")
-                queries.append(f"{core_name} Lietuva")
-                clean_comp = re.sub(r'["\'„“”«»]', '', comp).strip()
-                if len(clean_comp) >= 5 and clean_comp.lower() != core_name:
+                    queries.append(f"{clean_comp} {city}")
+                    queries.append(f"{core_name} {city}")
+                else:
                     queries.append(f"{clean_comp} Lietuva")
+                    queries.append(f"{core_name} Lietuva")
 
                 matched = False
                 for q_term in queries[:2]:
@@ -710,6 +808,9 @@ async def run_enrichment(headless=False, limit=0):
         # Lưu lần cuối khi hoàn tất
         with open(CACHE_PATH, 'w', encoding='utf-8') as f:
             json.dump(cache, f, ensure_ascii=False, indent=2)
+
+        # Thực hiện bước đoán email theo tiền tố phổ biến nhất cho các web còn lại
+        df = guess_emails_from_domains(df)
         final_emails = save_and_reorder_master(df)
 
         print("\n" + "=" * 85)
