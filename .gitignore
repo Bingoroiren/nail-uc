@@ -118,3 +118,8 @@ data/formatted/
 !csdl_mlt/LT_POUL_WEBD_2COL.csv
 
 !belgium_postcodes.json
+
+!BE_METL_KBO0_0RAW.csv
+!BE_METL_KBO0_2COL.csv
+!csdl_mlt/BE_METL_KBO0_0RAW.csv
+!csdl_mlt/BE_METL_KBO0_2COL.csv
