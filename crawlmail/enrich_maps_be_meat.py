@@ -610,8 +610,11 @@ async def enrich_maps_be_meat(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
         })
         idx += 1
 
-    with_email = [r for r in rows_2col if r['Email']]
-    without_email = [r for r in rows_2col if not r['Email']]
+    # Lọc chỉ giữ lại các doanh nghiệp có EMAIL hoặc SĐT (loại bỏ dòng không có thông tin)
+    valid_rows_2col = [r for r in rows_2col if r['Email'] or (r['SĐT'] and r['SĐT'] not in ['-', "'-", "''"])]
+
+    with_email = [r for r in valid_rows_2col if r['Email']]
+    without_email = [r for r in valid_rows_2col if not r['Email']]
     sorted_2col = with_email + without_email
 
     for i, r in enumerate(sorted_2col, 1):
@@ -620,12 +623,24 @@ async def enrich_maps_be_meat(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
     df_2col = pd.DataFrame(sorted_2col, columns=COL_20_HEADERS)
     df_2col.to_csv(OUTPUT_2COL_CSV, index=False, encoding='utf-8-sig')
 
+    # Xuất thêm các tệp tiện ích
+    file_ready = ROOT_DIR / "BE_MEAT_2COL_READY.csv"
+    file_emails_only = ROOT_DIR / "BE_MEAT_ONLY_EMAILS_READY.csv"
+    df_2col.to_csv(file_ready, index=False, encoding='utf-8-sig')
+
+    df_emails_only = pd.DataFrame(with_email, columns=COL_20_HEADERS)
+    for i, r in enumerate(with_email, 1):
+        r['No.'] = i
+    df_emails_only.to_csv(file_emails_only, index=False, encoding='utf-8-sig')
+
     for extra_dir in [ROOT_DIR / "csdl_mlt", ROOT_DIR / "archive" / "be_belgium"]:
         extra_dir.mkdir(parents=True, exist_ok=True)
         try:
             import shutil
             shutil.copy2(OUTPUT_1ENR_CSV, extra_dir / OUTPUT_1ENR_CSV.name)
             shutil.copy2(OUTPUT_2COL_CSV, extra_dir / OUTPUT_2COL_CSV.name)
+            shutil.copy2(file_ready, extra_dir / file_ready.name)
+            shutil.copy2(file_emails_only, extra_dir / file_emails_only.name)
         except Exception:
             pass
 

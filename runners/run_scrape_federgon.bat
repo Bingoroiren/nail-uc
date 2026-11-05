@@ -18,7 +18,7 @@ if exist .venv\Scripts\python.exe (
 )
 
 echo Extracting filtered Federgon members...
-%PYTHON_EXE% crawl_federgon.py
+%PYTHON_EXE% crawlmail\crawl_federgon.py
 
 echo.
 echo Process finished. Check output file: BE_AGCY_WEBD_0RAW.csv

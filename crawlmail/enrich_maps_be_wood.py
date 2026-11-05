@@ -2,31 +2,29 @@
 """
 GOOGLE MAPS & WEB EMAIL ENRICHMENT - BELGIUM WOOD & CARPENTRY ENTERPRISES (KBO)
 =============================================================================
-Kế thừa & Tuân thủ đầy đủ 100% các Skill:
+Kế thừa & Tuân thủ đầy đủ 100% các Kỹ năng chuẩn:
 - enrich-maps (.agents/skills/enrich-maps/SKILL.md)
-- scrape-maps (.agents/skills/scrape-maps/SKILL.md)
 - crawl-mail (.agents/skills/crawl-mail/SKILL.md)
 - data-standards (.agents/skills/data-standards/SKILL.md)
 
 Các quy chuẩn cốt lõi:
-1. Lọc trùng lặp thông minh theo Tên công ty & Mã số KBO trước khi làm giàu Maps:
-   - Gom các cơ sở chi nhánh (VE), văn phòng phụ trùng tên về 1 doanh nghiệp độc nhất.
-   - Ưu tiên giữ lại bản ghi Trụ sở chính (ENT RP, ENT NP) và địa chỉ đầy đủ nhất.
-2. Geolocation Bỉ chuẩn xác (Brussels: 50.8503, 4.3517, locale 'nl-BE') tránh lệch vị trí.
-3. Bộ Selectors chuẩn Google Maps:
-   - 'a.hfpxzc' (Listing links)
-   - 'h1.DUwDvf' (Business Name)
-   - 'a[data-item-id="authority"]' (Website)
-   - 'button[data-item-id^="phone:tel:"]' (Phone)
-   - 'button[data-item-id^="address"]' (Address)
-   - 'button.DkEaL' (Category)
-   - Nhận diện đóng cửa: 'Permanently closed' / 'Definitief gesloten' / 'Fermé définitivement'
-4. Smart & Strict Name Matching: Khử legal forms Bỉ (NV, BV, BVBA, SRL, SPRL, SA, BLDC...), NFKD accents, delimiter.
-5. Bóc tách SĐT có nháy đơn '+32... (Rule 2).
-6. Bóc tách email B2B đa tầng: DOM <a> link Priority 10, Cloudflare decoding, regex, lọc mail template rác, chấm điểm B2B Bỉ.
-7. Checkpoint JSON & Incremental Save mỗi 5 dòng hỗ trợ Resume 100%.
-8. Rule 12 Hard Blacklist: Scandi Standard, Biliarta, Daigre.
-9. Định dạng đầu ra Cold Mail 20 cột (Rule 10: BE_WOOD_GMAP_2COL.csv), đẩy 100% email lên đầu.
+1. Smart & Strict Name Matching (Skill enrich-maps Section 2.A):
+   - Khử legal forms Bỉ (BV, NV, BVBA, SRL, SPRL, SA, VOF, SNC, CVBA, Comm.V, GCV...).
+   - Khử dấu Unicode NFKD, bóc tách chú thích trong ngoặc đơn/vuông (...) hoặc [...].
+   - Quy tắc dấu phân cách chuẩn: -, –, —, |, /, :, ,
+   - Token overlap >= 75% đối với tên nhiều từ.
+2. Bóc Tách Email Đa Tầng Bản Địa Hóa Bỉ (Skill crawl-mail):
+   - Priority 10: Menu / DOM thẻ <a> trang chủ tiếng Hà Lan (Flanders) và Pháp (Wallonia).
+   - Priority 2: Guess subpaths bản địa có đuôi .html, .php, /nl/, /fr/.
+   - Giải mã Cloudflare data-cfemail, regex obfuscated ([at], (at), [dot]).
+   - Lọc 100% mail rác/template & sàn danh bạ địa phương Bỉ (localservices.be, bizbook.be, pagesdor.be, goudengids.be...).
+   - Chấm điểm B2B Manpower (score_email_b2b): Giữ lại duy nhất 1 email có giá trị cao nhất.
+3. Trình duyệt trực quan Playwright (headless=False), Geolocation Brussels (50.8503, 4.3517, 'nl-BE').
+4. Bộ Selectors Google Maps chuẩn, nhận diện đóng cửa (Definitief gesloten / Fermé définitivement / Permanently closed).
+5. SĐT có nháy đơn '+' (Rule 2).
+6. Danh sách đen vĩnh viễn (Rule 12: Scandi Standard, Biliarta, Daigre).
+7. Checkpoint JSON & Incremental Auto-Save mỗi 5 dòng hỗ trợ Resume 100%.
+8. Chuẩn hóa đầu ra Cold Mail 20 cột (Rule 10: BE_WOOD_GMAP_2COL.csv), đẩy 100% email lên đầu (Rule 3).
 """
 
 import os
@@ -70,6 +68,10 @@ HEADERS = {
 }
 
 EMAIL_REGEX = re.compile(r'\b[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]+\.[A-Za-z]{2,10}\b')
+OBFUSCATED_EMAIL_REGEX = re.compile(
+    r'\b([A-Za-z0-9._%+-]{1,64})\s*(?:@|\[at\]|\(at\)|\{at\}|\sat\s)\s*([A-Za-z0-9.-]+\.[A-Za-z]{2,10})\b',
+    re.IGNORECASE
+)
 INVALID_EXTS = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.css', '.js', '.pdf', '.woff', '.woff2', '.ico', '.mp4')
 
 # Blacklist danh bạ, mạng xã hội, cổng thông tin (không lấy làm web công ty)
@@ -88,7 +90,7 @@ BLACKLIST_DOMAINS = [
 PERMANENT_BLACKLIST_COMPANIES = [
     'scandi standard', 'scandi-standard', 'scandi standart',
     'biliarta',
-    'daigre'
+    'daigre', 'daigre'
 ]
 
 def is_blacklisted_company(name):
@@ -108,20 +110,34 @@ COL_20_HEADERS = [
 def clean_company_name(name):
     if not name or pd.isna(name):
         return ""
-    # Tách họ tên cá nhân đảo ngược (ví dụ: "Van den Berg, Jan" -> "Jan Van den Berg")
     s = str(name).strip()
+    # Tách họ tên cá nhân đảo ngược (ví dụ: "Van den Berg, Jan" -> "Jan Van den Berg")
     if ',' in s:
         parts = [p.strip() for p in s.split(',')]
         if len(parts) == 2 and len(parts[1].split()) <= 2 and len(parts[0].split()) <= 3:
             s = f"{parts[1]} {parts[0]}"
-    # Bỏ loại hình doanh nghiệp phổ biến ở Bỉ
+    # Bỏ legal forms Bỉ (Rule 11)
     legal_forms = [
-        r'\bbvba\b', r'\bsprl\b', r'\bnv\b', r'\bsa\b', r'\bbv\b', r'\bsrl\b',
-        r'\bvof\b', r'\bsnc\b', r'\bcomm\.v\b', r'\bcvba\b', r'\bscrnl\b',
-        r'\besv\b', r'\bgie\b', r'\bvzw\b', r'\basbl\b', r'\bcoop\b', r'\bholding\b'
+        'besloten vennootschap met beperkte aansprakelijkheid',
+        'societe a responsabilite limitee',
+        'naamloze vennootschap',
+        'societe anonyme',
+        'gewone commanditaire vennootschap',
+        'societe en commandite simple',
+        'vennootschap onder firma',
+        'societe en nom collectif',
+        'cooperatieve vennootschap',
+        'societe cooperative',
+        'b.v.b.a.', 'bvba', 's.p.r.l.', 'sprl',
+        'b.v.', 'bv', 's.r.l.', 'srl',
+        'n.v.', 'nv', 's.a.', 'sa',
+        'v.o.f.', 'vof', 's.n.c.', 'snc',
+        'c.v.b.a.', 'cvba', 'c.v.', 'cv',
+        'comm.v', 'comm.va', 'gcv', 'scs', 'sca',
+        'asbl', 'vzw', 'holding'
     ]
-    for pattern in legal_forms:
-        s = re.sub(pattern, '', s, flags=re.IGNORECASE)
+    for lf in sorted(legal_forms, key=len, reverse=True):
+        s = re.sub(r'\b' + re.escape(lf) + r'\b', '', s, flags=re.IGNORECASE)
     # Khử dấu ngoặc, dấu nháy
     s = re.sub(r'[\(\)\[\]\{\}\"\']', ' ', s)
     s = re.sub(r'\s+', ' ', s).strip(' -,./')
@@ -179,68 +195,11 @@ def is_valid_name_match(query_name, candidate_name):
 
     return False, "NO_MATCH"
 
-def deduplicate_companies(df):
-    """
-    LỌC TRÙNG TÊN CÔNG TY & MÃ SỐ KBO THÔNG MINH:
-    - Gom các cơ sở chi nhánh (VE), văn phòng phụ trùng tên về 1 doanh nghiệp độc nhất.
-    - Ưu tiên giữ lại bản ghi Trụ sở chính (ENT RP, ENT NP) và địa chỉ chi tiết nhất.
-    """
-    initial_count = len(df)
-    grouped = {}
-
-    for row in df.to_dict('records'):
-        c_name = str(row.get('Company_Name', '')).strip()
-        if not c_name or is_blacklisted_company(c_name) or len(c_name.strip(' .,-_/\\')) < 2:
-            continue
-
-        # 1. Khóa theo KBO Number (nếu có 10 số hợp lệ)
-        kbo_raw = str(row.get('KBO_Number', ''))
-        clean_kbo = re.sub(r'[^0-9]', '', kbo_raw)
-        
-        # 2. Khóa theo Tên chuẩn hóa
-        norm_name = normalize_match_string(clean_company_name(c_name))
-
-        if len(clean_kbo) == 10:
-            dedup_key = f"kbo_{clean_kbo}"
-        elif norm_name:
-            dedup_key = f"name_{norm_name}"
-        else:
-            continue
-
-        # Tính điểm ưu tiên bản ghi tốt nhất
-        score = 0
-        t = str(row.get('Type', '')).upper()
-        if 'ENT RP' in t:
-            score += 100
-        elif 'ENT NP' in t:
-            score += 80
-        elif 'VE' in t:
-            score += 50
-        else:
-            score += 10
-
-        if str(row.get('Status', '')).lower() == 'actief':
-            score += 20
-
-        addr = str(row.get('Address', '')).strip()
-        score += min(len(addr), 50)
-
-        if row.get('Activity'):
-            score += 10
-
-        if dedup_key not in grouped or score > grouped[dedup_key][0]:
-            grouped[dedup_key] = (score, row)
-
-    deduped_rows = [v[1] for v in grouped.values()]
-    df_dedup = pd.DataFrame(deduped_rows)
-    removed_count = initial_count - len(df_dedup)
-    return df_dedup, removed_count
-
 def clean_phone(phone_str):
     if not phone_str or pd.isna(phone_str):
         return ""
     p = str(phone_str).strip()
-    if p == 'nan' or p == '-':
+    if p.lower() in ['nan', '-', 'none', '']:
         return ""
     p = p.replace('\u00a0', ' ').replace('\xa0', ' ').replace('&nbsp;', ' ')
     p = re.sub(r'\s+', ' ', p).strip()
@@ -269,7 +228,7 @@ def is_junk_email(email):
     e = clean_email(email)
     if not e or '@' not in e or '.' not in e.split('@')[1]:
         return True
-    # Mail template / demo / fake
+    # Mail template / demo / fake (Rule 3)
     junk_users = [
         'youremail', 'your-email', 'your_email', 'yourname', 'yourcompany', 'someone', 'nobody',
         'john.doe', 'user', 'name', 'example', 'domain', 'yourdomain', 'email', 'sample', 'test',
@@ -290,6 +249,7 @@ def is_junk_email(email):
     return False
 
 def score_email_b2b(email, website_domain=""):
+    """Bộ chấm điểm B2B Manpower tối ưu tuyển chọn 1 email tốt nhất (Rule 3)"""
     e = clean_email(email)
     if is_junk_email(e):
         return 0
@@ -299,14 +259,14 @@ def score_email_b2b(email, website_domain=""):
     clean_domain = website_domain.lower().replace('www.', '').split('/')[0] if website_domain else ""
     if clean_domain and (clean_domain in d or d in clean_domain):
         score += 50
-    # Ưu tiên 1: Tuyển dụng / Nhân sự (+50đ)
-    if any(k in u for k in ['praca', 'kariera', 'hr', 'jobs', 'recruitment', 'career', 'werk', 'emploi', 'recrutement']):
+    # Ưu tiên 1: Tuyển dụng / Việc làm / Nhân sự (+50đ)
+    if any(k in u for k in ['praca', 'kariera', 'hr', 'jobs', 'recruitment', 'career', 'werk', 'emploi', 'recrutement', 'personeel', 'aanwerving']):
         score += 50
-    # Ưu tiên 2: Ban giám đốc / Kinh doanh (+45đ)
-    elif any(k in u for k in ['ceo', 'director', 'manager', 'sales', 'directie', 'bestuur', 'direction']):
+    # Ưu tiên 2: Ban giám đốc / Kinh doanh / Lãnh đạo (+45đ)
+    elif any(k in u for k in ['ceo', 'director', 'manager', 'sales', 'directie', 'bestuur', 'direction', 'zaakvoerder', 'gerant']):
         score += 45
     # Ưu tiên 3: Cổng liên hệ chính thức (+40đ)
-    elif any(k in u for k in ['info', 'contact', 'kontakt', 'office', 'secretariaat', 'secretariat', 'accueil']):
+    elif any(k in u for k in ['info', 'contact', 'kontakt', 'office', 'secretariaat', 'secretariat', 'accueil', 'balie']):
         score += 40
     # Email cá nhân riêng theo domain (+25đ)
     elif '.' in u and clean_domain in d:
@@ -328,55 +288,164 @@ def decode_cf_email(encoded_str):
         return ""
 
 def crawl_website_emails(website_url):
+    """
+    BÓC TÁCH EMAIL ĐA TẦNG BẢN ĐỊA HÓA BỈ (Skill crawl-mail):
+    1. Ưu tiên duyệt Trang chủ (Homepage) và bóc thẻ <a> menu DOM thực tế (Priority 10).
+    2. Quét sâu các link menu thật chứa từ khóa tiếng Hà Lan (Flanders) và Pháp (Wallonia).
+    3. Dự phòng các subpaths đoán mò bản địa hóa (Priority 2) có đuôi .html, .php.
+    4. Giải mã Cloudflare data-cfemail, regex obfuscated ([at], [dot]).
+    5. Tuyển chọn duy nhất 1 email có điểm B2B cao nhất.
+    """
     if not website_url:
         return []
     target_url = website_url if website_url.startswith(('http://', 'https://')) else f'http://{website_url}'
-    domain = urllib.parse.urlparse(target_url).netloc.lower()
+    try:
+        parsed = urllib.parse.urlparse(target_url)
+        domain = parsed.netloc.lower()
+    except Exception:
+        return []
+
     if any(bad in domain for bad in BLACKLIST_DOMAINS):
         return []
 
+    base_domain = domain.replace('www.', '')
     collected_emails = set()
-    subpaths = [
-        '', '/contact', '/nl/contact', '/fr/contact', '/contact-us', '/contacteer-ons',
-        '/over-ons', '/nl/over-ons', '/a-propos', '/impressum', '/jobs', '/over-ons/vacatures'
+    visited_urls = set()
+
+    # Bộ từ khóa nhận diện Menu Liên hệ bản địa Bỉ (Hà Lan + Pháp + Đức + Anh)
+    CONTACT_KEYWORDS = [
+        # Hà Lan / Flemish
+        'contact', 'contacteer', 'over-ons', 'wie-zijn-wij', 'locatie', 'vestiging',
+        'vacatures', 'jobs', 'afspraak', 'offerte', 'werkplaats',
+        # Pháp / Wallonie
+        'contactez', 'nous-contacter', 'a-propos', 'mentions-legales', 'qui-sommes-nous',
+        'equipe', 'nos-bureaux', 'rejoignez-nous', 'devis', 'atelier',
+        # Đức & Anh
+        'kontakt', 'impressum', 'ueber-uns', 'about'
     ]
 
-    base_domain = domain.replace('www.', '')
+    # Danh sách URL cần duyệt theo thứ bậc ưu tiên
+    priority_urls = []
 
-    for path in subpaths:
-        test_url = urllib.parse.urljoin(target_url, path)
+    # -------------------------------------------------------------
+    # BƯỚC 1: Quét Trang chủ (Homepage) & Trích xuất DOM Menu (Priority 10)
+    # -------------------------------------------------------------
+    home_url = f"{parsed.scheme}://{parsed.netloc}/"
+    try:
+        req = urllib.request.Request(home_url, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=7, context=ctx) as resp:
+            if resp.status == 200:
+                html = resp.read().decode('utf-8', errors='ignore')
+                visited_urls.add(home_url)
+                soup = BeautifulSoup(html, 'html.parser')
+
+                # 1.1. Mailto links trên DOM
+                for a in soup.find_all('a', href=True):
+                    href = a['href']
+                    if 'mailto:' in href.lower():
+                        raw_m = href.split(':', 1)[1].split('?')[0].strip()
+                        clean_m = clean_email(raw_m)
+                        if clean_m and not is_junk_email(clean_m):
+                            collected_emails.add(clean_m)
+
+                # 1.2. Cloudflare decode
+                for cf in soup.find_all(attrs={'data-cfemail': True}):
+                    dec = decode_cf_email(cf['data-cfemail'])
+                    clean_dec = clean_email(dec)
+                    if clean_dec and not is_junk_email(clean_dec):
+                        collected_emails.add(clean_dec)
+
+                # 1.3. Regex email chuẩn & regex obfuscated
+                for m in EMAIL_REGEX.findall(html):
+                    clean_m = clean_email(m)
+                    if clean_m and not is_junk_email(clean_m):
+                        collected_emails.add(clean_m)
+
+                for u_part, d_part in OBFUSCATED_EMAIL_REGEX.findall(html):
+                    clean_m = clean_email(f"{u_part}@{d_part}")
+                    if clean_m and not is_junk_email(clean_m):
+                        collected_emails.add(clean_m)
+
+                # 1.4. Bóc tách link Menu thật trên DOM (Priority 10)
+                for a in soup.find_all('a', href=True):
+                    href = a['href'].strip()
+                    text = a.get_text().strip().lower()
+                    href_lower = href.lower()
+
+                    if any(bad in href_lower for bad in ['javascript:', 'tel:', 'mailto:', '#']):
+                        continue
+
+                    # Kiểm tra xem anchor text hoặc href có chứa từ khóa liên hệ bản địa
+                    is_contact_link = any(kw in text for kw in CONTACT_KEYWORDS) or any(kw in href_lower for kw in CONTACT_KEYWORDS)
+                    if is_contact_link:
+                        full_sub_url = urllib.parse.urljoin(home_url, href)
+                        sub_parsed = urllib.parse.urlparse(full_sub_url)
+                        # Đảm bảo cùng domain
+                        if base_domain in sub_parsed.netloc.lower() and full_sub_url not in visited_urls:
+                            if full_sub_url not in priority_urls:
+                                priority_urls.append(full_sub_url)
+
+    except Exception:
+        pass
+
+    # -------------------------------------------------------------
+    # BƯỚC 2: Subpaths đoán mò dự phòng (Priority 2)
+    # -------------------------------------------------------------
+    # Chỉ thêm vào cuối nếu chưa có hoặc website ẩn menu bằng JS
+    fallback_subpaths = [
+        '/contact', '/contact.html', '/contact.php',
+        '/nl/contact', '/fr/contact',
+        '/contacteer-ons', '/contactez-nous', '/nous-contacter',
+        '/over-ons', '/over-ons.html', '/a-propos', '/a-propos.html',
+        '/nl/over-ons', '/fr/a-propos',
+        '/impressum', '/mentions-legales', '/jobs', '/vacatures'
+    ]
+    for sub in fallback_subpaths:
+        f_url = urllib.parse.urljoin(home_url, sub)
+        if f_url not in visited_urls and f_url not in priority_urls:
+            priority_urls.append(f_url)
+
+    # -------------------------------------------------------------
+    # BƯỚC 3: Duyệt các Subpages (Tối đa 8 trang)
+    # -------------------------------------------------------------
+    max_pages = 8
+    for sub_url in priority_urls[:max_pages]:
+        if len(collected_emails) >= 4:
+            break
+        if sub_url in visited_urls:
+            continue
+        visited_urls.add(sub_url)
+
         try:
-            req = urllib.request.Request(test_url, headers=HEADERS)
+            req = urllib.request.Request(sub_url, headers=HEADERS)
             with urllib.request.urlopen(req, timeout=6, context=ctx) as resp:
                 if resp.status == 200:
                     html = resp.read().decode('utf-8', errors='ignore')
                     soup = BeautifulSoup(html, 'html.parser')
 
-                    # Priority 10: mailto trên DOM menu
                     for a in soup.find_all('a', href=True):
                         href = a['href']
-                        if 'mailto:' in href:
-                            raw_m = href.split('mailto:')[1].split('?')[0].strip()
+                        if 'mailto:' in href.lower():
+                            raw_m = href.split(':', 1)[1].split('?')[0].strip()
                             clean_m = clean_email(raw_m)
                             if clean_m and not is_junk_email(clean_m):
                                 collected_emails.add(clean_m)
 
-                    # Cloudflare decode
                     for cf in soup.find_all(attrs={'data-cfemail': True}):
                         dec = decode_cf_email(cf['data-cfemail'])
                         clean_dec = clean_email(dec)
                         if clean_dec and not is_junk_email(clean_dec):
                             collected_emails.add(clean_dec)
 
-                    # Regex match
-                    matches = EMAIL_REGEX.findall(html)
-                    for m in matches:
+                    for m in EMAIL_REGEX.findall(html):
                         clean_m = clean_email(m)
                         if clean_m and not is_junk_email(clean_m):
                             collected_emails.add(clean_m)
 
-                    if len(collected_emails) >= 5:
-                        break
+                    for u_part, d_part in OBFUSCATED_EMAIL_REGEX.findall(html):
+                        clean_m = clean_email(f"{u_part}@{d_part}")
+                        if clean_m and not is_junk_email(clean_m):
+                            collected_emails.add(clean_m)
         except Exception:
             continue
 
@@ -400,12 +469,7 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
 
     df_raw = pd.read_csv(input_csv, encoding='utf-8-sig', dtype=str).fillna('')
     total_raw = len(df_raw)
-    print(f"[*] Đã nạp {total_raw:,} bản ghi thô từ tệp {input_csv.name}")
-
-    # 1. LỌC TRÙNG TÊN CÔNG TY & MÃ SỐ KBO THÔNG MINH
-    df_dedup, num_removed = deduplicate_companies(df_raw)
-    print(f"[+] Lọc trùng lặp thông minh: Đã loại bỏ {num_removed:,} chi nhánh/văn phòng phụ trùng lặp.")
-    print(f"[+] Còn lại {len(df_dedup):,} doanh nghiệp độc nhất sẵn sàng làm giàu Google Maps.\n")
+    print(f"[*] Đã nạp {total_raw:,} doanh nghiệp độc nhất từ tệp {input_csv.name}\n")
 
     # Đọc cache nếu có
     cache = {}
@@ -417,7 +481,7 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
         except Exception:
             pass
 
-    records_to_process = df_dedup.to_dict('records')
+    records_to_process = df_raw.to_dict('records')
     if limit:
         records_to_process = records_to_process[:limit]
 
@@ -454,6 +518,9 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
             postcode = item.get('Postcode', '').strip()
             kbo_num = item.get('KBO_Number', '').strip()
 
+            if is_blacklisted_company(name):
+                continue
+
             clean_kbo = re.sub(r'[^0-9]', '', kbo_num)
             unique_key = f"kbo_{clean_kbo}" if len(clean_kbo) == 10 else f"{name}_{postcode}"
 
@@ -462,7 +529,7 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
                 enriched_rows.append(cached_item)
                 continue
 
-            query = f"{clean_company_name(name)} {address} Belgium"
+            query = f"{clean_company_name(name)} {address} Belgium" if address else f"{clean_company_name(name)} {postcode} Belgium"
             search_url = f"https://www.google.com/maps/search/{urllib.parse.quote(query)}"
 
             found_name = ""
@@ -484,6 +551,12 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
                         await asyncio.sleep(0.5)
                 except Exception:
                     pass
+
+                # Kiểm tra Captcha
+                body_check = await page.inner_text('body')
+                if any(cp in body_check.lower() for cp in ['unusual traffic', 'recaptcha', 'robot']):
+                    print("\a\n[!] PHÁT HIỆN CAPTCHA GOOGLE MAPS! Vui lòng giải captcha trên trình duyệt và nhấn Enter để tiếp tục...")
+                    input("[+] Nhấn ENTER sau khi giải xong Captcha...")
 
                 # 1. Trường hợp Google Maps điều hướng thẳng vào trang Place
                 title_el = await page.query_selector('h1.DUwDvf')
@@ -527,7 +600,7 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
                                 if p_el:
                                     found_phone = (await p_el.inner_text()).strip()
                                 w_el = await page.query_selector('a[data-item-id="authority"]')
-                                if w_el:
+                                if web_el:
                                     found_website = await w_el.get_attribute('href')
                                 a_el = await page.query_selector('button[data-item-id^="address"]')
                                 if a_el:
@@ -535,6 +608,10 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
                                 c_el = await page.query_selector('button.DkEaL')
                                 if c_el:
                                     found_cat = (await c_el.inner_text()).strip()
+
+                                body_txt = await page.inner_text('body')
+                                if any(c in body_txt for c in ['Definitief gesloten', 'Fermé définitivement', 'Permanently closed']):
+                                    is_closed = True
                                 break
 
             except Exception:
