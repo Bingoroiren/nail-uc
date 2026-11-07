@@ -611,9 +611,10 @@ async def run_enrichment(headless=False, limit=None, start_idx=0, skip_phase1=Fa
             city = str(row.get('Thanh pho', '')).strip()
             cache_key = code if code else f"{normalize_text_core(comp)}::{normalize_text_core(city)}"
 
-            # If cache already says we crawled this without email, skip
-            if cache_key in cache and cache[cache_key].get('Email'):
-                df.at[c_idx, 'Email'] = cache[cache_key]['Email']
+            # If cache already says we crawled this, skip (even if without email)
+            if cache_key in cache:
+                if cache[cache_key].get('Email'):
+                    df.at[c_idx, 'Email'] = cache[cache_key]['Email']
                 continue
 
             em_found = crawl_site_for_emails(web)
@@ -702,7 +703,7 @@ async def run_enrichment(headless=False, limit=None, start_idx=0, skip_phase1=Fa
 
             processed += 1
 
-            # Check cache first
+            # Check cache first (skip if already searched in previous run)
             if cache_key in cache:
                 c = cache[cache_key]
                 if c.get('Email'):
@@ -711,8 +712,7 @@ async def run_enrichment(headless=False, limit=None, start_idx=0, skip_phase1=Fa
                     df.at[idx, 'Website'] = c['Web']
                 if c.get('SDT') and not df.at[idx, 'SDT']:
                     df.at[idx, 'SDT'] = c['SDT']
-                if c.get('Email'):
-                    continue
+                continue
 
             # Construct Maps Query
             loc_term = city if city else (khu_vuc if khu_vuc else "Lietuva")
