@@ -1,10 +1,10 @@
 @echo off
 chcp 65001 >nul
-title Enrich Lithuania Food Data via info.lt
+title Enrich Lithuania Restaurant and Food Service Data via info.lt
 
 echo ===============================================================================
-echo        ENRICH LITHUANIA FOOD DATA VIA INFO.LT
-echo                     (LT_FOOD)
+echo        ENRICH LITHUANIA RESTAURANTS AND FOOD SERVICE DATA VIA INFO.LT
+echo                             (LT_FOOD - NACE 56)
 echo ===============================================================================
 echo.
 
@@ -16,10 +16,10 @@ if not exist ".venv\Scripts\python.exe" (
     exit /b 1
 )
 
-echo [INFO] Running enrich_infolt_lt.py for Food data...
+echo [INFO] Running enrich_infolt_lt_food.py...
 echo.
 
-.venv\Scripts\python.exe crawlmail\enrich_infolt_lt.py --target food %*
+.venv\Scripts\python.exe crawlmail\enrich_infolt_lt_food.py %*
 if errorlevel 1 (
     echo.
     echo [ERROR] Enrichment script encountered an error!
@@ -29,8 +29,7 @@ if errorlevel 1 (
 
 echo.
 echo ===============================================================================
-echo [SUCCESS] Lithuania Food data successfully enriched!
+echo [SUCCESS] Lithuania Restaurant and Food Service data successfully enriched!
 echo ===============================================================================
 echo.
 pause
-

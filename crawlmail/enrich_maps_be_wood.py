@@ -55,6 +55,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT_CSV = ROOT_DIR / "BE_WOOD_KBO0_0RAW.csv"
 OUTPUT_1ENR_CSV = ROOT_DIR / "BE_WOOD_GMAP_1ENR.csv"
 OUTPUT_2COL_CSV = ROOT_DIR / "BE_WOOD_GMAP_2COL.csv"
+OUTPUT_READY_CSV = ROOT_DIR / "BE_WOOD_GMAP_ONLY_EMAILS_READY.csv"
 CACHE_PATH = ROOT_DIR / "crawlmail" / "cache_enrich_maps_be_wood.json"
 
 ctx = ssl.create_default_context()
@@ -673,7 +674,12 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
                 CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
                 with open(CACHE_PATH, 'w', encoding='utf-8') as f:
                     json.dump(cache, f, ensure_ascii=False)
-                pd.DataFrame(enriched_rows).to_csv(OUTPUT_1ENR_CSV, index=False, encoding='utf-8-sig')
+                df_cur = pd.DataFrame(enriched_rows)
+                df_cur.to_csv(OUTPUT_1ENR_CSV, index=False, encoding='utf-8-sig')
+
+            # Cập nhật tệp 2COL Cold Mail định kỳ mỗi 50 dòng
+            if count % 50 == 0:
+                export_coldmail_files(pd.DataFrame(enriched_rows), silent=True)
 
             await asyncio.sleep(0.5)
 
@@ -684,16 +690,30 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
     df_enr.to_csv(OUTPUT_1ENR_CSV, index=False, encoding='utf-8-sig')
     print(f"\n[+] Đã lưu {len(df_enr):,} doanh nghiệp vào {OUTPUT_1ENR_CSV.name}")
 
-    # Xuất định dạng chuẩn Cold Mail 20 cột (Rule 10: BE_WOOD_GMAP_2COL.csv)
-    # LỌC BỎ DOANH NGHIỆP ĐÓNG CỬA VÀ BLACKLIST
+    export_coldmail_files(df_enr)
+
+
+def export_coldmail_files(df_enr, silent=False):
+    """
+    Xuất định dạng chuẩn Cold Mail 20 cột (Rule 10: BE_WOOD_GMAP_2COL.csv)
+    và danh sách chỉ có email (BE_WOOD_GMAP_ONLY_EMAILS_READY.csv).
+    - Lọc bỏ doanh nghiệp đóng cửa và blacklist.
+    - Đẩy 100% doanh nghiệp có email lên đầu danh sách (Rule 3).
+    - Chuẩn hóa SĐT có nháy đơn '+' (Rule 2).
+    """
+    import shutil
+
     df_active = df_enr[df_enr['Permanently_Closed'] != 'Yes'].copy()
     
     rows_2col = []
     idx = 1
     for _, r in df_active.iterrows():
         c_name = r.get('Company_Name', '').strip()
+        if is_blacklisted_company(c_name):
+            continue
         phone = clean_phone(r.get('Phone', ''))
         email = clean_email(r.get('Email', ''))
+        web = r.get('Website', '').strip()
         addr = r.get('Maps_Address') or r.get('Address') or ''
         cat = r.get('Maps_Category') or r.get('Activity') or 'Wood & Carpentry'
 
@@ -703,14 +723,14 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
             'Chức danh': '',
             'Người liên hệ': '',
             'SĐT': phone,
-            'Liên Hệ': '',
+            'Liên Hệ': web,
             'Email': email,
-            'Liên Hệ mail': '',
+            'Liên Hệ mail': f"mailto:{email}" if email else web,
             'Địa chỉ': addr,
             'Lương': '',
             'Ngày đăng': '',
             'Hạn tuyển': '',
-            'Check gửi': '',
+            'Check gửi': 'Chưa gửi',
             'Last Subject': '',
             'Last Body HTML': '',
             'Trạng thái Reply': '',
@@ -732,28 +752,47 @@ async def enrich_maps_be_wood(input_csv=DEFAULT_INPUT_CSV, limit=None, headless=
     df_2col = pd.DataFrame(sorted_2col, columns=COL_20_HEADERS)
     df_2col.to_csv(OUTPUT_2COL_CSV, index=False, encoding='utf-8-sig')
 
+    # Xuất riêng file chỉ có Email sẵn sàng gửi chiến dịch Cold Mail
+    df_ready = df_2col[df_2col['Email'] != ''].copy()
+    df_ready.to_csv(OUTPUT_READY_CSV, index=False, encoding='utf-8-sig')
+
     # Đồng bộ sang csdl_mlt và archive/be_belgium
     for extra_dir in [ROOT_DIR / "csdl_mlt", ROOT_DIR / "archive" / "be_belgium"]:
         extra_dir.mkdir(parents=True, exist_ok=True)
         try:
-            import shutil
-            shutil.copy2(OUTPUT_1ENR_CSV, extra_dir / OUTPUT_1ENR_CSV.name)
+            if OUTPUT_1ENR_CSV.exists():
+                shutil.copy2(OUTPUT_1ENR_CSV, extra_dir / OUTPUT_1ENR_CSV.name)
             shutil.copy2(OUTPUT_2COL_CSV, extra_dir / OUTPUT_2COL_CSV.name)
+            shutil.copy2(OUTPUT_READY_CSV, extra_dir / OUTPUT_READY_CSV.name)
         except Exception:
             pass
 
-    print("=" * 80)
-    print("🏆 HOÀN THÀNH LÀM GIÀU DỮ LIỆU GOOGLE MAPS & EMAIL B2B (NGÀNH MỘC BỈ)!")
-    print(f"   - Tổng số doanh nghiệp hoạt động   : {len(df_2col):,}")
-    print(f"   - Doanh nghiệp có EMAIL (đẩy lên đầu): {len(with_email):,} ({len(with_email)*100/max(1, len(df_2col)):.1f}%)")
-    print(f"   - Doanh nghiệp có SĐT               : {len([r for r in sorted_2col if r['SĐT']]):,}")
-    print(f"   - Tệp Cold Mail sẵn sàng gửi        : {OUTPUT_2COL_CSV.name}")
-    print("=" * 80 + "\n")
+    if not silent:
+        print("=" * 80)
+        print("🏆 XUẤT TỆP COLD MAIL 20 CỘT & EMAIL READY THÀNH CÔNG (NGÀNH MỘC BỈ)!")
+        print(f"   - Tổng số doanh nghiệp hoạt động     : {len(df_2col):,}")
+        print(f"   - Doanh nghiệp có EMAIL (đẩy lên đầu): {len(with_email):,} ({len(with_email)*100/max(1, len(df_2col)):.1f}%)")
+        print(f"   - Doanh nghiệp có SĐT                 : {len([r for r in sorted_2col if r['SĐT']]):,}")
+        print(f"   - Tệp Cold Mail 20 cột (đủ danh sách) : {OUTPUT_2COL_CSV.name}")
+        print(f"   - Tệp CHỈ CÓ EMAIL (gửi chiến dịch)   : {OUTPUT_READY_CSV.name}")
+        print("=" * 80 + "\n")
+
+    return df_2col, df_ready
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Enrich Belgium Wood Enterprises with Google Maps & B2B Emails")
     parser.add_argument("--limit", type=int, default=None, help="Giới hạn số công ty")
     parser.add_argument("--headless", action="store_true", help="Chạy ẩn (mặc định hiện trình duyệt)")
+    parser.add_argument("--export-only", "--re-export", action="store_true", help="Chỉ xuất lại file Cold Mail từ 1ENR/Cache mà không cào")
     args = parser.parse_args()
 
-    asyncio.run(enrich_maps_be_wood(limit=args.limit, headless=args.headless))
+    if args.export_only:
+        if not OUTPUT_1ENR_CSV.exists():
+            print(f"[!] Lỗi: Chưa tìm thấy tệp {OUTPUT_1ENR_CSV.name} để xuất!")
+            sys.exit(1)
+        print(f"[*] Đang xuất lại file Cold Mail từ {OUTPUT_1ENR_CSV.name}...")
+        df_existing = pd.read_csv(OUTPUT_1ENR_CSV, encoding='utf-8-sig', dtype=str).fillna('')
+        export_coldmail_files(df_existing)
+    else:
+        asyncio.run(enrich_maps_be_wood(limit=args.limit, headless=args.headless))
